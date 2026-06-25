@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { getCollection } from 'astro:content';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<BaseLayout
+  title="Developer Blog"
+  description="Read technical deep-dives, privacy guides, and design retrospectives from BramLabs."
+>
+  <section class="py-24 bg-bg">
+    <div class="max-w-4xl mx-auto px-6 text-left">
+      <div class="flex flex-col gap-4 mb-16">
+        <h1 class="text-h1 text-text">Developer Blog</h1>
+        <p class="text-body text-muted max-w-xl">
+          Insights on user privacy, engineering browser extensions, building local-first software, and indie development.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-8">
+        {sortedPosts.length > 0 ? (
+          sortedPosts.map((post) => {
+            const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            });
+
+            return (
+              <article class="bg-surface rounded-xl border border-border p-8 flex flex-col gap-4 shadow-sm transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-accent/40">
+                <div class="flex items-center gap-4 text-mono text-xs text-muted">
+                  <time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
+                  <span>&bull;</span>
+                  <span>By {post.data.author}</span>
+                </div>
+                
+                <h2 class="text-h2 text-text hover:text-accent transition-colors leading-tight">
+                  <a href={`/blog/${post.slug}`} class="focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none">{post.data.title}</a>
+                </h2>
+                
+                <p class="text-small text-muted leading-relaxed max-w-prose">
+                  {post.data.description}
+                </p>
+
+                <div class="flex flex-wrap gap-2 mt-2">
+                  {post.data.tags.map((tag) => (
+                    <span class="bg-surface-2 text-muted font-mono text-[11px] px-2.5 py-1 rounded-full border border-border/50">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+
+                <div class="border-t border-border/50 pt-4 mt-2 flex justify-between items-center">
+                  <a href={`/blog/${post.slug}`} class="text-accent hover:underline text-sm font-semibold flex items-center gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none">
+                    Read Article
+                    <Icon name="ArrowRight" class="w-4 h-4" />
+                  </a>
+                </div>
+              </article>
+            );
+          })
+        ) : (
+          <div class="bg-surface rounded-xl border border-border border-dashed p-12 text-center flex flex-col items-center justify-center gap-3">
+            <h3 class="text-h3 text-text">No articles published yet</h3>
+            <p class="text-small text-muted max-w-sm">
+              Check back soon for development guides and updates.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

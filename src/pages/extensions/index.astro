@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import { getCollection } from 'astro:content';
+
+const extensions = await getCollection('extensions');
+---
+
+<BaseLayout
+  title="Extension Directory"
+  description="Explore the directory of BramLabs web browser extensions. Lightweight, privacy-respecting, and fast tools for Chrome and Firefox."
+>
+  <section class="py-24 bg-bg">
+    <div class="max-w-6xl mx-auto px-6 text-left">
+      <div class="max-w-2xl flex flex-col gap-4 mb-16">
+        <h1 class="text-h1 text-text">Extension Directory</h1>
+        <p class="text-body text-muted">
+          A list of specialized browser extensions built by BramLabs. Every extension runs entirely client-side without collecting tracking data.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {extensions.length > 0 ? (
+          extensions.map((ext) => (
+            <div class="bg-surface rounded-xl border border-border p-8 flex flex-col justify-between shadow-sm transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-accent/40">
+              <div>
+                <!-- Header -->
+                <div class="flex items-center justify-between border-b border-border pb-6 mb-6">
+                  <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
+                      <Icon name={ext.data.icon} class="w-7 h-7 text-accent" />
+                    </div>
+                    <div>
+                      <h2 class="text-h3 text-text leading-tight">{ext.data.title}</h2>
+                      <div class="flex items-center gap-2 mt-1">
+                        <span class="text-mono text-xs text-muted">v{ext.data.version}</span>
+                        <span class="text-muted text-xs">&bull;</span>
+                        <span class="text-mono text-xs text-muted">{ext.data.downloadCount}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="text-mono text-xs bg-green-100 text-green-800 dark:bg-green-950/30 dark:text-green-400 px-2.5 py-0.5 rounded-full font-semibold">Local Storage</span>
+                </div>
+
+                <!-- Tagline -->
+                <p class="text-small text-muted leading-relaxed mb-8">
+                  {ext.data.description}
+                </p>
+
+                <!-- Features checklist -->
+                <div class="flex flex-col gap-3 mb-8">
+                  <h3 class="text-mono text-xs font-bold text-text tracking-wider uppercase mb-1">Key Features</h3>
+                  {ext.data.features.map((feat) => (
+                    <div class="flex items-start gap-2.5 text-sm text-muted">
+                      <div class="mt-0.5 text-accent">
+                        <Icon name="CheckCircle" class="w-4 h-4 text-accent" />
+                      </div>
+                      <span><strong class="text-text">{feat.title}:</strong> {feat.description}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <!-- CTAs -->
+              <div class="border-t border-border/50 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <a href={`/extensions/${ext.slug}`} class="text-accent hover:underline text-sm font-semibold flex items-center gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none">
+                  View Landing Page
+                  <Icon name="ArrowRight" class="w-4 h-4" />
+                </a>
+                <a
+                  href={ext.data.storeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="border border-border text-text hover:bg-bg text-sm px-5 py-2.5 rounded-lg transition-colors font-semibold shadow-sm w-full sm:w-auto text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none"
+                >
+                  Add to Chrome
+                </a>
+              </div>
+            </div>
+          ))
+        ) : (
+          <!-- Placeholder Card -->
+          <div class="md:col-span-2 bg-surface rounded-xl border border-border border-dashed p-12 text-center flex flex-col items-center justify-center gap-3">
+            <h3 class="text-h3 text-text">First extension loading...</h3>
+            <p class="text-small text-muted max-w-sm">
+              Check back soon or follow the blog for launch updates.
+            </p>
+          </div>
+        )}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

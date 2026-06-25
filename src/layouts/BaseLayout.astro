@@ -1,0 +1,262 @@
+---
+import '@fontsource-variable/bricolage-grotesque';
+import '@fontsource-variable/instrument-sans';
+import '@fontsource/geist-mono/400.css';
+import '../styles/global.css';
+
+import { Menu, X } from 'lucide-astro';
+import { getCollection } from 'astro:content';
+import ThemeToggle from '../components/ThemeToggle.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  structuredData?: Record<string, any>;
+}
+
+const { title, description, ogImage, structuredData } = Astro.props;
+const extensions = await getCollection('extensions');
+const siteUrl = 'https://bramlabs.co'; // Default publisher site URL
+const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script is:inline>
+      (function() {
+        const stored = localStorage.getItem('bramlabs-theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = stored ?? (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+    <!-- Essential Meta Tags -->
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary SEO -->
+    <title>{title} | BramLabs</title>
+    <meta name="title" content={`${title} | BramLabs`} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={`${title} | BramLabs`} />
+    <meta property="og:description" content={description} />
+    {ogImage && <meta property="og:image" content={new URL(ogImage, siteUrl)} />}
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalURL} />
+    <meta property="twitter:title" content={`${title} | BramLabs`} />
+    <meta property="twitter:description" content={description} />
+    {ogImage && <meta property="twitter:image" content={new URL(ogImage, siteUrl)} />}
+
+    <!-- Structured Data (JSON-LD) -->
+    {structuredData && (
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+    )}
+  </head>
+  <body class="flex flex-col min-h-screen bg-bg text-text selection:bg-accent selection:text-white">
+    <!-- Scroll sentinel to detect scroll state and toggle header border -->
+    <div id="scroll-sentinel" class="h-px w-full absolute top-0 left-0 pointer-events-none"></div>
+
+    <!-- Header -->
+    <header id="site-header" class="sticky top-0 z-50 w-full border-b border-transparent bg-bg/90 backdrop-blur-sm transition-all duration-150">
+      <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="/" class="flex items-center gap-2 text-lg font-bold tracking-tight text-text group">
+          <span class="w-5 h-5 rounded bg-accent flex items-center justify-between p-1 transition-transform duration-200 group-hover:scale-105">
+            <span class="w-full h-full rounded-[2px] bg-white"></span>
+          </span>
+          <span class="font-heading text-lg font-bold">BramLabs</span>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+          <a href="/extensions" class={`hover:text-text transition-colors duration-150 ${Astro.url.pathname.startsWith('/extensions') ? 'text-accent' : 'text-muted'}`}>Extensions</a>
+          <a href="/blog" class={`hover:text-text transition-colors duration-150 ${Astro.url.pathname.startsWith('/blog') ? 'text-accent' : 'text-muted'}`}>Blog</a>
+          <a href="/privacy" class={`hover:text-text transition-colors duration-150 ${Astro.url.pathname === '/privacy' ? 'text-accent' : 'text-muted'}`}>Privacy</a>
+          <ThemeToggle />
+          <a href="/extensions" class="border border-border text-text hover:bg-surface px-4 py-2 rounded-lg transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus:outline-none font-medium">Explore Store</a>
+        </nav>
+
+        <!-- Mobile Header Actions -->
+        <div class="flex items-center gap-2 md:hidden">
+          <ThemeToggle />
+          <button id="menu-btn" class="p-2 text-text hover:text-accent transition-colors focus:outline-none" aria-label="Toggle Menu">
+            <Menu class="w-6 h-6" />
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-drawer" class="fixed inset-y-0 right-0 z-50 w-64 bg-bg border-l border-border shadow-sm transform translate-x-full transition-transform duration-200 ease-in-out md:hidden flex flex-col justify-between p-6">
+      <div class="flex flex-col gap-6">
+        <div class="flex items-center justify-between border-b border-border/50 pb-4">
+          <span class="font-heading font-bold text-lg">Menu</span>
+          <button id="close-drawer-btn" class="p-2 text-text hover:text-accent transition-colors focus:outline-none" aria-label="Close Menu">
+            <X class="w-6 h-6" />
+          </button>
+        </div>
+        <nav class="flex flex-col gap-4 text-base font-medium">
+          <a href="/extensions" class={`hover:text-text py-2 transition-colors border-b border-border/50 ${Astro.url.pathname.startsWith('/extensions') ? 'text-accent' : 'text-muted'}`}>Extensions</a>
+          <a href="/blog" class={`hover:text-text py-2 transition-colors border-b border-border/50 ${Astro.url.pathname.startsWith('/blog') ? 'text-accent' : 'text-muted'}`}>Blog</a>
+          <a href="/privacy" class={`hover:text-text py-2 transition-colors border-b border-border/50 ${Astro.url.pathname === '/privacy' ? 'text-accent' : 'text-muted'}`}>Privacy</a>
+        </nav>
+      </div>
+      <a href="/extensions" class="border border-border text-text hover:bg-surface px-4 py-3 rounded-lg text-center transition-colors font-medium">Explore Store</a>
+    </div>
+    <!-- Drawer backdrop overlay -->
+    <div id="drawer-overlay" class="fixed inset-0 z-40 bg-black/40 hidden md:hidden transition-opacity duration-200"></div>
+
+    <!-- Main Content -->
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <!-- Footer (Always Dark Theme) -->
+    <footer class="border-t border-dark-border bg-dark-bg py-16 text-sm text-dark-text">
+      <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
+        <!-- Brand -->
+        <div class="flex flex-col gap-4">
+          <a href="/" class="flex items-center gap-2 text-lg font-bold tracking-tight text-white group">
+            <span class="w-5 h-5 rounded bg-white flex items-center justify-between p-1 transition-transform duration-200 group-hover:scale-105">
+              <span class="w-full h-full rounded-[2px] bg-dark-bg"></span>
+            </span>
+            <span class="font-heading">BramLabs</span>
+          </a>
+          <p class="text-dark-muted leading-relaxed max-w-xs">
+            Indie developer studio building micro browser extensions focused on privacy, user autonomy, and streamlined productivity.
+          </p>
+        </div>
+
+        <!-- Products -->
+        <div class="flex flex-col gap-3">
+          <h3 class="text-[11px] font-mono uppercase tracking-wider text-dark-muted">Extensions</h3>
+          {extensions.length > 0 ? (
+            extensions.map((ext) => (
+              <a href={`/extensions/${ext.slug}`} class="text-dark-muted hover:text-dark-text transition-colors duration-150">{ext.data.title}</a>
+            ))
+          ) : (
+            <span class="text-dark-muted text-xs italic">Coming soon</span>
+          )}
+          <a href="/extensions" class="text-dark-accent hover:underline font-medium mt-1">View Directory &rarr;</a>
+        </div>
+
+        <!-- Resources -->
+        <div class="flex flex-col gap-3">
+          <h3 class="text-[11px] font-mono uppercase tracking-wider text-dark-muted">Resources</h3>
+          <a href="/blog" class="text-dark-muted hover:text-dark-text transition-colors duration-150">Developer Blog</a>
+          <a href="/privacy" class="text-dark-muted hover:text-dark-text transition-colors duration-150">Publisher Privacy</a>
+          <a href="https://github.com/bramlabs" target="_blank" rel="noopener noreferrer" class="text-dark-muted hover:text-dark-text transition-colors duration-150">GitHub Repository</a>
+        </div>
+
+        <!-- Support -->
+        <div class="flex flex-col gap-3">
+          <h3 class="text-[11px] font-mono uppercase tracking-wider text-dark-muted">Contact & Review</h3>
+          <p class="text-dark-muted leading-relaxed">
+            Need help or have feature ideas? Reach out to support.
+          </p>
+          <a href="mailto:support@bramlabs.co" class="text-dark-accent hover:underline font-medium">support@bramlabs.co</a>
+        </div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-6 mt-16 pt-8 border-t border-dark-border flex flex-col md:flex-row items-center justify-between gap-4 text-dark-muted">
+        <p>&copy; {new Date().getFullYear()} BramLabs. All rights reserved.</p>
+        <div class="flex gap-6">
+          <a href="/privacy" class="hover:text-dark-text transition-colors duration-150">Global Privacy</a>
+          <a href="/privacy" class="hover:text-dark-text transition-colors duration-150">Terms of Service</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Interactive Navigation Scripts -->
+    <script is:inline>
+      (function() {
+        // Scroll sentinel border handling
+        const sentinel = document.getElementById('scroll-sentinel');
+        const header = document.getElementById('site-header');
+        if (sentinel && header) {
+          const observer = new IntersectionObserver((entries) => {
+            const isScrolled = !entries[0].isIntersecting;
+            header.classList.toggle('border-border', isScrolled);
+            header.classList.toggle('border-transparent', !isScrolled);
+          });
+          observer.observe(sentinel);
+        }
+
+        // Mobile drawer panel toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const closeBtn = document.getElementById('close-drawer-btn');
+        const drawer = document.getElementById('mobile-drawer');
+        const overlay = document.getElementById('drawer-overlay');
+
+        if (menuBtn && closeBtn && drawer && overlay) {
+          const openDrawer = () => {
+            drawer.classList.remove('translate-x-full');
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Stop body scrolling
+          };
+
+          const closeDrawer = () => {
+            drawer.classList.add('translate-x-full');
+            overlay.classList.add('hidden');
+            document.body.style.overflow = '';
+          };
+
+          menuBtn.addEventListener('click', openDrawer);
+          closeBtn.addEventListener('click', closeDrawer);
+          overlay.addEventListener('click', closeDrawer);
+        }
+
+        // Theme toggle synchronization handling
+        const toggles = document.querySelectorAll('.theme-toggle');
+        
+        const updateUI = (theme) => {
+          toggles.forEach(toggle => {
+            const sunIcon = toggle.querySelector('.icon-sun');
+            const moonIcon = toggle.querySelector('.icon-moon');
+            if (sunIcon && moonIcon) {
+              if (theme === 'dark') {
+                sunIcon.classList.remove('hidden');
+                sunIcon.classList.add('flex');
+                moonIcon.classList.remove('flex');
+                moonIcon.classList.add('hidden');
+                toggle.setAttribute('aria-label', 'Switch to light mode');
+              } else {
+                sunIcon.classList.remove('flex');
+                sunIcon.classList.add('hidden');
+                moonIcon.classList.remove('hidden');
+                moonIcon.classList.add('flex');
+                toggle.setAttribute('aria-label', 'Switch to dark mode');
+              }
+            }
+          });
+        };
+
+        // Sync initial UI state
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+        updateUI(currentTheme);
+
+        // Bind click event to all toggles
+        toggles.forEach(toggle => {
+          toggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('bramlabs-theme', next);
+            updateUI(next);
+          });
+        });
+      })();
+    </script>
+  </body>
+</html>

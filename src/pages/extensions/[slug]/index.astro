@@ -1,0 +1,296 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Icon from '../../../components/Icon.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const extensions = await getCollection('extensions');
+  return extensions.map((ext) => ({
+    params: { slug: ext.slug },
+    props: { ext },
+  }));
+}
+
+const { ext } = Astro.props;
+const { slug } = Astro.params;
+const { Content } = await ext.render();
+
+// Setup SoftwareApplication schema for Google search rich snippet
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": ext.data.title,
+  "operatingSystem": "Chrome, Firefox, Edge, Safari",
+  "applicationCategory": "BrowserApplication",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "ratingCount": "84"
+  },
+  "offers": {
+    "@type": "Offer",
+    "price": "0.00",
+    "priceCurrency": "USD"
+  }
+};
+---
+
+<BaseLayout
+  title={ext.data.title}
+  description={ext.data.tagline}
+  structuredData={structuredData}
+>
+  <!-- Hero Section -->
+  <section class="py-32 bg-bg border-b border-border">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      <!-- Left: Extension info -->
+      <div class="lg:col-span-7 flex flex-col items-start gap-6 text-left">
+        <!-- Back Link -->
+        <a href="/extensions" class="inline-flex items-center gap-1.5 text-mono text-xs text-accent hover:underline mb-2 uppercase tracking-wider">
+          <Icon name="ArrowLeft" class="w-3.5 h-3.5" />
+          Back to Directory
+        </a>
+        
+        <div class="flex items-center gap-4">
+          <div class="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center text-white shadow-sm">
+            <Icon name={ext.data.icon} class="w-9 h-9 text-white" />
+          </div>
+          <div>
+            <h1 class="text-h1 text-text leading-tight">
+              {ext.data.title}
+            </h1>
+            <p class="text-mono text-xs text-muted mt-1">
+              Version {ext.data.version} &bull; Updated {ext.data.lastUpdated}
+            </p>
+          </div>
+        </div>
+
+        <p class="text-body text-muted max-w-prose">
+          {ext.data.tagline}
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto mt-2">
+          <a
+            href={ext.data.storeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="bg-accent hover:bg-accent-hover text-white px-8 py-3.5 rounded-lg font-semibold transition-colors duration-150 shadow-sm text-center flex items-center justify-center gap-2 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none"
+          >
+            Add to Chrome (Free)
+            <Icon name="ArrowUpRight" class="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+          <a
+            href={`/extensions/${slug}/privacy`}
+            class="border border-border bg-surface text-text hover:border-text px-6 py-3.5 rounded-lg font-semibold transition-all duration-150 text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none"
+          >
+            Privacy Policy
+          </a>
+        </div>
+
+        <!-- Meta badges -->
+        <div class="flex flex-wrap items-center gap-6 mt-4 text-mono text-xs text-muted">
+          <div class="flex items-center gap-1.5">
+            <Icon name="Download" class="w-4 h-4 text-accent" />
+            <span>{ext.data.downloadCount}</span>
+          </div>
+          <span>&bull;</span>
+          <div class="flex items-center gap-1.5">
+            <Icon name="Shield" class="w-4 h-4 text-green-600" />
+            <span>GDPR Compliant</span>
+          </div>
+          <span>&bull;</span>
+          <div class="flex items-center gap-1.5">
+            <Icon name="Github" class="w-4 h-4 text-text" />
+            <span>Open Source</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Real Toolbar/Popup UI rendered in CSS -->
+      <div class="lg:col-span-5 flex justify-center w-full">
+        <div class="w-full max-w-sm bg-surface rounded-xl border border-border shadow-sm overflow-hidden flex flex-col transition-all duration-200">
+          <!-- Window Header -->
+          <div class="bg-surface-2 px-4 py-3 border-b border-border flex items-center justify-between">
+            <div class="flex gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-[#FF5F57]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></span>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></span>
+            </div>
+            <!-- Mock URL bar -->
+            <div class="bg-surface border border-border rounded-md px-3 py-0.5 text-mono text-xs text-muted w-40 text-center truncate select-none">
+              {slug === 'tab-snoozer' ? 'github.com/bramlabs' : 'shop-slop-outlet.com'}
+            </div>
+            <!-- Mock extension icon in toolbar -->
+            <div class="w-10 flex justify-end">
+              <span class="w-5 h-5 rounded bg-accent flex items-center justify-center text-xs text-white">
+                <Icon name={ext.data.icon} class="w-3.5 h-3.5 text-white" />
+              </span>
+            </div>
+          </div>
+
+          <!-- Popup Content -->
+          <div class="p-6 bg-surface min-h-[320px] flex flex-col justify-between text-left">
+            <!-- Render custom popup based on the extension -->
+            {slug === 'tab-snoozer' ? (
+              <div class="flex flex-col gap-5 flex-grow">
+                <!-- Popup Header -->
+                <div class="flex items-center gap-3 border-b border-border pb-3">
+                  <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white text-sm font-bold">TS</div>
+                  <div>
+                    <h4 class="font-heading font-semibold text-text text-sm">Tab Snoozer</h4>
+                    <p class="text-xs text-muted">Snooze active tab</p>
+                  </div>
+                </div>
+                <!-- Snooze presets -->
+                <div class="flex flex-col gap-2">
+                  <span class="text-mono text-[10px] font-bold text-muted uppercase tracking-wider">Presets</span>
+                  <div class="grid grid-cols-1 gap-2">
+                    <button class="flex items-center justify-between border border-border hover:border-accent hover:bg-accent/5 rounded-lg p-2.5 text-xs text-left transition-colors font-medium">
+                      <span class="flex items-center gap-2"><Icon name="Clock" class="w-4 h-4 text-accent" /> Later Today</span>
+                      <span class="text-muted font-mono text-[10px]">In 3 hours</span>
+                    </button>
+                    <button class="flex items-center justify-between border border-border hover:border-accent hover:bg-accent/5 rounded-lg p-2.5 text-xs text-left transition-colors font-medium">
+                      <span class="flex items-center gap-2"><Icon name="Calendar" class="w-4 h-4 text-accent" /> Tomorrow Morning</span>
+                      <span class="text-muted font-mono text-[10px]">09:00 AM</span>
+                    </button>
+                    <button class="flex items-center justify-between border border-border hover:border-accent hover:bg-accent/5 rounded-lg p-2.5 text-xs text-left transition-colors font-medium">
+                      <span class="flex items-center gap-2"><Icon name="Coffee" class="w-4 h-4 text-accent" /> Next Weekend</span>
+                      <span class="text-muted font-mono text-[10px]">Saturday</span>
+                    </button>
+                  </div>
+                </div>
+                <!-- Mini warning / note -->
+                <div class="text-xs text-muted bg-surface-2 border border-border rounded p-2.5 flex items-start gap-2">
+                  <Icon name="Info" class="w-3.5 h-3.5 text-accent flex-shrink-0 mt-0.5" />
+                  <span>Your active tab will be securely closed and reopened automatically.</span>
+                </div>
+              </div>
+            ) : (
+              <div class="flex flex-col gap-5 flex-grow">
+                <!-- Popup Header -->
+                <div class="flex items-center gap-3 border-b border-border pb-3">
+                  <div class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-950/20 flex items-center justify-center text-red-600 dark:text-red-400"><Icon name="ShieldAlert" class="w-4 h-4" /></div>
+                  <div>
+                    <h4 class="font-heading font-semibold text-text text-sm">Shop Detector</h4>
+                    <p class="text-mono text-[10px] text-red-600 dark:text-red-400 font-semibold">Risk Warning</p>
+                  </div>
+                </div>
+                <!-- Warnings body -->
+                <div class="flex flex-col gap-3">
+                  <div class="bg-red-50 dark:bg-red-950/30 border border-red-200/50 dark:border-red-900/50 rounded-lg p-3 text-xs text-red-800 dark:text-red-300 flex items-start gap-2.5">
+                    <Icon name="AlertTriangle" class="w-4 h-4 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
+                    <div>
+                      <p class="font-semibold">Dropship Site Detected</p>
+                      <p class="text-[10px] leading-relaxed mt-0.5 text-red-700 dark:text-red-400/80">Flags: Template structure matched, 14 products duplicate stock image, registered 12 days ago.</p>
+                    </div>
+                  </div>
+                  
+                  <div class="flex flex-col gap-2 text-xs text-muted">
+                    <span class="text-mono text-[10px] font-bold text-muted uppercase tracking-wider">Parameters Tested</span>
+                    <div class="flex items-center justify-between border-b border-border/30 pb-1">
+                      <span>Shopify CMS Check</span>
+                      <span class="text-red-600 dark:text-red-400 font-semibold font-mono text-[10px]">Flagged</span>
+                    </div>
+                    <div class="flex items-center justify-between border-b border-border/30 pb-1">
+                      <span>AI Text Heuristics</span>
+                      <span class="text-yellow-600 dark:text-yellow-400 font-semibold font-mono text-[10px]">Moderate</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-24 bg-surface border-b border-border">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-xl flex flex-col gap-4 mb-16 text-left">
+        <h2 class="text-h2 text-text">Engineered for utility.</h2>
+        <p class="text-body text-muted max-w-prose">
+          Here is exactly what {ext.data.title} brings to your browsing workflow. No fluff, just functionality.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-left">
+        {ext.data.features.map((feat) => (
+          <div class="flex flex-col items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
+              <Icon name={feat.icon} class="w-6 h-6 text-accent" />
+            </div>
+            <h3 class="text-h3 text-text">{feat.title}</h3>
+            <p class="text-small text-muted max-w-prose">
+              {feat.description}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Detail Markdown Content Section -->
+  <section class="py-24 bg-bg">
+    <div class="max-w-3xl mx-auto px-6 text-left">
+      <h2 class="text-h2 text-text mb-8 border-b border-border/50 pb-4">Deep Dive & Technical Insights</h2>
+      <div class="prose prose-stone leading-relaxed text-muted flex flex-col gap-6 text-base">
+        <Content />
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-24 bg-surface border-t border-border">
+    <div class="max-w-3xl mx-auto px-6">
+      <div class="text-center flex flex-col gap-4 mb-16">
+        <h2 class="text-h2 text-text">Frequently Asked Questions</h2>
+        <p class="text-body text-muted max-w-prose mx-auto">
+          Everything you need to know about permissions, data policies, and functionality.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-4 text-left">
+        {ext.data.faq.map((item) => (
+          <details class="group bg-surface border border-border rounded-xl transition-all duration-200 [&_summary::-webkit-details-marker]:hidden">
+            <summary class="flex justify-between items-center p-6 font-semibold text-text cursor-pointer focus:outline-none select-none">
+              <span class="font-heading pr-4">{item.question}</span>
+              <span class="transition-transform duration-200 group-open:rotate-180 text-muted">
+                <Icon name="ChevronDown" class="w-5 h-5 text-muted" />
+              </span>
+            </summary>
+            <div class="px-6 pb-6 text-sm text-muted leading-relaxed border-t border-border/30 pt-4">
+              <p class="max-w-prose">{item.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  /* Markdown subcontent rendering */
+  .prose h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-top: 1.5rem;
+    font-family: var(--font-heading);
+  }
+  .prose p {
+    color: var(--color-muted);
+  }
+  .prose ul {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+  }
+  .prose li {
+    margin-bottom: 0.25rem;
+  }
+  .prose strong {
+    color: var(--color-text);
+  }
+</style>

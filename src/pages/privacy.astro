@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const extensions = await getCollection('extensions');
+---
+
+<BaseLayout
+  title="Privacy Policy"
+  description="Learn about BramLabs' strict privacy practices. We build extensions that execute locally on your device without storing your personal data or tracking history."
+>
+  <section class="py-24 bg-bg">
+    <div class="max-w-3xl mx-auto px-6 text-left">
+      <div class="flex flex-col gap-4 mb-12">
+        <h1 class="text-h1 text-text">Global Privacy Policy</h1>
+        <p class="text-mono text-xs text-muted">Last Updated: June 25, 2026</p>
+      </div>
+
+      <div class="prose prose-stone leading-relaxed text-muted flex flex-col gap-6 text-base">
+        <p class="text-body text-muted">
+          At BramLabs, we are committed to protecting your privacy. This policy outlines our approach to data across all our products, website, and extensions.
+        </p>
+
+        <h2 class="text-h2 text-text mt-6">1. Our Core Policy</h2>
+        <p class="text-body text-muted">
+          We do not collect, store, share, or sell your personal data. We do not track your browsing history, searches, or IP address. All operations executed by our extensions happen locally on your computer.
+        </p>
+
+        <h2 class="text-h2 text-text mt-6">2. Data We Do Not Collect</h2>
+        <ul class="list-disc pl-6 flex flex-col gap-2 text-body text-muted">
+          <li><strong>Browsing Data:</strong> We do not log the web pages you visit, or read cookies unless explicitly required for a localized feature (e.g. template detection).</li>
+          <li><strong>Personal Identifiers:</strong> We do not ask for your name, email address, phone number, or login credentials.</li>
+          <li><strong>Usage Metrics:</strong> We do not track how many times you click extension popups or features. We use only generic download/active statistics provided directly by the Chrome Web Store and Firefox Add-ons site.</li>
+        </ul>
+
+        <h2 class="text-h2 text-text mt-6">3. Local Storage</h2>
+        <p class="text-body text-muted">
+          Any configurations, settings, or cached data generated inside our browser extensions are stored locally on your device using the browser's extension storage API (`chrome.storage.local`). This data never leaves your device.
+        </p>
+
+        <h2 class="text-h2 text-text mt-6">4. Third-Party Websites & Services</h2>
+        <p class="text-body text-muted">
+          Our website and extensions may contain links to external web stores (Chrome Web Store, Firefox Add-ons). These sites have their own privacy policies. We do not control and are not responsible for their data collection practices.
+        </p>
+
+        <h2 class="text-h2 text-text mt-6">5. Extension-Specific Policies</h2>
+        <p class="text-body text-muted">
+          Some extensions require specific local permissions depending on their utility. You can view the precise, dedicated privacy policies for each extension here:
+        </p>
+        {extensions.length > 0 ? (
+          <div class="bg-surface border border-border rounded-xl p-6 flex flex-col gap-3 my-4 shadow-sm">
+            {extensions.map((ext) => (
+              <a href={`/extensions/${ext.slug}/privacy`} class="text-accent hover:underline font-semibold text-sm flex items-center gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none">
+                {ext.data.title} Privacy Policy &rarr;
+              </a>
+            ))}
+          </div>
+        ) : null}
+
+        <h2 class="text-h2 text-text mt-6">6. Changes to This Policy</h2>
+        <p class="text-body text-muted">
+          We may update this policy periodically to reflect changes in our tools or browser requirements. Any updates will be published on this page.
+        </p>
+
+        <h2 class="text-h2 text-text mt-6">7. Contact</h2>
+        <p class="text-body text-muted">
+          If you have any questions about this global policy, please contact us at: 
+          <a href="mailto:privacy@bramlabs.co" class="text-accent hover:underline font-medium">privacy@bramlabs.co</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  /* Markdown subcontent rendering */
+  .prose h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-top: 1.5rem;
+    font-family: var(--font-heading);
+  }
+  .prose p {
+    color: var(--color-muted);
+  }
+  .prose ul {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+  }
+  .prose li {
+    margin-bottom: 0.25rem;
+  }
+  .prose strong {
+    color: var(--color-text);
+  }
+</style>

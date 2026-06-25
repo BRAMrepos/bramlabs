@@ -1,0 +1,24 @@
+---
+title: "Building Privacy-First Extensions in an Ad-Obsessed Web"
+pubDate: "2026-06-20"
+description: "Why building for Chrome and Firefox is a developer's highest leverage point for improving user privacy."
+author: "Bram"
+tags: ["privacy", "manifest-v3", "development"]
+---
+
+The web has increasingly transitioned into a platform designed for trackers rather than users.
+
+As extension developers, we occupy a unique layer of the browser stack. We have the capability to filter, customize, and optimize the web experience for the end user. However, this power has frequently been abused by extensions that secretly scrape user history and sell it to data brokers.
+
+## The Problem with Extension Permissions
+
+When you install an extension, Chrome warns you that it can "read and change all your data on the websites you visit." This is a scary warning, and it should be! 
+
+Most developers request wide permissions (`<all_urls>`) because it is the easiest way to write code. But it exposes users to massive security vulnerabilities if the extension is ever sold or compromised.
+
+## Our Approach at BramLabs
+
+At BramLabs, we restrict ourselves to the absolute minimum permissions.
+For example, **Tab Snoozer** does not request page content read permissions. It only asks for `tabs` (to open/close them) and `storage` (to save your snooze times).
+
+By designing tools with sandboxed boundaries, we can build extensions that users can trust completely.

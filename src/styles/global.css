@@ -1,0 +1,171 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-muted: var(--accent-muted);
+
+  --color-dark-bg: var(--dark-bg);
+  --color-dark-surface: var(--dark-surface);
+  --color-dark-surface-2: var(--dark-surface-2);
+  --color-dark-text: var(--dark-text);
+  --color-dark-muted: var(--dark-muted);
+  --color-dark-border: var(--dark-border);
+  --color-dark-accent: var(--dark-accent);
+  --color-dark-accent-hover: var(--dark-accent-hover);
+  --color-dark-accent-muted: var(--dark-accent-muted);
+
+  --font-heading: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  --font-body: 'Instrument Sans Variable', system-ui, sans-serif;
+  --font-mono: 'Geist Mono', monospace;
+
+  /* Shadows - restraint */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+:root {
+  --bg: #F6F2EC;
+  --surface: #FFFFFF;
+  --surface-2: #F0EBE3;
+  --text: #1C1917;
+  --muted: #6B6560;
+  --border: #E2D9CE;
+  --accent: #2B4FFF;
+  --accent-hover: #1A3CE8;
+  --accent-muted: #EEF1FF;
+
+  --dark-bg: #111318;
+  --dark-surface: #1C1F28;
+  --dark-surface-2: #252830;
+  --dark-text: #F0EDE8;
+  --dark-muted: #8B8796;
+  --dark-border: #2D303A;
+  --dark-accent: #6B8AFF;
+  --dark-accent-hover: #8BA3FF;
+  --dark-accent-muted: #1A2052;
+}
+
+[data-theme="dark"] {
+  --bg: #111318;
+  --surface: #1C1F28;
+  --surface-2: #252830;
+  --text: #F0EDE8;
+  --muted: #8B8796;
+  --border: #2D303A;
+  --accent: #6B8AFF;
+  --accent-hover: #8BA3FF;
+  --accent-muted: #1A2052;
+}
+
+
+@layer base {
+  body {
+    font-family: 'Instrument Sans Variable', system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+    line-height: 1.1;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  code, .mono {
+    font-family: 'Geist Mono', monospace;
+    font-size: 0.875em;
+  }
+}
+
+/* Typography scale classes */
+.text-display {
+  font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  font-size: clamp(40px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.text-h1 {
+  font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  font-size: clamp(28px, 3.5vw, 40px);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.text-h2 {
+  font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  font-size: clamp(22px, 2.5vw, 28px);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.text-h3 {
+  font-family: 'Bricolage Grotesque Variable', system-ui, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.text-body {
+  font-family: 'Instrument Sans Variable', system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+.text-small {
+  font-family: 'Instrument Sans Variable', system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--color-muted);
+}
+
+.text-mono {
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-muted);
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Constrain prose paragraph widths for readability */
+.prose p {
+  max-width: 65ch;
+}
