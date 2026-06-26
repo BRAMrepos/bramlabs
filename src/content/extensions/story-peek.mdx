@@ -1,0 +1,50 @@
+---
+title: "StoryPeek"
+tagline: "Anonymous Instagram story viewer, reels downloader, and incognito browser helper."
+description: "StoryPeek is a privacy-first browser extension that lets you watch Instagram stories incognito, download reels, highlights, posts, and profile media, and explore content without leaving any seen receipts or read indicators. Runs entirely client-side with zero telemetry."
+storeUrl: "https://chromewebstore.google.com"
+icon: "EyeOff"
+version: "2.0.0"
+lastUpdated: "June 26, 2026"
+downloadCount: "Development Build"
+screenshots: []
+features:
+  - title: "Anonymous Story Viewing"
+    description: "Watch Instagram stories completely incognito. The extension automatically blocks the 'seen' receipt APIs, so your views never register."
+    icon: "EyeOff"
+  - title: "One-Click Media Downloader"
+    description: "Download high-quality stories, reels, highlights, posts, and profile pictures directly to your local downloads folder in one click."
+    icon: "Download"
+  - title: "100% Client-Side Processing"
+    description: "All requests are intercepted and processed locally in your browser sandbox. No external servers or proxy scripts are used, keeping your session secure."
+    icon: "Shield"
+faq:
+  - question: "Does StoryPeek require my Instagram login credentials?"
+    answer: "No. StoryPeek does not require you to provide your credentials. It leverages your existing active Instagram session directly in the browser, meaning your password never leaves your machine."
+  - question: "Can the creator of a story see that I viewed it?"
+    answer: "No. StoryPeek intercepts the background web requests that report story views to Instagram's servers. By blocking these requests entirely, Instagram never registers the view, and you will not appear in their viewer list."
+  - question: "Is StoryPeek safe to use?"
+    answer: "Yes. StoryPeek operates entirely client-side, does not contain tracking scripts, and adheres strictly to a zero-telemetry privacy policy. It requests minimum required permissions to download files and intercept traffic locally."
+---
+
+## Why StoryPeek?
+
+Instagram is designed to track user interactions and report them to content creators. While this helps analytics, it compromises your digital privacy and forces social seen receipts. 
+
+`StoryPeek` gives you control over your digital footprint. By blocking outbound seen telemetry, you can view stories at your own pace without notifying the author.
+
+## Client-Side Interception
+
+Unlike web-based online viewers that require you to paste usernames and fetch data through third-party servers (which violates privacy and frequently gets blocked), StoryPeek works directly inside your browser. It intercepts requests made from your official, authenticated Instagram tab. 
+
+This technique has major advantages:
+1. **Zero account risk**: You don't feed your password or session cookies to untrusted third-party services.
+2. **Instant access**: No loading queues or server timeouts. It works immediately as you browse.
+3. **Download quality**: Downloads are fetched at the highest resolution provided directly by the CDN.
+
+## Security Controls
+
+StoryPeek respects your system security:
+- **No Remote Servers**: Zero external API calls, meaning we can't track what accounts you view or download from.
+- **Minimal Permissions**: Requests `declarativeNetRequest` to intercept outgoing telemetry headers locally and `downloads` to save media.
+- **Open Code**: Designed to be auditable and reviewable at any time.
