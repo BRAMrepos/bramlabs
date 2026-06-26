@@ -119,7 +119,7 @@ const structuredData = {
             </div>
             <!-- Mock URL bar -->
             <div class="bg-surface border border-border rounded-md px-3 py-0.5 text-mono text-xs text-muted w-40 text-center truncate select-none">
-              {slug === 'tab-snoozer' ? 'github.com/bramlabs' : 'shop-slop-outlet.com'}
+              {slug === 'tab-snoozer' ? 'github.com/bramlabs' : 'instagram.com'}
             </div>
             <!-- Mock extension icon in toolbar -->
             <div class="w-10 flex justify-end">
@@ -169,33 +169,69 @@ const structuredData = {
             ) : (
               <div class="flex flex-col gap-5 flex-grow">
                 <!-- Popup Header -->
-                <div class="flex items-center gap-3 border-b border-border pb-3">
-                  <div class="w-8 h-8 rounded-lg bg-red-100 dark:bg-red-950/20 flex items-center justify-center text-red-600 dark:text-red-400"><Icon name="ShieldAlert" class="w-4 h-4" /></div>
-                  <div>
-                    <h4 class="font-heading font-semibold text-text text-sm">Shop Detector</h4>
-                    <p class="text-mono text-[10px] text-red-600 dark:text-red-400 font-semibold">Risk Warning</p>
+                <div class="flex items-center justify-between border-b border-border pb-3">
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded-lg bg-accent flex items-center justify-center text-white">
+                      <Icon name="EyeOff" class="w-4.5 h-4.5 text-white" />
+                    </div>
+                    <div>
+                      <h4 class="font-heading font-semibold text-text text-sm leading-tight">StoryPeek</h4>
+                      <p class="text-[10px] text-muted leading-none mt-0.5">v2.0.0 &bull; Active</p>
+                    </div>
+                  </div>
+                  <!-- Status Indicator -->
+                  <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-green-100 dark:bg-green-950/30 text-green-700 dark:text-green-400 text-[10px] font-semibold">
+                    <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                    Anonymous
+                  </span>
+                </div>
+
+                <!-- Active Stories Row -->
+                <div class="flex flex-col gap-2">
+                  <span class="text-mono text-[10px] font-bold text-muted uppercase tracking-wider">Unseen Feed Stories</span>
+                  <div class="flex gap-3 overflow-x-auto py-1">
+                    <!-- Bubble 1 -->
+                    <div class="flex flex-col items-center gap-1 cursor-pointer group">
+                      <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                        <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[10px] font-bold text-text">
+                          CR
+                        </div>
+                      </div>
+                      <span class="text-[9px] text-muted truncate w-12 text-center group-hover:text-text">@cristiano</span>
+                    </div>
+                    <!-- Bubble 2 -->
+                    <div class="flex flex-col items-center gap-1 cursor-pointer group">
+                      <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                        <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[10px] font-bold text-text">
+                          NS
+                        </div>
+                      </div>
+                      <span class="text-[9px] text-muted truncate w-12 text-center group-hover:text-text">@nasa</span>
+                    </div>
+                    <!-- Bubble 3 -->
+                    <div class="flex flex-col items-center gap-1 cursor-pointer group">
+                      <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                        <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[10px] font-bold text-text">
+                          DL
+                        </div>
+                      </div>
+                      <span class="text-[9px] text-muted truncate w-12 text-center group-hover:text-text">@dualipa</span>
+                    </div>
                   </div>
                 </div>
-                <!-- Warnings body -->
-                <div class="flex flex-col gap-3">
-                  <div class="bg-red-50 dark:bg-red-950/30 border border-red-200/50 dark:border-red-900/50 rounded-lg p-3 text-xs text-red-800 dark:text-red-300 flex items-start gap-2.5">
-                    <Icon name="AlertTriangle" class="w-4 h-4 text-red-600 dark:text-red-400 flex-shrink-0 mt-0.5" />
-                    <div>
-                      <p class="font-semibold">Dropship Site Detected</p>
-                      <p class="text-[10px] leading-relaxed mt-0.5 text-red-700 dark:text-red-400/80">Flags: Template structure matched, 14 products duplicate stock image, registered 12 days ago.</p>
-                    </div>
-                  </div>
-                  
-                  <div class="flex flex-col gap-2 text-xs text-muted">
-                    <span class="text-mono text-[10px] font-bold text-muted uppercase tracking-wider">Parameters Tested</span>
-                    <div class="flex items-center justify-between border-b border-border/30 pb-1">
-                      <span>Shopify CMS Check</span>
-                      <span class="text-red-600 dark:text-red-400 font-semibold font-mono text-[10px]">Flagged</span>
-                    </div>
-                    <div class="flex items-center justify-between border-b border-border/30 pb-1">
-                      <span>AI Text Heuristics</span>
-                      <span class="text-yellow-600 dark:text-yellow-400 font-semibold font-mono text-[10px]">Moderate</span>
-                    </div>
+
+                <!-- Downloader Panel Mockup -->
+                <div class="border-t border-border/50 pt-3 flex flex-col gap-2">
+                  <span class="text-mono text-[10px] font-bold text-muted uppercase tracking-wider">Quick Actions</span>
+                  <div class="grid grid-cols-2 gap-2">
+                    <button class="flex items-center gap-1.5 border border-border hover:border-accent hover:bg-accent/5 rounded-lg p-2 text-[11px] text-left transition-colors font-medium">
+                      <Icon name="Download" class="w-3.5 h-3.5 text-accent" />
+                      <span>Download Story</span>
+                    </button>
+                    <button class="flex items-center gap-1.5 border border-border hover:border-accent hover:bg-accent/5 rounded-lg p-2 text-[11px] text-left transition-colors font-medium">
+                      <Icon name="Video" class="w-3.5 h-3.5 text-accent" />
+                      <span>Download Reel</span>
+                    </button>
                   </div>
                 </div>
               </div>

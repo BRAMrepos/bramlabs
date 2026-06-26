@@ -68,8 +68,11 @@ const { slug } = Astro.params;
           </ul>
         ) : (
           <ul class="list-disc pl-6 flex flex-col gap-2 text-body text-muted">
-            <li><strong>`activeTab` or Host Permissions:</strong> Needed to analyze the DOM and scripts of the e-commerce store you are actively viewing to detect dropshipping patterns. No page contents or URLs are saved or transmitted.</li>
-            <li><strong>`storage` permission:</strong> Needed to store user settings (e.g. status bar badge preferences) and keep a local list of user-flagged stores.</li>
+            <li><strong>`declarativeNetRequest` permission & Host Permissions:</strong> Needed to intercept and filter network request headers locally on Instagram domains. This blocks the telemetry headers that report seen receipts to Instagram, ensuring anonymous viewing.</li>
+            <li><strong>`downloads` permission:</strong> Needed to save media files (stories, reels, posts, and profile media) directly to your local downloads folder.</li>
+            <li><strong>`storage` permission:</strong> Needed to save local settings (e.g. dark mode state, local view counts) inside your browser sandbox.</li>
+            <li><strong>`scripting` permission:</strong> Needed to inject the client-side blocking scripts locally on Instagram pages to prevent view receipt tracking.</li>
+            <li><strong>`tabs` permission:</strong> Needed to detect when you are on Instagram pages to enable the media detector scanner.</li>
           </ul>
         )}
 
