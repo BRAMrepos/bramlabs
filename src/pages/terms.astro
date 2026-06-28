@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const extensions = await getCollection('extensions');
+---
+
+<BaseLayout
+  title="Terms of Service"
+  description="Read BramLabs' global Terms of Service. Simple, clear, and privacy-respecting agreements for our browser extensions and website."
+>
+  <section class="py-24 bg-bg">
+    <div class="max-w-3xl mx-auto px-6 text-left">
+      <div class="flex flex-col gap-4 mb-12">
+        <h1 class="text-h1 text-text">Global Terms of Service</h1>
+        <p class="text-mono text-xs text-muted">Last Updated: June 28, 2026</p>
+      </div>
+
+      <div class="prose prose-stone leading-relaxed text-muted flex flex-col gap-6 text-base">
+        <p class="text-body text-muted">
+          Welcome to BramLabs. By using our website (`bramlabs.co`) or installing any of our browser extensions, you agree to comply with and be bound by the following Terms of Service.
+        </p>
+
+        <h2 class="text-h2 text-text mt-6">1. Our Philosophy & License</h2>
+        <p class="text-body text-muted">
+          At BramLabs, we value your autonomy. Our software is designed to run entirely locally on your device. We license our software under open-source agreements. You are permitted to install and use the software for personal, non-commercial, or commercial purposes, subject to these terms.
+        </p>
+
+        <h2 class="text-h2 text-text mt-6">2. Limitation of Liability</h2>
+        <p class="text-body text-muted">
+          All browser extensions and resources are provided "as is" and "as available" without warranties of any kind. BramLabs is not liable for any issues, blocks, account limitations, or data loss caused by changes in third-party services (such as Instagram or other host sites) that our extensions interface with.
+        </p>
+
+        <h2 class="text-h2 text-text mt-6">3. Local Security & Execution</h2>
+        <p class="text-body text-muted">
+          Our software does not transmit your session tokens, passwords, or data to any remote servers. Any custom configurations, tokens, or local databases are stored directly in your browser's local sandbox storage. You are solely responsible for securing your browser profiles and keys.
+        </p>
+
+        <h2 class="text-h2 text-text mt-6">4. Pro Licenses & Refunds</h2>
+        <p class="text-body text-muted">
+          BramLabs provides premium "Pro" features for advanced users. Pro licenses are issued for lifetime access or subscription models as indicated at checkout. We provide a **30-day money-back guarantee** if the tool does not work for your configuration. To request a refund, please contact support@bramlabs.co.
+        </p>
+
+        <h2 class="text-h2 text-text mt-6">5. Extension-Specific Terms</h2>
+        <p class="text-body text-muted">
+          Depending on the browser permission profile or host websites utilized, specific extensions have dedicated agreements. You can view them here:
+        </p>
+        {extensions.length > 0 ? (
+          <div class="bg-surface border border-border rounded-xl p-6 flex flex-col gap-3 my-4 shadow-sm">
+            {extensions.map((ext) => (
+              <a href={`/extensions/${ext.slug}/terms`} class="text-accent hover:underline font-semibold text-sm flex items-center gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none">
+                {ext.data.title} Terms &rarr;
+              </a>
+            ))}
+          </div>
+        ) : null}
+
+        <h2 class="text-h2 text-text mt-6">6. Changes to Terms</h2>
+        <p class="text-body text-muted">
+          BramLabs reserves the right to modify these terms at any time. Changes will be posted to this page, and your continued usage of our extensions constitutes agreement to the updated terms.
+        </p>
+
+        <h2 class="text-h2 text-text mt-6">7. Contact</h2>
+        <p class="text-body text-muted">
+          If you have any questions regarding these terms, please contact us at: 
+          <a href="mailto:support@bramlabs.co" class="text-accent hover:underline font-medium">support@bramlabs.co</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  .prose h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-top: 1.5rem;
+    font-family: var(--font-heading);
+  }
+  .prose p {
+    color: var(--color-muted);
+  }
+  .prose ul {
+    list-style-type: disc;
+    padding-left: 1.25rem;
+  }
+  .prose li {
+    margin-bottom: 0.25rem;
+  }
+  .prose strong {
+    color: var(--color-text);
+  }
+</style>

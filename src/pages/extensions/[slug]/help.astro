@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Icon from '../../../components/Icon.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const extensions = await getCollection('extensions');
+  return extensions.map((ext) => ({
+    params: { slug: ext.slug },
+    props: { ext },
+  }));
+}
+
+const { ext } = Astro.props;
+const { slug } = Astro.params;
+---
+
+<BaseLayout
+  title={`${ext.data.title} User Documentation & Help Guide`}
+  description={`Learn how to use ${ext.data.title}. Get step-by-step instructions for installation, anonymous viewing, and downloads.`}
+>
+  <section class="py-24 bg-bg">
+    <div class="max-w-4xl mx-auto px-6 text-left">
+      <!-- Back Link -->
+      <a href={`/extensions/${slug}`} class="inline-flex items-center gap-1.5 text-mono text-xs text-muted hover:text-text transition-colors mb-8 uppercase tracking-wider">
+        <Icon name="ArrowLeft" class="w-4 h-4" />
+        Back to {ext.data.title} Landing Page
+      </a>
+
+      <div class="flex flex-col gap-4 mb-12 border-b border-border pb-8">
+        <div class="inline-flex items-center gap-2 text-mono text-xs text-accent">
+          <span>Documentation Hub</span>
+          <span>&bull;</span>
+          <span>Version {ext.data.version}</span>
+        </div>
+        <h1 class="text-h1 text-text">
+          {ext.data.title} User Guide
+        </h1>
+        <p class="text-body text-muted max-w-prose">
+          Welcome to the user documentation page. This guide provides comprehensive, step-by-step instructions to get the most utility out of your StoryPeek browser extension.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        <!-- Left: Quick Navigation -->
+        <div class="hidden lg:flex lg:col-span-3 sticky top-24 flex-col gap-4 text-xs font-semibold text-muted border-r border-border/60 pr-6">
+          <a href="#getting-started" class="hover:text-accent transition-colors">1. Getting Started</a>
+          <a href="#anonymous-viewing" class="hover:text-accent transition-colors">2. Anonymous Viewing</a>
+          <a href="#media-downloads" class="hover:text-accent transition-colors">3. Media Downloads</a>
+          <a href="#bulk-downloader" class="hover:text-accent transition-colors">4. Pro Bulk Downloader</a>
+          <a href="#keyboard-shortcuts" class="hover:text-accent transition-colors">5. Keyboard Shortcuts</a>
+          <a href="#faq-trouble" class="hover:text-accent transition-colors">6. FAQ & Troubleshooting</a>
+        </div>
+
+        <!-- Right: Documentation Content -->
+        <div class="lg:col-span-9 flex flex-col gap-12 text-sm text-muted leading-relaxed">
+          <!-- Section 1 -->
+          <div id="getting-started" class="flex flex-col gap-4">
+            <h2 class="text-lg font-bold text-text flex items-center gap-2">
+              <span class="text-accent">1.</span> Getting Started
+            </h2>
+            <p>
+              To install and start using StoryPeek, make sure you are using a supported Chromium-based desktop browser (Google Chrome, Microsoft Edge, Brave, Vivaldi, Opera, or Kiwi Browser on Android).
+            </p>
+            <ol class="list-decimal pl-6 flex flex-col gap-2.5">
+              <li>
+                Visit the official **Chrome Web Store** link on our <a href={`/extensions/${slug}`} class="text-accent hover:underline font-semibold">landing page</a> and click <strong>Add to Chrome</strong>.
+              </li>
+              <li>
+                Once installed, click the **puzzle piece icon 🧩** in the top-right corner of your browser bar, find <strong>StoryPeek</strong>, and click the **Pin** icon.
+              </li>
+              <li>
+                Visit <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline font-semibold">instagram.com</a>. You will notice a vertical StoryPeek icon or action bar embedded on the left, or simply click the pinned toolbar icon to view active stories.
+              </li>
+            </ol>
+          </div>
+
+          <!-- Section 2 -->
+          <div id="anonymous-viewing" class="flex flex-col gap-4">
+            <h2 class="text-lg font-bold text-text flex items-center gap-2">
+              <span class="text-accent">2.</span> Anonymous Viewing
+            </h2>
+            <p>
+              By default, StoryPeek activates anonymous mode automatically. You can verify this by checking for the green shield badge inside the extension interface.
+            </p>
+            <ul class="list-disc pl-6 flex flex-col gap-2">
+              <li><strong>Incognito Viewing:</strong> You can watch active stories, highlights, and reels in full quality. The extension automatically intercepts Instagram's analytics requests (`/stories/seen/` APIs) locally and cancels them.</li>
+              <li><strong>Seen receipts:</strong> As long as the green anonymous badge is active in your popup, you will never appear on the creator's "seen by" viewers list.</li>
+            </ul>
+          </div>
+
+          <!-- Section 3 -->
+          <div id="media-downloads" class="flex flex-col gap-4">
+            <h2 class="text-lg font-bold text-text flex items-center gap-2">
+              <span class="text-accent">3.</span> Media Downloads
+            </h2>
+            <p>
+              StoryPeek injects direct download actions directly into Instagram's web interface for convenience:
+            </p>
+            <ul class="list-disc pl-6 flex flex-col gap-2">
+              <li><strong>Story Viewer:</strong> While watching stories anonymously inside the popup, click the <strong>Download icon</strong> in the top-right corner to save the active frame.</li>
+              <li><strong>Posts & Reels:</strong> Direct download buttons are appended right next to the standard like/comment icon row on feed posts and the reels sidebar.</li>
+              <li><strong>Resolution:</strong> All files are fetched directly from Instagram's content delivery network (CDN) links in original uploaded resolution without added watermarks or extra compression.</li>
+            </ul>
+          </div>
+
+          <!-- Section 4 -->
+          <div id="bulk-downloader" class="flex flex-col gap-4">
+            <h2 class="text-lg font-bold text-text flex items-center gap-2">
+              <span class="text-accent">4.</span> Pro Bulk Downloader
+            </h2>
+            <p>
+              If you have upgraded to **StoryPeek Pro**, you gain access to our bulk profile media saving module:
+            </p>
+            <ul class="list-disc pl-6 flex flex-col gap-2">
+              <li>Open the extension popup on any user's profile page.</li>
+              <li>Navigate to the **Bulk** tab.</li>
+              <li>Choose what content you wish to save (e.g. *All Active Stories*, *Latest 20 Feed Posts*, or *All Highlights*).</li>
+              <li>Click **Start Download**. StoryPeek will queue the requests and save all files in a structured folder named after the user.</li>
+            </ul>
+          </div>
+
+          <!-- Section 5 -->
+          <div id="keyboard-shortcuts" class="flex flex-col gap-4">
+            <h2 class="text-lg font-bold text-text flex items-center gap-2">
+              <span class="text-accent">5.</span> Keyboard Shortcuts
+            </h2>
+            <p>
+              Use these shortcuts while viewing stories inside the StoryPeek popup to browse rapidly:
+            </p>
+            <div class="border border-border rounded-xl overflow-hidden max-w-md">
+              <table class="w-full text-xs text-left border-collapse">
+                <thead>
+                  <tr class="bg-surface-2 border-b border-border text-text font-bold">
+                    <th class="px-4 py-2">Action</th>
+                    <th class="px-4 py-2">Shortcut</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-border">
+                  <tr>
+                    <td class="px-4 py-2">Next Story Segment</td>
+                    <td class="px-4 py-2"><kbd class="bg-surface border border-border px-1.5 py-0.5 rounded font-mono text-[10px]">Right Arrow</kbd> / <kbd class="bg-surface border border-border px-1.5 py-0.5 rounded font-mono text-[10px]">Space</kbd></td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2">Previous Segment</td>
+                    <td class="px-4 py-2"><kbd class="bg-surface border border-border px-1.5 py-0.5 rounded font-mono text-[10px]">Left Arrow</kbd></td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2">Download Active Frame</td>
+                    <td class="px-4 py-2"><kbd class="bg-surface border border-border px-1.5 py-0.5 rounded font-mono text-[10px]">D</kbd></td>
+                  </tr>
+                  <tr>
+                    <td class="px-4 py-2">Close Popup Viewer</td>
+                    <td class="px-4 py-2"><kbd class="bg-surface border border-border px-1.5 py-0.5 rounded font-mono text-[10px]">Escape</kbd></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 6 -->
+          <div id="faq-trouble" class="flex flex-col gap-4">
+            <h2 class="text-lg font-bold text-text flex items-center gap-2">
+              <span class="text-accent">6.</span> FAQ & Troubleshooting
+            </h2>
+            <p>
+              If stories fail to load, ensure you are fully logged into your Instagram account. If you encounter any bugs, layouts issues, or license activation errors, check out the dedicated <a href={`/extensions/${slug}/support`} class="text-accent hover:underline font-semibold">Support Center</a> or email us at <a href="mailto:support@bramlabs.co" class="text-accent hover:underline">support@bramlabs.co</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

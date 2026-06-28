@@ -1,0 +1,155 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Icon from '../../../components/Icon.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const extensions = await getCollection('extensions');
+  return extensions.map((ext) => ({
+    params: { slug: ext.slug },
+    props: { ext },
+  }));
+}
+
+const { ext } = Astro.props;
+const { slug } = Astro.params;
+---
+
+<BaseLayout
+  title={`Activate ${ext.data.title} Pro`}
+  description={`Step-by-step instructions to activate your ${ext.data.title} Pro lifetime license and unlock premium tools.`}
+>
+  <section class="py-24 bg-bg">
+    <div class="max-w-3xl mx-auto px-6 text-left">
+      <!-- Back Link -->
+      <a href={`/extensions/${slug}`} class="inline-flex items-center gap-1.5 text-mono text-xs text-muted hover:text-text transition-colors mb-8 uppercase tracking-wider">
+        <Icon name="ArrowLeft" class="w-4 h-4" />
+        Back to {ext.data.title}
+      </a>
+
+      <div class="flex flex-col gap-4 mb-12">
+        <div class="inline-flex items-center gap-2 text-mono text-xs text-accent">
+          <span>License Activation Guide</span>
+          <span>&bull;</span>
+          <span>Pro Tier</span>
+        </div>
+        <h1 class="text-h1 text-text">
+          How to Activate {ext.data.title} Pro
+        </h1>
+        <p class="text-body text-muted max-w-prose">
+          Welcome to the Pro family! Your license key was sent to your email immediately after checkout. Follow the quick steps below to unlock your premium features.
+        </p>
+      </div>
+
+      <!-- Activation Steps -->
+      <div class="flex flex-col gap-8">
+        <!-- Step 1 -->
+        <div class="flex gap-6 items-start">
+          <div class="w-10 h-10 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-sm font-bold flex-shrink-0 font-mono">
+            01
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold text-text">Copy your license key</h3>
+            <p class="text-body text-muted leading-relaxed">
+              Open your purchase confirmation email from <strong>LemonSqueezy</strong> or check your post-purchase redirect page. Highlight and copy the complete license key (formatted like <code class="bg-surface px-1.5 py-0.5 rounded border border-border text-xs text-text font-mono">SP-XXXX-XXXX-XXXX</code>).
+            </p>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="flex gap-6 items-start">
+          <div class="w-10 h-10 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-sm font-bold flex-shrink-0 font-mono">
+            02
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold text-text">Open the extension popup</h3>
+            <p class="text-body text-muted leading-relaxed">
+              Click the **{ext.data.title}** icon in your browser toolbar. If you don't see the icon:
+            </p>
+            <div class="bg-surface border border-border rounded-xl p-4 text-xs text-muted flex items-start gap-2.5 my-1 max-w-xl">
+              <span class="text-lg">🧩</span>
+              <p>
+                Click the extension puzzle piece icon in the top-right corner of Chrome, find <strong>{ext.data.title}</strong> in the dropdown menu, and click the **Pin** icon next to it so it stays visible on your toolbar.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="flex gap-6 items-start">
+          <div class="w-10 h-10 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-sm font-bold flex-shrink-0 font-mono">
+            03
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold text-text">Paste your key and activate</h3>
+            <p class="text-body text-muted leading-relaxed">
+              In the extension sidebar or popup, click on the **Pro** tab in the navigation bar. Paste your copied license key into the input field and click **Activate**.
+            </p>
+            <!-- Visual Mockup block representing key input inside popup -->
+            <div class="bg-surface border border-border rounded-xl p-5 max-w-md my-2 shadow-sm text-xs flex flex-col gap-3">
+              <div class="flex items-center gap-2 text-text font-bold pb-2 border-b border-border/60">
+                <Icon name="Star" class="w-4 h-4 text-accent" />
+                <span>StoryPeek Pro Activation</span>
+              </div>
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[10px] text-muted uppercase font-bold tracking-wider">License Key</label>
+                <div class="flex gap-2">
+                  <div class="flex-grow bg-surface-2 border border-border rounded-lg px-3 py-2 text-muted font-mono select-none">
+                    SP-XXXX-XXXX-XXXX
+                  </div>
+                  <button class="bg-accent text-white px-4 py-2 rounded-lg font-semibold cursor-pointer select-none">
+                    Activate
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="flex gap-6 items-start">
+          <div class="w-10 h-10 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-sm font-bold flex-shrink-0 font-mono">
+            04
+          </div>
+          <div class="flex flex-col gap-2">
+            <h3 class="text-lg font-bold text-text">Enjoy Pro features immediately</h3>
+            <p class="text-body text-muted leading-relaxed">
+              Your license will be validated cryptographically. Once activated, the interface will automatically switch to Pro, instantly unlocking bulk downloads, full resolution media saving, and priority updates.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Troubleshooting -->
+      <div class="mt-16 pt-12 border-t border-border">
+        <h2 class="text-h2 text-text mb-6">Troubleshooting Activation Issues</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-left">
+          <div class="flex flex-col gap-2">
+            <h4 class="font-bold text-text text-sm">"Invalid License Key" Error</h4>
+            <p class="text-xs text-muted leading-relaxed">
+              Make sure you copy the entire key string from your email without any leading or trailing spaces. Copying part of the key or extra characters will cause verification to fail.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h4 class="font-bold text-text text-sm">Didn't receive activation email?</h4>
+            <p class="text-xs text-muted leading-relaxed">
+              Activation emails are sent instantly by LemonSqueezy. Please check your **Spam**, **Promotions**, or **Updates** folders. If you still can't find it, contact support with your checkout details.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h4 class="font-bold text-text text-sm">Activate button does not respond</h4>
+            <p class="text-xs text-muted leading-relaxed">
+              Ensure you have a stable internet connection. If the button stays inactive, reload your active Instagram page and open the extension popup again to reset the session.
+            </p>
+          </div>
+          <div class="flex flex-col gap-2">
+            <h4 class="font-bold text-text text-sm">Still need assistance?</h4>
+            <p class="text-xs text-muted leading-relaxed">
+              We are here to help. Reach out to our developer team directly at <a href={`/extensions/${slug}/support`} class="text-accent hover:underline">support page</a> or email <a href="mailto:support@bramlabs.co" class="text-accent hover:underline">support@bramlabs.co</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

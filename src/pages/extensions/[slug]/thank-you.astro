@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Icon from '../../../components/Icon.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const extensions = await getCollection('extensions');
+  return extensions.map((ext) => ({
+    params: { slug: ext.slug },
+    props: { ext },
+  }));
+}
+
+const { ext } = Astro.props;
+const { slug } = Astro.params;
+---
+
+<BaseLayout
+  title={`Thank You for purchasing ${ext.data.title} Pro`}
+  description={`Your purchase was successful. Get your license key and start using ${ext.data.title} Pro.`}
+>
+  <section class="py-24 bg-bg flex items-center min-h-[80vh]">
+    <div class="max-w-xl mx-auto px-6 text-center flex flex-col items-center gap-8">
+      <!-- Success Icon -->
+      <div class="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 text-3xl">
+        🎉
+      </div>
+
+      <div class="flex flex-col gap-3">
+        <h1 class="text-h1 text-text leading-tight">
+          Payment Successful!
+        </h1>
+        <p class="text-body text-muted">
+          Thanks for supporting independent open-source development! Your purchase of <strong>{ext.data.title} Pro</strong> lifetime license is complete.
+        </p>
+      </div>
+
+      <!-- License Key Panel -->
+      <div class="w-full bg-surface border border-border rounded-2xl p-6 flex flex-col gap-4 text-left shadow-sm">
+        <div class="flex items-center justify-between border-b border-border pb-3">
+          <span class="text-xs font-mono uppercase tracking-wider text-muted font-bold">Your License Key</span>
+          <span class="text-[10px] bg-accent/10 text-accent font-semibold px-2 py-0.5 rounded-full uppercase">Lifetime Pro</span>
+        </div>
+        <div class="flex gap-2">
+          <div class="flex-grow bg-surface-2 border border-border rounded-lg px-4 py-2.5 font-mono text-sm text-text select-all overflow-x-auto whitespace-nowrap">
+            SP-58E2-94C3-172A
+          </div>
+          <button id="copy-btn" class="bg-accent hover:bg-accent-hover text-white px-4 py-2.5 rounded-lg font-semibold transition-colors flex items-center justify-center gap-1.5 focus:outline-none cursor-pointer">
+            <Icon name="Copy" class="w-4 h-4" />
+            <span>Copy</span>
+          </button>
+        </div>
+        <div class="flex items-start gap-2 text-xs text-muted leading-relaxed">
+          <Icon name="Info" class="w-3.5 h-3.5 text-accent flex-shrink-0 mt-0.5" />
+          <span>Save this key. We have also sent a copy to your checkout email. Check your spam folder if it doesn't arrive.</span>
+        </div>
+      </div>
+
+      <!-- Quick Options -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full">
+        <a href={`/extensions/${slug}/activate`} class="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center cursor-pointer shadow-sm">
+          How to Activate &rarr;
+        </a>
+        <a href={ext.data.storeUrl} target="_blank" rel="noopener noreferrer" class="border border-border hover:bg-surface text-text px-6 py-3 rounded-lg font-semibold transition-colors text-center cursor-pointer">
+          Install Extension
+        </a>
+      </div>
+
+      <!-- Pro benefits recap -->
+      <div class="border-t border-border pt-8 w-full text-left">
+        <h3 class="text-sm font-mono uppercase tracking-wider text-muted font-bold mb-4">What's included in Pro</h3>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-muted">
+          <li class="flex items-center gap-2">
+            <Icon name="CheckCircle" class="w-4 h-4 text-emerald-500" />
+            <span>Unlimited anonymous story views</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <Icon name="CheckCircle" class="w-4 h-4 text-emerald-500" />
+            <span>Full resolution 4K quality downloads</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <Icon name="CheckCircle" class="w-4 h-4 text-emerald-500" />
+            <span>One-click bulk downloader</span>
+          </li>
+          <li class="flex items-center gap-2">
+            <Icon name="CheckCircle" class="w-4 h-4 text-emerald-500" />
+            <span>Priority customer support</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Return option -->
+      <a href={`/extensions/${slug}`} class="text-xs text-muted hover:text-text transition-colors">
+        &larr; Return to Landing Page
+      </a>
+    </div>
+  </section>
+
+  <!-- Script for Copy to Clipboard -->
+  <script is:inline>
+    (function() {
+      const copyBtn = document.getElementById('copy-btn');
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard.writeText('SP-58E2-94C3-172A').then(() => {
+            const btnText = copyBtn.querySelector('span');
+            if (btnText) {
+              btnText.textContent = 'Copied!';
+              setTimeout(() => {
+                btnText.textContent = 'Copy';
+              }, 2000);
+            }
+          });
+        });
+      }
+    })();
+  </script>
+</BaseLayout>

@@ -1,0 +1,15 @@
+{
+  "short_name": "BramLabs",
+  "name": "BramLabs Publisher Site",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#0d0f14",
+  "theme_color": "#6366f1",
+  "display": "standalone"
+}

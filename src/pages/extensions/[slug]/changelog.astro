@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Icon from '../../../components/Icon.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const extensions = await getCollection('extensions');
+  return extensions.map((ext) => ({
+    params: { slug: ext.slug },
+    props: { ext },
+  }));
+}
+
+const { ext } = Astro.props;
+const { slug } = Astro.params;
+---
+
+<BaseLayout
+  title={`${ext.data.title} Release Notes & Changelog`}
+  description={`Track updates, version history, and bug fixes for the ${ext.data.title} browser extension.`}
+>
+  <section class="py-24 bg-bg">
+    <div class="max-w-3xl mx-auto px-6 text-left">
+      <!-- Back Link -->
+      <a href={`/extensions/${slug}`} class="inline-flex items-center gap-1.5 text-mono text-xs text-muted hover:text-text transition-colors mb-8 uppercase tracking-wider">
+        <Icon name="ArrowLeft" class="w-4 h-4" />
+        Back to {ext.data.title} Landing Page
+      </a>
+
+      <div class="flex flex-col gap-4 mb-12 border-b border-border pb-8">
+        <div class="inline-flex items-center gap-2 text-mono text-xs text-muted">
+          <span>Release Notes & Version Log</span>
+          <span>&bull;</span>
+          <span>Active Development</span>
+        </div>
+        <h1 class="text-h1 text-text">
+          {ext.data.title} Changelog
+        </h1>
+        <p class="text-body text-muted max-w-prose">
+          Track updates, feature additions, layout fixes, and engine performance optimizations made to the {ext.data.title} extension.
+        </p>
+      </div>
+
+      <!-- Changelog Timeline -->
+      <div class="flex flex-col gap-12 text-sm text-muted leading-relaxed">
+        <!-- Release Item -->
+        <div class="flex flex-col gap-4 relative pl-6 border-l border-border/80">
+          <!-- Timeline Bullet -->
+          <span class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-accent border-4 border-bg"></span>
+          <div class="flex flex-wrap items-center gap-3">
+            <h3 class="text-lg font-bold text-text">v2.0.0</h3>
+            <span class="bg-accent/10 text-accent font-semibold text-[10px] px-2 py-0.5 rounded-full font-mono">LATEST</span>
+            <span class="text-xs text-muted font-mono">June 26, 2026</span>
+          </div>
+          <div class="flex flex-col gap-4 text-xs text-muted">
+            <p class="text-sm">
+              Major engine overhaul and premium Pro feature set rollout. Optimized to support Instagram's mid-2026 backend adjustments.
+            </p>
+            <div class="flex flex-col gap-2">
+              <span class="font-bold text-text uppercase tracking-wider text-[9px]">Features Added</span>
+              <ul class="list-disc pl-5 flex flex-col gap-1">
+                <li>Released Pro Bulk Downloader to save all active stories or highlights of an account at once.</li>
+                <li>Added auto-download rules for target accounts.</li>
+                <li>Implemented high-resolution CDN direct link extraction to bypass standard compression.</li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="font-bold text-text uppercase tracking-wider text-[9px]">Improvements & Fixes</span>
+              <ul class="list-disc pl-5 flex flex-col gap-1">
+                <li>Fixed a bug where video stories would occasionally fail to download on slow network profiles.</li>
+                <li>Reduced popup loading overhead by 40% with lighter HTML container rendering.</li>
+                <li>Resolved layout conflicts with Instagram Web's new vertical navigation layout.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Release Item -->
+        <div class="flex flex-col gap-4 relative pl-6 border-l border-border/80">
+          <span class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-border border-4 border-bg"></span>
+          <div class="flex flex-wrap items-center gap-3">
+            <h3 class="text-lg font-bold text-text">v1.9.0</h3>
+            <span class="text-xs text-muted font-mono">May 12, 2026</span>
+          </div>
+          <div class="flex flex-col gap-4 text-xs text-muted">
+            <p class="text-sm">
+              Added layout support for Instagram Highlights and built in keyboard navigation.
+            </p>
+            <div class="flex flex-col gap-2">
+              <span class="font-bold text-text uppercase tracking-wider text-[9px]">Features Added</span>
+              <ul class="list-disc pl-5 flex flex-col gap-1">
+                <li>Introduced anonymous viewing and downloading of story highlights directly from user profiles.</li>
+                <li>Added keyboard shortcuts: left/right arrow to skip story frames, Space to play/pause, D to save.</li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-2">
+              <span class="font-bold text-text uppercase tracking-wider text-[9px]">Improvements & Fixes</span>
+              <ul class="list-disc pl-5 flex flex-col gap-1">
+                <li>Fixed overlapping download buttons in reels vertical viewport.</li>
+                <li>Improved declarativeNetRequest filter rules to ensure zero seen API hits.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Release Item -->
+        <div class="flex flex-col gap-4 relative pl-6 border-l border-border/80">
+          <span class="absolute -left-1.5 top-1.5 w-3 h-3 rounded-full bg-border border-4 border-bg"></span>
+          <div class="flex flex-wrap items-center gap-3">
+            <h3 class="text-lg font-bold text-text">v1.8.0</h3>
+            <span class="text-xs text-muted font-mono">April 03, 2026</span>
+          </div>
+          <div class="flex flex-col gap-4 text-xs text-muted">
+            <p class="text-sm">
+              Performance refactor and basic analytics interception changes.
+            </p>
+            <div class="flex flex-col gap-2">
+              <span class="font-bold text-text uppercase tracking-wider text-[9px]">Features Added</span>
+              <ul class="list-disc pl-5 flex flex-col gap-1">
+                <li>Embedded green shield anonymous indicators to give visual status reassurance.</li>
+                <li>Added one-click avatar profile picture downloader.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
