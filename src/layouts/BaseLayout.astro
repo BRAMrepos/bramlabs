@@ -121,58 +121,58 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
       <slot />
     </main>
 
-    <!-- Footer (Always Dark Theme) -->
-    <footer class="border-t border-dark-border bg-dark-bg py-16 text-sm text-dark-text">
+    <!-- Footer -->
+    <footer class="border-t border-border bg-surface-2 py-16 text-sm text-muted transition-colors duration-150">
       <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
         <!-- Brand -->
         <div class="flex flex-col gap-4">
-          <a href="/" class="flex items-center gap-2 text-lg font-bold tracking-tight text-white group">
-            <span class="w-5 h-5 rounded bg-white flex items-center justify-between p-1 transition-transform duration-200 group-hover:scale-105">
-              <span class="w-full h-full rounded-[2px] bg-dark-bg"></span>
+          <a href="/" class="flex items-center gap-2 text-lg font-bold tracking-tight text-text group">
+            <span class="w-5 h-5 rounded bg-accent flex items-center justify-between p-1 transition-transform duration-200 group-hover:scale-105">
+              <span class="w-full h-full rounded-[2px] bg-bg"></span>
             </span>
-            <span class="font-heading">BramLabs</span>
+            <span class="font-heading text-text">BramLabs</span>
           </a>
-          <p class="text-dark-muted leading-relaxed max-w-xs">
-            Indie developer studio building micro browser extensions focused on privacy, user autonomy, and streamlined productivity.
+          <p class="text-muted leading-relaxed max-w-xs">
+            BramLabs is an independent developer studio crafting lightweight, open-source browser extensions that put you back in control of your digital privacy and workflow.
           </p>
         </div>
 
         <!-- Products -->
-        <div class="flex flex-col gap-3">
-          <h3 class="text-[11px] font-mono uppercase tracking-wider text-dark-muted">Extensions</h3>
+        <div class="flex flex-col gap-3 text-left">
+          <h3 class="text-[11px] font-mono uppercase tracking-wider text-muted font-bold">Extensions</h3>
           {extensions.length > 0 ? (
             extensions.map((ext) => (
-              <a href={`/extensions/${ext.slug}`} class="text-dark-muted hover:text-dark-text transition-colors duration-150">{ext.data.title}</a>
+              <a href={`/extensions/${ext.slug}`} class="text-muted hover:text-text transition-colors duration-150">{ext.data.title}</a>
             ))
           ) : (
-            <span class="text-dark-muted text-xs italic">Coming soon</span>
+            <span class="text-muted text-xs italic">Coming soon</span>
           )}
-          <a href="/extensions" class="text-dark-accent hover:underline font-medium mt-1">View Directory &rarr;</a>
+          <a href="/extensions" class="text-accent hover:underline font-medium mt-1">View Directory &rarr;</a>
         </div>
 
         <!-- Resources -->
-        <div class="flex flex-col gap-3">
-          <h3 class="text-[11px] font-mono uppercase tracking-wider text-dark-muted">Resources</h3>
-          <a href="/blog" class="text-dark-muted hover:text-dark-text transition-colors duration-150">Developer Blog</a>
-          <a href="/privacy" class="text-dark-muted hover:text-dark-text transition-colors duration-150">Publisher Privacy</a>
-          <a href="https://github.com/BRAMrepos/bramlabs" target="_blank" rel="noopener noreferrer" class="text-dark-muted hover:text-dark-text transition-colors duration-150">GitHub Repository</a>
+        <div class="flex flex-col gap-3 text-left">
+          <h3 class="text-[11px] font-mono uppercase tracking-wider text-muted font-bold">Resources</h3>
+          <a href="/blog" class="text-muted hover:text-text transition-colors duration-150">Developer Blog</a>
+          <a href="/privacy" class="text-muted hover:text-text transition-colors duration-150">Publisher Privacy</a>
+          <a href="https://github.com/BRAMrepos/bramlabs" target="_blank" rel="noopener noreferrer" class="text-muted hover:text-text transition-colors duration-150">GitHub Repository</a>
         </div>
 
         <!-- Support -->
-        <div class="flex flex-col gap-3">
-          <h3 class="text-[11px] font-mono uppercase tracking-wider text-dark-muted">Contact & Review</h3>
-          <p class="text-dark-muted leading-relaxed">
-            Need help or have feature ideas? Reach out to support.
+        <div class="flex flex-col gap-3 text-left">
+          <h3 class="text-[11px] font-mono uppercase tracking-wider text-muted font-bold">Contact & Support</h3>
+          <p class="text-muted leading-relaxed">
+            Need help, have feature requests, or want to report an issue?
           </p>
-          <a href="mailto:support@bramlabs.co" class="text-dark-accent hover:underline font-medium">support@bramlabs.co</a>
+          <a href="mailto:support@bramlabs.co" class="text-accent hover:underline font-medium">support@bramlabs.co</a>
         </div>
       </div>
 
-      <div class="max-w-6xl mx-auto px-6 mt-16 pt-8 border-t border-dark-border flex flex-col md:flex-row items-center justify-between gap-4 text-dark-muted">
+      <div class="max-w-6xl mx-auto px-6 mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-muted">
         <p>&copy; {new Date().getFullYear()} BramLabs. All rights reserved.</p>
         <div class="flex gap-6">
-          <a href="/privacy" class="hover:text-dark-text transition-colors duration-150">Global Privacy</a>
-          <a href="/privacy" class="hover:text-dark-text transition-colors duration-150">Terms of Service</a>
+          <a href="/privacy" class="hover:text-text transition-colors duration-150">Global Privacy</a>
+          <a href="/privacy" class="hover:text-text transition-colors duration-150">Terms of Service</a>
         </div>
       </div>
     </footer>

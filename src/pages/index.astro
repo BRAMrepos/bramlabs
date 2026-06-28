@@ -24,7 +24,7 @@ const structuredData = {
   <section class="relative py-32 bg-bg flex items-center overflow-hidden">
     <div class="max-w-6xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
       <!-- Left Column: Copy -->
-      <div class="lg:col-span-7 flex flex-col items-start gap-8 z-10 text-left">
+      <div class="lg:col-span-6 flex flex-col items-start gap-8 z-10 text-left">
         <!-- Badge -->
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-muted text-accent text-xs font-mono font-semibold">
           <span class="text-accent">•</span>
@@ -56,8 +56,8 @@ const structuredData = {
       </div>
 
       <!-- Right Column: Browser Mockup -->
-      <div class="lg:col-span-5 relative w-full flex justify-center">
-        <div class="w-full max-w-md bg-surface rounded-xl border border-border shadow-sm overflow-hidden flex flex-col transition-all duration-200">
+      <div class="lg:col-span-6 relative w-full flex justify-center">
+        <div class="w-full max-w-2xl lg:max-w-none bg-surface rounded-xl border border-border shadow-md overflow-hidden flex flex-col transition-all duration-200">
           <!-- Browser Frame Header -->
           <div class="bg-surface-2 px-4 py-3 border-b border-border flex items-center justify-between">
             <div class="flex gap-1.5">
@@ -74,126 +74,124 @@ const structuredData = {
               </span>
             </div>
           </div>
-          <!-- Mock extension popup ui (StoryPeek) -->
-          <div class="flex flex-col flex-grow bg-surface text-text font-body text-xs select-none">
-            <!-- Extension Header -->
-            <div class="px-4 py-3 border-b border-border flex items-center justify-between bg-surface">
-              <div class="flex items-center gap-1.5">
-                <span class="w-5 h-5 rounded-md bg-[#6366f1] flex items-center justify-center text-white p-0.5">
-                  <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                    <circle cx="12" cy="12" r="4"/>
-                    <path d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                  </svg>
-                </span>
-                <span class="font-heading font-extrabold text-sm text-text leading-none">Story<span class="text-[#6366f1]">Peek</span></span>
+          <!-- Mock extension popup ui (StoryPeek Split view) -->
+          <div class="flex flex-row flex-grow bg-white dark:bg-black text-text select-none min-h-[380px] overflow-hidden">
+            <!-- Left Instagram Feed -->
+            <div class="hidden sm:flex flex-row w-[62%] border-r border-[#efefef] dark:border-[#262626] bg-white dark:bg-[#000000] text-black dark:text-[#f5f5f5]">
+              <div class="w-12 border-r border-[#efefef] dark:border-[#262626] py-4 flex flex-col items-center gap-5 text-[#262626] dark:text-[#a8a8a8] bg-white dark:bg-black">
+                <Icon name="Instagram" class="w-4.5 h-4.5 text-black dark:text-white" />
+                <Icon name="Home" class="w-4.5 h-4.5 text-black dark:text-white" />
+                <Icon name="Search" class="w-4.5 h-4.5" />
+                <Icon name="Compass" class="w-4.5 h-4.5" />
+                <Icon name="Film" class="w-4.5 h-4.5" />
+                <Icon name="Send" class="w-4.5 h-4.5" />
               </div>
-              <div class="flex items-center gap-2.5 text-muted">
-                <Icon name="RefreshCw" class="w-3.5 h-3.5" />
-                <Icon name="Instagram" class="w-3.5 h-3.5" />
-                <Icon name="Settings" class="w-3.5 h-3.5" />
-                <Icon name="Moon" class="w-3.5 h-3.5" />
-              </div>
-            </div>
-
-            <!-- Tabs Navigation -->
-            <div class="px-4 border-b border-border bg-surface flex gap-5 text-[11px] font-medium">
-              <span class="py-2.5 border-b-2 border-[#6366f1] text-[#6366f1] flex items-center gap-1">
-                <Icon name="User" class="w-3.5 h-3.5" />
-                Stories
-              </span>
-              <span class="py-2.5 text-muted flex items-center gap-1">
-                <Icon name="Download" class="w-3.5 h-3.5" />
-                Download
-              </span>
-              <span class="py-2.5 text-muted flex items-center gap-1">
-                <Icon name="Search" class="w-3.5 h-3.5" />
-                Search
-              </span>
-            </div>
-
-            <!-- Banner -->
-            <div class="m-3 p-2 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200/50 dark:border-emerald-900/30 rounded-lg text-emerald-800 dark:text-emerald-400 flex items-start gap-2 text-[10px] leading-relaxed">
-              <Icon name="ShieldCheck" class="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" />
-              <span>Anonymous mode active — stories viewed without seen receipts</span>
-            </div>
-
-            <!-- Active Stories Section -->
-            <div class="px-3 flex flex-col gap-2 pb-3">
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-[10px] font-bold text-muted uppercase tracking-wider">Active Stories</span>
-                <span class="text-[9px] bg-emerald-100 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-400 font-semibold px-2 py-0.5 rounded-full">17 ACTIVE</span>
-              </div>
-
-              <!-- Stories Bubbles -->
-              <div class="flex gap-3 py-1 px-1 overflow-hidden">
-                <!-- Bubble 1 (Cristiano) -->
-                <div class="flex flex-col items-center gap-1">
-                  <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
-                    <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[9px] font-bold text-text">
-                      CR
+              <div class="flex-grow p-3 flex flex-col gap-3 overflow-hidden bg-white dark:bg-black">
+                <div class="flex gap-2.5 overflow-hidden py-1 border-b border-[#efefef] dark:border-[#262626] pb-3">
+                  <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
+                    <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                      <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">BS</div>
                     </div>
-                    <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center border border-surface">
-                      8
-                    </span>
+                    <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">betasquad</span>
                   </div>
-                  <span class="text-[8px] text-muted truncate w-10 text-center">cristiano</span>
+                  <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
+                    <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                      <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">DP</div>
+                    </div>
+                    <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">dishapat...</span>
+                  </div>
+                  <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
+                    <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                      <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">MB</div>
+                    </div>
+                    <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">mercedes...</span>
+                  </div>
                 </div>
-
-                <!-- Bubble 2 (Leo Messi) -->
-                <div class="flex flex-col items-center gap-1">
-                  <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
-                    <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[9px] font-bold text-text">
-                      LM
-                    </div>
-                    <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center border border-surface">
-                      4
-                    </span>
+                <!-- Post -->
+                <div class="flex flex-col gap-1.5 text-left">
+                  <div class="flex items-center gap-1.5">
+                    <div class="w-5 h-5 rounded-full bg-yellow-600 dark:bg-yellow-700 flex items-center justify-center text-[7px] font-bold text-white">RM</div>
+                    <span class="text-[8px] font-bold">realmadrid</span>
+                    <span class="text-blue-500 text-[8px]">&bull;</span>
+                    <span class="text-gray-400 dark:text-gray-500 text-[7px]">6 h</span>
                   </div>
-                  <span class="text-[8px] text-muted truncate w-10 text-center">leomessi</span>
-                </div>
-
-                <!-- Bubble 3 (Neymar Jr) -->
-                <div class="flex flex-col items-center gap-1">
-                  <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
-                    <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[9px] font-bold text-text">
-                      NJ
+                  <div class="relative w-full aspect-[4/3] rounded-md overflow-hidden bg-gray-900 border border-[#efefef] dark:border-[#262626]">
+                    <img src="/bellingham_celebration.png" alt="Celebration Post" class="w-full h-full object-cover" />
+                    <div class="absolute top-1.5 right-1.5 bg-black/60 p-1 rounded-full text-white">
+                      <Icon name="Download" class="w-3 h-3 text-white" />
                     </div>
-                    <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center border border-surface">
-                      12
-                    </span>
                   </div>
-                  <span class="text-[8px] text-muted truncate w-10 text-center">neymarjr</span>
-                </div>
-
-                <!-- Bubble 4 (National Geographic) -->
-                <div class="flex flex-col items-center gap-1">
-                  <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
-                    <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[9px] font-bold text-text">
-                      NG
-                    </div>
-                    <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center border border-surface">
-                      3
-                    </span>
-                  </div>
-                  <span class="text-[8px] text-muted truncate w-10 text-center">natgeo</span>
                 </div>
               </div>
             </div>
-
-            <!-- Footer Status Bar -->
-            <div class="mt-auto px-3 py-2 bg-surface-2 border-t border-border flex items-center justify-between text-[9px] text-muted rounded-b-xl">
-              <div class="flex items-center gap-1">
-                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                <span>Active session secure</span>
+            
+            <!-- Right StoryPeek Sidebar -->
+            <div class="w-full sm:w-[38%] flex flex-col bg-[#f8f9fa] dark:bg-[#0b0f14] text-[#262626] dark:text-[#f5f5f5] text-[10px]">
+              <div class="px-2.5 py-2 border-b border-[#e2d9ce] dark:border-[#262626] flex items-center justify-between bg-white dark:bg-[#0d0f14]">
+                <div class="flex items-center gap-1">
+                  <span class="w-4.5 h-4.5 rounded bg-[#6366f1] flex items-center justify-center text-white p-0.5">
+                    <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                      <circle cx="12" cy="12" r="4"/>
+                      <path d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                  </span>
+                  <span class="font-heading font-extrabold text-[11px] leading-none">Story<span class="text-[#6366f1]">Peek</span></span>
+                </div>
+                <div class="flex items-center gap-1.5 text-gray-400">
+                  <Icon name="RefreshCw" class="w-3 h-3" />
+                  <Icon name="Instagram" class="w-3 h-3" />
+                  <Icon name="ExternalLink" class="w-3 h-3" />
+                  <Icon name="Moon" class="w-3 h-3" />
+                </div>
               </div>
-              <div class="flex gap-2">
-                <span>Privacy</span>
-                <span>Help</span>
+              <div class="px-3 border-b border-[#e2d9ce] dark:border-[#262626] bg-white dark:bg-[#0d0f14] flex justify-between text-[9px] font-semibold text-gray-500 dark:text-gray-400">
+                <span class="py-1.5 border-b border-[#6366f1] text-[#6366f1] cursor-pointer">Stories</span>
+                <span>Download</span>
+                <span>Bulk</span>
+                <span>Pro</span>
+              </div>
+              <div class="m-2 p-1.5 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200/40 dark:border-emerald-900/30 rounded text-emerald-800 dark:text-emerald-400 flex items-center gap-1 text-[8px] leading-tight font-medium">
+                <Icon name="ShieldCheck" class="w-3 h-3 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                <span>Anonymous active</span>
+              </div>
+              <div class="flex-grow flex flex-col gap-3 px-2 overflow-y-auto max-h-[220px]">
+                <div class="flex flex-col gap-1 text-left">
+                  <div class="flex justify-between items-center text-[8px] font-bold text-gray-400 uppercase tracking-wider">
+                    <span>Active Stories</span>
+                    <span class="text-emerald-600 dark:text-emerald-400">64 Active</span>
+                  </div>
+                  <div class="flex gap-1 py-1 items-center justify-between">
+                    <div class="flex flex-col items-center gap-0.5">
+                      <div class="w-8 h-8 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                        <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">BS</div>
+                        <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">2</span>
+                      </div>
+                    </div>
+                    <div class="flex flex-col items-center gap-0.5">
+                      <div class="w-8 h-8 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                        <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">MB</div>
+                        <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">2</span>
+                      </div>
+                    </div>
+                    <div class="flex flex-col items-center gap-0.5">
+                      <div class="w-8 h-8 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                        <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">DP</div>
+                        <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">5</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="mt-auto px-2.5 py-1.5 bg-[#f8f9fa] dark:bg-[#0d0f14] border-t border-[#e2d9ce] dark:border-[#262626] flex items-center justify-between text-[7px] text-gray-400 rounded-b-xl">
+                <span>64 stories found</span>
+                <div class="flex gap-1.5 font-medium">
+                  <span>Help</span>
+                  <span>Privacy</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
     </div>
   </section>
 
@@ -261,7 +259,7 @@ const structuredData = {
       {extensions.length === 1 ? (
         <!-- Spotlight Card for Single Product -->
         <div class="bg-surface rounded-2xl border border-border p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-sm hover:border-accent/40 transition-all duration-200 text-left">
-          <div class="lg:col-span-7 flex flex-col gap-6">
+          <div class="lg:col-span-6 flex flex-col gap-6">
             <div class="flex items-center gap-4">
               <div class="w-14 h-14 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
                 <Icon name={extensions[0].data.icon} class="w-7 h-7 text-accent" />
@@ -309,43 +307,136 @@ const structuredData = {
             </div>
           </div>
           
-          <div class="lg:col-span-5 w-full flex justify-center">
-            <div class="w-full max-w-sm bg-surface-2 rounded-xl border border-border shadow-sm overflow-hidden flex flex-col">
-              <!-- Mock URL bar window frame -->
-              <div class="bg-surface px-4 py-2 border-b border-border flex items-center justify-between">
+          <div class="lg:col-span-6 w-full flex justify-center">
+            <div class="w-full max-w-2xl lg:max-w-none bg-surface rounded-xl border border-border shadow-md overflow-hidden flex flex-col transition-all duration-200">
+              <!-- Window Header -->
+              <div class="bg-surface px-4 py-2 border-b border-border flex items-center justify-between bg-surface-2 bg-bg dark:bg-[#1c1f28]">
                 <div class="flex gap-1">
                   <span class="w-2 h-2 rounded-full bg-[#FF5F57]"></span>
                   <span class="w-2 h-2 rounded-full bg-[#FFBD2E]"></span>
                   <span class="w-2 h-2 rounded-full bg-[#27C93F]"></span>
                 </div>
-                <div class="text-[10px] text-muted font-mono bg-surface-2 px-3 py-0.5 rounded border border-border">instagram.com</div>
-                <div class="w-4"></div>
+                <div class="text-[10px] text-muted font-mono bg-surface px-3 py-0.5 rounded border border-border">instagram.com</div>
+                <div class="w-4 flex justify-end">
+                  <Icon name="EyeOff" class="w-3.5 h-3.5 text-accent" />
+                </div>
               </div>
-              <div class="p-4 bg-surface flex flex-col gap-4 text-xs">
-                <div class="flex items-center justify-between border-b border-border pb-2">
-                  <span class="font-bold flex items-center gap-1.5"><Icon name="EyeOff" class="w-4 h-4 text-[#6366f1]" /> StoryPeek Active</span>
-                  <span class="text-[9px] bg-emerald-100 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-400 px-1.5 py-0.5 rounded font-mono font-bold">ANONYMOUS</span>
+              
+              <!-- Mock Content Split Panel -->
+              <div class="flex flex-row flex-grow bg-white dark:bg-black text-text select-none min-h-[380px] overflow-hidden">
+                <!-- Left Instagram Feed -->
+                <div class="hidden sm:flex flex-row w-[62%] border-r border-[#efefef] dark:border-[#262626] bg-white dark:bg-[#000000] text-black dark:text-[#f5f5f5]">
+                  <div class="w-12 border-r border-[#efefef] dark:border-[#262626] py-4 flex flex-col items-center gap-5 text-[#262626] dark:text-[#a8a8a8] bg-white dark:bg-black">
+                    <Icon name="Instagram" class="w-4.5 h-4.5 text-black dark:text-white" />
+                    <Icon name="Home" class="w-4.5 h-4.5 text-black dark:text-white" />
+                    <Icon name="Search" class="w-4.5 h-4.5" />
+                    <Icon name="Compass" class="w-4.5 h-4.5" />
+                    <Icon name="Film" class="w-4.5 h-4.5" />
+                    <Icon name="Send" class="w-4.5 h-4.5" />
+                  </div>
+                  <div class="flex-grow p-3 flex flex-col gap-3 overflow-hidden bg-white dark:bg-black">
+                    <div class="flex gap-2.5 overflow-hidden py-1 border-b border-[#efefef] dark:border-[#262626] pb-3">
+                      <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
+                        <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                          <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">BS</div>
+                        </div>
+                        <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">betasquad</span>
+                      </div>
+                      <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
+                        <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                          <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">DP</div>
+                        </div>
+                        <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">dishapat...</span>
+                      </div>
+                      <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
+                        <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                          <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">MB</div>
+                        </div>
+                        <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">mercedes...</span>
+                      </div>
+                    </div>
+                    <!-- Post -->
+                    <div class="flex flex-col gap-1.5 text-left">
+                      <div class="flex items-center gap-1.5">
+                        <div class="w-5 h-5 rounded-full bg-yellow-600 dark:bg-yellow-700 flex items-center justify-center text-[7px] font-bold text-white">RM</div>
+                        <span class="text-[8px] font-bold">realmadrid</span>
+                        <span class="text-blue-500 text-[8px]">&bull;</span>
+                        <span class="text-gray-400 dark:text-gray-500 text-[7px]">6 h</span>
+                      </div>
+                      <div class="relative w-full aspect-[4/3] rounded-md overflow-hidden bg-gray-900 border border-[#efefef] dark:border-[#262626]">
+                        <img src="/bellingham_celebration.png" alt="Celebration Post" class="w-full h-full object-cover" />
+                        <div class="absolute top-1.5 right-1.5 bg-black/60 p-1 rounded-full text-white">
+                          <Icon name="Download" class="w-3 h-3 text-white" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <!-- Mock Story list -->
-                <div class="flex gap-3 overflow-hidden py-1 justify-center">
-                  <div class="flex flex-col items-center gap-1">
-                    <div class="w-9 h-9 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
-                      <div class="w-full h-full rounded-full bg-surface flex items-center justify-center font-bold text-[9px]">cristiano</div>
+                
+                <!-- Right StoryPeek Sidebar -->
+                <div class="w-full sm:w-[38%] flex flex-col bg-[#f8f9fa] dark:bg-[#0b0f14] text-[#262626] dark:text-[#f5f5f5] text-[10px]">
+                  <div class="px-2.5 py-2 border-b border-[#e2d9ce] dark:border-[#262626] flex items-center justify-between bg-white dark:bg-[#0d0f14]">
+                    <div class="flex items-center gap-1">
+                      <span class="w-4.5 h-4.5 rounded bg-[#6366f1] flex items-center justify-center text-white p-0.5">
+                        <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                          <circle cx="12" cy="12" r="4"/>
+                          <path d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                      </span>
+                      <span class="font-heading font-extrabold text-[11px] leading-none">Story<span class="text-[#6366f1]">Peek</span></span>
+                    </div>
+                    <div class="flex items-center gap-1.5 text-gray-400">
+                      <Icon name="RefreshCw" class="w-3 h-3" />
+                      <Icon name="Instagram" class="w-3 h-3" />
+                      <Icon name="ExternalLink" class="w-3 h-3" />
+                      <Icon name="Moon" class="w-3 h-3" />
                     </div>
                   </div>
-                  <div class="flex flex-col items-center gap-1">
-                    <div class="w-9 h-9 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
-                      <div class="w-full h-full rounded-full bg-surface flex items-center justify-center font-bold text-[9px]">leomessi</div>
+                  <div class="px-3 border-b border-[#e2d9ce] dark:border-[#262626] bg-white dark:bg-[#0d0f14] flex justify-between text-[9px] font-semibold text-gray-500 dark:text-gray-400">
+                    <span class="py-1.5 border-b border-[#6366f1] text-[#6366f1]">Stories</span>
+                    <span>Download</span>
+                    <span>Bulk</span>
+                    <span>Pro</span>
+                  </div>
+                  <div class="m-2 p-1.5 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200/40 dark:border-emerald-900/30 rounded text-emerald-800 dark:text-emerald-400 flex items-center gap-1 text-[8px] leading-tight font-medium">
+                    <Icon name="ShieldCheck" class="w-3 h-3 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                    <span>Anonymous active</span>
+                  </div>
+                  <div class="flex-grow flex flex-col gap-3 px-2 overflow-y-auto max-h-[220px]">
+                    <div class="flex flex-col gap-1 text-left">
+                      <div class="flex justify-between items-center text-[8px] font-bold text-gray-400 uppercase tracking-wider">
+                        <span>Active Stories</span>
+                        <span class="text-emerald-600 dark:text-emerald-400">64 Active</span>
+                      </div>
+                      <div class="flex gap-1 py-1 items-center justify-between">
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-8 h-8 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                            <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">BS</div>
+                            <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">2</span>
+                          </div>
+                        </div>
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-8 h-8 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                            <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">MB</div>
+                            <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">2</span>
+                          </div>
+                        </div>
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-8 h-8 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                            <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">DP</div>
+                            <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">5</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div class="flex flex-col items-center gap-1">
-                    <div class="w-9 h-9 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
-                      <div class="w-full h-full rounded-full bg-surface flex items-center justify-center font-bold text-[9px]">neymarjr</div>
+                  <div class="mt-auto px-2.5 py-1.5 bg-[#f8f9fa] dark:bg-[#0d0f14] border-t border-[#e2d9ce] dark:border-[#262626] flex items-center justify-between text-[7px] text-gray-400 rounded-b-xl">
+                    <span>64 stories found</span>
+                    <div class="flex gap-1.5 font-medium">
+                      <span>Help</span>
+                      <span>Privacy</span>
                     </div>
                   </div>
-                </div>
-                <div class="bg-surface-2 p-2 rounded border border-border text-[10px] text-muted">
-                  Watch any active stories anonymously without trigger receipts.
                 </div>
               </div>
             </div>

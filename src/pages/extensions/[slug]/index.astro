@@ -44,7 +44,7 @@ const structuredData = {
   <section class="py-32 bg-bg border-b border-border">
     <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
       <!-- Left: Extension info -->
-      <div class="lg:col-span-7 flex flex-col items-start gap-6 text-left">
+      <div class="lg:col-span-6 flex flex-col items-start gap-6 text-left">
         <!-- Back Link -->
         <a href="/extensions" class="inline-flex items-center gap-1.5 text-mono text-xs text-muted hover:text-text transition-colors mb-2 uppercase tracking-wider">
           <Icon name="ArrowLeft" class="w-3.5 h-3.5" />
@@ -113,8 +113,8 @@ const structuredData = {
       </div>
 
       <!-- Right: Real Toolbar/Popup UI rendered in CSS -->
-      <div class="lg:col-span-5 flex justify-center w-full">
-        <div class="w-full max-w-sm bg-surface rounded-xl border border-border shadow-sm overflow-hidden flex flex-col transition-all duration-200">
+      <div class="lg:col-span-6 flex justify-center w-full">
+        <div class="w-full max-w-2xl lg:max-w-none bg-surface rounded-xl border border-border shadow-md overflow-hidden flex flex-col transition-all duration-200">
           <!-- Window Header -->
           <div class="bg-surface-2 px-4 py-3 border-b border-border flex items-center justify-between">
             <div class="flex gap-1.5">
@@ -134,8 +134,8 @@ const structuredData = {
             </div>
           </div>
 
-          <!-- Popup Content -->
-          <div class={slug === 'tab-snoozer' ? "p-6 bg-surface min-h-[320px] flex flex-col justify-between text-left" : "bg-surface min-h-[320px] flex flex-col justify-between text-left"}>
+          <!-- Popup / Browser Split Content -->
+          <div class={slug === 'tab-snoozer' ? "p-6 bg-surface min-h-[320px] flex flex-col justify-between text-left" : "bg-surface min-h-[380px] flex flex-col justify-between text-left"}>
             <!-- Render custom popup based on the extension -->
             {slug === 'tab-snoozer' ? (
               <div class="flex flex-col gap-5 flex-grow">
@@ -172,194 +172,214 @@ const structuredData = {
                 </div>
               </div>
             ) : (
-              <div class="flex flex-col flex-grow bg-surface text-text font-body text-xs select-none">
-                <!-- Extension Header -->
-                <div class="px-4 py-3 border-b border-border flex items-center justify-between bg-surface">
-                  <div class="flex items-center gap-1.5">
-                    <span class="w-5 h-5 rounded-md bg-[#6366f1] flex items-center justify-center text-white p-0.5">
-                      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                        <circle cx="12" cy="12" r="4"/>
-                        <path d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                      </svg>
-                    </span>
-                    <span class="font-heading font-extrabold text-sm text-text leading-none">Story<span class="text-[#6366f1]">Peek</span></span>
+              <div class="flex flex-row flex-grow bg-white dark:bg-black text-text select-none min-h-[380px] overflow-hidden">
+                <!-- Left Instagram Mockup (62% width, hidden on extra small mobile screens) -->
+                <div class="hidden sm:flex flex-row w-[62%] border-r border-[#efefef] dark:border-[#262626] bg-white dark:bg-[#000000] text-black dark:text-[#f5f5f5]">
+                  <!-- Instagram Mini Vertical Navbar -->
+                  <div class="w-12 border-r border-[#efefef] dark:border-[#262626] py-4 flex flex-col items-center gap-5 text-[#262626] dark:text-[#a8a8a8] bg-white dark:bg-black">
+                    <Icon name="Instagram" class="w-4.5 h-4.5 text-black dark:text-white" />
+                    <Icon name="Home" class="w-4.5 h-4.5 text-black dark:text-white" />
+                    <Icon name="Search" class="w-4.5 h-4.5" />
+                    <Icon name="Compass" class="w-4.5 h-4.5" />
+                    <Icon name="Film" class="w-4.5 h-4.5" />
+                    <Icon name="Send" class="w-4.5 h-4.5" />
+                    <Icon name="Heart" class="w-4.5 h-4.5" />
+                    <Icon name="PlusSquare" class="w-4.5 h-4.5" />
                   </div>
-                  <!-- Header Actions -->
-                  <div class="flex items-center gap-2.5 text-muted">
-                    <Icon name="RefreshCw" class="w-3.5 h-3.5 hover:text-text cursor-pointer" />
-                    <Icon name="Instagram" class="w-3.5 h-3.5 hover:text-text cursor-pointer" />
-                    <Icon name="Settings" class="w-3.5 h-3.5 hover:text-text cursor-pointer" />
-                    <Icon name="Moon" class="w-3.5 h-3.5 hover:text-text cursor-pointer" />
-                  </div>
-                </div>
-
-                <!-- Tabs Navigation -->
-                <div class="px-4 border-b border-border bg-surface flex gap-5 text-[11px] font-medium">
-                  <button class="py-2.5 border-b-2 border-[#6366f1] text-[#6366f1] flex items-center gap-1 cursor-pointer">
-                    <Icon name="User" class="w-3.5 h-3.5" />
-                    Stories
-                  </button>
-                  <button class="py-2.5 text-muted hover:text-text flex items-center gap-1 cursor-pointer">
-                    <Icon name="Download" class="w-3.5 h-3.5" />
-                    Download
-                  </button>
-                  <button class="py-2.5 text-muted hover:text-text flex items-center gap-1 cursor-pointer">
-                    <Icon name="Search" class="w-3.5 h-3.5" />
-                    Search
-                  </button>
-                  <button class="py-2.5 text-muted hover:text-text flex items-center gap-1 cursor-pointer">
-                    <Icon name="Star" class="w-3.5 h-3.5" />
-                    Pro
-                  </button>
-                </div>
-
-                <!-- Banner -->
-                <div class="m-3 p-2 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200/50 dark:border-emerald-900/30 rounded-lg text-emerald-800 dark:text-emerald-400 flex items-start gap-2 text-[10px] leading-relaxed">
-                  <Icon name="ShieldCheck" class="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" />
-                  <span>Anonymous mode active — stories viewed without seen receipts</span>
-                </div>
-
-                <!-- Active Stories Section -->
-                <div class="px-3 flex flex-col gap-2.5">
-                  <div class="flex items-center justify-between">
-                    <span class="text-[10px] font-bold text-muted uppercase tracking-wider">Active Stories</span>
-                    <span class="text-[9px] bg-emerald-100 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-400 font-semibold px-2 py-0.5 rounded-full">17 ACTIVE</span>
-                  </div>
-
-                  <!-- Stories Carousel Container -->
-                  <div class="relative flex items-center">
-                    <!-- Left Arrow -->
-                    <span class="absolute -left-1 z-10 w-5 h-5 rounded-full border border-border bg-surface flex items-center justify-center text-[10px] text-muted shadow-sm cursor-pointer hover:text-text">
-                      ‹
-                    </span>
-                    <!-- Stories Bubbles -->
-                    <div class="flex gap-3 overflow-x-auto py-1 px-4 w-full scrollbar-none">
-                      <!-- Bubble 1 (Khabib) -->
-                      <div class="flex flex-col items-center gap-1 cursor-pointer">
-                        <div class="w-11 h-11 rounded-full p-[2.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
-                          <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[10px] font-bold text-text">
-                            KB
-                          </div>
-                          <!-- Count badge -->
-                          <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-surface">
-                            7
-                          </span>
+                  
+                  <!-- Instagram Main Feed Mockup -->
+                  <div class="flex-grow p-3 flex flex-col gap-3 overflow-hidden bg-white dark:bg-black">
+                    <!-- Feed Stories Row -->
+                    <div class="flex gap-2.5 overflow-hidden py-1 border-b border-[#efefef] dark:border-[#262626] pb-3">
+                      <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
+                        <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                          <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">BS</div>
                         </div>
-                        <span class="text-[9px] text-muted truncate w-12 text-center">khabib_n...</span>
+                        <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">betasquad</span>
                       </div>
-
-                      <!-- Bubble 2 (Inidnews) -->
-                      <div class="flex flex-col items-center gap-1 cursor-pointer">
-                        <div class="w-11 h-11 rounded-full p-[2.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
-                          <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[10px] font-bold text-text">
-                            IN
-                          </div>
-                          <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-surface">
-                            4
-                          </span>
+                      <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
+                        <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                          <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">DP</div>
                         </div>
-                        <span class="text-[9px] text-muted truncate w-12 text-center">inidnews</span>
+                        <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">dishapat...</span>
                       </div>
-
-                      <!-- Bubble 3 (Equipe) -->
-                      <div class="flex flex-col items-center gap-1 cursor-pointer">
-                        <div class="w-11 h-11 rounded-full p-[2.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
-                          <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[10px] font-bold text-text">
-                            EQ
-                          </div>
-                          <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-surface">
-                            10
-                          </span>
+                      <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
+                        <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                          <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">MB</div>
                         </div>
-                        <span class="text-[9px] text-muted truncate w-12 text-center">equipedu...</span>
+                        <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">mercedes...</span>
                       </div>
-
-                      <!-- Bubble 4 (NatGeo) -->
-                      <div class="flex flex-col items-center gap-1 cursor-pointer">
-                        <div class="w-11 h-11 rounded-full p-[2.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
-                          <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[10px] font-bold text-text">
-                            NG
-                          </div>
-                          <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-surface">
-                            3
-                          </span>
+                      <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
+                        <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                          <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">UM</div>
                         </div>
-                        <span class="text-[9px] text-muted truncate w-12 text-center">natgeo</span>
-                      </div>
-
-                      <!-- Bubble 5 (NatGeoAnimals) -->
-                      <div class="flex flex-col items-center gap-1 cursor-pointer">
-                        <div class="w-11 h-11 rounded-full p-[2.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
-                          <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[10px] font-bold text-text">
-                            NA
-                          </div>
-                          <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-surface">
-                            2
-                          </span>
-                        </div>
-                        <span class="text-[9px] text-muted truncate w-12 text-center">natgeoan...</span>
+                        <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">__umwami</span>
                       </div>
                     </div>
-                    <!-- Right Arrow -->
-                    <span class="absolute -right-1 z-10 w-5 h-5 rounded-full border border-border bg-surface flex items-center justify-center text-[10px] text-muted shadow-sm cursor-pointer hover:text-text">
-                      ›
-                    </span>
-                  </div>
-                </div>
-
-                <!-- Recent Highlights Section -->
-                <div class="px-3 mt-4 flex flex-col gap-2.5">
-                  <div class="flex items-center justify-between">
-                    <span class="text-[10px] font-bold text-muted uppercase tracking-wider">Recent Highlights</span>
-                    <span class="text-[9px] text-[#6366f1] hover:underline cursor-pointer font-medium">See all</span>
-                  </div>
-                  <div class="flex gap-4 overflow-x-auto py-1 px-1">
-                    <!-- Highlight 1 -->
-                    <div class="flex flex-col items-center gap-1 cursor-pointer">
-                      <div class="w-9 h-9 rounded-full border border-border bg-surface-2 flex items-center justify-center text-[9px] font-semibold text-text">
-                        H1
+                    
+                    <!-- Post Block -->
+                    <div class="flex flex-col gap-1.5 text-left">
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-1.5">
+                          <div class="w-5 h-5 rounded-full bg-yellow-600 dark:bg-yellow-700 flex items-center justify-center text-[7px] font-bold text-white">RM</div>
+                          <span class="text-[8px] font-bold">realmadrid</span>
+                          <span class="text-blue-500 text-[8px]">&bull;</span>
+                          <span class="text-gray-400 dark:text-gray-500 text-[7px]">6 h</span>
+                        </div>
+                        <Icon name="MoreHorizontal" class="w-3 h-3 text-gray-400 dark:text-gray-500" />
                       </div>
-                      <span class="text-[9px] text-muted truncate w-12 text-center">Highligh...</span>
-                    </div>
-                    <!-- Highlight 2 -->
-                    <div class="flex flex-col items-center gap-1 cursor-pointer">
-                      <div class="w-9 h-9 rounded-full border border-border bg-surface-2 flex items-center justify-center text-[9px] font-semibold text-text">
-                        H2
+                      <!-- Bellingham Image -->
+                      <div class="relative w-full aspect-[4/3] rounded-md overflow-hidden bg-gray-900 border border-[#efefef] dark:border-[#262626]">
+                        <img src="/bellingham_celebration.png" alt="Celebration Post" class="w-full h-full object-cover" />
+                        <div class="absolute top-1.5 right-1.5 bg-black/60 p-1 rounded-full text-white cursor-pointer hover:bg-black/80 transition-colors">
+                          <Icon name="Download" class="w-3 h-3 text-white" />
+                        </div>
                       </div>
-                      <span class="text-[9px] text-muted truncate w-12 text-center">Highligh...</span>
-                    </div>
-                    <!-- Highlight 3 -->
-                    <div class="flex flex-col items-center gap-1 cursor-pointer">
-                      <div class="w-9 h-9 rounded-full border border-border bg-surface-2 flex items-center justify-center text-[9px] font-semibold text-text">
-                        H3
-                      </div>
-                      <span class="text-[9px] text-muted truncate w-12 text-center">Highligh...</span>
-                    </div>
-                    <!-- Highlight 4 -->
-                    <div class="flex flex-col items-center gap-1 cursor-pointer">
-                      <div class="w-9 h-9 rounded-full border border-border bg-surface-2 flex items-center justify-center text-[9px] font-semibold text-text">
-                        H4
-                      </div>
-                      <span class="text-[9px] text-muted truncate w-12 text-center">Highligh...</span>
                     </div>
                   </div>
                 </div>
-
-                <!-- Footer Status Bar -->
-                <div class="mt-4 px-3 py-2 bg-surface-2 border-t border-border flex items-center justify-between text-[9px] text-muted rounded-b-xl">
-                  <div class="flex items-center gap-1">
-                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    <span>17 stories found</span>
+                
+                <!-- Right StoryPeek Sidebar (38% width, adapts on mobile to fill 100%) -->
+                <div class="w-full sm:w-[38%] flex flex-col bg-[#f8f9fa] dark:bg-[#0b0f14] text-[#262626] dark:text-[#f5f5f5] text-[10px]">
+                  <!-- Header -->
+                  <div class="px-2.5 py-2 border-b border-[#e2d9ce] dark:border-[#262626] flex items-center justify-between bg-white dark:bg-[#0d0f14]">
+                    <div class="flex items-center gap-1">
+                      <span class="w-4.5 h-4.5 rounded bg-[#6366f1] flex items-center justify-center text-white p-0.5">
+                        <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                          <circle cx="12" cy="12" r="4"/>
+                          <path d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                        </svg>
+                      </span>
+                      <span class="font-heading font-extrabold text-[11px] leading-none">Story<span class="text-[#6366f1]">Peek</span></span>
+                    </div>
+                    <!-- Header Actions -->
+                    <div class="flex items-center gap-1.5 text-gray-400">
+                      <Icon name="RefreshCw" class="w-3 h-3 hover:text-black dark:hover:text-white cursor-pointer" />
+                      <Icon name="Instagram" class="w-3 h-3 hover:text-black dark:hover:text-white cursor-pointer" />
+                      <Icon name="ExternalLink" class="w-3 h-3 hover:text-black dark:hover:text-white cursor-pointer" />
+                      <Icon name="Moon" class="w-3 h-3 hover:text-black dark:hover:text-white cursor-pointer" />
+                      <Icon name="Settings" class="w-3 h-3 hover:text-black dark:hover:text-white cursor-pointer" />
+                    </div>
                   </div>
-                  <div class="flex gap-2">
-                    <span class="hover:text-text cursor-pointer">Help</span>
-                    <span class="hover:text-text cursor-pointer">Privacy</span>
-                    <span class="hover:text-text cursor-pointer">Terms</span>
+
+                  <!-- Tabs -->
+                  <div class="px-3 border-b border-[#e2d9ce] dark:border-[#262626] bg-white dark:bg-[#0d0f14] flex justify-between text-[9px] font-semibold text-gray-500 dark:text-gray-400">
+                    <span class="py-1.5 border-b border-[#6366f1] text-[#6366f1] cursor-pointer">Stories</span>
+                    <span class="py-1.5 hover:text-black dark:hover:text-white cursor-pointer">Download</span>
+                    <span class="py-1.5 hover:text-black dark:hover:text-white cursor-pointer">Bulk</span>
+                    <span class="py-1.5 hover:text-black dark:hover:text-white cursor-pointer">Pro</span>
+                  </div>
+
+                  <!-- Green Active Banner -->
+                  <div class="m-2 p-1.5 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200/40 dark:border-emerald-900/30 rounded text-emerald-800 dark:text-emerald-400 flex items-center gap-1 text-[8px] leading-tight font-medium">
+                    <Icon name="ShieldCheck" class="w-3 h-3 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
+                    <span>Anonymous mode active — no seen receipts</span>
+                  </div>
+
+                  <!-- Content Area scrollable -->
+                  <div class="flex-grow flex flex-col gap-3.5 px-2.5 overflow-y-auto max-h-[220px]">
+                    <!-- Active Stories -->
+                    <div class="flex flex-col gap-1 text-left">
+                      <div class="flex justify-between items-center text-[8px] font-bold text-gray-400 uppercase tracking-wider">
+                        <span>Active Stories</span>
+                        <span class="text-emerald-600 dark:text-emerald-400">64 Active</span>
+                      </div>
+                      <div class="flex gap-1.5 py-1 items-center justify-between">
+                        <!-- Bubble 1 -->
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                            <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">BS</div>
+                            <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">2</span>
+                          </div>
+                          <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">betasquad</span>
+                        </div>
+                        <!-- Bubble 2 -->
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                            <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">MB</div>
+                            <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">2</span>
+                          </div>
+                          <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">mercedes...</span>
+                        </div>
+                        <!-- Bubble 3 -->
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                            <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">DP</div>
+                            <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">5</span>
+                          </div>
+                          <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">dishapat...</span>
+                        </div>
+                        <!-- Bubble 4 -->
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                            <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">UM</div>
+                            <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">2</span>
+                          </div>
+                          <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">__umwami</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Recent Highlights -->
+                    <div class="flex flex-col gap-1 text-left">
+                      <div class="flex justify-between items-center text-[8px] font-bold text-gray-400 uppercase tracking-wider">
+                        <span>Recent Highlights</span>
+                        <span class="text-[#6366f1] hover:underline cursor-pointer">See all</span>
+                      </div>
+                      <div class="flex gap-2 py-0.5 overflow-hidden">
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-7 h-7 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d0f14] flex items-center justify-center text-[6px] font-bold">BS</div>
+                          <span class="text-[6px] text-gray-500 dark:text-gray-400 truncate w-7 text-center">Highligh...</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-7 h-7 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d0f14] flex items-center justify-center text-[6px] font-bold">MB</div>
+                          <span class="text-[6px] text-gray-500 dark:text-gray-400 truncate w-7 text-center">Highligh...</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-7 h-7 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0d0f14] flex items-center justify-center text-[6px] font-bold">DP</div>
+                          <span class="text-[6px] text-gray-500 dark:text-gray-400 truncate w-7 text-center">Highligh...</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Recently Viewed -->
+                    <div class="flex flex-col gap-1 text-left">
+                      <div class="flex justify-between items-center text-[8px] font-bold text-gray-400 uppercase tracking-wider">
+                        <span>Recently Viewed</span>
+                        <span class="text-gray-400 hover:text-black dark:hover:text-white cursor-pointer">Clear</span>
+                      </div>
+                      <div class="flex gap-2.5 py-0.5 overflow-hidden">
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-7.5 h-7.5 rounded-full bg-yellow-500 flex items-center justify-center font-bold text-white text-[7px]">RD</div>
+                          <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">ronaldinho</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-7.5 h-7.5 rounded-full bg-blue-700 flex items-center justify-center font-bold text-white text-[7px]">RM</div>
+                          <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">realmadrid</span>
+                        </div>
+                        <div class="flex flex-col items-center gap-0.5">
+                          <div class="w-7.5 h-7.5 rounded-full bg-[#00a6ff] flex items-center justify-center font-bold text-white text-[7px]">FT</div>
+                          <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">feastables</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Footer Status Bar -->
+                  <div class="mt-auto px-2.5 py-1.5 bg-[#f8f9fa] dark:bg-[#0d0f14] border-t border-[#e2d9ce] dark:border-[#262626] flex items-center justify-between text-[7px] text-gray-400 rounded-b-xl">
+                    <div class="flex items-center gap-1">
+                      <span class="w-1 h-1 rounded-full bg-emerald-500"></span>
+                      <span>64 stories found</span>
+                    </div>
+                    <div class="flex gap-1.5 font-medium">
+                      <span>Help</span>
+                      <span>Privacy</span>
+                      <span>Terms</span>
+                    </div>
                   </div>
                 </div>
               </div>
             )}
-          </div>
           </div>
         </div>
       </div>
