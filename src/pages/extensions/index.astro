@@ -19,9 +19,102 @@ const extensions = await getCollection('extensions');
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {extensions.length > 0 ? (
-          extensions.map((ext) => (
+      {extensions.length === 1 ? (
+        <!-- Featured Spotlight Hero -->
+        <div class="bg-surface rounded-2xl border border-border p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center shadow-sm hover:border-accent/40 transition-all duration-200 text-left">
+          <div class="lg:col-span-7 flex flex-col gap-6">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center text-white shadow-sm">
+                <Icon name={extensions[0].data.icon} class="w-9 h-9 text-white" />
+              </div>
+              <div>
+                <h2 class="text-h2 text-text leading-tight">{extensions[0].data.title}</h2>
+                <div class="flex items-center gap-2 mt-1.5">
+                  <span class="text-mono text-xs text-muted">{extensions[0].data.downloadCount}</span>
+                  <span class="text-muted text-xs">&bull;</span>
+                  <span class="text-mono text-xs text-muted">v{extensions[0].data.version}</span>
+                </div>
+              </div>
+            </div>
+            
+            <p class="text-body text-muted leading-relaxed max-w-prose">
+              {extensions[0].data.description}
+            </p>
+
+            <div class="flex flex-col gap-3">
+              <span class="text-mono text-xs font-bold text-text tracking-wider uppercase">Key Features</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {extensions[0].data.features.map((feat) => (
+                  <div class="flex items-start gap-2.5 text-sm text-muted">
+                    <div class="mt-0.5 text-accent flex-shrink-0">
+                      <Icon name="CheckCircle" class="w-4 h-4 text-accent" />
+                    </div>
+                    <span><strong class="text-text">{feat.title}:</strong> {feat.description}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div class="border-t border-border/50 pt-6 flex flex-col sm:flex-row items-center gap-4">
+              <a
+                href={extensions[0].data.storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-sm text-center flex items-center justify-center gap-2 w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
+              >
+                Add to Chrome (Free)
+              </a>
+              <a href={`/extensions/${extensions[0].slug}`} class="border border-border text-text hover:bg-bg px-6 py-3 rounded-lg font-semibold transition-colors text-center w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer">
+                Learn More &rarr;
+              </a>
+            </div>
+          </div>
+          
+          <div class="lg:col-span-5 w-full flex justify-center">
+            <div class="w-full max-w-sm bg-surface-2 rounded-xl border border-border shadow-sm overflow-hidden flex flex-col">
+              <!-- Window Header -->
+              <div class="bg-surface px-4 py-2 border-b border-border flex items-center justify-between">
+                <div class="flex gap-1">
+                  <span class="w-2 h-2 rounded-full bg-[#FF5F57]"></span>
+                  <span class="w-2 h-2 rounded-full bg-[#FFBD2E]"></span>
+                  <span class="w-2 h-2 rounded-full bg-[#27C93F]"></span>
+                </div>
+                <div class="text-[10px] text-muted font-mono bg-surface-2 px-3 py-0.5 rounded border border-border">instagram.com</div>
+                <div class="w-4"></div>
+              </div>
+              <!-- Mock Extension Interface -->
+              <div class="p-4 bg-surface flex flex-col gap-4 text-xs">
+                <div class="flex items-center justify-between border-b border-border pb-2">
+                  <span class="font-bold flex items-center gap-1.5"><Icon name="EyeOff" class="w-4 h-4 text-[#6366f1]" /> StoryPeek Active</span>
+                  <span class="text-[9px] bg-emerald-100 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-400 px-1.5 py-0.5 rounded font-mono font-bold">ANONYMOUS</span>
+                </div>
+                <div class="flex gap-3 overflow-hidden py-1 justify-center">
+                  <div class="flex flex-col items-center gap-1">
+                    <div class="w-9 h-9 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                      <div class="w-full h-full rounded-full bg-surface flex items-center justify-center font-bold text-[9px]">cristiano</div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-center gap-1">
+                    <div class="w-9 h-9 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                      <div class="w-full h-full rounded-full bg-surface flex items-center justify-center font-bold text-[9px]">leomessi</div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-center gap-1">
+                    <div class="w-9 h-9 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                      <div class="w-full h-full rounded-full bg-surface flex items-center justify-center font-bold text-[9px]">neymarjr</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-surface-2 p-2 rounded border border-border text-[10px] text-muted">
+                  Click any story bubble to watch completely anonymously.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {extensions.map((ext) => (
             <div class="bg-surface rounded-xl border border-border p-8 flex flex-col justify-between shadow-sm transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-accent/40">
               <div>
                 <!-- Header -->
@@ -77,17 +170,9 @@ const extensions = await getCollection('extensions');
                 </a>
               </div>
             </div>
-          ))
-        ) : (
-          <!-- Placeholder Card -->
-          <div class="md:col-span-2 bg-surface rounded-xl border border-border border-dashed p-12 text-center flex flex-col items-center justify-center gap-3">
-            <h3 class="text-h3 text-text">First extension loading...</h3>
-            <p class="text-small text-muted max-w-sm">
-              Check back soon or follow the blog for launch updates.
-            </p>
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   </section>
 </BaseLayout>

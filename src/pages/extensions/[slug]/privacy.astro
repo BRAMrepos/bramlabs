@@ -22,7 +22,7 @@ const { slug } = Astro.params;
   <section class="py-24 bg-bg">
     <div class="max-w-3xl mx-auto px-6 text-left">
       <!-- Back Link -->
-      <a href={`/extensions/${slug}`} class="inline-flex items-center gap-1.5 text-mono text-xs text-accent hover:underline mb-8 uppercase tracking-wider">
+      <a href={`/extensions/${slug}`} class="inline-flex items-center gap-1.5 text-mono text-xs text-muted hover:text-text transition-colors mb-8 uppercase tracking-wider">
         <Icon name="ArrowLeft" class="w-4 h-4" />
         Back to {ext.data.title} Landing Page
       </a>

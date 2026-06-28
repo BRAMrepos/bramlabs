@@ -46,7 +46,7 @@ const structuredData = {
       <!-- Left: Extension info -->
       <div class="lg:col-span-7 flex flex-col items-start gap-6 text-left">
         <!-- Back Link -->
-        <a href="/extensions" class="inline-flex items-center gap-1.5 text-mono text-xs text-accent hover:underline mb-2 uppercase tracking-wider">
+        <a href="/extensions" class="inline-flex items-center gap-1.5 text-mono text-xs text-muted hover:text-text transition-colors mb-2 uppercase tracking-wider">
           <Icon name="ArrowLeft" class="w-3.5 h-3.5" />
           Back to Directory
         </a>
@@ -70,22 +70,27 @@ const structuredData = {
         </p>
 
         <!-- CTAs -->
-        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto mt-2">
-          <a
-            href={ext.data.storeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="bg-accent hover:bg-accent-hover text-white px-8 py-3.5 rounded-lg font-semibold transition-colors duration-150 shadow-sm text-center flex items-center justify-center gap-2 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none"
-          >
-            Add to Chrome (Free)
-            <Icon name="ArrowUpRight" class="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-          <a
-            href={`/extensions/${slug}/privacy`}
-            class="border border-border bg-surface text-text hover:border-text px-6 py-3.5 rounded-lg font-semibold transition-all duration-150 text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none"
-          >
-            Privacy Policy
-          </a>
+        <div class="flex flex-col gap-2.5 w-full sm:w-auto mt-2">
+          <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:w-auto">
+            <a
+              href={ext.data.storeUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="bg-accent hover:bg-accent-hover text-white px-8 py-3.5 rounded-lg font-semibold transition-colors duration-150 shadow-sm text-center flex items-center justify-center gap-2 group focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
+            >
+              Add to Chrome (Free)
+              <Icon name="ArrowUpRight" class="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+            <a
+              href={`/extensions/${slug}/privacy`}
+              class="border border-border bg-surface text-text hover:border-text px-6 py-3.5 rounded-lg font-semibold transition-all duration-150 text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
+            >
+              Privacy Policy
+            </a>
+          </div>
+          <p class="text-[11px] text-muted text-left mt-1">
+            Free to install &bull; Pro upgrade available for advanced features
+          </p>
         </div>
 
         <!-- Meta badges -->
@@ -119,7 +124,7 @@ const structuredData = {
             </div>
             <!-- Mock URL bar -->
             <div class="bg-surface border border-border rounded-md px-3 py-0.5 text-mono text-xs text-muted w-40 text-center truncate select-none">
-              {slug === 'tab-snoozer' ? 'github.com/bramlabs' : 'instagram.com'}
+              {slug === 'tab-snoozer' ? 'github.com/BRAMrepos/bramlabs' : 'instagram.com'}
             </div>
             <!-- Mock extension icon in toolbar -->
             <div class="w-10 flex justify-end">

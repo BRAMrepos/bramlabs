@@ -27,8 +27,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
     <script is:inline>
       (function() {
         const stored = localStorage.getItem('bramlabs-theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const theme = stored ?? (prefersDark ? 'dark' : 'light');
+        const theme = stored ?? 'dark';
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
@@ -156,7 +155,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
           <h3 class="text-[11px] font-mono uppercase tracking-wider text-dark-muted">Resources</h3>
           <a href="/blog" class="text-dark-muted hover:text-dark-text transition-colors duration-150">Developer Blog</a>
           <a href="/privacy" class="text-dark-muted hover:text-dark-text transition-colors duration-150">Publisher Privacy</a>
-          <a href="https://github.com/bramlabs" target="_blank" rel="noopener noreferrer" class="text-dark-muted hover:text-dark-text transition-colors duration-150">GitHub Repository</a>
+          <a href="https://github.com/BRAMrepos/bramlabs" target="_blank" rel="noopener noreferrer" class="text-dark-muted hover:text-dark-text transition-colors duration-150">GitHub Repository</a>
         </div>
 
         <!-- Support -->

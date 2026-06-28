@@ -32,23 +32,23 @@ const structuredData = {
         </div>
         <!-- Headline -->
         <h1 class="text-display text-text max-w-xl">
-          Browser tools built with craft & privacy.
+          Privacy-first browser extensions. Zero telemetry.
         </h1>
         <!-- Subtext -->
         <p class="text-body text-muted max-w-prose">
-          We design lightweight, open-source browser extensions to protect your digital footprint, declutter your workspaces, and keep you safe.
+          Lightweight, open-source browser tools designed to protect your privacy and secure your browsing data. All execution stays local on your machine.
         </p>
         <!-- CTAs -->
         <div class="flex flex-wrap gap-3 w-full sm:w-auto">
           <a
             href="/extensions"
-            class="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-lg font-medium transition-colors duration-150 shadow-sm text-center flex items-center justify-center gap-2 group w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none"
+            class="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-lg font-medium transition-colors duration-150 shadow-sm text-center flex items-center justify-center gap-2 group w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
           >
             Explore Extensions &rarr;
           </a>
           <a
             href="/blog"
-            class="border border-border bg-surface hover:bg-surface-2 text-text hover:border-text px-6 py-3 rounded-lg font-medium transition-all duration-150 text-center w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none"
+            class="border-2 border-accent/20 bg-accent/5 hover:bg-accent/10 text-accent px-6 py-3 rounded-lg font-medium transition-all duration-150 text-center w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
           >
             Read Blog
           </a>
@@ -66,47 +66,130 @@ const structuredData = {
               <span class="w-3 h-3 rounded-full bg-[#27C93F]"></span>
             </div>
             <div class="bg-surface border border-border rounded-md px-3 py-0.5 text-mono text-muted w-48 text-center truncate select-none">
-              bramlabs.co/extensions
+              instagram.com
             </div>
-            <div class="w-10"></div>
-          </div>
-          <!-- Mock extension popup ui -->
-          <div class="p-6 flex flex-col gap-6 bg-surface min-h-[300px]">
-            <div class="flex items-center justify-between border-b border-border pb-4">
-              <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-accent flex items-center justify-center text-white">
-                  <Icon name="Layers" class="w-5 h-5 text-white" />
-                </div>
-                <div class="text-left">
-                  <h3 class="text-h3 text-text">Extension Active</h3>
-                  <p class="text-xs text-muted">Local Sandbox &bull; Enabled</p>
-                </div>
-              </div>
-              <!-- Toggle switch mockup -->
-              <span class="w-10 h-6 bg-accent rounded-full p-0.5 flex items-center justify-end cursor-pointer">
-                <span class="w-5 h-5 rounded-full bg-white shadow-sm"></span>
+            <div class="w-10 flex justify-end">
+              <span class="w-5 h-5 rounded bg-accent flex items-center justify-center text-xs text-white">
+                <Icon name="EyeOff" class="w-3.5 h-3.5 text-white" />
               </span>
             </div>
-            
-            <div class="flex flex-col gap-3 text-left">
-              <span class="text-mono text-xs font-bold text-muted uppercase tracking-wider">Status & Performance</span>
-              <div class="flex flex-col gap-2">
-                <div class="flex justify-between items-center text-xs border border-border rounded-lg p-3">
-                  <span class="text-muted flex items-center gap-2"><Icon name="Cpu" class="w-3.5 h-3.5 text-accent" /> Memory Overhead</span>
-                  <span class="font-semibold text-text font-mono">0.1 MB</span>
+          </div>
+          <!-- Mock extension popup ui (StoryPeek) -->
+          <div class="flex flex-col flex-grow bg-surface text-text font-body text-xs select-none">
+            <!-- Extension Header -->
+            <div class="px-4 py-3 border-b border-border flex items-center justify-between bg-surface">
+              <div class="flex items-center gap-1.5">
+                <span class="w-5 h-5 rounded-md bg-[#6366f1] flex items-center justify-center text-white p-0.5">
+                  <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <circle cx="12" cy="12" r="4"/>
+                    <path d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                  </svg>
+                </span>
+                <span class="font-heading font-extrabold text-sm text-text leading-none">Story<span class="text-[#6366f1]">Peek</span></span>
+              </div>
+              <div class="flex items-center gap-2.5 text-muted">
+                <Icon name="RefreshCw" class="w-3.5 h-3.5" />
+                <Icon name="Instagram" class="w-3.5 h-3.5" />
+                <Icon name="Settings" class="w-3.5 h-3.5" />
+                <Icon name="Moon" class="w-3.5 h-3.5" />
+              </div>
+            </div>
+
+            <!-- Tabs Navigation -->
+            <div class="px-4 border-b border-border bg-surface flex gap-5 text-[11px] font-medium">
+              <span class="py-2.5 border-b-2 border-[#6366f1] text-[#6366f1] flex items-center gap-1">
+                <Icon name="User" class="w-3.5 h-3.5" />
+                Stories
+              </span>
+              <span class="py-2.5 text-muted flex items-center gap-1">
+                <Icon name="Download" class="w-3.5 h-3.5" />
+                Download
+              </span>
+              <span class="py-2.5 text-muted flex items-center gap-1">
+                <Icon name="Search" class="w-3.5 h-3.5" />
+                Search
+              </span>
+            </div>
+
+            <!-- Banner -->
+            <div class="m-3 p-2 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200/50 dark:border-emerald-900/30 rounded-lg text-emerald-800 dark:text-emerald-400 flex items-start gap-2 text-[10px] leading-relaxed">
+              <Icon name="ShieldCheck" class="w-4 h-4 text-emerald-600 dark:text-emerald-400 flex-shrink-0 mt-0.5" />
+              <span>Anonymous mode active — stories viewed without seen receipts</span>
+            </div>
+
+            <!-- Active Stories Section -->
+            <div class="px-3 flex flex-col gap-2 pb-3">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-[10px] font-bold text-muted uppercase tracking-wider">Active Stories</span>
+                <span class="text-[9px] bg-emerald-100 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-400 font-semibold px-2 py-0.5 rounded-full">17 ACTIVE</span>
+              </div>
+
+              <!-- Stories Bubbles -->
+              <div class="flex gap-3 py-1 px-1 overflow-hidden">
+                <!-- Bubble 1 (Cristiano) -->
+                <div class="flex flex-col items-center gap-1">
+                  <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                    <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[9px] font-bold text-text">
+                      CR
+                    </div>
+                    <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center border border-surface">
+                      8
+                    </span>
+                  </div>
+                  <span class="text-[8px] text-muted truncate w-10 text-center">cristiano</span>
                 </div>
-                <div class="flex justify-between items-center text-xs border border-border rounded-lg p-3">
-                  <span class="text-muted flex items-center gap-2"><Icon name="Shield" class="w-3.5 h-3.5 text-accent" /> Telemetry & Tracking</span>
-                  <span class="font-semibold text-green-800 bg-green-100 dark:bg-green-950/30 dark:text-green-400 px-2 py-0.5 rounded-full font-mono text-[10px]">Blocked</span>
+
+                <!-- Bubble 2 (Leo Messi) -->
+                <div class="flex flex-col items-center gap-1">
+                  <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                    <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[9px] font-bold text-text">
+                      LM
+                    </div>
+                    <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center border border-surface">
+                      4
+                    </span>
+                  </div>
+                  <span class="text-[8px] text-muted truncate w-10 text-center">leomessi</span>
+                </div>
+
+                <!-- Bubble 3 (Neymar Jr) -->
+                <div class="flex flex-col items-center gap-1">
+                  <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                    <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[9px] font-bold text-text">
+                      NJ
+                    </div>
+                    <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center border border-surface">
+                      12
+                    </span>
+                  </div>
+                  <span class="text-[8px] text-muted truncate w-10 text-center">neymarjr</span>
+                </div>
+
+                <!-- Bubble 4 (National Geographic) -->
+                <div class="flex flex-col items-center gap-1">
+                  <div class="w-10 h-10 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
+                    <div class="w-full h-full rounded-full bg-surface border border-surface flex items-center justify-center text-[9px] font-bold text-text">
+                      NG
+                    </div>
+                    <span class="absolute -bottom-1 -right-1 bg-[#6366f1] text-white font-mono text-[8px] font-bold w-3.5 h-3.5 rounded-full flex items-center justify-center border border-surface">
+                      3
+                    </span>
+                  </div>
+                  <span class="text-[8px] text-muted truncate w-10 text-center">natgeo</span>
                 </div>
               </div>
             </div>
 
-            <div class="bg-surface-2 rounded-lg p-4 flex items-start gap-3 border border-border text-left">
-              <Icon name="Lock" class="w-4 h-4 text-accent mt-0.5 flex-shrink-0" />
-              <p class="text-xs text-muted leading-relaxed">
-                All functions execute entirely client-side. Your browsing metadata never leaves your machine.
-              </p>
+            <!-- Footer Status Bar -->
+            <div class="mt-auto px-3 py-2 bg-surface-2 border-t border-border flex items-center justify-between text-[9px] text-muted rounded-b-xl">
+              <div class="flex items-center gap-1">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span>Active session secure</span>
+              </div>
+              <div class="flex gap-2">
+                <span>Privacy</span>
+                <span>Help</span>
+              </div>
             </div>
           </div>
         </div>
@@ -115,49 +198,46 @@ const structuredData = {
   </section>
 
   <!-- Pillars / Values Section -->
-  <section class="py-24 bg-surface border-y border-border">
+  <section class="py-24 bg-bg border-y border-border">
     <div class="max-w-6xl mx-auto px-6">
       <div class="max-w-xl flex flex-col gap-4 mb-16 text-left">
         <span class="text-[12px] font-mono text-accent uppercase tracking-wider font-semibold">How We Build</span>
         <h2 class="text-h2 text-text">Three principles. No exceptions.</h2>
       </div>
 
-      <!-- Horizontal row layout -->
-      <div class="flex flex-col w-full">
-        <!-- Row 1 -->
-        <div class="grid grid-cols-1 md:grid-cols-10 gap-6 py-8 border-b border-border items-start text-left">
-          <div class="md:col-span-3">
-            <h3 class="text-h3 text-text">Privacy by Design</h3>
+      <!-- Cards grid layout -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="bg-surface border border-border rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:border-accent/30 transition-all duration-200 text-left">
+          <div class="w-12 h-12 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
+            <Icon name="Shield" class="w-6 h-6 text-accent" />
           </div>
-          <div class="md:col-span-7">
-            <p class="text-body text-muted max-w-prose">
-              No cloud servers, no telemetry, no behavioral tracking. Every setting stays on your machine.
-            </p>
-          </div>
+          <h3 class="text-h3 text-text font-bold">Privacy by Design</h3>
+          <p class="text-small text-muted leading-relaxed">
+            No cloud servers, no telemetry, no behavioral tracking. Every setting and data point stays local on your machine.
+          </p>
         </div>
 
-        <!-- Row 2 -->
-        <div class="grid grid-cols-1 md:grid-cols-10 gap-6 py-8 border-b border-border items-start text-left">
-          <div class="md:col-span-3">
-            <h3 class="text-h3 text-text">Zero Bundle Bloat</h3>
+        <!-- Card 2 -->
+        <div class="bg-surface border border-border rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:border-accent/30 transition-all duration-200 text-left">
+          <div class="w-12 h-12 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
+            <Icon name="Cpu" class="w-6 h-6 text-accent" />
           </div>
-          <div class="md:col-span-7">
-            <p class="text-body text-muted max-w-prose">
-              Built with vanilla APIs. Loads instantly, never slows your browser, never inflates your RAM usage.
-            </p>
-          </div>
+          <h3 class="text-h3 text-text font-bold">Zero Bundle Bloat</h3>
+          <p class="text-small text-muted leading-relaxed">
+            Built with vanilla APIs. Loads instantly, never slows down your browser tabs, and keeps RAM overhead near zero.
+          </p>
         </div>
 
-        <!-- Row 3 -->
-        <div class="grid grid-cols-1 md:grid-cols-10 gap-6 py-8 items-start text-left">
-          <div class="md:col-span-3">
-            <h3 class="text-h3 text-text">Audit-Ready Source</h3>
+        <!-- Card 3 -->
+        <div class="bg-surface border border-border rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:border-accent/30 transition-all duration-200 text-left">
+          <div class="w-12 h-12 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
+            <Icon name="Code" class="w-6 h-6 text-accent" />
           </div>
-          <div class="md:col-span-7">
-            <p class="text-body text-muted max-w-prose">
-              All code is open-source and reviewable on GitHub. Security researchers can confirm every claim we make.
-            </p>
-          </div>
+          <h3 class="text-h3 text-text font-bold">Audit-Ready Source</h3>
+          <p class="text-small text-muted leading-relaxed">
+            All code is fully open-source and reviewable on GitHub. Security researchers can audit every line to verify our safety.
+          </p>
         </div>
       </div>
     </div>
@@ -178,9 +258,102 @@ const structuredData = {
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {extensions.length > 0 ? (
-          extensions.map((ext) => (
+      {extensions.length === 1 ? (
+        <!-- Spotlight Card for Single Product -->
+        <div class="bg-surface rounded-2xl border border-border p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-sm hover:border-accent/40 transition-all duration-200 text-left">
+          <div class="lg:col-span-7 flex flex-col gap-6">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
+                <Icon name={extensions[0].data.icon} class="w-7 h-7 text-accent" />
+              </div>
+              <div>
+                <h3 class="text-h2 text-text leading-tight">{extensions[0].data.title}</h3>
+                <div class="flex items-center gap-2 mt-1.5">
+                  <span class="text-mono text-xs text-muted">{extensions[0].data.downloadCount}</span>
+                  <span class="text-muted text-xs">&bull;</span>
+                  <span class="text-mono text-xs text-muted">v{extensions[0].data.version}</span>
+                </div>
+              </div>
+            </div>
+            
+            <p class="text-body text-muted leading-relaxed max-w-prose">
+              {extensions[0].data.description}
+            </p>
+
+            <div class="flex flex-col gap-3">
+              <span class="text-mono text-xs font-bold text-text tracking-wider uppercase">Key Features</span>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {extensions[0].data.features.slice(0, 4).map((feat) => (
+                  <div class="flex items-start gap-2 text-sm text-muted">
+                    <div class="mt-0.5 text-accent flex-shrink-0">
+                      <Icon name="CheckCircle" class="w-4 h-4 text-accent" />
+                    </div>
+                    <span><strong class="text-text">{feat.title}:</strong> {feat.description}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            <div class="border-t border-border/50 pt-6 flex flex-col sm:flex-row items-center gap-4">
+              <a
+                href={extensions[0].data.storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-sm text-center flex items-center justify-center gap-2 w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
+              >
+                Add to Chrome (Free)
+              </a>
+              <a href={`/extensions/${extensions[0].slug}`} class="border border-border text-text hover:bg-bg px-6 py-3 rounded-lg font-semibold transition-colors text-center w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer">
+                Learn More &rarr;
+              </a>
+            </div>
+          </div>
+          
+          <div class="lg:col-span-5 w-full flex justify-center">
+            <div class="w-full max-w-sm bg-surface-2 rounded-xl border border-border shadow-sm overflow-hidden flex flex-col">
+              <!-- Mock URL bar window frame -->
+              <div class="bg-surface px-4 py-2 border-b border-border flex items-center justify-between">
+                <div class="flex gap-1">
+                  <span class="w-2 h-2 rounded-full bg-[#FF5F57]"></span>
+                  <span class="w-2 h-2 rounded-full bg-[#FFBD2E]"></span>
+                  <span class="w-2 h-2 rounded-full bg-[#27C93F]"></span>
+                </div>
+                <div class="text-[10px] text-muted font-mono bg-surface-2 px-3 py-0.5 rounded border border-border">instagram.com</div>
+                <div class="w-4"></div>
+              </div>
+              <div class="p-4 bg-surface flex flex-col gap-4 text-xs">
+                <div class="flex items-center justify-between border-b border-border pb-2">
+                  <span class="font-bold flex items-center gap-1.5"><Icon name="EyeOff" class="w-4 h-4 text-[#6366f1]" /> StoryPeek Active</span>
+                  <span class="text-[9px] bg-emerald-100 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-400 px-1.5 py-0.5 rounded font-mono font-bold">ANONYMOUS</span>
+                </div>
+                <!-- Mock Story list -->
+                <div class="flex gap-3 overflow-hidden py-1 justify-center">
+                  <div class="flex flex-col items-center gap-1">
+                    <div class="w-9 h-9 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                      <div class="w-full h-full rounded-full bg-surface flex items-center justify-center font-bold text-[9px]">cristiano</div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-center gap-1">
+                    <div class="w-9 h-9 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                      <div class="w-full h-full rounded-full bg-surface flex items-center justify-center font-bold text-[9px]">leomessi</div>
+                    </div>
+                  </div>
+                  <div class="flex flex-col items-center gap-1">
+                    <div class="w-9 h-9 rounded-full p-[2px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
+                      <div class="w-full h-full rounded-full bg-surface flex items-center justify-center font-bold text-[9px]">neymarjr</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-surface-2 p-2 rounded border border-border text-[10px] text-muted">
+                  Watch any active stories anonymously without trigger receipts.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {extensions.map((ext) => (
             <div class="bg-surface rounded-xl border border-border p-6 flex flex-col justify-between shadow-sm transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-accent/40 text-left">
               <div>
                 <div class="flex items-center gap-4 mb-4">
@@ -213,17 +386,9 @@ const structuredData = {
                 </a>
               </div>
             </div>
-          ))
-        ) : (
-          <!-- Placeholder Card -->
-          <div class="md:col-span-2 bg-surface rounded-xl border border-border border-dashed p-12 text-center flex flex-col items-center justify-center gap-3">
-            <h3 class="text-h3 text-text">First extension loading...</h3>
-            <p class="text-small text-muted max-w-sm">
-              Check back soon or follow the blog for launch updates.
-            </p>
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   </section>
 
@@ -240,20 +405,26 @@ const structuredData = {
         </div>
         <!-- Right column -->
         <div class="lg:col-span-5 w-full">
-          <form class="flex flex-col sm:flex-row gap-3 w-full items-stretch" onsubmit="alert('Subscribed!'); return false;">
-            <input
-              type="email"
-              placeholder="your@email.com"
-              required
-              class="flex-grow bg-surface-2 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent"
-            />
-            <button
-              type="submit"
-              class="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-lg text-sm font-semibold transition-colors duration-150 shadow-sm flex-shrink-0"
-            >
-              Subscribe
-            </button>
-          </form>
+          <div class="flex flex-col gap-2 w-full">
+            <form class="flex flex-col sm:flex-row gap-3 w-full items-stretch" onsubmit="alert('Subscribed!'); return false;">
+              <input
+                type="email"
+                placeholder="your@email.com"
+                required
+                class="flex-grow bg-surface-2 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text placeholder:text-muted"
+              />
+              <button
+                type="submit"
+                class="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-lg text-sm font-semibold transition-colors duration-150 shadow-sm flex-shrink-0 cursor-pointer"
+              >
+                Subscribe
+              </button>
+            </form>
+            <span class="text-[11px] text-muted flex items-center gap-1 mt-1 justify-start">
+              <Icon name="Lock" class="w-3.5 h-3.5 text-accent" />
+              We value your privacy. Zero spam. Unsubscribe anytime.
+            </span>
+          </div>
         </div>
       </div>
     </div>
