@@ -1,12 +1,12 @@
 ---
 title: "StoryPeek"
-tagline: "Anonymous Instagram story viewer, reels downloader, and incognito browser helper."
-description: "StoryPeek is a privacy-first browser extension that lets you watch Instagram stories incognito, download reels, highlights, posts, and profile media, and explore content without leaving any seen receipts or read indicators. Runs entirely client-side with zero telemetry."
+tagline: "Watch stories, download posts, and save media from Instagram."
+description: "StoryPeek is a browser utility extension that lets you watch Instagram stories, download reels, highlights, posts, and profile media directly from your browser session."
 storeUrl: "https://chromewebstore.google.com/detail/storypeek-%E2%80%94-anonymous-vie/fbcmgjmagfglmkinlmbbgicipemheoll"
 icon: "EyeOff"
 version: "2.0.0"
 lastUpdated: "June 26, 2026"
-downloadCount: "Verified Secure"
+downloadCount: "Web Extension"
 screenshots: []
 features:
   - title: "Anonymous Story Viewing"
@@ -43,22 +43,17 @@ faq:
 
 ## Why StoryPeek?
 
-Instagram is designed to track user interactions and report them to content creators. While this helps analytics, it compromises your digital privacy and forces social seen receipts. 
+StoryPeek provides a clean, native overlay right inside your Instagram interface, allowing you to watch stories, download media, and manage highlights without leaving the page. It adds simple controls to save stories, reels, posts, and profile media quickly and easily.
 
-`StoryPeek` gives you control over your digital footprint. By blocking outbound seen telemetry, you can view stories at your own pace without notifying the author.
+## One-Click Media Saver
 
-## Client-Side Interception
+Save stories, posts, reels, and highlights directly to your device with a single click. StoryPeek downloads media at the maximum resolution provided by the platform.
 
-Unlike web-based online viewers that require you to paste usernames and fetch data through third-party servers (which violates privacy and frequently gets blocked), StoryPeek works directly inside your browser. It intercepts requests made from your official, authenticated Instagram tab. 
+This provides major advantages:
+1. **Instant Access**: No loading queues, third-party server timeouts, or copying links to external helper websites.
+2. **High Resolution**: Downloads are saved in their original quality directly to your local folders.
+3. **No Setup Required**: Installs directly in your browser and works immediately without requiring custom configurations.
 
-This technique has major advantages:
-1. **Zero account risk**: You don't feed your password or session cookies to untrusted third-party services.
-2. **Instant access**: No loading queues or server timeouts. It works immediately as you browse.
-3. **Download quality**: Downloads are fetched at the highest resolution provided directly by the CDN.
+## How it works
 
-## Security Controls
-
-StoryPeek respects your system security:
-- **No Remote Servers**: Zero external API calls, meaning we can't track what accounts you view or download from.
-- **Minimal Permissions**: Requests `declarativeNetRequest` to intercept outgoing telemetry headers locally and `downloads` to save media.
-- **Open Code**: Designed to be auditable and reviewable at any time.
+Once installed, StoryPeek adds subtle download overlay buttons directly onto Instagram pages and media feeds. You can toggle incognito options, download single stories, or save all active media in one click from the popup interface.
