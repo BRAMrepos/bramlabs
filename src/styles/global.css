@@ -32,34 +32,34 @@
 }
 
 :root {
-  --bg: #0A0A0A;
-  --surface: #161616;
-  --surface-2: #222222;
-  --text: #F5F5F5;
-  --muted: #8E8E93;
-  --border: #2C2C2E;
-  --accent: #4F46E5;
-  --accent-hover: #6366F1;
+  --bg: #090A0F;
+  --surface: #141620;
+  --surface-2: #1E2130;
+  --text: #F5F6FA;
+  --muted: #8E93B0;
+  --border: #1F2335;
+  --accent: #6366F1;
+  --accent-hover: #4F46E5;
   --accent-muted: #1E1B4B;
 
-  --dark-bg: #0A0A0A;
-  --dark-surface: #161616;
-  --dark-surface-2: #222222;
-  --dark-text: #F5F5F5;
-  --dark-muted: #8E8E93;
-  --dark-border: #2C2C2E;
-  --dark-accent: #4F46E5;
-  --dark-accent-hover: #6366F1;
+  --dark-bg: #090A0F;
+  --dark-surface: #141620;
+  --dark-surface-2: #1E2130;
+  --dark-text: #F5F6FA;
+  --dark-muted: #8E93B0;
+  --dark-border: #1F2335;
+  --dark-accent: #6366F1;
+  --dark-accent-hover: #4F46E5;
   --dark-accent-muted: #1E1B4B;
 }
 
 [data-theme="light"] {
-  --bg: #FAFAFA;
+  --bg: #FAF8F5;
   --surface: #FFFFFF;
-  --surface-2: #F5F5F7;
-  --text: #1C1C1E;
-  --muted: #8E8E93;
-  --border: #E5E5EA;
+  --surface-2: #EFECE6;
+  --text: #1F1D1A;
+  --muted: #6E6357;
+  --border: #E5DED5;
   --accent: #4F46E5;
   --accent-hover: #3730A3;
   --accent-muted: #EEF2FF;
@@ -168,4 +168,37 @@
 /* Constrain prose paragraph widths for readability */
 .prose p {
   max-width: 65ch;
+}
+
+/* Premium UI/UX Redesign Utilities */
+.bg-glow-blob {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  max-width: 90vw;
+  height: 350px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.12) 0%, rgba(99, 102, 241, 0) 70%);
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="light"] .bg-glow-blob {
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.05) 0%, rgba(79, 70, 229, 0) 70%);
+}
+
+.glow-card {
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glow-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-accent);
+  box-shadow: 0 10px 30px -15px rgba(99, 102, 241, 0.15);
+}
+[data-theme="light"] .glow-card:hover {
+  box-shadow: 0 10px 30px -15px rgba(79, 70, 229, 0.1);
 }

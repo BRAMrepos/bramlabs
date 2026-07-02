@@ -21,112 +21,40 @@ const structuredData = {
   structuredData={structuredData}
 >
   <!-- Hero Section -->
-    <div class="max-w-6xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-      <!-- Left Column: Copy -->
-      <div class="lg:col-span-7 flex flex-col items-start gap-8 z-10 text-left">
-        <!-- Badge -->
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-muted text-accent text-xs font-mono font-semibold">
-          <span class="text-accent">•</span>
-          ✨ Premium Browser Utilities
-        </div>
-        <!-- Headline -->
-        <h1 class="text-display text-text max-w-xl leading-tight">
-          Lightweight extensions to elevate your web experience.
-        </h1>
-        <!-- Subtext -->
-        <p class="text-body text-muted max-w-prose">
-          Discover simple, beautifully designed browser utilities built to capture pages, manage audio volume, and browse content smoothly.
-        </p>
-        <!-- CTAs -->
-        <div class="flex flex-wrap gap-4 w-full sm:w-auto">
-          <a
-            href="/extensions"
-            class="bg-accent hover:bg-accent-hover text-white px-8 py-3.5 rounded-lg font-semibold transition-colors duration-150 shadow-sm text-center flex items-center justify-center gap-2 group w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
-          >
-            Explore Extension Store
-            <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
-          </a>
-          <a
-            href="/extensions"
-            class="border border-border bg-surface text-text hover:border-text px-8 py-3.5 rounded-lg font-semibold transition-all duration-150 text-center w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
-          >
-            View Directory
-          </a>
-        </div>
+  <section class="relative py-24 md:py-32 overflow-hidden flex items-center justify-center min-h-[70vh]">
+    <!-- Background Glow Blobs -->
+    <div class="bg-glow-blob"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.02),transparent_60%)]"></div>
+
+    <div class="max-w-4xl mx-auto px-6 w-full text-center flex flex-col items-center gap-8 relative z-10">
+      <!-- Badge -->
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-muted border border-accent/20 text-accent text-xs font-mono font-semibold hover:border-accent/40 transition-colors">
+        <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+        Browser Extensions
       </div>
-
-      <!-- Right Column: Suite Card -->
-      <div class="lg:col-span-5 relative w-full flex justify-center">
-        <div class="w-full max-w-md bg-surface-2 border border-border/80 rounded-2xl shadow-xl p-6 flex flex-col gap-6 relative overflow-hidden transition-all duration-200">
-          <div class="absolute -right-24 -top-24 w-48 h-48 rounded-full bg-accent/5 blur-3xl"></div>
-          
-          <div class="flex items-center justify-between border-b border-border pb-4">
-            <div class="flex flex-col">
-              <span class="text-[10px] font-mono text-accent font-bold uppercase tracking-wider">Studio Portfolio</span>
-              <h2 class="text-base font-bold text-text mt-0.5">BramLabs Suite</h2>
-            </div>
-            <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-400 font-mono text-[9px] font-bold">
-              3 Active Apps
-            </span>
-          </div>
-
-          <!-- Extensions List -->
-          <div class="flex flex-col gap-4">
-            <!-- StoryPeek -->
-            <a href="/extensions/story-peek" class="flex items-center justify-between p-3 rounded-xl border border-border/50 bg-surface/50 hover:bg-surface hover:border-accent/30 transition-all duration-150 group">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
-                  <Icon name="EyeOff" class="w-4.5 h-4.5 text-accent" />
-                </div>
-                <div>
-                  <h4 class="text-xs font-bold text-text leading-none">StoryPeek</h4>
-                  <span class="text-[10px] text-muted mt-1 block">Incognito viewer &amp; downloader</span>
-                </div>
-              </div>
-              <span class="text-[10px] font-mono text-muted bg-surface-2 px-1.5 py-0.5 rounded group-hover:text-accent transition-colors">v2.0.0</span>
-            </a>
-
-            <!-- SnapElite -->
-            <a href="/extensions/snap-elite" class="flex items-center justify-between p-3 rounded-xl border border-border/50 bg-surface/50 hover:bg-surface hover:border-accent/30 transition-all duration-150 group">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
-                  <Icon name="Camera" class="w-4.5 h-4.5 text-accent" />
-                </div>
-                <div>
-                  <h4 class="text-xs font-bold text-text leading-none">SnapElite</h4>
-                  <span class="text-[10px] text-muted mt-1 block">Full page screen capture</span>
-                </div>
-              </div>
-              <span class="text-[10px] font-mono text-muted bg-surface-2 px-1.5 py-0.5 rounded group-hover:text-accent transition-colors">v1.0.0</span>
-            </a>
-
-            <!-- SonicShield -->
-            <a href="/extensions/sonic-shield" class="flex items-center justify-between p-3 rounded-xl border border-border/50 bg-surface/50 hover:bg-surface hover:border-accent/30 transition-all duration-150 group">
-              <div class="flex items-center gap-3">
-                <div class="w-8 h-8 rounded-lg bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
-                  <Icon name="Volume2" class="w-4.5 h-4.5 text-accent" />
-                </div>
-                <div>
-                  <h4 class="text-xs font-bold text-text leading-none">SonicShield</h4>
-                  <span class="text-[10px] text-muted mt-1 block">Volume booster &amp; equalizer</span>
-                </div>
-              </div>
-              <span class="text-[10px] font-mono text-muted bg-surface-2 px-1.5 py-0.5 rounded group-hover:text-accent transition-colors">v1.0.0</span>
-            </a>
-          </div>
-
-          <!-- Bottom Banner -->
-          <div class="border-t border-border pt-4 flex items-center justify-between text-[10px] text-muted font-mono">
-            <span class="flex items-center gap-1">
-              <Icon name="Zap" class="w-3.5 h-3.5 text-accent" />
-              Lightweight &amp; Fast
-            </span>
-            <span class="flex items-center gap-1">
-              <Icon name="User" class="w-3.5 h-3.5 text-accent" />
-              No Account Required
-            </span>
-          </div>
-        </div>
+      <!-- Headline -->
+      <h1 class="text-display text-text max-w-3xl leading-[1.05] tracking-tight">
+        Lightweight browser extensions that <span class="bg-gradient-to-r from-accent via-indigo-400 to-accent bg-clip-text text-transparent">do one thing well.</span>
+      </h1>
+      <!-- Subtext -->
+      <p class="text-body text-muted max-w-2xl leading-relaxed">
+        Discover simple, beautifully designed browser utilities built to capture pages, manage audio volume, and browse content smoothly. No complex setups, no clutter.
+      </p>
+      <!-- CTAs -->
+      <div class="flex flex-col sm:flex-row gap-4 items-center justify-center w-full">
+        <a
+          href="/extensions"
+          class="bg-accent hover:bg-accent-hover text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-accent/15 text-center flex items-center justify-center gap-2 group w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
+        >
+          Explore Extension Store
+          <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
+        </a>
+        <a
+          href="/extensions"
+          class="border border-border bg-surface/40 backdrop-blur-sm text-text hover:bg-surface hover:border-accent/30 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] text-center w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
+        >
+          View Directory
+        </a>
       </div>
     </div>
   </section>
@@ -142,7 +70,7 @@ const structuredData = {
       <!-- Cards grid layout -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <!-- Card 1 -->
-        <div class="bg-surface border border-border rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:border-accent/30 transition-all duration-200 text-left">
+        <div class="bg-surface border border-border/80 rounded-2xl p-8 flex flex-col gap-5 shadow-sm glow-card text-left">
           <div class="w-12 h-12 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
             <Icon name="Zap" class="w-6 h-6 text-accent" />
           </div>
@@ -153,7 +81,7 @@ const structuredData = {
         </div>
 
         <!-- Card 2 -->
-        <div class="bg-surface border border-border rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:border-accent/30 transition-all duration-200 text-left">
+        <div class="bg-surface border border-border/80 rounded-2xl p-8 flex flex-col gap-5 shadow-sm glow-card text-left">
           <div class="w-12 h-12 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
             <Icon name="Activity" class="w-6 h-6 text-accent" />
           </div>
@@ -164,7 +92,7 @@ const structuredData = {
         </div>
 
         <!-- Card 3 -->
-        <div class="bg-surface border border-border rounded-2xl p-8 flex flex-col gap-5 shadow-sm hover:border-accent/30 transition-all duration-200 text-left">
+        <div class="bg-surface border border-border/80 rounded-2xl p-8 flex flex-col gap-5 shadow-sm glow-card text-left">
           <div class="w-12 h-12 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
             <Icon name="Sparkles" class="w-6 h-6 text-accent" />
           </div>
@@ -192,230 +120,107 @@ const structuredData = {
         </a>
       </div>
 
-      {extensions.length === 1 ? (
-        <!-- Spotlight Card for Single Product -->
-        <div class="bg-surface rounded-2xl border border-border p-8 md:p-12 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center shadow-sm hover:border-accent/40 transition-all duration-200 text-left">
-          <div class="lg:col-span-6 flex flex-col gap-6">
-            <div class="flex items-center gap-4">
-              <div class="w-14 h-14 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
-                <Icon name={extensions[0].data.icon} class="w-7 h-7 text-accent" />
-              </div>
-              <div>
-                <h3 class="text-h2 text-text leading-tight">{extensions[0].data.title}</h3>
-                <div class="flex items-center gap-2 mt-1.5">
-                  <span class="text-mono text-xs text-muted">{extensions[0].data.downloadCount}</span>
-                  <span class="text-muted text-xs">&bull;</span>
-                  <span class="text-mono text-xs text-muted">v{extensions[0].data.version}</span>
+      <!-- Asymmetrical Spotlight Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- Featured Spotlight Card: StoryPeek -->
+        {(() => {
+          const storyPeek = extensions.find(e => e.slug === 'story-peek');
+          if (!storyPeek) return null;
+          return (
+            <div class="md:col-span-2 bg-surface border border-border/80 p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 shadow-sm glow-card text-left relative overflow-hidden rounded-2xl">
+              <div class="absolute -right-20 -bottom-20 w-48 h-48 rounded-full bg-accent/5 blur-3xl pointer-events-none"></div>
+              <div class="flex-grow flex flex-col md:flex-row items-start gap-6 max-w-3xl">
+                <div class="w-16 h-16 rounded-2xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent flex-shrink-0 shadow-sm">
+                  <Icon name={storyPeek.data.icon} class="w-8 h-8 text-accent" />
                 </div>
-              </div>
-            </div>
-            
-            <p class="text-body text-muted leading-relaxed max-w-prose">
-              {extensions[0].data.description}
-            </p>
-
-            <div class="flex flex-col gap-3">
-              <span class="text-mono text-xs font-bold text-text tracking-wider uppercase">Key Features</span>
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {extensions[0].data.features.slice(0, 4).map((feat) => (
-                  <div class="flex items-start gap-2 text-sm text-muted">
-                    <div class="mt-0.5 text-accent flex-shrink-0">
-                      <Icon name="CheckCircle" class="w-4 h-4 text-accent" />
-                    </div>
-                    <span><strong class="text-text">{feat.title}:</strong> {feat.description}</span>
+                <div class="flex flex-col gap-3">
+                  <div class="flex items-center gap-3 flex-wrap">
+                    <h3 class="text-h2 text-text leading-tight">{storyPeek.data.title}</h3>
+                    <span class="text-mono text-[10px] px-2.5 py-0.5 rounded-full bg-accent-muted text-accent font-semibold border border-accent/10">Featured Release</span>
+                    <span class="text-mono text-xs text-muted">v{storyPeek.data.version}</span>
                   </div>
-                ))}
-              </div>
-            </div>
-            
-            <div class="border-t border-border/50 pt-6 flex flex-col sm:flex-row items-center gap-4">
-              <a
-                href={extensions[0].data.storeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-sm text-center flex items-center justify-center gap-2 w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
-              >
-                Add to Chrome (Free)
-              </a>
-              <a href={`/extensions/${extensions[0].slug}`} class="border border-border text-text hover:bg-bg px-6 py-3 rounded-lg font-semibold transition-colors text-center w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer">
-                Learn More &rarr;
-              </a>
-            </div>
-          </div>
-          
-          <div class="lg:col-span-6 w-full flex justify-center">
-            <div class="w-full max-w-2xl lg:max-w-none bg-surface rounded-xl border border-border shadow-md overflow-hidden flex flex-col transition-all duration-200">
-              <!-- Window Header -->
-              <div class="bg-surface px-4 py-2 border-b border-border flex items-center justify-between bg-surface-2 bg-bg dark:bg-[#1c1f28]">
-                <div class="flex gap-1">
-                  <span class="w-2 h-2 rounded-full bg-[#FF5F57]"></span>
-                  <span class="w-2 h-2 rounded-full bg-[#FFBD2E]"></span>
-                  <span class="w-2 h-2 rounded-full bg-[#27C93F]"></span>
-                </div>
-                <div class="text-[10px] text-muted font-mono bg-surface px-3 py-0.5 rounded border border-border">instagram.com</div>
-                <div class="w-4 flex justify-end">
-                  <Icon name="EyeOff" class="w-3.5 h-3.5 text-accent" />
+                  <p class="text-body text-muted leading-relaxed max-w-prose">
+                    {storyPeek.data.description}
+                  </p>
+                  <div class="flex flex-wrap gap-4 mt-2">
+                    {storyPeek.data.features.slice(0, 3).map((feat) => (
+                      <span class="flex items-center gap-1.5 text-xs text-muted font-medium">
+                        <Icon name="Check" class="w-4 h-4 text-accent" />
+                        {feat.title}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
               
-              <!-- Mock Content Split Panel -->
-              <div class="flex flex-row flex-grow bg-white dark:bg-black text-text select-none min-h-[380px] overflow-hidden">
-                <!-- Left Instagram Feed -->
-                <div class="hidden sm:flex flex-row w-[62%] border-r border-[#efefef] dark:border-[#262626] bg-white dark:bg-[#000000] text-black dark:text-[#f5f5f5]">
-                  <div class="w-12 border-r border-[#efefef] dark:border-[#262626] py-4 flex flex-col items-center gap-5 text-[#262626] dark:text-[#a8a8a8] bg-white dark:bg-black">
-                    <Icon name="Instagram" class="w-4.5 h-4.5 text-black dark:text-white" />
-                    <Icon name="Home" class="w-4.5 h-4.5 text-black dark:text-white" />
-                    <Icon name="Search" class="w-4.5 h-4.5" />
-                    <Icon name="Compass" class="w-4.5 h-4.5" />
-                    <Icon name="Film" class="w-4.5 h-4.5" />
-                    <Icon name="Send" class="w-4.5 h-4.5" />
-                  </div>
-                  <div class="flex-grow p-3 flex flex-col gap-3 overflow-hidden bg-white dark:bg-black">
-                    <div class="flex gap-2.5 overflow-hidden py-1 border-b border-[#efefef] dark:border-[#262626] pb-3">
-                      <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
-                        <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
-                          <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">BS</div>
-                        </div>
-                        <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">betasquad</span>
-                      </div>
-                      <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
-                        <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
-                          <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">DP</div>
-                        </div>
-                        <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">dishapat...</span>
-                      </div>
-                      <div class="flex flex-col items-center gap-0.5 flex-shrink-0">
-                        <div class="w-8.5 h-8.5 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600">
-                          <div class="w-full h-full rounded-full bg-white dark:bg-black border border-white dark:border-black flex items-center justify-center font-bold text-[7px]">MB</div>
-                        </div>
-                        <span class="text-[7px] text-gray-500 dark:text-gray-400 truncate w-9 text-center">mercedes...</span>
-                      </div>
-                    </div>
-                    <!-- Post -->
-                    <div class="flex flex-col gap-1.5 text-left">
-                      <div class="flex items-center gap-1.5">
-                        <div class="w-5 h-5 rounded-full bg-yellow-600 dark:bg-yellow-700 flex items-center justify-center text-[7px] font-bold text-white">RM</div>
-                        <span class="text-[8px] font-bold">realmadrid</span>
-                        <span class="text-blue-500 text-[8px]">&bull;</span>
-                        <span class="text-gray-400 dark:text-gray-500 text-[7px]">6 h</span>
-                      </div>
-                      <div class="relative w-full aspect-[4/3] rounded-md overflow-hidden bg-gray-900 border border-[#efefef] dark:border-[#262626]">
-                        <img src="/bellingham_celebration.png" alt="Celebration Post" class="w-full h-full object-cover" />
-                        <div class="absolute top-1.5 right-1.5 bg-black/60 p-1 rounded-full text-white">
-                          <Icon name="Download" class="w-3 h-3 text-white" />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <!-- Right StoryPeek Sidebar -->
-                <div class="w-full sm:w-[38%] flex flex-col bg-[#f8f9fa] dark:bg-[#0b0f14] text-[#262626] dark:text-[#f5f5f5] text-[10px]">
-                  <div class="px-2.5 py-2 border-b border-[#e2d9ce] dark:border-[#262626] flex items-center justify-between bg-white dark:bg-[#0d0f14]">
-                    <div class="flex items-center gap-1">
-                      <span class="w-4.5 h-4.5 rounded bg-[#6366f1] flex items-center justify-center text-white p-0.5">
-                        <svg width="10" height="10" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                          <circle cx="12" cy="12" r="4"/>
-                          <path d="M12 2v2m0 16v2M4.22 4.22l1.42 1.42m12.72 12.72 1.42 1.42M2 12h2m16 0h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-                        </svg>
-                      </span>
-                      <span class="font-heading font-extrabold text-[11px] leading-none">Story<span class="text-[#6366f1]">Peek</span></span>
-                    </div>
-                    <div class="flex items-center gap-1.5 text-gray-400">
-                      <Icon name="RefreshCw" class="w-3 h-3" />
-                      <Icon name="Instagram" class="w-3 h-3" />
-                      <Icon name="ExternalLink" class="w-3 h-3" />
-                      <Icon name="Moon" class="w-3 h-3" />
-                    </div>
-                  </div>
-                  <div class="px-3 border-b border-[#e2d9ce] dark:border-[#262626] bg-white dark:bg-[#0d0f14] flex justify-between text-[9px] font-semibold text-gray-500 dark:text-gray-400">
-                    <span class="py-1.5 border-b border-[#6366f1] text-[#6366f1]">Stories</span>
-                    <span>Download</span>
-                    <span>Bulk</span>
-                    <span>Pro</span>
-                  </div>
-                  <div class="m-2 p-1.5 bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-200/40 dark:border-emerald-900/30 rounded text-emerald-800 dark:text-emerald-400 flex items-center gap-1 text-[8px] leading-tight font-medium">
-                    <Icon name="ShieldCheck" class="w-3 h-3 text-emerald-600 dark:text-emerald-400 flex-shrink-0" />
-                    <span>Anonymous active</span>
-                  </div>
-                  <div class="flex-grow flex flex-col gap-3 px-2 overflow-y-auto max-h-[220px]">
-                    <div class="flex flex-col gap-1 text-left">
-                      <div class="flex justify-between items-center text-[8px] font-bold text-gray-400 uppercase tracking-wider">
-                        <span>Active Stories</span>
-                        <span class="text-emerald-600 dark:text-emerald-400">64 Active</span>
-                      </div>
-                      <div class="flex gap-1 py-1 items-center justify-between">
-                        <div class="flex flex-col items-center gap-0.5">
-                          <div class="w-8 h-8 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
-                            <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">BS</div>
-                            <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">2</span>
-                          </div>
-                        </div>
-                        <div class="flex flex-col items-center gap-0.5">
-                          <div class="w-8 h-8 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
-                            <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">MB</div>
-                            <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">2</span>
-                          </div>
-                        </div>
-                        <div class="flex flex-col items-center gap-0.5">
-                          <div class="w-8 h-8 rounded-full p-[1.5px] bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-600 relative">
-                            <div class="w-full h-full rounded-full bg-white dark:bg-[#0d0f14] border border-white dark:border-black flex items-center justify-center font-bold text-[7px] text-[#262626] dark:text-[#f5f5f5]">DP</div>
-                            <span class="absolute -bottom-1 -right-0.5 bg-[#6366f1] text-white font-mono text-[7px] font-bold w-3 h-3 rounded-full flex items-center justify-center border border-white dark:border-black">5</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mt-auto px-2.5 py-1.5 bg-[#f8f9fa] dark:bg-[#0d0f14] border-t border-[#e2d9ce] dark:border-[#262626] flex items-center justify-between text-[7px] text-gray-400 rounded-b-xl">
-                    <span>64 stories found</span>
-                    <div class="flex gap-1.5 font-medium">
-                      <span>Help</span>
-                      <span>Privacy</span>
-                    </div>
-                  </div>
-                </div>
+              <div class="flex flex-col sm:flex-row md:flex-col gap-3 w-full md:w-auto flex-shrink-0">
+                <a
+                  href={storyPeek.data.storeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center text-sm shadow-sm w-full md:w-44 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
+                >
+                  Add to Chrome (Free)
+                </a>
+                <a href={`/extensions/${storyPeek.slug}`} class="border border-border text-text hover:bg-bg px-6 py-3 rounded-lg font-semibold transition-colors text-center text-sm w-full md:w-44 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer">
+                  Learn More &rarr;
+                </a>
               </div>
             </div>
-          </div>
-        </div>
-      ) : (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {extensions.map((ext) => (
-            <div class="bg-surface rounded-xl border border-border p-6 flex flex-col justify-between shadow-sm transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-0.5 hover:border-accent/40 text-left">
-              <div>
-                <div class="flex items-center gap-4 mb-4">
-                  <div class="w-12 h-12 rounded-lg bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
+          );
+        })()}
+
+        <!-- Secondary Utilities: SnapElite and SonicShield -->
+        {extensions.filter(e => e.slug !== 'story-peek').map((ext) => (
+          <div class="bg-surface rounded-2xl border border-border/80 p-8 flex flex-col justify-between shadow-sm glow-card text-left relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-36 h-36 rounded-full bg-accent/3 blur-3xl pointer-events-none"></div>
+            <div>
+              <div class="flex items-center justify-between mb-6 border-b border-border/50 pb-4">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
                     <Icon name={ext.data.icon} class="w-6 h-6 text-accent" />
                   </div>
                   <div>
                     <h3 class="text-h3 text-text leading-tight">{ext.data.title}</h3>
-                    {ext.data.downloadCount && (
-                      <span class="text-mono text-xs text-muted mt-0.5 block">{ext.data.downloadCount}</span>
-                    )}
+                    <span class="text-mono text-xs text-muted mt-1 block">v{ext.data.version}</span>
                   </div>
                 </div>
-                <p class="text-small text-muted leading-relaxed mb-6">
-                  {ext.data.tagline}
-                </p>
+                <span class="text-mono text-[10px] px-2 py-0.5 rounded-full bg-surface-2 text-muted border border-border">Preview</span>
               </div>
               
-              <div class="border-t border-border/50 pt-4 flex items-center justify-between">
-                <a href={`/extensions/${ext.slug}`} class="text-accent hover:underline text-sm font-semibold flex items-center gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none">
-                  Learn More &rarr;
-                </a>
-                <a
-                  href={ext.data.storeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="border border-border text-text hover:bg-bg text-xs px-3.5 py-1.5 rounded-lg transition-colors font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none"
-                >
-                  Add to Chrome
-                </a>
+              <p class="text-small text-muted leading-relaxed mb-6">
+                {ext.data.description}
+              </p>
+              
+              <div class="flex flex-col gap-2.5 mb-8">
+                {ext.data.features.slice(0, 2).map((feat) => (
+                  <span class="flex items-start gap-2 text-xs text-muted font-medium">
+                    <div class="mt-0.5 text-accent flex-shrink-0">
+                      <Icon name="Check" class="w-3.5 h-3.5 text-accent" />
+                    </div>
+                    <span><strong class="text-text">{feat.title}:</strong> {feat.description}</span>
+                  </span>
+                ))}
               </div>
             </div>
-          ))}
-        </div>
-      )}
+            
+            <div class="border-t border-border/50 pt-5 flex items-center justify-between gap-4">
+              <a href={`/extensions/${ext.slug}`} class="text-accent hover:underline text-sm font-semibold flex items-center gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none">
+                Learn More
+                <Icon name="ArrowRight" class="w-4 h-4" />
+              </a>
+              <a
+                href={ext.data.storeUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="border border-border text-text hover:bg-bg text-sm px-4 py-2 rounded-lg transition-colors font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none"
+              >
+                Add to Chrome
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 

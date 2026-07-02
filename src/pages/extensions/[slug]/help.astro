@@ -42,121 +42,315 @@ const { slug } = Astro.params;
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <!-- Left: Quick Navigation -->
+        {/* Left: Quick Navigation */}
         <div class="hidden lg:flex lg:col-span-3 sticky top-24 flex-col gap-4 text-xs font-semibold text-muted border-r border-border/60 pr-6">
-          <a href="#getting-started" class="hover:text-accent transition-colors">1. Getting Started</a>
-          <a href="#anonymous-viewing" class="hover:text-accent transition-colors">2. Anonymous Viewing</a>
-          <a href="#media-downloads" class="hover:text-accent transition-colors">3. Media Downloads</a>
-          <a href="#bulk-downloader" class="hover:text-accent transition-colors">4. Pro Bulk Downloader</a>
-          <a href="#keyboard-shortcuts" class="hover:text-accent transition-colors">5. Keyboard Shortcuts</a>
-          <a href="#faq-trouble" class="hover:text-accent transition-colors">6. FAQ & Troubleshooting</a>
+          {slug === 'story-peek' && (
+            <>
+              <a href="#getting-started" class="hover:text-accent transition-colors">1. Getting Started</a>
+              <a href="#anonymous-viewing" class="hover:text-accent transition-colors">2. Anonymous Viewing</a>
+              <a href="#media-downloads" class="hover:text-accent transition-colors">3. Media Downloads</a>
+              <a href="#bulk-downloader" class="hover:text-accent transition-colors">4. Pro Bulk Downloader</a>
+              <a href="#keyboard-shortcuts" class="hover:text-accent transition-colors">5. Keyboard Shortcuts</a>
+              <a href="#faq-trouble" class="hover:text-accent transition-colors">6. FAQ & Troubleshooting</a>
+            </>
+          )}
+          {slug === 'snap-elite' && (
+            <>
+              <a href="#getting-started" class="hover:text-accent transition-colors">1. Getting Started</a>
+              <a href="#screenshot-modes" class="hover:text-accent transition-colors">2. Capture Modes</a>
+              <a href="#canvas-editor" class="hover:text-accent transition-colors">3. Annotation Editor</a>
+              <a href="#local-gallery" class="hover:text-accent transition-colors">4. History Gallery</a>
+              <a href="#filename-templates" class="hover:text-accent transition-colors">5. Custom Filenames</a>
+              <a href="#faq-trouble" class="hover:text-accent transition-colors">6. FAQ & Troubleshooting</a>
+            </>
+          )}
+          {slug === 'sonic-shield' && (
+            <>
+              <a href="#getting-started" class="hover:text-accent transition-colors">1. Getting Started</a>
+              <a href="#volume-boost" class="hover:text-accent transition-colors">2. Volume Boosting</a>
+              <a href="#equalizer-presets" class="hover:text-accent transition-colors">3. Equalizer & Presets</a>
+              <a href="#mono-panning" class="hover:text-accent transition-colors">4. Mono & Panning</a>
+              <a href="#audio-hotkeys" class="hover:text-accent transition-colors">5. Audio Hotkeys</a>
+              <a href="#faq-trouble" class="hover:text-accent transition-colors">6. FAQ & Troubleshooting</a>
+            </>
+          )}
         </div>
 
-        <!-- Right: Documentation Content -->
+        {/* Right: Documentation Content */}
         <div class="lg:col-span-9 flex flex-col gap-12 text-sm text-muted leading-relaxed">
-          <!-- Section 1 -->
-          <div id="getting-started" class="flex flex-col gap-4">
-            <h2 class="text-lg font-bold text-text flex items-center gap-2">
-              <span class="text-accent">1.</span> Getting Started
-            </h2>
-            <p>
-              To install and start using StoryPeek, make sure you are using a supported Chromium-based desktop browser (Google Chrome, Microsoft Edge, Brave, Vivaldi, Opera, or Kiwi Browser on Android).
-            </p>
-            <ol class="list-decimal pl-6 flex flex-col gap-2.5">
-              <li>
-                Visit the official **Chrome Web Store** link on our <a href={`/extensions/${slug}`} class="text-accent hover:underline font-semibold">landing page</a> and click <strong>Add to Chrome</strong>.
-              </li>
-              <li>
-                Once installed, click the **puzzle piece icon 🧩** in the top-right corner of your browser bar, find <strong>StoryPeek</strong>, and click the **Pin** icon.
-              </li>
-              <li>
-                Visit <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline font-semibold">instagram.com</a>. You will notice a vertical StoryPeek icon or action bar embedded on the left, or simply click the pinned toolbar icon to view active stories.
-              </li>
-            </ol>
-          </div>
+          {slug === 'story-peek' && (
+            <>
+              <!-- Section 1 -->
+              <div id="getting-started" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">1.</span> Getting Started
+                </h2>
+                <p>
+                  To install and start using StoryPeek, make sure you are using a supported Chromium-based desktop browser (Google Chrome, Microsoft Edge, Brave, Vivaldi, Opera, or Kiwi Browser on Android).
+                </p>
+                <ol class="list-decimal pl-6 flex flex-col gap-2.5">
+                  <li>
+                    Visit the official **Chrome Web Store** link on our <a href={`/extensions/${slug}`} class="text-accent hover:underline font-semibold">landing page</a> and click <strong>Add to Chrome</strong>.
+                  </li>
+                  <li>
+                    Once installed, click the **puzzle piece icon 🧩** in the top-right corner of your browser bar, find <strong>StoryPeek</strong>, and click the **Pin** icon.
+                  </li>
+                  <li>
+                    Visit <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="text-accent hover:underline font-semibold">instagram.com</a>. You will notice a vertical StoryPeek icon or action bar embedded on the left, or simply click the pinned toolbar icon to view active stories.
+                  </li>
+                </ol>
+              </div>
 
-          <!-- Section 2 -->
-          <div id="anonymous-viewing" class="flex flex-col gap-4">
-            <h2 class="text-lg font-bold text-text flex items-center gap-2">
-              <span class="text-accent">2.</span> Anonymous Viewing
-            </h2>
-            <p>
-              By default, StoryPeek activates anonymous mode automatically. You can verify this by checking for the green shield badge inside the extension interface.
-            </p>
-            <ul class="list-disc pl-6 flex flex-col gap-2">
-              <li><strong>Incognito Viewing:</strong> You can watch active stories, highlights, and reels in full quality. The extension automatically intercepts Instagram's analytics requests (`/stories/seen/` APIs) locally and cancels them.</li>
-              <li><strong>Seen receipts:</strong> As long as the green anonymous badge is active in your popup, you will never appear on the creator's "seen by" viewers list.</li>
-            </ul>
-          </div>
+              <!-- Section 2 -->
+              <div id="anonymous-viewing" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">2.</span> Anonymous Viewing
+                </h2>
+                <p>
+                  By default, StoryPeek activates anonymous mode automatically. You can verify this by checking for the green shield badge inside the extension interface.
+                </p>
+                <ul class="list-disc pl-6 flex flex-col gap-2">
+                  <li><strong>Incognito Viewing:</strong> You can watch active stories, highlights, and reels in full quality. The extension automatically intercepts Instagram's analytics requests (`/stories/seen/` APIs) locally and cancels them.</li>
+                  <li><strong>Seen receipts:</strong> As long as the green anonymous badge is active in your popup, you will never appear on the creator's "seen by" viewers list.</li>
+                </ul>
+              </div>
 
-          <!-- Section 3 -->
-          <div id="media-downloads" class="flex flex-col gap-4">
-            <h2 class="text-lg font-bold text-text flex items-center gap-2">
-              <span class="text-accent">3.</span> Media Downloads
-            </h2>
-            <p>
-              StoryPeek injects direct download actions directly into Instagram's web interface for convenience:
-            </p>
-            <ul class="list-disc pl-6 flex flex-col gap-2">
-              <li><strong>Story Viewer:</strong> While watching stories anonymously inside the popup, click the <strong>Download icon</strong> in the top-right corner to save the active frame.</li>
-              <li><strong>Posts & Reels:</strong> Direct download buttons are appended right next to the standard like/comment icon row on feed posts and the reels sidebar.</li>
-              <li><strong>Resolution:</strong> All files are fetched directly from Instagram's content delivery network (CDN) links in original uploaded resolution without added watermarks or extra compression.</li>
-            </ul>
-          </div>
+              <!-- Section 3 -->
+              <div id="media-downloads" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">3.</span> Media Downloads
+                </h2>
+                <p>
+                  StoryPeek injects direct download actions directly into Instagram's web interface for convenience:
+                </p>
+                <ul class="list-disc pl-6 flex flex-col gap-2">
+                  <li><strong>Story Viewer:</strong> While watching stories anonymously inside the popup, click the <strong>Download icon</strong> in the top-right corner to save the active frame.</li>
+                  <li><strong>Posts & Reels:</strong> Direct download buttons are appended right next to the standard like/comment icon row on feed posts and the reels sidebar.</li>
+                  <li><strong>Resolution:</strong> All files are fetched directly from Instagram's content delivery network (CDN) links in original uploaded resolution without added watermarks or extra compression.</li>
+                </ul>
+              </div>
 
-          <!-- Section 4 -->
-          <div id="bulk-downloader" class="flex flex-col gap-4">
-            <h2 class="text-lg font-bold text-text flex items-center gap-2">
-              <span class="text-accent">4.</span> Pro Bulk Downloader
-            </h2>
-            <p>
-              If you have upgraded to **StoryPeek Pro**, you gain access to our bulk profile media saving module:
-            </p>
-            <ul class="list-disc pl-6 flex flex-col gap-2">
-              <li>Open the extension popup on any user's profile page.</li>
-              <li>Navigate to the **Bulk** tab.</li>
-              <li>Choose what content you wish to save (e.g. *All Active Stories*, *Latest 20 Feed Posts*, or *All Highlights*).</li>
-              <li>Click **Start Download**. StoryPeek will queue the requests and save all files in a structured folder named after the user.</li>
-            </ul>
-          </div>
+              <!-- Section 4 -->
+              <div id="bulk-downloader" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">4.</span> Pro Bulk Downloader
+                </h2>
+                <p>
+                  If you have upgraded to **StoryPeek Pro**, you gain access to our bulk profile media saving module:
+                </p>
+                <ul class="list-disc pl-6 flex flex-col gap-2">
+                  <li>Open the extension popup on any user's profile page.</li>
+                  <li>Navigate to the **Bulk** tab.</li>
+                  <li>Choose what content you wish to save (e.g. *All Active Stories*, *Latest 20 Feed Posts*, or *All Highlights*).</li>
+                  <li>Click **Start Download**. StoryPeek will queue the requests and save all files in a structured folder named after the user.</li>
+                </ul>
+              </div>
 
-          <!-- Section 5 -->
-          <div id="keyboard-shortcuts" class="flex flex-col gap-4">
-            <h2 class="text-lg font-bold text-text flex items-center gap-2">
-              <span class="text-accent">5.</span> Keyboard Shortcuts
-            </h2>
-            <p>
-              Use these shortcuts while viewing stories inside the StoryPeek popup to browse rapidly:
-            </p>
-            <div class="border border-border rounded-xl overflow-hidden max-w-md">
-              <table class="w-full text-xs text-left border-collapse">
-                <thead>
-                  <tr class="bg-surface-2 border-b border-border text-text font-bold">
-                    <th class="px-4 py-2">Action</th>
-                    <th class="px-4 py-2">Shortcut</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-border">
-                  <tr>
-                    <td class="px-4 py-2">Next Story Segment</td>
-                    <td class="px-4 py-2"><kbd class="bg-surface border border-border px-1.5 py-0.5 rounded font-mono text-[10px]">Right Arrow</kbd> / <kbd class="bg-surface border border-border px-1.5 py-0.5 rounded font-mono text-[10px]">Space</kbd></td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-2">Previous Segment</td>
-                    <td class="px-4 py-2"><kbd class="bg-surface border border-border px-1.5 py-0.5 rounded font-mono text-[10px]">Left Arrow</kbd></td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-2">Download Active Frame</td>
-                    <td class="px-4 py-2"><kbd class="bg-surface border border-border px-1.5 py-0.5 rounded font-mono text-[10px]">D</kbd></td>
-                  </tr>
-                  <tr>
-                    <td class="px-4 py-2">Close Popup Viewer</td>
-                    <td class="px-4 py-2"><kbd class="bg-surface border border-border px-1.5 py-0.5 rounded font-mono text-[10px]">Escape</kbd></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
+              <!-- Section 5 -->
+              <div id="keyboard-shortcuts" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">5.</span> Keyboard Shortcuts
+                </h2>
+                <p>
+                  Use these shortcuts while viewing stories inside the StoryPeek popup to browse rapidly:
+                </p>
+                <div class="border border-border/80 rounded-xl overflow-hidden max-w-md">
+                  <table class="w-full text-xs text-left border-collapse">
+                    <thead>
+                      <tr class="bg-surface-2 border-b border-border/50 text-text font-bold">
+                        <th class="px-4 py-2">Action</th>
+                        <th class="px-4 py-2">Shortcut</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-border/50">
+                      <tr>
+                        <td class="px-4 py-2">Next Story Segment</td>
+                        <td class="px-4 py-2"><kbd class="bg-surface border border-border/80 px-1.5 py-0.5 rounded font-mono text-[10px]">Right Arrow</kbd> / <kbd class="bg-surface border border-border/80 px-1.5 py-0.5 rounded font-mono text-[10px]">Space</kbd></td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-2">Previous Segment</td>
+                        <td class="px-4 py-2"><kbd class="bg-surface border border-border/80 px-1.5 py-0.5 rounded font-mono text-[10px]">Left Arrow</kbd></td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-2">Download Active Frame</td>
+                        <td class="px-4 py-2"><kbd class="bg-surface border border-border/80 px-1.5 py-0.5 rounded font-mono text-[10px]">D</kbd></td>
+                      </tr>
+                      <tr>
+                        <td class="px-4 py-2">Close Popup Viewer</td>
+                        <td class="px-4 py-2"><kbd class="bg-surface border border-border/80 px-1.5 py-0.5 rounded font-mono text-[10px]">Escape</kbd></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </>
+          )}
+
+          {slug === 'snap-elite' && (
+            <>
+              <!-- Section 1 -->
+              <div id="getting-started" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">1.</span> Getting Started
+                </h2>
+                <p>
+                  To install and start using SnapElite, make sure you are using a supported Chromium-based desktop browser.
+                </p>
+                <ol class="list-decimal pl-6 flex flex-col gap-2.5">
+                  <li>
+                    Visit the official **Chrome Web Store** link on our <a href={`/extensions/${slug}`} class="text-accent hover:underline font-semibold">landing page</a> and click <strong>Add to Chrome</strong>.
+                  </li>
+                  <li>
+                    Pin the extension: Click the **puzzle piece icon 🧩** in the top-right corner of your browser bar, find <strong>SnapElite</strong>, and click the **Pin** icon.
+                  </li>
+                  <li>
+                    Click the pinned camera icon to activate the screen capture menu.
+                  </li>
+                </ol>
+              </div>
+
+              <!-- Section 2 -->
+              <div id="screenshot-modes" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">2.</span> Capture Modes
+                </h2>
+                <p>
+                  SnapElite provides three main capture modes for flexibility:
+                </p>
+                <ul class="list-disc pl-6 flex flex-col gap-2">
+                  <li><strong>Full-Page Capture:</strong> Automatically scrolls through the entire webpage, capturing and stitching all segments into a single high-resolution image.</li>
+                  <li><strong>Visible Viewport:</strong> Captures exactly what is currently visible on your screen.</li>
+                  <li><strong>Custom Region:</strong> Click and drag a crop box to capture a specific section of the page.</li>
+                </ul>
+              </div>
+
+              <!-- Section 3 -->
+              <div id="canvas-editor" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">3.</span> Annotation Editor
+                </h2>
+                <p>
+                  Once you take a screenshot, SnapElite opens the built-in annotation editor. Use the canvas tools to mark up your capture:
+                </p>
+                <ul class="list-disc pl-6 flex flex-col gap-2">
+                  <li><strong>Shapes & Lines:</strong> Draw rectangles, circles, lines, and custom arrows.</li>
+                  <li><strong>Redaction (Blur):</strong> Cover passwords, usernames, and sensitive data with the blur brush.</li>
+                  <li><strong>Text Tools:</strong> Add text notes directly to your screenshots.</li>
+                </ul>
+              </div>
+
+              <!-- Section 4 -->
+              <div id="local-gallery" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">4.</span> History Gallery
+                </h2>
+                <p>
+                  SnapElite automatically stores your screen captures locally inside the browser's secure IndexedDB sandbox:
+                </p>
+                <ul class="list-disc pl-6 flex flex-col gap-2">
+                  <li>Open the extension popup and click <strong>History</strong>.</li>
+                  <li>View your previous captures, re-edit them, or delete them.</li>
+                  <li>Your data never leaves your computer; it is processed 100% locally.</li>
+                </ul>
+              </div>
+
+              <!-- Section 5 -->
+              <div id="filename-templates" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">5.</span> Custom Filenames
+                </h2>
+                <p>
+                  Set up structured naming configurations in the settings tab to keep downloads organized:
+                </p>
+                <ul class="list-disc pl-6 flex flex-col gap-2">
+                  <li>Use templates like <code>{'{domain} - {title} - {date}'}</code>.</li>
+                  <li>Screenshots will automatically name themselves accordingly upon export.</li>
+                </ul>
+              </div>
+            </>
+          )}
+
+          {slug === 'sonic-shield' && (
+            <>
+              <!-- Section 1 -->
+              <div id="getting-started" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">1.</span> Getting Started
+                </h2>
+                <p>
+                  To install and start using SonicShield, make sure you are using a supported Chromium-based desktop browser.
+                </p>
+                <ol class="list-decimal pl-6 flex flex-col gap-2.5">
+                  <li>
+                    Visit the official **Chrome Web Store** link on our <a href={`/extensions/${slug}`} class="text-accent hover:underline font-semibold">landing page</a> and click <strong>Add to Chrome</strong>.
+                  </li>
+                  <li>
+                    Pin the extension: Click the **puzzle piece icon 🧩** in the top-right corner of your browser bar, find <strong>SonicShield</strong>, and click the **Pin** icon.
+                  </li>
+                  <li>
+                    Open a media page (e.g. YouTube) and click the pinned volume slider icon to begin boosting audio.
+                  </li>
+                </ol>
+              </div>
+
+              <!-- Section 2 -->
+              <div id="volume-boost" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">2.</span> Volume Boosting
+                </h2>
+                <p>
+                  SonicShield can boost volume past the default 100% standard maximum limit:
+                </p>
+                <ul class="list-disc pl-6 flex flex-col gap-2">
+                  <li><strong>Boost Level:</strong> Safely increase sound volume up to **600%** using our HTML5 Web Audio gain nodes.</li>
+                  <li><strong>Limiter:</strong> The built-in audio limiter prevents speaker distortion and clipping at high volume levels.</li>
+                </ul>
+              </div>
+
+              <!-- Section 3 -->
+              <div id="equalizer-presets" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">3.</span> Equalizer & Presets
+                </h2>
+                <p>
+                  Configure sound frequencies with the integrated 10-band graphic equalizer:
+                </p>
+                <ul class="list-disc pl-6 flex flex-col gap-2">
+                  <li><strong>Graphic Equalizer:</strong> Adjust bass, mid-tones, and treble using 10 separate sliders.</li>
+                  <li><strong>Presets:</strong> Instantly switch between popular presets (Bass Booster, Vocal Booster, Classical, Rock, Electronic, etc.).</li>
+                </ul>
+              </div>
+
+              <!-- Section 4 -->
+              <div id="mono-panning" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">4.</span> Mono & Panning
+                </h2>
+                <p>
+                  Customize audio channel layouts inside the settings menu:
+                </p>
+                <ul class="list-disc pl-6 flex flex-col gap-2">
+                  <li><strong>Mono Mixer:</strong> Mix left and right audio channels together into a single mono output (ideal for single earbud listening).</li>
+                  <li><strong>Panning Control:</strong> Adjust the balance slider to push sound towards the left or right ear.</li>
+                </ul>
+              </div>
+
+              <!-- Section 5 -->
+              <div id="audio-hotkeys" class="flex flex-col gap-4">
+                <h2 class="text-lg font-bold text-text flex items-center gap-2">
+                  <span class="text-accent">5.</span> Audio Hotkeys
+                </h2>
+                <p>
+                  Control volume quickly with custom hotkeys defined in settings:
+                </p>
+                <ul class="list-disc pl-6 flex flex-col gap-2">
+                  <li>Increase volume: `Ctrl + Up Arrow` (default)</li>
+                  <li>Decrease volume: `Ctrl + Down Arrow` (default)</li>
+                  <li>Mute active tab: `Ctrl + M` (default)</li>
+                </ul>
+              </div>
+            </>
+          )}
 
           <!-- Section 6 -->
           <div id="faq-trouble" class="flex flex-col gap-4">
@@ -164,7 +358,7 @@ const { slug } = Astro.params;
               <span class="text-accent">6.</span> FAQ & Troubleshooting
             </h2>
             <p>
-              If stories fail to load, ensure you are fully logged into your Instagram account. If you encounter any bugs, layouts issues, or license activation errors, check out the dedicated <a href={`/extensions/${slug}/support`} class="text-accent hover:underline font-semibold">Support Center</a> or email us at <a href="mailto:support@bramlabs.co" class="text-accent hover:underline">support@bramlabs.co</a>.
+              If the extension fails to manipulate audio or capture screen, refresh the target tab and try again. For further questions, layout bugs, or license issues, visit the dedicated <a href={`/extensions/${slug}/support`} class="text-accent hover:underline font-semibold">Support Center</a> or email us at <a href="mailto:support@bramlabs.co" class="text-accent hover:underline">support@bramlabs.co</a>.
             </p>
           </div>
         </div>
