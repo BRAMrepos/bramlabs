@@ -17,16 +17,16 @@ We have integrated details, feature breakdowns, and FAQs for two new privacy-cen
 - **Mockup**: Interactive CSS volume control panel featuring a live waveform sound visualizer, dynamic volume slider, EQ preset switches, and audio normalizer configurations.
 
 ### 1.3 [StoryPeek](file:///C:/Users/hp/.gemini/antigravity/scratch/bramlabs-site/src/content/extensions/story-peek.mdx) (Instagram Incognito Helper)
-- **CWS Link**: Updated the "Add to Chrome (Free)" link to point directly to its official store page: `https://chromewebstore.google.com/detail/peplbgpalimccdhgjhcjmclikckonddj`.
-- **Mockup Removal**: Removed the simulated Instagram footballer split-screen mockup due to layout discrepancies, transforming the landing page into a clean, modern centered layout focusing on product copy and trust banners.
+- **CWS Link**: Updated the "Add to Chrome (Free)" link to point directly to its official store page: `https://chromewebstore.google.com/detail/storypeek-%E2%80%94-anonymous-vie/fbcmgjmagfglmkinlmbbgicipemheoll`.
+- **Product Card Replacement**: Replaced the simulated Instagram footballer split-screen mockup with a **high-fidelity Product Specification Card** containing technical metrics, database models, permissions, and security badges.
 
 ---
 
 ## 2. Platform Optimizations & New Pages
 
-### 2.1 Center-Aligned Homepage Hero
-- **What was changed**: Replaced the single-product StoryPeek mockup on the homepage hero with a **premium, centered copy layout** with brand badges, clear calls to action, and links to the GitHub repository.
-- **Dynamic 3-Column Grid**: Updated the homepage extensions row and the extensions directory page to load a responsive **3-column card grid** instead of the 2-column or spotlight panels, perfectly distributing all three products side-by-side.
+### 2.1 2-Column Homepage Hero & Spec Cards
+- **What was changed**: Maintained a balanced 2-column homepage hero layout, rendering a beautiful **BramLabs Suite Portfolio Card** on the right side summarizing our active extensions (StoryPeek, SnapElite, SonicShield), their versions, and client-side execution policies.
+- **Dynamic 3-Column Grid**: Updated the homepage extensions grid and directory layout to load a responsive **3-column card grid** instead of the 2-column panels, perfectly distributing all three extensions side-by-side.
 
 ### 2.2 [Uninstall Feedback Center](file:///C:/Users/hp/.gemini/antigravity/scratch/bramlabs-site/src/pages/feedback.astro)
 - **Path**: `https://bramlabs.co/feedback`

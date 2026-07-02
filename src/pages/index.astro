@@ -21,38 +21,114 @@ const structuredData = {
   structuredData={structuredData}
 >
   <!-- Hero Section -->
-  <section class="relative py-32 bg-bg flex items-center overflow-hidden">
-    <div class="max-w-4xl mx-auto px-6 w-full flex flex-col items-center text-center gap-8 py-16">
-      <!-- Badge -->
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-muted text-accent text-xs font-mono font-semibold">
-        <span class="text-accent">•</span>
-        100% Local-First & open Source
+    <div class="max-w-6xl mx-auto px-6 w-full grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+      <!-- Left Column: Copy -->
+      <div class="lg:col-span-7 flex flex-col items-start gap-8 z-10 text-left">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-muted text-accent text-xs font-mono font-semibold">
+          <span class="text-accent">•</span>
+          100% Local-First &amp; Open Source
+        </div>
+        <!-- Headline -->
+        <h1 class="text-display text-text max-w-xl leading-tight">
+          Privacy-first browser extensions. Zero telemetry.
+        </h1>
+        <!-- Subtext -->
+        <p class="text-body text-muted max-w-prose">
+          Lightweight, local-first browser utilities designed to protect your privacy and supercharge your web workflow. All operations execute entirely on your device.
+        </p>
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-4 w-full sm:w-auto">
+          <a
+            href="/extensions"
+            class="bg-accent hover:bg-accent-hover text-white px-8 py-3.5 rounded-lg font-semibold transition-colors duration-150 shadow-sm text-center flex items-center justify-center gap-2 group w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
+          >
+            Explore Extension Store
+            <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
+          </a>
+          <a
+            href="https://github.com/BRAMrepos/bramlabs"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="border border-border bg-surface text-text hover:border-text px-8 py-3.5 rounded-lg font-semibold transition-all duration-150 text-center w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
+          >
+            View on GitHub
+          </a>
+        </div>
       </div>
-      <!-- Headline -->
-      <h1 class="text-display text-text max-w-3xl text-center leading-tight">
-        Privacy-first browser extensions. Zero telemetry.
-      </h1>
-      <!-- Subtext -->
-      <p class="text-body text-muted max-w-2xl text-center">
-        Lightweight, local-first browser utilities designed to protect your privacy and supercharge your web workflow. All operations execute entirely on your device.
-      </p>
-      <!-- CTAs -->
-      <div class="flex flex-wrap justify-center gap-4 w-full sm:w-auto mt-2">
-        <a
-          href="/extensions"
-          class="bg-accent hover:bg-accent-hover text-white px-8 py-3.5 rounded-lg font-semibold transition-colors duration-150 shadow-sm text-center flex items-center justify-center gap-2 group w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
-        >
-          Explore Extension Store
-          <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
-        </a>
-        <a
-          href="https://github.com/BRAMrepos/bramlabs"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="border border-border bg-surface text-text hover:border-text px-8 py-3.5 rounded-lg font-semibold transition-all duration-150 text-center w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
-        >
-          View on GitHub
-        </a>
+
+      <!-- Right Column: Suite Card -->
+      <div class="lg:col-span-5 relative w-full flex justify-center">
+        <div class="w-full max-w-md bg-surface-2 border border-border/80 rounded-2xl shadow-xl p-6 flex flex-col gap-6 relative overflow-hidden transition-all duration-200 hover:border-accent/40">
+          <div class="absolute -right-24 -top-24 w-48 h-48 rounded-full bg-accent/5 blur-3xl"></div>
+          
+          <div class="flex items-center justify-between border-b border-border pb-4">
+            <div class="flex flex-col">
+              <span class="text-[10px] font-mono text-accent font-bold uppercase tracking-wider">Studio Portfolio</span>
+              <h2 class="text-base font-bold text-text mt-0.5">BramLabs Suite</h2>
+            </div>
+            <span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 dark:bg-emerald-950/30 dark:text-emerald-400 font-mono text-[9px] font-bold">
+              3 Active Apps
+            </span>
+          </div>
+
+          <!-- Extensions List -->
+          <div class="flex flex-col gap-4">
+            <!-- StoryPeek -->
+            <a href="/extensions/story-peek" class="flex items-center justify-between p-3 rounded-xl border border-border/50 bg-surface/50 hover:bg-surface hover:border-accent/30 transition-all duration-150 group">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
+                  <Icon name="EyeOff" class="w-4.5 h-4.5 text-accent" />
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-text leading-none">StoryPeek</h4>
+                  <span class="text-[10px] text-muted mt-1 block">Anonymous story viewer</span>
+                </div>
+              </div>
+              <span class="text-[10px] font-mono text-muted bg-surface-2 px-1.5 py-0.5 rounded group-hover:text-accent transition-colors">v2.0.0</span>
+            </a>
+
+            <!-- SnapElite -->
+            <a href="/extensions/snap-elite" class="flex items-center justify-between p-3 rounded-xl border border-border/50 bg-surface/50 hover:bg-surface hover:border-accent/30 transition-all duration-150 group">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
+                  <Icon name="Camera" class="w-4.5 h-4.5 text-accent" />
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-text leading-none">SnapElite</h4>
+                  <span class="text-[10px] text-muted mt-1 block">Full page screen capture</span>
+                </div>
+              </div>
+              <span class="text-[10px] font-mono text-muted bg-surface-2 px-1.5 py-0.5 rounded group-hover:text-accent transition-colors">v1.0.0</span>
+            </a>
+
+            <!-- SonicShield -->
+            <a href="/extensions/sonic-shield" class="flex items-center justify-between p-3 rounded-xl border border-border/50 bg-surface/50 hover:bg-surface hover:border-accent/30 transition-all duration-150 group">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
+                  <Icon name="Volume2" class="w-4.5 h-4.5 text-accent" />
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-text leading-none">SonicShield</h4>
+                  <span class="text-[10px] text-muted mt-1 block">Volume booster &amp; profiles</span>
+                </div>
+              </div>
+              <span class="text-[10px] font-mono text-muted bg-surface-2 px-1.5 py-0.5 rounded group-hover:text-accent transition-colors">v1.0.0</span>
+            </a>
+          </div>
+
+          <!-- Bottom Banner -->
+          <div class="border-t border-border pt-4 flex items-center justify-between text-[10px] text-muted font-mono">
+            <span class="flex items-center gap-1">
+              <Icon name="Shield" class="w-3.5 h-3.5 text-green-600" />
+              GDPR Compliant
+            </span>
+            <span class="flex items-center gap-1">
+              <Icon name="Cpu" class="w-3.5 h-3.5 text-accent" />
+              100% Local-First
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
