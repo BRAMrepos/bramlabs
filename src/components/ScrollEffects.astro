@@ -1,0 +1,53 @@
+---
+// Handles: scroll reveal (.reveal), header shrink on scroll, stagger children
+---
+<script>
+  // --- Header scroll shrink ---
+  const header = document.getElementById('site-header');
+  if (header) {
+    const onScroll = () => {
+      if (window.scrollY > 10) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
+
+  // --- Scroll reveal ---
+  const revealEls = document.querySelectorAll('.reveal, [data-reveal]');
+  if (revealEls.length > 0 && 'IntersectionObserver' in window) {
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            obs.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+    );
+    revealEls.forEach((el) => obs.observe(el));
+  } else {
+    // Fallback: no observer → show all
+    revealEls.forEach((el) => el.classList.add('is-visible'));
+  }
+
+  // Mark JS available (enables .reveal opacity:0 via CSS)
+  document.documentElement.classList.add('js');
+
+  // --- Read progress bar ---
+  const bar = document.getElementById('read-progress');
+  if (bar) {
+    const updateBar = () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      if (total <= 0) { bar.style.width = '0%'; return; }
+      bar.style.width = Math.min((window.scrollY / total) * 100, 100) + '%';
+    };
+    window.addEventListener('scroll', updateBar, { passive: true });
+    updateBar();
+  }
+</script>
