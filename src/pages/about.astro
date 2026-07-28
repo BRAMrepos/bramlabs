@@ -12,7 +12,7 @@ const structuredData = {
     "name": "BramLabs",
     "url": "https://bramlabs.co",
     "email": "support@bramlabs.co",
-    "description": "Independent product studio building mobile apps, browser extensions, web platforms, and original merchandise."
+    "description": "Independent product studio building mobile apps, browser extensions, web platforms, and original brand merchandise for our own IP."
   }
 };
 ---
@@ -25,67 +25,138 @@ const structuredData = {
   <!-- Hero Section -->
   <section class="section-block pt-16 md:pt-24 border-b border-[var(--border-subtle)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl flex flex-col gap-6 reveal" data-reveal>
-        <span class="badge badge-sky text-xs font-mono">Independent Product Studio</span>
-        <h1 class="mb-4">BramLabs Software Studio</h1>
+      <div class="max-w-3xl flex flex-col gap-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-400/10 border border-sky-400/20 text-sky-400 text-xs font-mono font-semibold w-fit">
+          <Icon name="Smartphone" class="w-3.5 h-3.5" />
+          Independent Product Studio &amp; Appstore Developer
+        </div>
+        
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-primary)] leading-[1.1]">
+          We build focused software tools<br />
+          <span class="text-gradient">and design original apparel IP.</span>
+        </h1>
+
         <p class="text-[var(--text-secondary)] text-base sm:text-lg leading-relaxed">
-          We engineer focused software tools — mobile applications on the Amazon Appstore, browser utilities on the Chrome Web Store, and web platforms like WorkflowAI.site — and produce original brand merchandise that belongs to those products.
+          BramLabs is an independent software studio founded on a clear mission: engineer low-friction utility software across mobile and browser platforms, and produce official print merchandise strictly for <strong class="text-[var(--text-primary)] font-semibold">our own software titles and studio IP</strong>.
         </p>
+
+        <!-- Studio Quick Stats -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 font-mono text-xs text-[var(--text-secondary)]">
+          <div class="glass-card p-4 flex flex-col gap-1">
+            <span class="text-[var(--text-muted)] text-[10px] uppercase font-bold">Appstore Status</span>
+            <span class="text-[var(--text-primary)] font-bold text-sm">Active Developer</span>
+          </div>
+          <div class="glass-card p-4 flex flex-col gap-1">
+            <span class="text-[var(--text-muted)] text-[10px] uppercase font-bold">Live Apps</span>
+            <span class="text-[var(--text-primary)] font-bold text-sm">ClearCue &amp; ShiftLedger</span>
+          </div>
+          <div class="glass-card p-4 flex flex-col gap-1">
+            <span class="text-[var(--text-muted)] text-[10px] uppercase font-bold">Chrome Store</span>
+            <span class="text-[var(--text-primary)] font-bold text-sm">SonicShield Live</span>
+          </div>
+          <div class="glass-card p-4 flex flex-col gap-1">
+            <span class="text-[var(--text-muted)] text-[10px] uppercase font-bold">IP Policy</span>
+            <span class="text-emerald-400 font-bold text-sm">100% Original</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Principles Section -->
-  <section class="section-block border-b border-[var(--border-subtle)] bg-white/[0.01]">
+  <!-- Studio Ethos & Software Craftsmanship -->
+  <section class="section-block border-b border-[var(--border-subtle)] bg-[var(--bg-surface)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-xl mb-12">
+        <span class="text-[11px] font-mono uppercase tracking-widest text-[var(--text-muted)] font-semibold block mb-1">Foundational Vision</span>
+        <h2 class="text-[var(--text-primary)] mb-2">Software Craftsmanship</h2>
+        <p class="text-[var(--text-secondary)] text-sm">How we approach product design, performance, and user privacy.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="glass-card p-7 flex flex-col gap-3.5">
+          <div class="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500 mb-1">
+            <Icon name="Zap" class="w-5 h-5" />
+          </div>
+          <h3 class="text-lg font-bold text-[var(--text-primary)]">01. Local-First &amp; Fast</h3>
+          <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
+            Our applications execute directly on the user's device without requiring background telemetry or continuous server handshakes. Fast first-paints and lightweight memory footprints are non-negotiable.
+          </p>
+        </div>
+
+        <div class="glass-card p-7 flex flex-col gap-3.5">
+          <div class="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-500 mb-1">
+            <Icon name="Lock" class="w-5 h-5" />
+          </div>
+          <h3 class="text-lg font-bold text-[var(--text-primary)]">02. Zero Paywall Bloat</h3>
+          <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
+            Every product features full transparent privacy documentation, zero dark patterns, and simple core utilities that work straight out of the box.
+          </p>
+        </div>
+
+        <div class="glass-card p-7 flex flex-col gap-3.5">
+          <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 mb-1">
+            <Icon name="ShieldCheck" class="w-5 h-5" />
+          </div>
+          <h3 class="text-lg font-bold text-[var(--text-primary)]">03. In-House Apparel IP</h3>
+          <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
+            We design print-ready vector artwork to complement our software titles. Every shirt and hoodie graphic originates from studio vector masters — zero third-party brands or copyrighted material.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Developer Credibility & Policy Compliance -->
+  <section class="section-block border-b border-[var(--border-subtle)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
         
-        <div class="glass-card p-8 flex flex-col gap-4 reveal" data-reveal>
+        <div class="glass-card p-8 flex flex-col gap-4">
           <div class="w-10 h-10 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center text-emerald-400 mb-2">
             <Icon name="Target" class="w-5 h-5" />
           </div>
-          <h2 class="text-xl font-bold text-[var(--text-primary)]">Studio Principles</h2>
+          <h2 class="text-xl font-bold text-[var(--text-primary)]">Publisher Standards</h2>
           <ul class="flex flex-col gap-3 text-xs sm:text-sm text-[var(--text-muted)]">
             <li class="flex items-center gap-2.5">
               <span class="text-emerald-400 font-bold">✓</span>
-              <span>Ship production software listings users can immediately install and run</span>
+              <span>Publish verified Android/Fire OS applications to the Amazon Appstore</span>
             </li>
             <li class="flex items-center gap-2.5">
               <span class="text-emerald-400 font-bold">✓</span>
-              <span>Prioritize local-first, low-permission architecture with zero unnecessary tracking</span>
+              <span>Maintain active Chrome Web Store extension listings with Manifest V3 security</span>
             </li>
             <li class="flex items-center gap-2.5">
               <span class="text-emerald-400 font-bold">✓</span>
-              <span>Own brand marks and original vector assets end-to-end</span>
+              <span>Operate production web platforms like WorkflowAI.site and BramLabs Publisher Hub</span>
             </li>
             <li class="flex items-center gap-2.5">
               <span class="text-emerald-400 font-bold">✓</span>
-              <span>Maintain dedicated privacy policy, terms, and support trees per product</span>
+              <span>Maintain dedicated per-product terms, privacy statements, and changelogs</span>
             </li>
           </ul>
         </div>
 
-        <div class="glass-card p-8 flex flex-col gap-4 reveal" data-reveal style="--reveal-delay:80ms">
+        <div class="glass-card p-8 flex flex-col gap-4">
           <div class="w-10 h-10 rounded-lg bg-sky-400/10 border border-sky-400/20 flex items-center justify-center text-sky-400 mb-2">
             <Icon name="ShieldCheck" class="w-5 h-5" />
           </div>
-          <h2 class="text-xl font-bold text-[var(--text-primary)]">Strict Compliance Boundaries</h2>
+          <h2 class="text-xl font-bold text-[var(--text-primary)]">Merch on Demand Compliance</h2>
           <ul class="flex flex-col gap-3 text-xs sm:text-sm text-[var(--text-muted)]">
             <li class="flex items-center gap-2.5">
               <span class="text-sky-400 font-bold">✓</span>
-              <span>Never sell third-party brands, sports logos, or licensed character merch</span>
+              <span>Strictly zero third-party brands, sports logos, or copyrighted characters</span>
             </li>
             <li class="flex items-center gap-2.5">
               <span class="text-sky-400 font-bold">✓</span>
-              <span>Never ship browser extensions that transmit user payloads to remote servers</span>
+              <span>300 DPI native resolution working files (4500x5400 px transparent PNG)</span>
             </li>
             <li class="flex items-center gap-2.5">
               <span class="text-sky-400 font-bold">✓</span>
-              <span>Never publish graphic artwork without prior USPTO trademark screening</span>
+              <span>Pre-flight USPTO trademark search before submitting print designs</span>
             </li>
             <li class="flex items-center gap-2.5">
               <span class="text-sky-400 font-bold">✓</span>
-              <span>Verify all apparel against Amazon Content Policy rules prior to upload</span>
+              <span>Pre-submission line-by-line review against Merch Content Policy</span>
             </li>
           </ul>
         </div>
@@ -94,26 +165,24 @@ const structuredData = {
     </div>
   </section>
 
-  <!-- Studio Lanes Grid -->
-  <section class="section-block border-b border-[var(--border-subtle)]">
+  <!-- Four Disciplines Navigation -->
+  <section class="section-block border-b border-[var(--border-subtle)] bg-[var(--bg-surface)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-xl mb-10 reveal" data-reveal>
-        <span class="text-[11px] font-mono uppercase tracking-widest text-sky-400 font-semibold block mb-1">Architecture</span>
-        <h2 class="text-[var(--text-primary)]">Studio Lanes</h2>
+      <div class="max-w-xl mb-10">
+        <span class="text-[11px] font-mono uppercase tracking-widest text-sky-400 font-semibold block mb-1">Directory</span>
+        <h2 class="text-[var(--text-primary)]">Explore Studio Lanes</h2>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
-          { href: '/apps',       icon: 'Smartphone', title: 'Apps',       desc: 'Amazon Appstore developer account and original mobile apps.' },
-          { href: '/extensions', icon: 'Puzzle',     title: 'Extensions', desc: 'SonicShield, SnapElite, Tab Snoozer Chrome utilities.' },
-          { href: '/web',        icon: 'Globe',      title: 'Web',        desc: 'WorkflowAI.site, DesignTokens.dev, and studio platforms.' },
-          { href: '/merch',      icon: 'Shirt',      title: 'Merch',      desc: '300 DPI original print masters for our software titles.' },
-        ].map((lane, i) => (
+          { href: '/apps',       icon: 'Smartphone', title: 'Mobile Apps',  desc: 'Amazon Appstore developer titles — ClearCue and ShiftLedger.' },
+          { href: '/extensions', icon: 'Puzzle',     title: 'Extensions',   desc: 'SonicShield, SnapElite, and Tab Snoozer Chrome utilities.' },
+          { href: '/web',        icon: 'Globe',      title: 'Web Platforms', desc: 'WorkflowAI.site and BramLabs Publisher Platform.' },
+          { href: '/merch',      icon: 'Shirt',      title: 'Apparel & Art', desc: '300 DPI print-ready vector series and compliance reference.' },
+        ].map((lane) => (
           <a
             href={lane.href}
-            class="glass-card p-6 flex flex-col gap-3 group reveal"
-            data-reveal
-            style={`--reveal-delay:${i * 60}ms`}
+            class="glass-card p-6 flex flex-col gap-3 group"
           >
             <div class="w-10 h-10 rounded-lg bg-sky-400/10 border border-sky-400/20 flex items-center justify-center">
               <Icon name={lane.icon} class="w-5 h-5 text-sky-400" />
@@ -126,21 +195,22 @@ const structuredData = {
     </div>
   </section>
 
-  <!-- Contact Section -->
+  <!-- Studio Contact Reference -->
   <section class="section-block">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="glass-card p-8 md:p-12 max-w-2xl reveal" data-reveal>
-        <h2 class="text-[var(--text-primary)] mb-3">Studio Contact</h2>
+      <div class="glass-card p-8 md:p-12 max-w-2xl">
+        <span class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] font-bold mb-1 block">Developer Contact</span>
+        <h2 class="text-[var(--text-primary)] mb-3">Studio Contact &amp; Support</h2>
         <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-4">
-          For technical support, store reviewer inquiries, or Merch on Demand verification:
+          For technical support, store reviewer inquiries, or Merch on Demand developer verification:
         </p>
-        <a href="mailto:support@bramlabs.co" class="text-sky-400 hover:underline font-bold text-lg block mb-6">
+        <a href="mailto:support@bramlabs.co" class="text-sky-400 hover:underline font-bold text-xl block mb-6">
           support@bramlabs.co
         </a>
-        <div class="text-xs text-[var(--text-faint)] flex items-center gap-4 pt-4 border-t border-white/[0.06]">
+        <div class="text-xs text-[var(--text-faint)] flex items-center gap-4 pt-4 border-t border-[var(--border-subtle)] font-mono">
           <a href="/privacy" class="hover:text-[var(--text-muted)] transition-colors">Privacy Policy</a> · 
           <a href="/terms" class="hover:text-[var(--text-muted)] transition-colors">Terms of Service</a> · 
-          <a href="/feedback" class="hover:text-[var(--text-muted)] transition-colors">Feedback Portal</a>
+          <a href="/merch" class="hover:text-[var(--text-muted)] transition-colors">MBA Reference</a>
         </div>
       </div>
     </div>

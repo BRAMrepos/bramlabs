@@ -3,7 +3,7 @@ import Icon from './Icon.astro';
 ---
 <div class="w-full max-w-[460px] mx-auto flex flex-col gap-3.5">
   <!-- Studio Status Header Card -->
-  <div class="glass-card p-4 flex items-center justify-between gap-3 shadow-md border border-white/[0.12]">
+  <div class="glass-card p-4 flex items-center justify-between gap-3 shadow-md">
     <div class="flex items-center gap-3">
       <div class="w-9 h-9 rounded-lg bg-sky-400/10 border border-sky-400/25 flex items-center justify-center text-sky-400 flex-shrink-0">
         <Icon name="Smartphone" class="w-4 h-4" />
@@ -17,12 +17,12 @@ import Icon from './Icon.astro';
   </div>
 
   <!-- Live Software Grid Preview -->
-  <div class="glass-card p-4 flex flex-col gap-3 border border-white/[0.08]">
+  <div class="glass-card p-4 flex flex-col gap-3">
     <span class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] font-semibold">Active Product Lanes</span>
     
     <div class="flex flex-col gap-2.5">
       <!-- App Item -->
-      <div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.15] transition-colors">
+      <div class="flex items-center justify-between p-2.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[var(--border-default)] transition-colors">
         <div class="flex items-center gap-2.5">
           <Icon name="BellOff" class="w-4 h-4 text-sky-400 flex-shrink-0" />
           <span class="text-xs font-bold text-[var(--text-primary)]">ClearCue</span>
@@ -31,25 +31,25 @@ import Icon from './Icon.astro';
       </div>
 
       <!-- App Item -->
-      <div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.15] transition-colors">
+      <div class="flex items-center justify-between p-2.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[var(--border-default)] transition-colors">
         <div class="flex items-center gap-2.5">
           <Icon name="Calendar" class="w-4 h-4 text-sky-400 flex-shrink-0" />
-          <span class="text-xs font-bold text-[var(--text-primary)]">ShiftWorkApp</span>
+          <span class="text-xs font-bold text-[var(--text-primary)]">ShiftLedger</span>
         </div>
         <span class="text-[10px] font-mono text-[var(--text-muted)]">Appstore · Live</span>
       </div>
 
       <!-- App Item -->
-      <div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.15] transition-colors">
+      <div class="flex items-center justify-between p-2.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[var(--border-default)] transition-colors">
         <div class="flex items-center gap-2.5">
           <Icon name="Activity" class="w-4 h-4 text-sky-400 flex-shrink-0" />
           <span class="text-xs font-bold text-[var(--text-primary)]">Cadence</span>
         </div>
-        <span class="text-[10px] font-mono text-[var(--text-muted)]">Mobile · Live</span>
+        <span class="text-[10px] font-mono text-[var(--text-muted)]">Mobile · Pending</span>
       </div>
 
       <!-- Extension Item -->
-      <div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.15] transition-colors">
+      <div class="flex items-center justify-between p-2.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[var(--border-default)] transition-colors">
         <div class="flex items-center gap-2.5">
           <Icon name="Volume2" class="w-4 h-4 text-indigo-400 flex-shrink-0" />
           <span class="text-xs font-bold text-[var(--text-primary)]">SonicShield</span>
@@ -58,7 +58,7 @@ import Icon from './Icon.astro';
       </div>
 
       <!-- Web Item -->
-      <div class="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.03] border border-white/[0.05] hover:border-white/[0.15] transition-colors">
+      <div class="flex items-center justify-between p-2.5 rounded-lg bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[var(--border-default)] transition-colors">
         <div class="flex items-center gap-2.5">
           <Icon name="Workflow" class="w-4 h-4 text-emerald-400 flex-shrink-0" />
           <span class="text-xs font-bold text-[var(--text-primary)]">WorkflowAI.site</span>
@@ -69,7 +69,7 @@ import Icon from './Icon.astro';
   </div>
 
   <!-- Merch Compliance Strip -->
-  <div class="glass-card p-3 flex items-center justify-between text-xs text-[var(--text-muted)] border border-white/[0.08]">
+  <div class="glass-card p-3 flex items-center justify-between text-xs text-[var(--text-muted)]">
     <span class="flex items-center gap-1.5 font-mono text-[11px]">
       <Icon name="ShieldCheck" class="w-3.5 h-3.5 text-emerald-400" />
       Merch on Demand Reference

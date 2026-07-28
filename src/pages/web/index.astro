@@ -70,14 +70,20 @@ const projects = (await getCollection('web')).sort((a, b) => Number(b.data.statu
               </div>
 
               <div class="flex flex-col gap-3 flex-shrink-0 w-full lg:w-44 pt-2 lg:pt-0">
-                <a
-                  href={project.data.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="btn btn-primary text-xs w-full justify-center"
-                >
-                  Visit Platform ↗
-                </a>
+                {project.data.status === 'live' ? (
+                  <a
+                    href={project.data.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-primary text-xs w-full justify-center"
+                  >
+                    Visit Platform ↗
+                  </a>
+                ) : (
+                  <span class="btn btn-secondary text-xs w-full justify-center opacity-75 cursor-default">
+                    Coming Soon
+                  </span>
+                )}
               </div>
             </div>
           </article>
