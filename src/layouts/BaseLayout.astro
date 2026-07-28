@@ -199,12 +199,12 @@ const navLinks = [
     <div id="drawer-overlay" class="fixed inset-0 z-[55] bg-black/60 hidden lg:hidden backdrop-blur-sm"></div>
 
     <!-- Main Page Content -->
-    <main id="main-content" class="flex-grow">
+    <main id="main-content" class="flex-grow relative z-1 font-sans">
       <slot />
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-[var(--border-default)] bg-[var(--bg-surface)] py-14 text-sm text-[var(--text-muted)]">
+    <footer class="border-t border-[var(--border-default)] bg-[var(--bg-surface)] py-14 text-sm text-[var(--text-muted)] relative z-1">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
 

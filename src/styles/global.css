@@ -7,9 +7,9 @@
    ========================================================== */
 
 @theme {
-  --font-display: 'Bricolage Grotesque Variable', system-ui, sans-serif;
-  --font-sans: 'Instrument Sans Variable', system-ui, -apple-system, sans-serif;
-  --font-mono: 'Geist Mono', ui-monospace, monospace;
+  --font-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', system-ui, sans-serif;
+  --font-sans: 'Instrument Sans Variable', 'Instrument Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
 
   --color-zinc-950: #09090b;
   --color-zinc-900: #121215;
@@ -88,7 +88,7 @@
   body {
     background-color: var(--bg-base);
     color: var(--text-secondary);
-    font-family: 'Instrument Sans Variable', system-ui, -apple-system, sans-serif;
+    font-family: 'Instrument Sans Variable', 'Instrument Sans', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 1rem;
