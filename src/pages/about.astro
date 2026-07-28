@@ -5,93 +5,143 @@ import Icon from '../components/Icon.astro';
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "AboutPage",
-  "name": "About BramLabs",
+  "name": "About BramLabs Studio",
   "url": "https://bramlabs.co/about",
   "mainEntity": {
     "@type": "Organization",
     "name": "BramLabs",
     "url": "https://bramlabs.co",
     "email": "support@bramlabs.co",
-    "description": "Indie product studio building apps, browser extensions, web products, and original merchandise."
+    "description": "Independent product studio building mobile apps, browser extensions, web platforms, and original merchandise."
   }
 };
 ---
 
 <BaseLayout
-  title="About"
-  description="BramLabs is an indie product studio: Amazon Appstore apps, Chrome extensions, web products, and original merch for our own IP."
+  title="About BramLabs Studio"
+  description="BramLabs is an independent software product studio shipping Amazon Appstore apps, Chrome extensions, production web platforms, and original merch for our own IP."
   structuredData={structuredData}
 >
-  <section class="py-20 border-b border-border">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-2xl flex flex-col gap-6">
-        <span class="text-mono text-xs text-accent uppercase tracking-wider font-semibold">About</span>
-        <h1 class="text-h1 text-text">BramLabs is a product studio</h1>
-        <p class="text-body text-muted leading-relaxed">
-          We build small, focused software — apps on Amazon Appstore, utilities on the Chrome Web Store, and web products like WorkflowAI.site — then design original merchandise that belongs to those products.
+  <!-- Hero Section -->
+  <section class="section-block pt-16 md:pt-24 border-b border-[var(--border-subtle)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl flex flex-col gap-6 reveal" data-reveal>
+        <span class="badge badge-sky text-xs font-mono">Independent Product Studio</span>
+        <h1 class="mb-4">BramLabs Software Studio</h1>
+        <p class="text-[var(--text-secondary)] text-base sm:text-lg leading-relaxed">
+          We engineer focused software tools — mobile applications on the Amazon Appstore, browser utilities on the Chrome Web Store, and web platforms like WorkflowAI.site — and produce original brand merchandise that belongs to those products.
         </p>
       </div>
     </div>
   </section>
 
-  <section class="py-20 border-b border-border">
-    <div class="max-w-6xl mx-auto px-6">
+  <!-- Principles Section -->
+  <section class="section-block border-b border-[var(--border-subtle)] bg-white/[0.01]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-surface border border-border rounded-xl p-8 flex flex-col gap-4 shadow-sm">
-          <Icon name="Target" class="w-5 h-5 text-accent" />
-          <h2 class="text-h3 text-text">What we optimize for</h2>
-          <ul class="flex flex-col gap-3 text-small text-muted">
-            <li class="flex gap-2"><Icon name="Check" class="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />Ship real listings users can install</li>
-            <li class="flex gap-2"><Icon name="Check" class="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />Keep tools local-first where it matters</li>
-            <li class="flex gap-2"><Icon name="Check" class="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />Own our brand marks end to end</li>
-            <li class="flex gap-2"><Icon name="Check" class="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />Document support, privacy, and terms per product</li>
+        
+        <div class="glass-card p-8 flex flex-col gap-4 reveal" data-reveal>
+          <div class="w-10 h-10 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center text-emerald-400 mb-2">
+            <Icon name="Target" class="w-5 h-5" />
+          </div>
+          <h2 class="text-xl font-bold text-[var(--text-primary)]">Studio Principles</h2>
+          <ul class="flex flex-col gap-3 text-xs sm:text-sm text-[var(--text-muted)]">
+            <li class="flex items-center gap-2.5">
+              <span class="text-emerald-400 font-bold">✓</span>
+              <span>Ship production software listings users can immediately install and run</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-emerald-400 font-bold">✓</span>
+              <span>Prioritize local-first, low-permission architecture with zero unnecessary tracking</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-emerald-400 font-bold">✓</span>
+              <span>Own brand marks and original vector assets end-to-end</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-emerald-400 font-bold">✓</span>
+              <span>Maintain dedicated privacy policy, terms, and support trees per product</span>
+            </li>
           </ul>
         </div>
-        <div class="bg-surface border border-border rounded-xl p-8 flex flex-col gap-4 shadow-sm">
-          <Icon name="Ban" class="w-5 h-5 text-accent" />
-          <h2 class="text-h3 text-text">What we do not do</h2>
-          <ul class="flex flex-col gap-3 text-small text-muted">
-            <li class="flex gap-2"><Icon name="X" class="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />Sell third-party brand or character merch</li>
-            <li class="flex gap-2"><Icon name="X" class="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />Ship extensions that phone home without reason</li>
-            <li class="flex gap-2"><Icon name="X" class="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />Publish art we cannot defend as original</li>
-            <li class="flex gap-2"><Icon name="X" class="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />Skip trademark or Content Policy review</li>
+
+        <div class="glass-card p-8 flex flex-col gap-4 reveal" data-reveal style="--reveal-delay:80ms">
+          <div class="w-10 h-10 rounded-lg bg-sky-400/10 border border-sky-400/20 flex items-center justify-center text-sky-400 mb-2">
+            <Icon name="ShieldCheck" class="w-5 h-5" />
+          </div>
+          <h2 class="text-xl font-bold text-[var(--text-primary)]">Strict Compliance Boundaries</h2>
+          <ul class="flex flex-col gap-3 text-xs sm:text-sm text-[var(--text-muted)]">
+            <li class="flex items-center gap-2.5">
+              <span class="text-sky-400 font-bold">✓</span>
+              <span>Never sell third-party brands, sports logos, or licensed character merch</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-sky-400 font-bold">✓</span>
+              <span>Never ship browser extensions that transmit user payloads to remote servers</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-sky-400 font-bold">✓</span>
+              <span>Never publish graphic artwork without prior USPTO trademark screening</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="text-sky-400 font-bold">✓</span>
+              <span>Verify all apparel against Amazon Content Policy rules prior to upload</span>
+            </li>
           </ul>
         </div>
+
       </div>
     </div>
   </section>
 
-  <section class="py-20 border-b border-border bg-surface">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-h2 text-text mb-10">Studio lanes</h2>
+  <!-- Studio Lanes Grid -->
+  <section class="section-block border-b border-[var(--border-subtle)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-xl mb-10 reveal" data-reveal>
+        <span class="text-[11px] font-mono uppercase tracking-widest text-sky-400 font-semibold block mb-1">Architecture</span>
+        <h2 class="text-[var(--text-primary)]">Studio Lanes</h2>
+      </div>
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {[
-          { href: '/apps', icon: 'Smartphone', title: 'Apps', body: 'Amazon Appstore developer account and original titles.' },
-          { href: '/extensions', icon: 'Puzzle', title: 'Extensions', body: 'StoryPeek, SnapElite, SonicShield — Chrome utilities.' },
-          { href: '/web', icon: 'Globe', title: 'Web', body: 'WorkflowAI.site and this publisher platform.' },
-          { href: '/merch', icon: 'Shirt', title: 'Art & Merch', body: '300 DPI originals for our products only.' },
-        ].map((lane) => (
-          <a href={lane.href} class="bg-bg border border-border rounded-xl p-6 flex flex-col gap-3 shadow-sm transition-transform duration-200 hover:translate-y-[-2px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
-            <Icon name={lane.icon} class="w-5 h-5 text-accent" />
-            <h3 class="text-h3 text-text">{lane.title}</h3>
-            <p class="text-small text-muted leading-relaxed">{lane.body}</p>
+          { href: '/apps',       icon: 'Smartphone', title: 'Apps',       desc: 'Amazon Appstore developer account and original mobile apps.' },
+          { href: '/extensions', icon: 'Puzzle',     title: 'Extensions', desc: 'SonicShield, SnapElite, Tab Snoozer Chrome utilities.' },
+          { href: '/web',        icon: 'Globe',      title: 'Web',        desc: 'WorkflowAI.site, DesignTokens.dev, and studio platforms.' },
+          { href: '/merch',      icon: 'Shirt',      title: 'Merch',      desc: '300 DPI original print masters for our software titles.' },
+        ].map((lane, i) => (
+          <a
+            href={lane.href}
+            class="glass-card p-6 flex flex-col gap-3 group reveal"
+            data-reveal
+            style={`--reveal-delay:${i * 60}ms`}
+          >
+            <div class="w-10 h-10 rounded-lg bg-sky-400/10 border border-sky-400/20 flex items-center justify-center">
+              <Icon name={lane.icon} class="w-5 h-5 text-sky-400" />
+            </div>
+            <h3 class="text-base font-bold text-[var(--text-primary)] group-hover:text-sky-300 transition-colors">{lane.title}</h3>
+            <p class="text-xs text-[var(--text-muted)] leading-relaxed">{lane.desc}</p>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <section class="py-20">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-2xl flex flex-col gap-4">
-        <h2 class="text-h2 text-text">Contact</h2>
-        <p class="text-body text-muted">
-          Support, partnerships, or Merch by Amazon verification:
+  <!-- Contact Section -->
+  <section class="section-block">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="glass-card p-8 md:p-12 max-w-2xl reveal" data-reveal>
+        <h2 class="text-[var(--text-primary)] mb-3">Studio Contact</h2>
+        <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-4">
+          For technical support, store reviewer inquiries, or Merch on Demand verification:
         </p>
-        <a href="mailto:support@bramlabs.co" class="text-accent font-medium hover:underline text-lg">support@bramlabs.co</a>
-        <p class="text-small text-muted pt-4">
-          Legal: <a href="/privacy" class="text-accent hover:underline">Privacy</a> · <a href="/terms" class="text-accent hover:underline">Terms</a> · <a href="/feedback" class="text-accent hover:underline">Feedback</a>
-        </p>
+        <a href="mailto:support@bramlabs.co" class="text-sky-400 hover:underline font-bold text-lg block mb-6">
+          support@bramlabs.co
+        </a>
+        <div class="text-xs text-[var(--text-faint)] flex items-center gap-4 pt-4 border-t border-white/[0.06]">
+          <a href="/privacy" class="hover:text-[var(--text-muted)] transition-colors">Privacy Policy</a> · 
+          <a href="/terms" class="hover:text-[var(--text-muted)] transition-colors">Terms of Service</a> · 
+          <a href="/feedback" class="hover:text-[var(--text-muted)] transition-colors">Feedback Portal</a>
+        </div>
       </div>
     </div>
   </section>

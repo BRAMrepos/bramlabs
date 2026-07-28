@@ -6,12 +6,14 @@ const extensionsCollection = defineCollection({
     title: z.string(),
     tagline: z.string(),
     description: z.string(),
-    storeUrl: z.string(),
+    storeUrl: z.string().optional(),
+    status: z.enum(['live', 'in-review', 'in-development']).default('live'),
     icon: z.string(),
     version: z.string(),
     lastUpdated: z.string(),
     downloadCount: z.string(),
-    screenshots: z.array(z.string()),
+    featured: z.boolean().default(false),
+    screenshots: z.array(z.string()).default([]),
     features: z.array(
       z.object({
         title: z.string(),
@@ -24,7 +26,7 @@ const extensionsCollection = defineCollection({
         question: z.string(),
         answer: z.string(),
       })
-    ),
+    ).default([]),
   }),
 });
 
@@ -51,6 +53,7 @@ const webCollection = defineCollection({
     tagline: z.string(),
     description: z.string(),
     url: z.string(),
+    status: z.enum(['live', 'in-review', 'in-development']).default('live'),
     stack: z.array(z.string()),
     role: z.string(),
     year: z.string(),

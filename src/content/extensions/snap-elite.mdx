@@ -1,61 +1,26 @@
 ---
 title: "SnapElite"
-tagline: "Full-page, region, and viewport screen capture with a built-in canvas editor."
-description: "SnapElite is a browser utility extension for full-page, viewport, and custom region screenshots. Includes a screen capture history gallery, custom filename templates, and a drawing annotation editor (shapes, arrows, blurs, crops, highlighter)."
-storeUrl: "https://chromewebstore.google.com"
+tagline: "High-DPI full-page screen capture, element snapping, and quick annotation utility."
+description: "Capture entire scrolling web pages, select DOM elements with precision pixel snapping, annotate with vector arrows and highlights, and export crisp PNGs instantly."
+storeUrl: "https://chromewebstore.google.com/detail/snap-elite/placeholder"
+status: "live"
 icon: "Camera"
-version: "1.0.0"
-lastUpdated: "July 2, 2026"
-downloadCount: "Web Extension"
-screenshots: []
+version: "2.1.0"
+lastUpdated: "June 2026"
+downloadCount: "Chrome Extension"
+featured: true
 features:
-  - title: "Full-Page Capture"
-    description: "Automatically scrolls through the entire webpage, capturing and stitching all segments into a single high-resolution image."
+  - title: "Full Page Capture"
+    description: "Stitches long scrolling pages seamlessly without fixed element overlapping glitches."
     icon: "Maximize"
-  - title: "Annotation Editor"
-    description: "Draw arrows, rectangles, highlighter, ellipses, crop regions, redact private data with blur, and add text directly on screenshots."
-    icon: "Edit"
-  - title: "Offline Storage & Gallery"
-    description: "Saves and displays history of screenshots locally using indexedDB. Works on file:// protocols and local HTML pages."
-    icon: "History"
-faq:
-  - question: "Does SnapElite work on local file:/// URLs?"
-    answer: "Yes. SnapElite has full support for local HTML files (file:/// protocols) and localhost workspaces, allowing offline captures without issues."
-  - question: "Where are my screenshots saved?"
-    answer: "All screenshots and edited revisions are saved directly in your browser's local sandbox storage (indexedDB). They never leave your device."
-  - question: "Are my captured images transmitted to any cloud servers?"
-    answer: "No. SnapElite runs 100% locally on your computer. Captured images are processed entirely in memory and saved to your device without cloud server connections."
-  - question: "What export formats are supported?"
-    answer: "You can download screenshots as PNG (lossless), JPG (compressed), WebP (modern web compression), or export them directly as a PDF document."
-  - question: "Is there a capture delay timer?"
-    answer: "Yes. You can select a delay of 0s, 3s, 5s, or 10s from the popup, which is highly useful for capturing hover states, dropdown menus, and animations."
-  - question: "Is the annotation editor free to use?"
-    answer: "Yes. Unlike other extensions that charge a premium subscription for canvas annotation editor features, SnapElite provides all tools for free."
-  - question: "How does Element capture work?"
-    answer: "Element capture allows you to hover over elements in the active browser viewport. It automatically detects boundaries, highlighting and cropping exactly that DOM element."
-  - question: "Can I copy screenshots directly to my clipboard?"
-    answer: "Yes. In the annotation editor, you can click the Copy button to place the screenshot image directly onto your system clipboard for instant pasting."
-  - question: "Does it support custom filename templates?"
-    answer: "Yes. In settings, you can define filename structures using variables like {domain}, {date}, {time}, and {title} for automated organization."
-  - question: "Can I redact or blur sensitive information?"
-    answer: "Yes. The editor includes a dedicated Blur tool designed specifically to pixelate or block out passwords, credit cards, or personal identifiers before saving."
+  - title: "DOM Element Snapper"
+    description: "Hover over any web component, card, or hero section to snap and copy it cleanly."
+    icon: "Crop"
+  - title: "Privacy First"
+    description: "All screen processing and image cropping occurs 100% locally on your machine."
+    icon: "ShieldCheck"
 ---
 
-## Professional Screen Capture
+## Why SnapElite?
 
-SnapElite is a modern, lightweight screen capture tool built to solve page snapshotting tasks. It provides useful features like region capture, custom annotations, blur redactions, and WebP exports for free.
-
-## How it works
-
-All screen captures, image stitching, and editor operations are executed directly inside your browser. This enables fast, offline execution:
-- **Scrolling stitching**: Automatically scrolls down vertical pages to stitch together full snapshots.
-- **Crop capture**: Allows you to hover over elements or drag selection boxes to crop specific sections.
-- **Canvas Editor**: Instantly annotate screenshots with shapes, lines, numbers, and text before downloading.
-
-## Supported Formats
-
-You can download captures in four main formats:
-1. **PNG**: Lossless quality, best for diagrams and mockups.
-2. **JPG**: Compressed file size, ideal for photos and web pages.
-3. **WebP**: Modern image format featuring excellent quality/compression ratios.
-4. **PDF**: Document format, great for sharing reports or printing pages.
+SnapElite is crafted for developers, designers, and researchers who need clean, pixel-perfect web captures without installing bulky desktop software or sending screenshots to third-party upload servers.

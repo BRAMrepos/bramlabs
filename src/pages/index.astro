@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
 import WorkCard from '../components/WorkCard.astro';
+import StudioCoreAnimation from '../components/StudioCoreAnimation.astro';
 import { getCollection } from 'astro:content';
 
 const extensions = await getCollection('extensions');
@@ -9,218 +10,155 @@ const apps       = await getCollection('apps');
 const web        = await getCollection('web');
 const art        = await getCollection('art');
 
-const featuredWeb  = web.filter(w => w.data.featured);
-const featuredArt  = art.filter(a => a.data.featured).slice(0, 4);
-const featuredExt  = extensions.find(e => e.slug === 'story-peek') ?? extensions[0];
-const otherExt     = extensions.filter(e => e.slug !== 'story-peek').slice(0, 2);
-const featuredApps = apps.filter(a => a.data.featured);
+const liveApps       = apps.filter(a => a.data.status === 'live');
+const upcomingApps   = apps.filter(a => a.data.status !== 'live');
+const liveExt        = extensions.filter(e => e.data.status === 'live');
+const upcomingExt    = extensions.filter(e => e.data.status !== 'live');
+const liveWeb        = web.filter(w => w.data.status === 'live');
+const featuredArt    = art.slice(0, 6);
 ---
 
 <BaseLayout
-  title="Apps, Extensions, Web & Original Merch"
-  description="BramLabs is an indie product studio shipping Amazon Appstore apps, Chrome extensions, web products, and original merch for our own IP only."
+  title="BramLabs | Independent Software Studio & IP Developer"
+  description="BramLabs is an independent product studio. We ship Amazon Appstore apps, Android utilities, Chrome extensions, web platforms, and original merch for our own IP."
 >
 
   <!-- ========================================================
-       HERO
+       HERO SECTION
        ======================================================== -->
-  <section class="relative section-block pt-24 md:pt-32 overflow-hidden">
-    <!-- Glow orbs -->
-    <div class="glow-orb glow-orb-sky w-[520px] h-[520px] -top-32 -left-32 opacity-30" aria-hidden="true"></div>
-    <div class="glow-orb glow-orb-indigo w-[420px] h-[420px] -top-20 right-0 opacity-20" aria-hidden="true"></div>
+  <section class="relative section-block pt-16 md:pt-24 pb-12 overflow-hidden">
+    <!-- Ambient Orbs -->
+    <div class="glow-orb glow-orb-sky w-[550px] h-[550px] -top-36 -left-36 opacity-35" aria-hidden="true"></div>
+    <div class="glow-orb glow-orb-indigo w-[450px] h-[450px] -top-24 right-0 opacity-25" aria-hidden="true"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl">
-        <!-- Badge -->
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-sky-400/30 bg-sky-400/[0.08] mb-6">
-          <span class="w-1.5 h-1.5 rounded-full bg-sky-400 animate-pulse"></span>
-          <span class="text-sky-400 text-xs font-semibold tracking-wide">Indie product studio</span>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
+        <!-- Left Hero Content -->
+        <div class="lg:col-span-7 flex flex-col items-start text-left">
+          <!-- Status Pill -->
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-sky-400/30 bg-sky-400/10 mb-6 backdrop-blur-md">
+            <span class="w-2 h-2 rounded-full bg-sky-400 animate-pulse"></span>
+            <span class="text-sky-300 text-xs font-semibold tracking-wide uppercase font-mono">Independent Product Studio</span>
+          </div>
+
+          <!-- Main Title -->
+          <h1 class="mb-6 leading-[1.06]">
+            We ship software tools<br class="hidden sm:block" />
+            <span class="text-gradient">&amp; original IP merch.</span>
+          </h1>
+
+          <!-- Body Description -->
+          <p class="text-[var(--text-secondary)] text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
+            BramLabs builds original mobile applications, browser extensions, and web platforms — extended with print-ready merchandise designed strictly for our own software titles. No third-party brands, no copyrighted characters.
+          </p>
+
+          <!-- Studio Metrics Counter -->
+          <div class="flex flex-wrap gap-y-3 gap-x-6 py-3 px-4 rounded-xl bg-white/[0.03] border border-white/[0.08] mb-8 text-xs font-mono text-[var(--text-muted)]">
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+              <strong class="text-[var(--text-primary)]">{apps.length}</strong> Mobile Apps
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
+              <strong class="text-[var(--text-primary)]">{extensions.length}</strong> Extensions
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-teal-400"></span>
+              <strong class="text-[var(--text-primary)]">{web.length}</strong> Web Products
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <strong class="text-[var(--text-primary)]">{art.length}</strong> Merch Marks
+            </div>
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap gap-3">
+            <a href="/work" class="btn btn-primary shadow-lg shadow-sky-500/20">
+              Explore All Work
+            </a>
+            <a href="/apps" class="btn btn-secondary">
+              Amazon Appstore Apps
+            </a>
+            <a href="/merch" class="btn btn-ghost text-sky-400 hover:text-sky-300">
+              MBA Portfolio →
+            </a>
+          </div>
         </div>
 
-        <!-- Headline -->
-        <h1 class="mb-6">
-          We build products<br class="hidden sm:block" />
-          <span class="text-gradient">and the things<br class="hidden sm:block" />that belong to them.</span>
-        </h1>
-
-        <!-- Lead -->
-        <p class="text-[var(--text-secondary)] text-lg leading-relaxed mb-8 max-w-xl">
-          Apps, browser extensions, web tools, and original apparel — all from one studio. Merch is for our own IP only. No third-party brands, no characters.
-        </p>
-
-        <!-- Mini stats -->
-        <div class="flex flex-wrap gap-x-6 gap-y-2.5 text-sm text-[var(--text-muted)] mb-10">
-          <span class="flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 flex-shrink-0"></span>
-            {extensions.length} Chrome extensions live
-          </span>
-          <span class="flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-sky-400 flex-shrink-0"></span>
-            Active Appstore developer
-          </span>
-          <span class="flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 flex-shrink-0"></span>
-            {featuredWeb.length + featuredApps.length}+ products shipped
-          </span>
+        <!-- Right Hero Interactive Animation -->
+        <div class="lg:col-span-5 flex justify-center lg:justify-end">
+          <StudioCoreAnimation />
         </div>
 
-        <!-- CTAs -->
-        <div class="flex flex-wrap gap-3">
-          <a href="/work"       class="btn btn-primary">View all work</a>
-          <a href="/extensions" class="btn btn-secondary">Browse extensions →</a>
-        </div>
       </div>
     </div>
   </section>
 
   <!-- ========================================================
-       TRUST STRIP
+       TRUST & COMPLIANCE BAR
        ======================================================== -->
-  <div class="border-y border-[var(--border-subtle)] bg-white/[0.02] py-4 mt-16 reveal" data-reveal>
+  <div class="border-y border-[var(--border-subtle)] bg-white/[0.02] py-4 reveal" data-reveal>
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <ul class="flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-[var(--text-muted)]">
+      <ul class="flex flex-wrap items-center justify-between gap-x-8 gap-y-3 text-xs sm:text-sm font-medium text-[var(--text-muted)]">
         <li class="flex items-center gap-2">
-          <Icon name="Smartphone" class="w-3.5 h-3.5 text-sky-400 flex-shrink-0" />
-          Amazon Appstore developer
+          <Icon name="Smartphone" class="w-4 h-4 text-sky-400 flex-shrink-0" />
+          <span>Active Amazon Appstore Developer</span>
         </li>
         <li class="flex items-center gap-2">
-          <Icon name="Puzzle" class="w-3.5 h-3.5 text-sky-400 flex-shrink-0" />
-          Chrome Web Store publisher
+          <Icon name="Puzzle" class="w-4 h-4 text-sky-400 flex-shrink-0" />
+          <span>Chrome Web Store Publisher</span>
         </li>
         <li class="flex items-center gap-2">
-          <Icon name="Palette" class="w-3.5 h-3.5 text-sky-400 flex-shrink-0" />
-          300 DPI print-ready art
+          <Icon name="Palette" class="w-4 h-4 text-sky-400 flex-shrink-0" />
+          <span>300 DPI Transparent PNG Masters</span>
         </li>
         <li class="flex items-center gap-2">
-          <Icon name="ShieldCheck" class="w-3.5 h-3.5 text-sky-400 flex-shrink-0" />
-          USPTO checks before publish
+          <Icon name="ShieldCheck" class="w-4 h-4 text-sky-400 flex-shrink-0" />
+          <span>USPTO Trademark Screened IP</span>
         </li>
       </ul>
     </div>
   </div>
 
   <!-- ========================================================
-       FEATURED EXTENSION SPOTLIGHT
+       FOUR STUDIO LANES (BENTO GRID)
        ======================================================== -->
-  {featuredExt && (
-    <section class="section-block">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-end justify-between gap-4 mb-8 reveal" data-reveal>
-          <div>
-            <p class="text-[11px] font-semibold uppercase tracking-widest text-sky-400 mb-1">Featured extension</p>
-            <h2 class="text-[var(--text-primary)]">StoryPeek</h2>
-          </div>
-          <a href="/extensions" class="text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors flex-shrink-0">
-            All extensions →
-          </a>
-        </div>
-
-        <!-- Featured card - wide -->
-        <div class="glass-card p-8 md:p-10 grid grid-cols-1 lg:grid-cols-2 gap-10 items-start mb-6 reveal" data-reveal style="--reveal-delay:100ms">
-          <div class="flex flex-col gap-5">
-            <div class="flex items-center gap-4">
-              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-sky-400 to-indigo-500 flex items-center justify-center flex-shrink-0 shadow-lg shadow-sky-500/20">
-                <Icon name={featuredExt.data.icon} class="w-7 h-7 text-white" />
-              </div>
-              <div>
-                <h3 class="text-[var(--text-primary)] text-xl font-bold">{featuredExt.data.title}</h3>
-                <p class="text-[var(--text-faint)] text-xs mt-0.5">v{featuredExt.data.version} · Chrome Extension · Free</p>
-              </div>
-            </div>
-
-            <p class="text-[var(--text-secondary)] leading-relaxed">{featuredExt.data.description}</p>
-
-            <div class="flex flex-col sm:flex-row gap-3">
-              <a
-                href={featuredExt.data.storeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="btn btn-primary"
-              >
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-                Add to Chrome — Free
-              </a>
-              <a href={`/extensions/${featuredExt.slug}`} class="btn btn-secondary">
-                Learn more
-              </a>
-            </div>
-          </div>
-
-          <div class="flex flex-col gap-3">
-            <p class="text-[11px] font-semibold uppercase tracking-widest text-[var(--text-faint)]">What it does</p>
-            <ul class="flex flex-col gap-3">
-              {featuredExt.data.features.map((feat) => (
-                <li class="flex items-start gap-3 text-sm">
-                  <span class="w-5 h-5 rounded-full bg-sky-400/10 border border-sky-400/20 flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Icon name="Check" class="w-3 h-3 text-sky-400" />
-                  </span>
-                  <span class="text-[var(--text-secondary)]">
-                    <span class="text-[var(--text-primary)] font-medium">{feat.title}</span> — {feat.description}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <!-- Other extensions -->
-        {otherExt.length > 0 && (
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-5 reveal" data-reveal style="--reveal-delay:160ms">
-            {otherExt.map((ext) => (
-              <WorkCard
-                href={`/extensions/${ext.slug}`}
-                title={ext.data.title}
-                tagline={ext.data.tagline}
-                meta={`v${ext.data.version} · Chrome`}
-                icon={ext.data.icon}
-                badge="Free"
-              />
-            ))}
-          </div>
-        )}
-      </div>
-    </section>
-  )}
-
-  <!-- ========================================================
-       FOUR LANES
-       ======================================================== -->
-  <section class="section-block border-t border-[var(--border-subtle)] bg-white/[0.02]">
+  <section class="section-block border-t border-[var(--border-subtle)] bg-white/[0.01]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-xl mb-12 reveal" data-reveal>
-        <p class="text-[11px] font-semibold uppercase tracking-widest text-sky-400 mb-2">What we build</p>
-        <h2 class="text-[var(--text-primary)] mb-3">Four lanes. One studio.</h2>
-        <p class="text-[var(--text-muted)] text-sm leading-relaxed">Real product work — not a service offering. Everything ships under the BramLabs identity.</p>
+      <div class="max-w-xl mb-10 reveal" data-reveal>
+        <p class="text-[11px] font-semibold uppercase tracking-widest text-sky-400 mb-2 font-mono">Studio Architecture</p>
+        <h2 class="text-[var(--text-primary)] mb-3">Four disciplines. One studio umbrella.</h2>
+        <p class="text-[var(--text-muted)] text-sm leading-relaxed">Each lane represents active, fully-owned software development — not agency client services.</p>
       </div>
+
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         {[
-          { href: '/apps',       icon: 'Smartphone', title: 'Apps',         desc: 'Original titles on Amazon Appstore. Local-first, minimal permissions.',            badge: 'Active' },
-          { href: '/extensions', icon: 'Puzzle',     title: 'Extensions',   desc: 'StoryPeek, SnapElite, SonicShield — Chrome utilities with full support trees.',   badge: 'Live' },
-          { href: '/web',        icon: 'Globe',      title: 'Web',          desc: 'Production sites with real content systems. Led by WorkflowAI.site.',              badge: 'Shipped' },
-          { href: '/merch',      icon: 'Shirt',      title: 'Art & Merch',  desc: '300 DPI originals for our products only. USPTO-checked before every publish.',    badge: 'MBA-ready' },
+          { href: '/apps',       icon: 'Smartphone', title: 'Mobile Apps',  count: `${apps.length} Titles`,      desc: 'ClearCue, ShiftWorkApp, Cadence, FocusPulse — published on Amazon Appstore & Android.', badge: 'Appstore' },
+          { href: '/extensions', icon: 'Puzzle',     title: 'Extensions',   count: `${extensions.length} Tools`, desc: 'SonicShield, SnapElite, Tab Snoozer, PromptVault — focused Chrome browser utilities.', badge: 'Chrome' },
+          { href: '/web',        icon: 'Globe',      title: 'Web Apps',     count: `${web.length} Sites`,        desc: 'WorkflowAI.site, DesignTokens.dev, StackDeck — production web platforms.', badge: 'Web Stack' },
+          { href: '/merch',      icon: 'Shirt',      title: 'Art & Merch',  count: `${art.length} Series`,       desc: 'Print-ready artwork & vector marks for our software products. 100% original IP.', badge: 'MBA-Ready' },
         ].map((lane, i) => (
           <a
             href={lane.href}
-            class="glass-card group flex flex-col gap-4 p-6 reveal"
+            class="glass-card group flex flex-col justify-between p-6 reveal"
             data-reveal
-            style={`--reveal-delay:${i * 60}ms`}
+            style={`--reveal-delay:${i * 70}ms`}
           >
-            <div class="flex items-start justify-between">
-              <div class="w-10 h-10 rounded-lg bg-sky-400/10 border border-sky-400/20 flex items-center justify-center">
-                <Icon name={lane.icon} class="w-5 h-5 text-sky-400" />
-              </div>
-              <span class="badge badge-sky text-[10px]">{lane.badge}</span>
-            </div>
             <div>
-              <h3 class="text-[var(--text-primary)] font-semibold mb-1.5 group-hover:text-sky-300 transition-colors">{lane.title}</h3>
-              <p class="text-[var(--text-muted)] text-sm leading-relaxed">{lane.desc}</p>
+              <div class="flex items-start justify-between mb-4">
+                <div class="w-10 h-10 rounded-xl bg-sky-400/10 border border-sky-400/20 flex items-center justify-center">
+                  <Icon name={lane.icon} class="w-5 h-5 text-sky-400" />
+                </div>
+                <span class="badge badge-sky text-[10px] font-mono">{lane.badge}</span>
+              </div>
+              <h3 class="text-[var(--text-primary)] font-bold text-lg mb-1 group-hover:text-sky-300 transition-colors">{lane.title}</h3>
+              <p class="text-xs font-mono text-sky-400/80 mb-3">{lane.count}</p>
+              <p class="text-[var(--text-muted)] text-xs leading-relaxed">{lane.desc}</p>
             </div>
-            <span class="text-sky-400 text-sm font-medium mt-auto flex items-center gap-1 group-hover:gap-2 transition-all duration-150">
-              Explore
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
+            <span class="text-sky-400 text-xs font-semibold mt-6 flex items-center gap-1 group-hover:gap-2 transition-all">
+              Explore {lane.title} →
             </span>
           </a>
         ))}
@@ -229,95 +167,148 @@ const featuredApps = apps.filter(a => a.data.featured);
   </section>
 
   <!-- ========================================================
-       WEB + APPS WORK GRID
+       APPS SHOWCASE (AMAZON APPSTORE & ANDROID)
        ======================================================== -->
-  {(featuredWeb.length > 0 || featuredApps.length > 0) && (
-    <section class="section-block border-t border-[var(--border-subtle)]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex items-end justify-between gap-4 mb-8 reveal" data-reveal>
-          <div>
-            <p class="text-[11px] font-semibold uppercase tracking-widest text-sky-400 mb-1">Shipped, not sketched</p>
-            <h2 class="text-[var(--text-primary)]">Web &amp; Apps</h2>
-          </div>
-          <a href="/work" class="text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors flex-shrink-0">All work →</a>
+  <section class="section-block border-t border-[var(--border-subtle)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 reveal" data-reveal>
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-widest text-sky-400 mb-1 font-mono">Appstore &amp; Mobile</p>
+          <h2 class="text-[var(--text-primary)]">Featured Applications</h2>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {featuredWeb.map((project, i) => (
-            <div class="reveal" data-reveal style={`--reveal-delay:${i * 80}ms`}>
-              <WorkCard
-                href={project.data.url}
-                title={project.data.title}
-                tagline={project.data.tagline}
-                meta={`Web · ${project.data.year}`}
-                icon={project.data.icon}
-                badge="Live"
-                external
-              />
-            </div>
-          ))}
-          {featuredApps.map((app, i) => (
-            <div class="reveal" data-reveal style={`--reveal-delay:${(featuredWeb.length + i) * 80}ms`}>
-              <WorkCard
-                href="/apps"
-                title={app.data.title}
-                tagline={app.data.tagline}
-                meta={`${app.data.platform} · ${app.data.year}`}
-                icon={app.data.icon}
-                badge={app.data.status === 'live' ? 'Live' : 'In progress'}
-              />
-            </div>
-          ))}
-        </div>
+        <a href="/apps" class="text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors flex-shrink-0">
+          View All Apps ({apps.length}) →
+        </a>
       </div>
-    </section>
-  )}
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {apps.map((app, i) => (
+          <div class="reveal" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+            <WorkCard
+              href="/apps"
+              title={app.data.title}
+              tagline={app.data.tagline}
+              meta={`${app.data.platform} · ${app.data.category}`}
+              icon={app.data.icon}
+              badge={app.data.status === 'live' ? 'Live' : app.data.status === 'in-review' ? 'In Review' : 'Coming Soon'}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
   <!-- ========================================================
-       ART / MERCH BRIEF
+       EXTENSIONS DIRECTORY
+       ======================================================== -->
+  <section class="section-block border-t border-[var(--border-subtle)] bg-white/[0.01]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 reveal" data-reveal>
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-widest text-sky-400 mb-1 font-mono">Chrome Web Store</p>
+          <h2 class="text-[var(--text-primary)]">Browser Utilities</h2>
+        </div>
+        <a href="/extensions" class="text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors flex-shrink-0">
+          All Extensions ({extensions.length}) →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {extensions.map((ext, i) => (
+          <div class="reveal" data-reveal style={`--reveal-delay:${i * 60}ms`}>
+            <WorkCard
+              href={`/extensions/${ext.slug}`}
+              title={ext.data.title}
+              tagline={ext.data.tagline}
+              meta={`v${ext.data.version} · Chrome Extension`}
+              icon={ext.data.icon}
+              badge={ext.data.status === 'live' ? 'Live' : 'Coming Soon'}
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       WEB PLATFORMS
+       ======================================================== -->
+  <section class="section-block border-t border-[var(--border-subtle)]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10 reveal" data-reveal>
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-widest text-sky-400 mb-1 font-mono">Web Platforms</p>
+          <h2 class="text-[var(--text-primary)]">Shipped Web Products</h2>
+        </div>
+        <a href="/web" class="text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors flex-shrink-0">
+          All Web Projects →
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {web.map((site, i) => (
+          <div class="reveal" data-reveal style={`--reveal-delay:${i * 70}ms`}>
+            <WorkCard
+              href={site.data.url}
+              title={site.data.title}
+              tagline={site.data.tagline}
+              meta={`Web · ${site.data.year}`}
+              icon={site.data.icon}
+              badge={site.data.status === 'live' ? 'Live' : 'Coming Soon'}
+              external
+            />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================
+       AMAZON MERCH INSPECTOR PORTFOLIO SECTION
        ======================================================== -->
   <section class="section-block border-t border-[var(--border-subtle)] bg-white/[0.02]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div class="flex flex-col gap-5 reveal" data-reveal>
-          <div>
-            <p class="text-[11px] font-semibold uppercase tracking-widest text-sky-400 mb-2">Merch on Demand</p>
-            <h2 class="text-[var(--text-primary)] mb-3">Original art for our own products.</h2>
-            <p class="text-[var(--text-muted)] leading-relaxed">
-              BramLabs is an active Amazon Appstore developer expanding into Merch on Demand. We publish original apparel for our apps, games, extensions, and sites — not third-party IP, sports brands, or copyrighted characters.
-            </p>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-12">
+        <div class="lg:col-span-6 flex flex-col gap-4 reveal" data-reveal>
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-400/10 border border-emerald-400/20 text-emerald-400 text-xs font-mono font-semibold w-fit">
+            <Icon name="ShieldCheck" class="w-3.5 h-3.5" />
+            Amazon Merch on Demand Reference
           </div>
-          <ul class="flex flex-col gap-2.5 text-sm text-[var(--text-muted)]">
-            {[
-              '300 DPI transparent PNG masters',
-              'USPTO trademark screen before every publish',
-              'Amazon Content Policy review on every design',
-            ].map(item => (
-              <li class="flex items-center gap-2.5">
-                <span class="w-5 h-5 rounded-full bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center flex-shrink-0">
-                  <Icon name="Check" class="w-3 h-3 text-emerald-400" />
-                </span>
-                {item}
-              </li>
-            ))}
+          <h2 class="text-[var(--text-primary)]">Original Art &amp; Product Marks</h2>
+          <p class="text-[var(--text-muted)] text-sm sm:text-base leading-relaxed">
+            BramLabs is an active Amazon Appstore developer expanding into Merch on Demand. We publish original apparel &amp; branded merchandise exclusively for our own software titles — never third-party IP, sports logos, or copyrighted characters.
+          </p>
+          <ul class="flex flex-col gap-2.5 text-xs sm:text-sm text-[var(--text-muted)]">
+            <li class="flex items-center gap-2.5">
+              <span class="w-4 h-4 rounded-full bg-emerald-400/20 flex items-center justify-center flex-shrink-0 text-emerald-400 text-[10px]">✓</span>
+              <span><strong>300 DPI Masters</strong>: Transparent 4500x5400 px print vector masters</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="w-4 h-4 rounded-full bg-emerald-400/20 flex items-center justify-center flex-shrink-0 text-emerald-400 text-[10px]">✓</span>
+              <span><strong>USPTO Screened</strong>: Distinctive mark &amp; wordmark clearance before upload</span>
+            </li>
+            <li class="flex items-center gap-2.5">
+              <span class="w-4 h-4 rounded-full bg-emerald-400/20 flex items-center justify-center flex-shrink-0 text-emerald-400 text-[10px]">✓</span>
+              <span><strong>Policy Compliant</strong>: Strict adherence to Amazon Content Policy guidelines</span>
+            </li>
           </ul>
-          <a href="/merch" class="text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors w-fit">
-            Art &amp; process →
+          <a href="/merch" class="btn btn-secondary w-fit text-xs mt-2">
+            View Full MBA Portfolio &amp; Technical Specs →
           </a>
         </div>
 
-        <!-- Palette preview cards -->
-        <div class="grid grid-cols-2 gap-4 reveal" data-reveal style="--reveal-delay:120ms">
+        <!-- Palette Preview Grid -->
+        <div class="lg:col-span-6 grid grid-cols-2 sm:grid-cols-3 gap-4 reveal" data-reveal style="--reveal-delay:100ms">
           {featuredArt.map((piece) => (
             <div class="glass-card overflow-hidden">
-              <!-- Actual hex palette stripe -->
-              <div class="h-20 flex overflow-hidden">
+              <div class="h-16 flex overflow-hidden">
                 {piece.data.palette.map((hex: string) => (
                   <div class="flex-1 h-full" style={`background-color:${hex};`} title={hex}></div>
                 ))}
               </div>
-              <div class="p-4 flex flex-col gap-0.5">
-                <p class="text-[var(--text-primary)] text-sm font-semibold leading-tight">{piece.data.title}</p>
-                <p class="text-[var(--text-faint)] text-[11px]">{piece.data.series} · {piece.data.printSpecs.dpi} DPI</p>
+              <div class="p-3 flex flex-col gap-0.5">
+                <p class="text-[var(--text-primary)] text-xs font-bold leading-tight truncate">{piece.data.title}</p>
+                <p class="text-[var(--text-faint)] text-[10px] font-mono">{piece.data.printSpecs.dpi} DPI · {piece.data.series}</p>
               </div>
             </div>
           ))}
@@ -327,22 +318,22 @@ const featuredApps = apps.filter(a => a.data.featured);
   </section>
 
   <!-- ========================================================
-       BOTTOM CTA
+       DEVELOPER REFERENCE & FOOTER CTA
        ======================================================== -->
   <section class="section-block border-t border-[var(--border-subtle)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="glass-card p-8 md:p-12 flex flex-col md:flex-row md:items-center justify-between gap-8 reveal" data-reveal>
-        <div class="max-w-xl">
-          <h2 class="text-[var(--text-primary)] mb-3">Developer reference</h2>
-          <p class="text-[var(--text-muted)] leading-relaxed">
-            Amazon Appstore developer · Chrome publisher · Expanding into Merch on Demand for original apparel tied to our own products.
-            Questions or verification:
-            <a href="mailto:support@bramlabs.co" class="text-sky-400 hover:text-sky-300 transition-colors">support@bramlabs.co</a>
+      <div class="glass-card p-8 md:p-12 flex flex-col lg:flex-row lg:items-center justify-between gap-8 reveal" data-reveal>
+        <div class="max-w-2xl">
+          <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold mb-2 block">Developer Verification</span>
+          <h2 class="text-[var(--text-primary)] mb-3">BramLabs Studio Reference</h2>
+          <p class="text-[var(--text-muted)] text-sm leading-relaxed">
+            Amazon Appstore Developer Account · Chrome Web Store Publisher · Merch on Demand IP Creator. For verification, store reviews, or inquiries:
+            <a href="mailto:support@bramlabs.co" class="text-sky-400 hover:underline font-semibold ml-1">support@bramlabs.co</a>
           </p>
         </div>
-        <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
-          <a href="/about"  class="btn btn-primary">About the studio</a>
-          <a href="/merch"  class="btn btn-secondary">MBA portfolio</a>
+        <div class="flex flex-wrap gap-3 flex-shrink-0">
+          <a href="/about" class="btn btn-primary">About Studio</a>
+          <a href="/merch" class="btn btn-secondary">MBA Portfolio</a>
         </div>
       </div>
     </div>

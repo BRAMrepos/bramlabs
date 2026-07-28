@@ -4,42 +4,43 @@ import WorkCard from '../components/WorkCard.astro';
 import { getCollection } from 'astro:content';
 
 const extensions = await getCollection('extensions');
-const apps = await getCollection('apps');
-const web = await getCollection('web');
-const art = await getCollection('art');
+const apps       = await getCollection('apps');
+const web        = await getCollection('web');
+const art        = await getCollection('art');
 
 const filter = Astro.url.searchParams.get('type') ?? 'all';
 ---
 
 <BaseLayout
-  title="Work"
-  description="All BramLabs work in one place: Amazon Appstore apps, Chrome extensions, web products, and original merch art."
+  title="All Studio Work"
+  description="Explore the complete BramLabs software portfolio — Amazon Appstore apps, Android utilities, Chrome extensions, web platforms, and Merch on Demand artwork."
 >
-  <section class="py-20">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-2xl flex flex-col gap-4 mb-10">
-        <h1 class="text-h1 text-text">Work</h1>
-        <p class="text-body text-muted">
-          Product work across apps, extensions, web, and original art for Merch on Demand.
+  <section class="section-block pt-16 md:pt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Page Header -->
+      <div class="max-w-3xl mb-10 reveal" data-reveal>
+        <span class="badge badge-sky text-xs font-mono mb-3">Complete Portfolio</span>
+        <h1 class="mb-4">Studio Work</h1>
+        <p class="text-[var(--text-secondary)] text-base sm:text-lg leading-relaxed">
+          All active products shipped and maintained under BramLabs across mobile, browser extensions, web infrastructure, and apparel art.
         </p>
       </div>
 
-      <!-- Filters -->
-      <div class="flex flex-wrap gap-2 mb-12">
+      <!-- Filter Bar -->
+      <div class="flex flex-wrap gap-2 mb-12 reveal" data-reveal style="--reveal-delay:60ms">
         {[
-          { id: 'all', label: 'All' },
-          { id: 'apps', label: 'Apps' },
-          { id: 'extensions', label: 'Extensions' },
-          { id: 'web', label: 'Web' },
-          { id: 'art', label: 'Art & Merch' },
+          { id: 'all',        label: `All (${apps.length + extensions.length + web.length + art.length})` },
+          { id: 'apps',       label: `Apps (${apps.length})` },
+          { id: 'extensions', label: `Extensions (${extensions.length})` },
+          { id: 'web',        label: `Web (${web.length})` },
+          { id: 'art',        label: `Art & Merch (${art.length})` },
         ].map((item) => (
           <a
             href={item.id === 'all' ? '/work' : `/work?type=${item.id}`}
             class:list={[
-              'text-sm px-4 py-2 rounded-full border transition-colors font-medium',
-              filter === item.id
-                ? 'bg-accent text-white border-accent'
-                : 'border-border text-muted hover:text-text hover:border-accent/30',
+              'filter-chip',
+              filter === item.id ? 'active' : '',
             ]}
           >
             {item.label}
@@ -47,76 +48,88 @@ const filter = Astro.url.searchParams.get('type') ?? 'all';
         ))}
       </div>
 
+      <!-- Apps Section -->
       {(filter === 'all' || filter === 'apps') && (
-        <div class="mb-14">
-          <h2 class="text-h3 text-text mb-6 flex items-center gap-2">
-            Apps
-            <span class="text-mono text-xs text-muted font-normal">{apps.length}</span>
-          </h2>
+        <div class="mb-14 reveal" data-reveal>
+          <div class="flex items-center justify-between border-b border-white/[0.08] pb-4 mb-6">
+            <h2 class="text-xl font-bold text-[var(--text-primary)]">
+              Mobile Applications <span class="text-xs font-mono text-[var(--text-faint)] font-normal ml-2">({apps.length})</span>
+            </h2>
+            <a href="/apps" class="text-xs text-sky-400 font-semibold hover:underline">View Apps Page →</a>
+          </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {apps.map((app) => (
               <WorkCard
                 href="/apps"
                 title={app.data.title}
                 tagline={app.data.tagline}
-                meta={`${app.data.platform} · ${app.data.status}`}
+                meta={`${app.data.platform} · ${app.data.category}`}
                 icon={app.data.icon}
-                badge={app.data.category}
+                badge={app.data.status === 'live' ? 'Live' : 'Coming Soon'}
               />
             ))}
           </div>
         </div>
       )}
 
+      <!-- Extensions Section -->
       {(filter === 'all' || filter === 'extensions') && (
-        <div class="mb-14">
-          <h2 class="text-h3 text-text mb-6 flex items-center gap-2">
-            Extensions
-            <span class="text-mono text-xs text-muted font-normal">{extensions.length}</span>
-          </h2>
+        <div class="mb-14 reveal" data-reveal>
+          <div class="flex items-center justify-between border-b border-white/[0.08] pb-4 mb-6">
+            <h2 class="text-xl font-bold text-[var(--text-primary)]">
+              Chrome Extensions <span class="text-xs font-mono text-[var(--text-faint)] font-normal ml-2">({extensions.length})</span>
+            </h2>
+            <a href="/extensions" class="text-xs text-sky-400 font-semibold hover:underline">View Extensions Directory →</a>
+          </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {extensions.map((ext) => (
               <WorkCard
                 href={`/extensions/${ext.slug}`}
                 title={ext.data.title}
                 tagline={ext.data.tagline}
-                meta={`v${ext.data.version} · ${ext.data.lastUpdated}`}
+                meta={`v${ext.data.version} · Chrome`}
                 icon={ext.data.icon}
-                badge="Chrome"
+                badge={ext.data.status === 'live' ? 'Live' : 'Coming Soon'}
               />
             ))}
           </div>
         </div>
       )}
 
+      <!-- Web Section -->
       {(filter === 'all' || filter === 'web') && (
-        <div class="mb-14">
-          <h2 class="text-h3 text-text mb-6 flex items-center gap-2">
-            Web
-            <span class="text-mono text-xs text-muted font-normal">{web.length}</span>
-          </h2>
+        <div class="mb-14 reveal" data-reveal>
+          <div class="flex items-center justify-between border-b border-white/[0.08] pb-4 mb-6">
+            <h2 class="text-xl font-bold text-[var(--text-primary)]">
+              Web Applications <span class="text-xs font-mono text-[var(--text-faint)] font-normal ml-2">({web.length})</span>
+            </h2>
+            <a href="/web" class="text-xs text-sky-400 font-semibold hover:underline">View Web Page →</a>
+          </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {web.map((project) => (
               <WorkCard
-                href={project.data.url.startsWith('http') ? project.data.url : project.data.url}
+                href={project.data.url}
                 title={project.data.title}
                 tagline={project.data.tagline}
                 meta={project.data.stack.slice(0, 3).join(' · ')}
                 icon={project.data.icon}
-                badge={project.data.year}
-                external={project.data.url.startsWith('http') && !project.data.url.includes('bramlabs.co')}
+                badge={project.data.status === 'live' ? 'Live' : 'Coming Soon'}
+                external
               />
             ))}
           </div>
         </div>
       )}
 
+      <!-- Art & Merch Section -->
       {(filter === 'all' || filter === 'art') && (
-        <div class="mb-4">
-          <h2 class="text-h3 text-text mb-6 flex items-center gap-2">
-            Art &amp; Merch
-            <span class="text-mono text-xs text-muted font-normal">{art.length}</span>
-          </h2>
+        <div class="mb-8 reveal" data-reveal>
+          <div class="flex items-center justify-between border-b border-white/[0.08] pb-4 mb-6">
+            <h2 class="text-xl font-bold text-[var(--text-primary)]">
+              Art &amp; Merch Marks <span class="text-xs font-mono text-[var(--text-faint)] font-normal ml-2">({art.length})</span>
+            </h2>
+            <a href="/merch" class="text-xs text-sky-400 font-semibold hover:underline">View MBA Reference →</a>
+          </div>
           <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {art.map((piece) => (
               <WorkCard
@@ -131,6 +144,7 @@ const filter = Astro.url.searchParams.get('type') ?? 'all';
           </div>
         </div>
       )}
+
     </div>
   </section>
 </BaseLayout>

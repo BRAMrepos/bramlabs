@@ -7,78 +7,93 @@ const extensions = await getCollection('extensions');
 ---
 
 <BaseLayout
-  title="Extensions"
-  description="BramLabs Chrome extensions: StoryPeek, SnapElite, and SonicShield — focused utilities with full privacy, help, and support pages."
+  title="Browser Extensions"
+  description="Focused Chrome extensions built by BramLabs — SonicShield, SnapElite, Tab Snoozer, PromptVault, and more. Local-first privacy, clear terms, and zero telemetry."
 >
-  <section class="py-20 bg-bg">
-    <div class="max-w-6xl mx-auto px-6 text-left">
-      <div class="max-w-2xl flex flex-col gap-4 mb-16">
-        <span class="text-mono text-xs text-accent uppercase tracking-wider font-semibold">Chrome Web Store</span>
-        <h1 class="text-h1 text-text">Extensions</h1>
-        <p class="text-body text-muted">
-          Focused browser utilities from BramLabs. Each product has its own landing page, privacy policy, terms, help, and support.
+  <section class="section-block pt-16 md:pt-24">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Page Header -->
+      <div class="max-w-3xl mb-12 reveal" data-reveal>
+        <span class="badge badge-sky text-xs font-mono mb-3">Chrome Web Store</span>
+        <h1 class="mb-4">Browser Extensions</h1>
+        <p class="text-[var(--text-secondary)] text-base sm:text-lg leading-relaxed">
+          Focused tools built directly for modern web browsers. Each extension features local-first processing, dedicated privacy documentation, and zero background telemetry.
         </p>
       </div>
 
       <!-- Directory Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {extensions.map((ext) => (
-          <div class="bg-surface rounded-2xl border border-border/80 p-8 flex flex-col justify-between shadow-sm glow-card text-left relative overflow-hidden">
-            <div class="absolute -right-20 -bottom-20 w-36 h-36 rounded-full bg-accent/3 blur-3xl pointer-events-none"></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {extensions.map((ext, i) => (
+          <div
+            class="glass-card flex flex-col justify-between p-8 reveal"
+            data-reveal
+            style={`--reveal-delay:${i * 70}ms`}
+          >
             <div>
               <!-- Header -->
-              <div class="flex items-center justify-between border-b border-border/50 pb-6 mb-6">
-                <div class="flex items-center gap-4">
-                  <div class="w-14 h-14 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent flex-shrink-0">
-                    <Icon name={ext.data.icon} class="w-7 h-7 text-accent" />
+              <div class="flex items-start justify-between gap-4 pb-6 border-b border-white/[0.06] mb-6">
+                <div class="flex items-center gap-3.5">
+                  <div class="w-12 h-12 rounded-xl bg-sky-400/10 border border-sky-400/20 flex items-center justify-center text-sky-400 flex-shrink-0">
+                    <Icon name={ext.data.icon} class="w-6 h-6 text-sky-400" />
                   </div>
                   <div>
-                    <h2 class="text-h3 text-text leading-tight">{ext.data.title}</h2>
-                    <div class="flex items-center gap-2 mt-1">
-                      <span class="text-mono text-xs text-muted">v{ext.data.version}</span>
-                    </div>
+                    <h2 class="text-lg font-bold text-[var(--text-primary)] leading-tight">{ext.data.title}</h2>
+                    <span class="text-xs font-mono text-[var(--text-faint)]">v{ext.data.version} · {ext.data.lastUpdated}</span>
                   </div>
                 </div>
-                <span class="text-mono text-[10px] px-2.5 py-0.5 rounded-full bg-accent-muted text-accent font-semibold border border-accent/10">Verified Utility</span>
+                <span class={`badge text-[10px] font-mono ${ext.data.status === 'live' ? 'badge-emerald' : 'badge-amber'}`}>
+                  {ext.data.status === 'live' ? 'Live' : 'Coming Soon'}
+                </span>
               </div>
 
               <!-- Tagline -->
-              <p class="text-small text-muted leading-relaxed mb-8">
+              <p class="text-sm text-[var(--text-secondary)] leading-relaxed mb-6">
                 {ext.data.description}
               </p>
 
-              <!-- Features checklist -->
-              <div class="flex flex-col gap-3 mb-8">
-                <h3 class="text-mono text-xs font-bold text-text tracking-wider uppercase mb-1">Key Features</h3>
-                {ext.data.features.map((feat) => (
-                  <div class="flex items-start gap-2.5 text-sm text-muted">
-                    <div class="mt-0.5 text-accent flex-shrink-0">
-                      <Icon name="Check" class="w-4 h-4 text-accent" />
+              <!-- Key Features -->
+              {ext.data.features && ext.data.features.length > 0 && (
+                <div class="flex flex-col gap-2.5 mb-8">
+                  <span class="text-[10px] font-mono font-bold uppercase tracking-wider text-[var(--text-faint)]">Key Features</span>
+                  {ext.data.features.slice(0, 3).map((feat) => (
+                    <div class="flex items-start gap-2.5 text-xs text-[var(--text-muted)]">
+                      <Icon name="Check" class="w-3.5 h-3.5 text-sky-400 flex-shrink-0 mt-0.5" />
+                      <span><strong class="text-[var(--text-primary)] font-medium">{feat.title}:</strong> {feat.description}</span>
                     </div>
-                    <span><strong class="text-text">{feat.title}:</strong> {feat.description}</span>
-                  </div>
-                ))}
-              </div>
+                  ))}
+                </div>
+              )}
             </div>
 
             <!-- CTAs -->
-            <div class="border-t border-border/50 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 mt-auto">
-              <a href={`/extensions/${ext.slug}`} class="text-accent hover:underline text-sm font-semibold flex items-center gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none">
-                View Landing Page
-                <Icon name="ArrowRight" class="w-4 h-4" />
-              </a>
+            <div class="pt-5 border-t border-white/[0.06] flex items-center justify-between gap-3 mt-auto">
               <a
-                href={ext.data.storeUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="border border-border text-text hover:bg-bg text-sm px-5 py-2.5 rounded-lg transition-colors font-semibold shadow-sm w-full sm:w-auto text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
+                href={`/extensions/${ext.slug}`}
+                class="text-sky-400 hover:text-sky-300 text-xs font-semibold flex items-center gap-1.5 transition-colors"
               >
-                Add to Chrome
+                Product Details →
               </a>
+              {ext.data.storeUrl ? (
+                <a
+                  href={ext.data.storeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="btn btn-secondary text-xs px-3.5 py-1.5"
+                  style="min-height:2rem;"
+                >
+                  Chrome Store
+                </a>
+              ) : (
+                <span class="text-[10px] font-mono text-[var(--text-faint)] px-2.5 py-1 rounded bg-white/[0.04]">
+                  In Review
+                </span>
+              )}
             </div>
           </div>
         ))}
       </div>
+
     </div>
   </section>
 </BaseLayout>

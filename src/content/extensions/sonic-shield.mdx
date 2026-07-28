@@ -1,57 +1,30 @@
 ---
 title: "SonicShield"
-tagline: "Volume normalizer, audio manager, audio spike limiter, and tab mute hotkeys."
-description: "SonicShield is a volume control and audio manager extension that lets you normalize audio volume, boost low volumes up to 200%, suppress sudden audio spikes, and maintain persistent volume profiles per website."
-storeUrl: "https://chromewebstore.google.com/detail/sonicshield"
+tagline: "Per-site web volume normalization and automatic audio hearing safety limiter."
+description: "SonicShield prevents sudden loud audio blasts while browsing videos, podcasts, and media sites by enforcing a master volume ceiling and dynamic range compression directly in your browser."
+storeUrl: "https://chromewebstore.google.com/detail/sonic-shield/placeholder"
+status: "live"
 icon: "Volume2"
-version: "1.0.0"
-lastUpdated: "July 2, 2026"
-downloadCount: "Web Extension"
-screenshots: []
+version: "1.2.0"
+lastUpdated: "July 2026"
+downloadCount: "Chrome Extension"
+featured: true
 features:
-  - title: "Persistent Volume Profiles"
-    description: "Remembers your volume levels and equalizer configurations per website, automatically applying them when you return."
-    icon: "Sliders"
-  - title: "Audio Booster (200%)"
-    description: "Safely amplifies quiet videos and low audio tracks up to double the default DOM threshold."
-    icon: "Activity"
-  - title: "Peak Audio Limiter"
-    description: "Suppresses sudden high-volume jumps and loud commercials to protect your hearing."
+  - title: "Automatic Peak Protection"
+    description: "Instantly dampens ear-splitting ads and sudden volume spikes across all browser tabs."
     icon: "Shield"
-faq:
-  - question: "Does SonicShield require access to my browser tabs?"
-    answer: "SonicShield requires permission to capture the active tab's audio stream locally to apply volume boost and normalizations. No audio is recorded or transmitted."
-  - question: "Can I boost volume beyond 100%?"
-    answer: "Yes. SonicShield includes a booster slider that allows you to amplify low audio sources up to 200% safely in software."
-  - question: "How does the Peak Limiter protect my hearing?"
-    answer: "The Peak Limiter dynamically monitors the audio signal level and limits sudden spikes above a safe threshold, mitigating volume jumps from loud ads."
-  - question: "Does it work on background tabs?"
-    answer: "Yes. Once volume configurations are saved for a website, they apply to all tabs under that domain, even if they are playing audio in the background."
-  - question: "Can I configure custom equalizer presets?"
-    answer: "Yes. SonicShield comes with pre-configured audio profiles (Flat, Bass Boost, and Vocal Clarity) to optimize your listening experience."
-  - question: "Is there a mute keyboard shortcut?"
-    answer: "Yes. You can press Ctrl+Shift+X to instantly mute or unmute the active browser tab without opening the extension popup."
-  - question: "Does it support Mono audio mixing?"
-    answer: "Yes. The Pro tier provides a Mono Audio Downmix toggle, combining left and right stereo channels for mono-based output configurations."
-  - question: "Will it slow down tab loading?"
-    answer: "No. SonicShield uses lightweight, modern Web Audio APIs. It injects a highly optimized filter node with zero noticeable latency."
-  - question: "How do I activate Pro?"
-    answer: "Enter your Pro license key under the Upgrade tab. Pro unlocks unlimited saved site profiles, permanent volume booster saving, and peak limiters."
-  - question: "What is the daily Pro trial?"
-    answer: "We provide a free 60-minute daily Pro trial so users can evaluate the limiters and booster profiles before buying."
+  - title: "Per-Site Volume Memory"
+    description: "Remembers your preferred volume boost or attenuation for specific domains."
+    icon: "Sliders"
+  - title: "Client-Side Processing"
+    description: "Audio processing uses Web Audio API nodes directly in your browser sandbox."
+    icon: "Lock"
 ---
 
-## Intelligent Audio Management
+## Why SonicShield?
 
-Many websites have drastically different volume levels, forcing you to constantly adjust your system volume slider. `SonicShield` resolves this by automatically applying volume configurations per domain. 
+Web media volume varies wildly between platforms and video creators. SonicShield injects a lightweight Web Audio compressor node to ensure clean, balanced sound across YouTube, Twitch, podcasts, and social media feeds.
 
-## Web Audio Compression
+## How It Works
 
-By utilizing modern Web Audio API compressors, SonicShield dynamically levels out the volume stream:
-- **Gain Nodes**: For boosting low signals up to 2x.
-- **DynamicsCompressorNode**: To level sudden audio spikes and normalize quiet/loud segments.
-- **StereoPannerNode**: For mono conversions.
-
-## Easy Shortcuts & Presets
-
-SonicShield is designed to run efficiently in your browser background. Toggle settings, configure equalizer presets, and mute active tabs with simple keyboard shortcuts like `Ctrl+Shift+X`.
+Once enabled, SonicShield monitors audio output levels in active tabs and applies smooth gain correction without distorting voice clarity or music.
