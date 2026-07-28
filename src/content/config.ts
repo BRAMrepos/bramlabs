@@ -71,6 +71,7 @@ const artCollection = defineCollection({
     description: z.string(),
     productLink: z.string().optional(),
     productName: z.string().optional(),
+    preview: z.string().optional(),
     medium: z.string(),
     printSpecs: z.object({
       dpi: z.number(),

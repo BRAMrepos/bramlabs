@@ -71,12 +71,19 @@ const navLinks = [
     <meta property="og:url"         content={canonicalURL} />
     <meta property="og:title"       content={`${title} | BramLabs`} />
     <meta property="og:description" content={description} />
-    {ogImage && <meta property="og:image" content={new URL(ogImage, siteUrl)} />}
-
-    <meta name="twitter:card"        content="summary_large_image" />
-    <meta name="twitter:title"       content={`${title} | BramLabs`} />
-    <meta name="twitter:description" content={description} />
-    {ogImage && <meta name="twitter:image" content={new URL(ogImage, siteUrl)} />}
+    {(() => {
+      const imgPath = ogImage || '/favicon.svg';
+      const imgUrl = new URL(imgPath, siteUrl);
+      return (
+        <>
+          <meta property="og:image" content={imgUrl} />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={`${title} | BramLabs`} />
+          <meta name="twitter:description" content={description} />
+          <meta name="twitter:image" content={imgUrl} />
+        </>
+      );
+    })()}
 
     {structuredData && (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
