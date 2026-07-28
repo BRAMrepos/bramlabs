@@ -9,9 +9,9 @@ const art = (await getCollection('art')).sort((a, b) => Number(b.data.featured) 
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  "name": "BramLabs Merch & Art Reference",
+  "name": "BramLabs Merch & Art Portfolio",
   "url": "https://bramlabs.co/merch",
-  "description": "Original print-ready apparel art for BramLabs apps and software products. 300 DPI PNG, Amazon Content Policy, USPTO trademark checks.",
+  "description": "Original print-ready apparel art for BramLabs software products. 300 DPI transparent PNG, Content Policy compliance, and USPTO trademark checks.",
   "isPartOf": {
     "@type": "Organization",
     "name": "BramLabs",
@@ -21,20 +21,20 @@ const structuredData = {
 ---
 
 <BaseLayout
-  title="Merch & Art Portfolio | Amazon Merch on Demand Reference"
-  description="Original print-ready apparel art for BramLabs products. 300 DPI transparent PNG, Amazon Content Policy compliance, and USPTO trademark checks before every publish."
+  title="Merch & Art Portfolio"
+  description="Original print-ready apparel art for BramLabs software products. 300 DPI transparent PNG, Content Policy compliance, and USPTO trademark checks."
   structuredData={structuredData}
 >
 
   <!-- ========================================================
-       HERO FOR MBA REVIEWERS
+       HERO / BRAND APPAREL STATEMENT
        ======================================================== -->
-  <section class="section-block pt-16 md:pt-24 border-b border-[var(--border-subtle)]">
+  <section class="section-block pt-14 md:pt-20 border-b border-[var(--border-default)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl flex flex-col gap-6 reveal" data-reveal>
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-400/10 border border-emerald-400/20 text-emerald-400 text-xs font-mono font-semibold w-fit">
-          <Icon name="ShieldCheck" class="w-4 h-4" />
-          Amazon Merch on Demand · Developer Portfolio
+      <div class="max-w-3xl flex flex-col gap-5">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-mono font-semibold w-fit">
+          <Icon name="ShieldCheck" class="w-3.5 h-3.5" />
+          Brand Apparel &amp; IP Reference
         </div>
         
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[var(--text-primary)] leading-[1.1]">
@@ -43,25 +43,25 @@ const structuredData = {
         </h1>
 
         <p class="text-[var(--text-secondary)] text-base sm:text-lg leading-relaxed">
-          BramLabs is an active Amazon Appstore developer expanding into Merch on Demand. We publish original apparel and branded merchandise exclusively for <strong class="text-[var(--text-primary)] font-semibold">our apps, games, extensions, and web products</strong> — never third-party brands, sports teams, or copyrighted characters.
+          BramLabs is an active software developer publishing original titles on the Amazon Appstore. We create official merchandise and apparel graphics exclusively for <strong class="text-[var(--text-primary)] font-semibold">our own apps, games, extensions, and web tools</strong> — strictly zero third-party brands, sports logos, or copyrighted characters.
         </p>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-[var(--text-muted)] pt-2 font-mono">
-          <div class="flex items-center gap-2.5 p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-            <Icon name="Smartphone" class="w-4 h-4 text-sky-400 flex-shrink-0" />
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-[var(--text-secondary)] pt-2 font-mono">
+          <div class="flex items-center gap-2.5 p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-default)]">
+            <Icon name="Smartphone" class="w-4 h-4 text-blue-500 flex-shrink-0" />
             <span>Appstore Developer: BramLabs</span>
           </div>
-          <div class="flex items-center gap-2.5 p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-            <Icon name="FileImage" class="w-4 h-4 text-sky-400 flex-shrink-0" />
+          <div class="flex items-center gap-2.5 p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-default)]">
+            <Icon name="FileImage" class="w-4 h-4 text-blue-500 flex-shrink-0" />
             <span>300 DPI Transparent PNG Masters</span>
           </div>
-          <div class="flex items-center gap-2.5 p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-            <Icon name="ShieldCheck" class="w-4 h-4 text-sky-400 flex-shrink-0" />
+          <div class="flex items-center gap-2.5 p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-default)]">
+            <Icon name="ShieldCheck" class="w-4 h-4 text-blue-500 flex-shrink-0" />
             <span>USPTO Trademark Screened</span>
           </div>
-          <div class="flex items-center gap-2.5 p-3 rounded-lg bg-white/[0.03] border border-white/[0.06]">
-            <Icon name="Check" class="w-4 h-4 text-sky-400 flex-shrink-0" />
-            <span>Amazon Content Policy Review</span>
+          <div class="flex items-center gap-2.5 p-3 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-default)]">
+            <Icon name="Check" class="w-4 h-4 text-blue-500 flex-shrink-0" />
+            <span>Garment Content Policy Compliant</span>
           </div>
         </div>
       </div>
@@ -69,30 +69,26 @@ const structuredData = {
   </section>
 
   <!-- ========================================================
-       4-STEP COMPLIANCE PROCESS
+       4-STEP PIPELINE
        ======================================================== -->
-  <section class="section-block border-b border-[var(--border-subtle)] bg-white/[0.01]">
+  <section class="section-block border-b border-[var(--border-default)] bg-[var(--bg-surface)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-xl mb-12 reveal" data-reveal>
-        <span class="text-[11px] font-mono uppercase tracking-widest text-sky-400 font-semibold mb-2 block">Publishing Pipeline</span>
-        <h2 class="text-[var(--text-primary)]">How a design reaches Amazon</h2>
+      <div class="max-w-xl mb-10">
+        <span class="text-[11px] font-mono uppercase tracking-widest text-[var(--text-muted)] font-semibold mb-1 block">Publishing Pipeline</span>
+        <h2 class="text-[var(--text-primary)]">Design &amp; Review Process</h2>
       </div>
 
-      <ol class="grid grid-cols-1 md:grid-cols-4 gap-6">
+      <ol class="grid grid-cols-1 md:grid-cols-4 gap-5">
         {[
-          { step: '01', title: 'Concept on our IP', body: 'Start from a BramLabs product mark, icon system, or original studio line. Zero third-party characters.' },
-          { step: '02', title: '300 DPI Masters', body: 'Built at 300 DPI scale. Export transparent PNG masters with solid print-friendly vector fills.' },
+          { step: '01', title: 'Concept on Studio IP', body: 'Start from an original BramLabs product mark, icon system, or studio line. Zero licensed characters.' },
+          { step: '02', title: '300 DPI Masters', body: 'Built at 300 DPI scale. Export transparent PNG masters (4500x5400 px) with solid vector fills.' },
           { step: '03', title: 'Trademark Screen', body: 'Run USPTO TESS checks on distinctive text and marks. Redesign or drop anything that collides.' },
-          { step: '04', title: 'Policy Audit', body: 'Final review pass against Amazon Content Policy line-by-line before publishing under our merch account.' },
-        ].map((item, i) => (
-          <li
-            class="glass-card p-6 flex flex-col gap-3 reveal"
-            data-reveal
-            style={`--reveal-delay:${i * 70}ms`}
-          >
-            <span class="text-xs font-mono font-bold text-sky-400">{item.step}</span>
+          { step: '04', title: 'Policy Pass', body: 'Final review against Merch on Demand Content Policy guidelines line-by-line prior to publishing.' },
+        ].map((item) => (
+          <li class="glass-card p-5 flex flex-col gap-2.5">
+            <span class="text-xs font-mono font-bold text-blue-500">{item.step}</span>
             <h3 class="text-base font-bold text-[var(--text-primary)]">{item.title}</h3>
-            <p class="text-xs text-[var(--text-muted)] leading-relaxed">{item.body}</p>
+            <p class="text-xs text-[var(--text-secondary)] leading-relaxed">{item.body}</p>
           </li>
         ))}
       </ol>
@@ -100,39 +96,39 @@ const structuredData = {
   </section>
 
   <!-- ========================================================
-       TECHNICAL SPECS
+       TECHNICAL PRINT SPECIFICATIONS
        ======================================================== -->
-  <section class="section-block border-b border-[var(--border-subtle)]">
+  <section class="section-block border-b border-[var(--border-default)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-        <div class="lg:col-span-5 flex flex-col gap-4 reveal" data-reveal>
-          <span class="text-[11px] font-mono uppercase tracking-widest text-sky-400 font-semibold">Print Technicals</span>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-5 flex flex-col gap-3">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-[var(--text-muted)] font-semibold">Print Technicals</span>
           <h2 class="text-[var(--text-primary)]">Garment Print Delivery Standards</h2>
-          <p class="text-[var(--text-muted)] text-sm leading-relaxed">
+          <p class="text-[var(--text-secondary)] text-sm leading-relaxed">
             All graphics are engineered specifically for apparel production. Working files maintain vector source layers and export clean transparent PNG masters at native 300 DPI print scale.
           </p>
         </div>
 
-        <dl class="lg:col-span-7 glass-card p-8 grid grid-cols-1 sm:grid-cols-2 gap-6 reveal" data-reveal style="--reveal-delay:100ms">
+        <dl class="lg:col-span-7 glass-card p-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-faint)]">Resolution</dt>
+            <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">Resolution</dt>
             <dd class="text-[var(--text-primary)] font-bold mt-1 text-sm">300 DPI Minimum Master</dd>
           </div>
           <div>
-            <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-faint)]">File Format</dt>
+            <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">File Format</dt>
             <dd class="text-[var(--text-primary)] font-bold mt-1 text-sm">Transparent PNG (4500x5400 px)</dd>
           </div>
           <div>
-            <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-faint)]">Working Palette</dt>
+            <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">Working Palette</dt>
             <dd class="text-[var(--text-primary)] font-bold mt-1 text-sm">RGB working files; solid fills</dd>
           </div>
           <div>
-            <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-faint)]">IP Ownership</dt>
+            <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">IP Ownership</dt>
             <dd class="text-[var(--text-primary)] font-bold mt-1 text-sm">100% Studio Original</dd>
           </div>
-          <div class="sm:col-span-2 pt-2 border-t border-white/[0.06]">
-            <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-faint)]">Policy &amp; Compliance Guarantee</dt>
-            <dd class="text-[var(--text-muted)] mt-1.5 text-xs leading-relaxed">
+          <div class="sm:col-span-2 pt-2 border-t border-[var(--border-default)]">
+            <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">Policy &amp; Compliance Guarantee</dt>
+            <dd class="text-[var(--text-secondary)] mt-1.5 text-xs leading-relaxed">
               We do not upload third-party brand marks, sports team logos, celebrity likenesses, or copyrighted characters. All apparel graphics support BramLabs mobile apps, extensions, and web tools exclusively.
             </dd>
           </div>
@@ -142,24 +138,24 @@ const structuredData = {
   </section>
 
   <!-- ========================================================
-       DESIGN PORTFOLIO GRID
+       ARTWORK & MARKS PORTFOLIO
        ======================================================== -->
-  <section class="section-block border-b border-[var(--border-subtle)] bg-white/[0.01]">
+  <section class="section-block border-b border-[var(--border-default)] bg-[var(--bg-surface)]">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12 reveal" data-reveal>
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-10">
         <div class="max-w-xl">
-          <span class="text-[11px] font-mono uppercase tracking-widest text-sky-400 font-semibold block mb-1">Portfolio</span>
-          <h2 class="text-[var(--text-primary)]">Product Art &amp; Vector Marks</h2>
-          <p class="text-[var(--text-muted)] text-sm mt-1">
+          <span class="text-[11px] font-mono uppercase tracking-widest text-[var(--text-muted)] font-semibold block mb-1">Portfolio</span>
+          <h2 class="text-[var(--text-primary)]">Product Marks &amp; Vector Series</h2>
+          <p class="text-[var(--text-secondary)] text-sm mt-1">
             Original marks designed for our software products. Each item contains verifiable print specs.
           </p>
         </div>
-        <a href="/apps" class="text-sky-400 hover:text-sky-300 text-sm font-medium transition-colors flex-shrink-0">
+        <a href="/apps" class="text-blue-500 hover:underline text-xs font-semibold flex-shrink-0">
           Mobile Apps →
         </a>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {art.map((piece) => (
           <ArtCard
             title={piece.data.title}
@@ -182,17 +178,17 @@ const structuredData = {
   </section>
 
   <!-- ========================================================
-       REFERENCE CTA
+       DEVELOPER REFERENCE CTA
        ======================================================== -->
   <section class="section-block">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="glass-card p-8 md:p-12 flex flex-col lg:flex-row lg:items-center justify-between gap-8 reveal" data-reveal>
+      <div class="glass-card p-8 md:p-10 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
         <div class="max-w-2xl">
-          <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 font-bold mb-2 block">Inspector Reference</span>
-          <h2 class="text-[var(--text-primary)] mb-3">Merch by Amazon Developer Reference</h2>
-          <p class="text-[var(--text-muted)] text-sm leading-relaxed">
-            Developer reference site for Merch by Amazon application verification: <a href="https://bramlabs.co" class="text-sky-400 hover:underline">https://bramlabs.co</a>.
-            Studio support: <a href="mailto:support@bramlabs.co" class="text-sky-400 hover:underline">support@bramlabs.co</a>.
+          <span class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] font-bold mb-1 block">Verification Reference</span>
+          <h2 class="text-[var(--text-primary)] mb-2">BramLabs Studio Reference</h2>
+          <p class="text-[var(--text-secondary)] text-sm leading-relaxed">
+            Developer reference site for Merch on Demand verification: <a href="https://bramlabs.co" class="text-blue-500 hover:underline font-medium">https://bramlabs.co</a>.
+            Studio support: <a href="mailto:support@bramlabs.co" class="text-blue-500 hover:underline font-medium">support@bramlabs.co</a>.
           </p>
         </div>
         <div class="flex flex-wrap gap-3 flex-shrink-0">

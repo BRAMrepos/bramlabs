@@ -5,29 +5,52 @@ import { Sun, Moon } from 'lucide-astro';
 <button
   type="button"
   id="theme-toggle-btn"
-  class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/[0.06] transition-colors cursor-pointer focus:outline-none"
-  aria-label="Toggle light/dark theme"
+  class="p-2 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-white/[0.06] transition-colors cursor-pointer focus:outline-none flex items-center justify-center"
+  aria-label="Toggle theme"
 >
-  <span class="dark:hidden flex items-center justify-center icon-sun">
-    <Sun class="w-4 h-4 text-amber-400" />
-  </span>
-  <span class="hidden dark:flex items-center justify-center icon-moon">
+  <!-- Moon Icon (shows in dark mode, click to switch to light) -->
+  <span id="theme-moon-icon" class="flex items-center justify-center">
     <Moon class="w-4 h-4 text-sky-400" />
+  </span>
+  <!-- Sun Icon (shows in light mode, click to switch to dark) -->
+  <span id="theme-sun-icon" class="hidden items-center justify-center">
+    <Sun class="w-4 h-4 text-amber-500" />
   </span>
 </button>
 
 <script is:inline>
   (function() {
-    var btn = document.getElementById('theme-toggle-btn');
-    if (!btn) return;
+    function updateThemeUI(theme) {
+      var moon = document.getElementById('theme-moon-icon');
+      var sun = document.getElementById('theme-sun-icon');
+      if (theme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        document.documentElement.classList.remove('dark');
+        document.documentElement.classList.add('light');
+        if (moon) { moon.classList.add('hidden'); moon.classList.remove('flex'); }
+        if (sun)  { sun.classList.remove('hidden'); sun.classList.add('flex'); }
+      } else {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        document.documentElement.classList.remove('light');
+        document.documentElement.classList.add('dark');
+        if (sun)  { sun.classList.add('hidden'); sun.classList.remove('flex'); }
+        if (moon) { moon.classList.remove('hidden'); moon.classList.add('flex'); }
+      }
+    }
 
-    btn.addEventListener('click', function() {
-      var current = document.documentElement.getAttribute('data-theme') || 'dark';
-      var next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      try {
-        localStorage.setItem('bramlabs-theme', next);
-      } catch(e) {}
-    });
+    // Initial sync
+    var stored = localStorage.getItem('bramlabs-theme') || 'dark';
+    updateThemeUI(stored);
+
+    // Event listener
+    var btn = document.getElementById('theme-toggle-btn');
+    if (btn) {
+      btn.addEventListener('click', function() {
+        var current = document.documentElement.getAttribute('data-theme') || 'dark';
+        var next = current === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem('bramlabs-theme', next); } catch(e) {}
+        updateThemeUI(next);
+      });
+    }
   })();
 </script>
