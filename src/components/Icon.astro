@@ -1,5 +1,43 @@
 ---
-import * as Icons from 'lucide-astro';
+import {
+  Smartphone,
+  Puzzle,
+  Globe,
+  Shirt,
+  BellOff,
+  Calendar,
+  Activity,
+  Volume2,
+  Camera,
+  Check,
+  ShieldCheck,
+  Palette,
+  ArrowRight,
+  Sun,
+  Moon,
+  Headphones,
+  LayoutGrid,
+  Terminal,
+  FileText,
+  Workflow,
+  Layers,
+  Shield,
+  Clock,
+  Zap,
+  Code,
+  Eye,
+  Maximize,
+  Crop,
+  Sliders,
+  Lock,
+  Cpu,
+  Target,
+  Ban,
+  X,
+  FileImage,
+  Scale,
+  HelpCircle
+} from 'lucide-astro';
 
 interface Props {
   name: string;
@@ -9,8 +47,46 @@ interface Props {
 
 const { name, class: className = '', strokeWidth = 1.5 } = Astro.props;
 
-// Resolve the icon dynamically from the lucide-astro package
-const IconComponent = (Icons as any)[name] || Icons.HelpCircle;
+const iconMap: Record<string, any> = {
+  Smartphone,
+  Puzzle,
+  Globe,
+  Shirt,
+  BellOff,
+  Calendar,
+  Activity,
+  Volume2,
+  Camera,
+  Check,
+  ShieldCheck,
+  Palette,
+  ArrowRight,
+  Sun,
+  Moon,
+  Headphones,
+  LayoutGrid,
+  Terminal,
+  FileText,
+  Workflow,
+  Layers,
+  Shield,
+  Clock,
+  Zap,
+  Code,
+  Eye,
+  Maximize,
+  Crop,
+  Sliders,
+  Lock,
+  Cpu,
+  Target,
+  Ban,
+  X,
+  FileImage,
+  Scale
+};
+
+const IconComponent = iconMap[name] || HelpCircle;
 ---
 
 <IconComponent class={className} stroke-width={strokeWidth} />

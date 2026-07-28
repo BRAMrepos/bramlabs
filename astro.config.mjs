@@ -7,5 +7,8 @@ export default defineConfig({
   integrations: [mdx()],
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ['lucide-astro'],
+    },
   },
 });
