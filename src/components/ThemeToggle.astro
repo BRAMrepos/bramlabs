@@ -3,15 +3,31 @@ import { Sun, Moon } from 'lucide-astro';
 ---
 
 <button
-  class="theme-toggle p-2 bg-transparent border-0 text-muted hover:text-text cursor-pointer transition-colors duration-150 flex items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus:outline-none"
-  aria-label="Toggle theme"
+  type="button"
+  id="theme-toggle-btn"
+  class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-white/[0.06] transition-colors cursor-pointer focus:outline-none"
+  aria-label="Toggle light/dark theme"
 >
-  <!-- Moon icon (visible in light mode, hidden in dark mode) -->
-  <span class="icon-moon flex">
-    <Moon class="w-[18px] h-[18px]" />
+  <span class="dark:hidden flex items-center justify-center icon-sun">
+    <Sun class="w-4 h-4 text-amber-400" />
   </span>
-  <!-- Sun icon (hidden in light mode, visible in dark mode) -->
-  <span class="icon-sun hidden">
-    <Sun class="w-[18px] h-[18px]" />
+  <span class="hidden dark:flex items-center justify-center icon-moon">
+    <Moon class="w-4 h-4 text-sky-400" />
   </span>
 </button>
+
+<script is:inline>
+  (function() {
+    var btn = document.getElementById('theme-toggle-btn');
+    if (!btn) return;
+
+    btn.addEventListener('click', function() {
+      var current = document.documentElement.getAttribute('data-theme') || 'dark';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try {
+        localStorage.setItem('bramlabs-theme', next);
+      } catch(e) {}
+    });
+  })();
+</script>
