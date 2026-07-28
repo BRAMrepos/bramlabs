@@ -3,9 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
 import { getCollection } from 'astro:content';
 
-const extensions = await getCollection('extensions');
-const apps       = await getCollection('apps');
-const web        = await getCollection('web');
+const extensions = (await getCollection('extensions')).sort((a, b) => Number(b.data.status === 'live') - Number(a.data.status === 'live'));
+const apps       = (await getCollection('apps')).sort((a, b) => Number(b.data.status === 'live') - Number(a.data.status === 'live'));
+const web        = (await getCollection('web')).sort((a, b) => Number(b.data.status === 'live') - Number(a.data.status === 'live'));
 const art        = await getCollection('art');
 
 const filter = Astro.url.searchParams.get('type') ?? 'all';
