@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Icon from '../../components/Icon.astro';
+import ArtCard from '../../components/ArtCard.astro';
+import { getCollection } from 'astro:content';
+
+const art = (await getCollection('art')).sort((a, b) => Number(b.data.featured) - Number(a.data.featured));
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "BramLabs Merch & Art",
+  "url": "https://bramlabs.co/merch",
+  "description": "Original print-ready apparel art for BramLabs apps and games. 300 DPI PNG, Amazon Content Policy, USPTO trademark checks.",
+  "isPartOf": {
+    "@type": "Organization",
+    "name": "BramLabs",
+    "url": "https://bramlabs.co"
+  }
+};
+---
+
+<BaseLayout
+  title="Merch & Art"
+  description="Original print-ready art for BramLabs products. 300 DPI transparent PNG, Amazon Content Policy compliance, and USPTO trademark checks before every Merch on Demand publish."
+  structuredData={structuredData}
+>
+  <!-- Hero for MBA reviewers -->
+  <section class="py-20 border-b border-border">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-3xl flex flex-col gap-6">
+        <span class="text-mono text-xs text-accent uppercase tracking-wider font-semibold">Merch on Demand · Portfolio</span>
+        <h1 class="text-h1 text-text">Original apparel art for our own products</h1>
+        <p class="text-body text-muted leading-relaxed">
+          BramLabs is an active Amazon Appstore developer expanding into Merch on Demand. We publish original apparel and branded merchandise for <strong class="text-text font-medium">our apps, games, extensions, and web products</strong> — not third-party brands, sports teams, or copyrighted characters.
+        </p>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-small text-muted">
+          <li class="flex items-center gap-2">
+            <Icon name="Smartphone" class="w-4 h-4 text-accent flex-shrink-0" />
+            Amazon Appstore developer (BramLabs)
+          </li>
+          <li class="flex items-center gap-2">
+            <Icon name="FileImage" class="w-4 h-4 text-accent flex-shrink-0" />
+            Print-ready: 300 DPI, transparent PNG, RGB
+          </li>
+          <li class="flex items-center gap-2">
+            <Icon name="Scale" class="w-4 h-4 text-accent flex-shrink-0" />
+            USPTO trademark checks before publish
+          </li>
+          <li class="flex items-center gap-2">
+            <Icon name="ShieldCheck" class="w-4 h-4 text-accent flex-shrink-0" />
+            Amazon Content Policy on every design
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="py-20 border-b border-border bg-surface">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-xl flex flex-col gap-3 mb-12">
+        <span class="text-mono text-xs text-accent uppercase tracking-wider font-semibold">Process</span>
+        <h2 class="text-h2 text-text">How a design reaches Amazon</h2>
+      </div>
+      <ol class="grid grid-cols-1 md:grid-cols-4 gap-6">
+        {[
+          { step: '01', title: 'Concept on our IP', body: 'Start from a BramLabs product name, mark, or original series. No licensed characters or brand rips.' },
+          { step: '02', title: 'Print-ready art', body: 'Build at 300 DPI. Export transparent PNG masters with safe zones and solid, print-friendly fills.' },
+          { step: '03', title: 'Trademark screen', body: 'Run USPTO checks on distinctive text and marks. Redesign or drop anything that collides.' },
+          { step: '04', title: 'Policy review', body: 'Final pass against Amazon Content Policy, then publish under the BramLabs merch account.' },
+        ].map((item) => (
+          <li class="bg-bg border border-border rounded-xl p-6 flex flex-col gap-3 shadow-sm">
+            <span class="text-mono text-xs text-accent font-semibold">{item.step}</span>
+            <h3 class="text-h3 text-text">{item.title}</h3>
+            <p class="text-small text-muted leading-relaxed">{item.body}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Specs -->
+  <section class="py-20 border-b border-border">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div class="flex flex-col gap-4">
+          <span class="text-mono text-xs text-accent uppercase tracking-wider font-semibold">Technical specs</span>
+          <h2 class="text-h2 text-text">What we deliver to print</h2>
+          <p class="text-small text-muted leading-relaxed">
+            Graphic work is produced for garment print, not just social mockups. Masters are kept as vector plus flattened transparent PNG at full print resolution.
+          </p>
+        </div>
+        <dl class="bg-surface border border-border rounded-xl p-6 md:p-8 grid grid-cols-1 sm:grid-cols-2 gap-6 shadow-sm">
+          <div>
+            <dt class="text-mono text-[10px] uppercase tracking-wider text-muted">Resolution</dt>
+            <dd class="text-text font-semibold mt-1">300 DPI minimum</dd>
+          </div>
+          <div>
+            <dt class="text-mono text-[10px] uppercase tracking-wider text-muted">File format</dt>
+            <dd class="text-text font-semibold mt-1">Transparent PNG</dd>
+          </div>
+          <div>
+            <dt class="text-mono text-[10px] uppercase tracking-wider text-muted">Color</dt>
+            <dd class="text-text font-semibold mt-1">RGB working files</dd>
+          </div>
+          <div>
+            <dt class="text-mono text-[10px] uppercase tracking-wider text-muted">Ownership</dt>
+            <dd class="text-text font-semibold mt-1">100% studio original</dd>
+          </div>
+          <div class="sm:col-span-2">
+            <dt class="text-mono text-[10px] uppercase tracking-wider text-muted">Policy</dt>
+            <dd class="text-muted mt-1 text-small leading-relaxed">
+              We do not upload third-party logos, celebrity likenesses, sports IP, or copyrighted characters. Merchandise supports BramLabs apps, games, extensions, and web products only.
+            </dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio grid -->
+  <section class="py-20 border-b border-border">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div class="max-w-xl flex flex-col gap-3">
+          <span class="text-mono text-xs text-accent uppercase tracking-wider font-semibold">Portfolio</span>
+          <h2 class="text-h2 text-text">Design series</h2>
+          <p class="text-small text-muted">
+            Product marks and studio originals. Each card includes print specs reviewers can verify against our process.
+          </p>
+        </div>
+        <a href="/apps" class="text-accent text-sm font-medium hover:underline">Developer / apps →</a>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {art.map((piece) => (
+          <ArtCard
+            title={piece.data.title}
+            series={piece.data.series}
+            description={piece.data.description}
+            productName={piece.data.productName}
+            productLink={piece.data.productLink}
+            motif={piece.data.motif}
+            palette={piece.data.palette}
+            dpi={piece.data.printSpecs.dpi}
+            format={piece.data.printSpecs.format}
+            color={piece.data.printSpecs.color}
+            notes={piece.data.printSpecs.notes}
+            status={piece.data.status}
+            year={piece.data.year}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Reference CTA -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="bg-surface border border-border rounded-xl p-8 md:p-10 flex flex-col gap-6 shadow-sm">
+        <h2 class="text-h2 text-text">Developer reference</h2>
+        <p class="text-small text-muted max-w-2xl leading-relaxed">
+          Portfolio and developer reference for Merch by Amazon applications: <a href="https://bramlabs.co" class="text-accent hover:underline">https://bramlabs.co</a>.
+          Studio contact: <a href="mailto:support@bramlabs.co" class="text-accent hover:underline">support@bramlabs.co</a>.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="/apps" class="border border-border text-text hover:bg-bg py-3 px-6 rounded-lg font-medium text-sm transition-colors">Apps</a>
+          <a href="/extensions" class="border border-border text-text hover:bg-bg py-3 px-6 rounded-lg font-medium text-sm transition-colors">Extensions</a>
+          <a href="/web" class="border border-border text-text hover:bg-bg py-3 px-6 rounded-lg font-medium text-sm transition-colors">Web</a>
+          <a href="/about" class="bg-accent hover:bg-accent-hover text-white py-3 px-6 rounded-lg font-medium text-sm transition-colors">About BramLabs</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

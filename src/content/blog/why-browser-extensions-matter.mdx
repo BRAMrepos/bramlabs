@@ -1,24 +1,25 @@
 ---
-title: "Building Privacy-First Extensions in an Ad-Obsessed Web"
+title: "Why we still build browser extensions"
 pubDate: "2026-06-20"
-description: "Why building for Chrome and Firefox is a developer's highest leverage point for improving user privacy."
+description: "Extensions sit in a high-leverage layer of the browser — if you treat permissions as a product decision, not an afterthought."
 author: "Bram"
-tags: ["privacy", "manifest-v3", "development"]
+tags: ["privacy", "manifest-v3", "extensions"]
 ---
 
-The web has increasingly transitioned into a platform designed for trackers rather than users.
+The web has drifted toward trackers and retention loops. Browser extensions still sit in a useful middle layer: they can change how a page behaves without asking the user to leave their workflow.
 
-As extension developers, we occupy a unique layer of the browser stack. We have the capability to filter, customize, and optimize the web experience for the end user. However, this power has frequently been abused by extensions that secretly scrape user history and sell it to data brokers.
+That power is easy to abuse. Plenty of extensions request `<all_urls>`, scrape history, and sell data. Users learn to distrust the whole category.
 
-## The Problem with Extension Permissions
+## How BramLabs approaches permissions
 
-When you install an extension, Chrome warns you that it can "read and change all your data on the websites you visit." This is a scary warning, and it should be! 
+We treat permissions as part of the product:
 
-Most developers request wide permissions (`<all_urls>`) because it is the easiest way to write code. But it exposes users to massive security vulnerabilities if the extension is ever sold or compromised.
+- Request only what the feature needs.
+- Prefer client-side processing when possible.
+- Spell out what we access on the product privacy page.
 
-## Our Approach at BramLabs
+**StoryPeek**, **SnapElite**, and **SonicShield** each have their own privacy, terms, help, and support pages on this site for that reason.
 
-At BramLabs, we restrict ourselves to the absolute minimum permissions.
-For example, **Tab Snoozer** does not request page content read permissions. It only asks for `tabs` (to open/close them) and `storage` (to save your snooze times).
+## Where extensions fit in the studio
 
-By designing tools with sandboxed boundaries, we can build extensions that users can trust completely.
+Extensions are one lane next to Amazon Appstore apps, web products, and original merch. The same rule applies across all of them: ship something concrete, own the brand, and do not lean on third-party IP.

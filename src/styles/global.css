@@ -88,6 +88,13 @@
     font-family: 'Geist Mono', monospace;
     font-size: 0.875em;
   }
+
+  /* Consistent focus ring across the site */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 }
 
 /* Typography scale classes */
@@ -187,7 +194,7 @@
 }
 
 [data-theme="light"] .bg-glow-blob {
-  background: radial-gradient(circle, rgba(79, 70, 229, 0.05) 0%, rgba(79, 70, 229, 0) 70%);
+  background: radial-gradient(circle, rgba(79, 70, 229, 0.10) 0%, rgba(79, 70, 229, 0) 70%);
 }
 
 .glow-card {
@@ -200,5 +207,32 @@
   box-shadow: 0 10px 30px -15px rgba(99, 102, 241, 0.15);
 }
 [data-theme="light"] .glow-card:hover {
-  box-shadow: 0 10px 30px -15px rgba(79, 70, 229, 0.1);
+  box-shadow: 0 10px 30px -15px rgba(79, 70, 229, 0.12);
+}
+
+/* Smooth entry animation for hero content */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-entry {
+  animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-entry-1 { animation-delay: 0ms; }
+.animate-entry-2 { animation-delay: 60ms; }
+.animate-entry-3 { animation-delay: 120ms; }
+.animate-entry-4 { animation-delay: 200ms; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-entry {
+    animation: none;
+  }
 }

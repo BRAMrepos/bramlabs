@@ -17,8 +17,23 @@ interface Props {
 
 const { title, description, ogImage, structuredData } = Astro.props;
 const extensions = await getCollection('extensions');
-const siteUrl = 'https://bramlabs.co'; // Default publisher site URL
+const siteUrl = 'https://bramlabs.co';
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
+
+const path = Astro.url.pathname;
+const isActive = (href: string) => {
+  if (href === '/') return path === '/';
+  return path === href || path.startsWith(`${href}/`);
+};
+
+const navLinks = [
+  { href: '/work', label: 'Work' },
+  { href: '/extensions', label: 'Extensions' },
+  { href: '/web', label: 'Web' },
+  { href: '/merch', label: 'Merch' },
+  { href: '/blog', label: 'Blog' },
+  { href: '/about', label: 'About' },
+];
 ---
 
 <!DOCTYPE html>
@@ -31,63 +46,66 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
         document.documentElement.setAttribute('data-theme', theme);
       })();
     </script>
-    <!-- Essential Meta Tags -->
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Primary SEO -->
     <title>{title} | BramLabs</title>
     <meta name="title" content={`${title} | BramLabs`} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:title" content={`${title} | BramLabs`} />
     <meta property="og:description" content={description} />
     {ogImage && <meta property="og:image" content={new URL(ogImage, siteUrl)} />}
 
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
     <meta property="twitter:title" content={`${title} | BramLabs`} />
     <meta property="twitter:description" content={description} />
     {ogImage && <meta property="twitter:image" content={new URL(ogImage, siteUrl)} />}
 
-    <!-- Structured Data (JSON-LD) -->
     {structuredData && (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     )}
   </head>
   <body class="flex flex-col min-h-screen bg-bg text-text selection:bg-accent selection:text-white">
-    <!-- Scroll sentinel to detect scroll state and toggle header border -->
     <div id="scroll-sentinel" class="h-px w-full absolute top-0 left-0 pointer-events-none"></div>
 
-    <!-- Header -->
     <header id="site-header" class="sticky top-0 z-50 w-full border-b border-transparent bg-bg/90 backdrop-blur-sm transition-all duration-150">
-      <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-        <!-- Logo -->
-        <a href="/" class="flex items-center gap-2 text-lg font-bold tracking-tight text-text group">
+      <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between gap-4">
+        <a href="/" class="flex items-center gap-2 text-lg font-bold tracking-tight text-text group flex-shrink-0">
           <span class="w-5 h-5 rounded bg-accent flex items-center justify-between p-1 transition-transform duration-200 group-hover:scale-105">
             <span class="w-full h-full rounded-[2px] bg-white"></span>
           </span>
           <span class="font-heading text-lg font-bold">BramLabs</span>
         </a>
 
-        <!-- Desktop Navigation -->
-        <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="/extensions" class={`hover:text-text transition-colors duration-150 ${Astro.url.pathname.startsWith('/extensions') ? 'text-accent' : 'text-muted'}`}>Extensions</a>
-          <a href="/blog" class={`hover:text-text transition-colors duration-150 ${Astro.url.pathname.startsWith('/blog') ? 'text-accent' : 'text-muted'}`}>Blog</a>
-          <a href="/privacy" class={`hover:text-text transition-colors duration-150 ${Astro.url.pathname === '/privacy' ? 'text-accent' : 'text-muted'}`}>Privacy</a>
+        <nav class="hidden lg:flex items-center gap-6 text-sm font-medium">
+          {navLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                'hover:text-text transition-colors duration-150',
+                isActive(link.href) ? 'text-accent font-medium' : 'text-muted',
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
           <ThemeToggle />
-          <a href="/extensions" class="border border-border text-text hover:bg-surface px-4 py-2 rounded-lg transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus:outline-none font-medium">Explore Store</a>
+          <a
+            href="/work"
+            class="border border-border text-text hover:bg-surface px-4 py-2 rounded-lg transition-all duration-150 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent focus:outline-none font-medium text-sm"
+          >
+            All work
+          </a>
         </nav>
 
-        <!-- Mobile Header Actions -->
-        <div class="flex items-center gap-2 md:hidden">
+        <div class="flex items-center gap-2 lg:hidden">
           <ThemeToggle />
           <button id="menu-btn" class="p-2 text-text hover:text-accent transition-colors focus:outline-none" aria-label="Toggle Menu">
             <Menu class="w-6 h-6" />
@@ -96,8 +114,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
       </div>
     </header>
 
-    <!-- Mobile Navigation Drawer -->
-    <div id="mobile-drawer" class="fixed inset-y-0 right-0 z-50 w-64 bg-bg border-l border-border shadow-sm transform translate-x-full transition-transform duration-200 ease-in-out md:hidden flex flex-col justify-between p-6">
+    <div id="mobile-drawer" class="fixed inset-y-0 right-0 z-50 w-64 bg-bg border-l border-border shadow-sm transform translate-x-full transition-transform duration-200 ease-in-out lg:hidden flex flex-col justify-between p-6">
       <div class="flex flex-col gap-6">
         <div class="flex items-center justify-between border-b border-border/50 pb-4">
           <span class="font-heading font-bold text-lg">Menu</span>
@@ -105,82 +122,84 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
             <X class="w-6 h-6" />
           </button>
         </div>
-        <nav class="flex flex-col gap-4 text-base font-medium">
-          <a href="/extensions" class={`hover:text-text py-2 transition-colors border-b border-border/50 ${Astro.url.pathname.startsWith('/extensions') ? 'text-accent' : 'text-muted'}`}>Extensions</a>
-          <a href="/blog" class={`hover:text-text py-2 transition-colors border-b border-border/50 ${Astro.url.pathname.startsWith('/blog') ? 'text-accent' : 'text-muted'}`}>Blog</a>
-          <a href="/privacy" class={`hover:text-text py-2 transition-colors border-b border-border/50 ${Astro.url.pathname === '/privacy' ? 'text-accent' : 'text-muted'}`}>Privacy</a>
+        <nav class="flex flex-col gap-1 text-base font-medium">
+          {navLinks.map((link) => (
+            <a
+              href={link.href}
+              class:list={[
+                'hover:text-text py-2 transition-colors border-b border-border/50',
+                isActive(link.href) ? 'text-accent' : 'text-muted',
+              ]}
+            >
+              {link.label}
+            </a>
+          ))}
+          <a href="/blog" class:list={['hover:text-text py-2 transition-colors border-b border-border/50', isActive('/blog') ? 'text-accent' : 'text-muted']}>
+            Blog
+          </a>
         </nav>
       </div>
-      <a href="/extensions" class="border border-border text-text hover:bg-surface px-4 py-3 rounded-lg text-center transition-colors font-medium">Explore Store</a>
+      <a href="/work" class="border border-border text-text hover:bg-surface px-4 py-3 rounded-lg text-center transition-colors font-medium">View work</a>
     </div>
-    <!-- Drawer backdrop overlay -->
-    <div id="drawer-overlay" class="fixed inset-0 z-40 bg-black/40 hidden md:hidden transition-opacity duration-200"></div>
+    <div id="drawer-overlay" class="fixed inset-0 z-40 bg-black/40 hidden lg:hidden transition-opacity duration-200"></div>
 
-    <!-- Main Content -->
     <main class="flex-grow">
       <slot />
     </main>
 
-    <!-- Footer -->
     <footer class="border-t border-border bg-surface-2 py-16 text-sm text-muted transition-colors duration-150">
-      <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
-        <!-- Brand -->
-        <div class="flex flex-col gap-4">
+      <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
+        <div class="flex flex-col gap-4 lg:col-span-2">
           <a href="/" class="flex items-center gap-2 text-lg font-bold tracking-tight text-text group">
             <span class="w-5 h-5 rounded bg-accent flex items-center justify-between p-1 transition-transform duration-200 group-hover:scale-105">
               <span class="w-full h-full rounded-[2px] bg-bg"></span>
             </span>
             <span class="font-heading text-text">BramLabs</span>
           </a>
-          <p class="text-muted leading-relaxed max-w-xs text-xs">
-            BramLabs is an independent developer studio crafting beautiful, lightweight browser extensions (StoryPeek, SnapElite, and SonicShield) built to simplify and enhance your daily web browsing experience.
+          <p class="text-muted leading-relaxed max-w-sm text-xs">
+            Indie product studio: Amazon Appstore apps, Chrome extensions, web products, and original merch for our own IP. Never third-party brands or characters.
           </p>
+          <a href="mailto:support@bramlabs.co" class="text-accent hover:underline font-medium text-xs">support@bramlabs.co</a>
         </div>
 
-        <!-- Products -->
+        <div class="flex flex-col gap-3 text-left">
+          <h3 class="text-[11px] font-mono uppercase tracking-wider text-muted font-bold">Studio</h3>
+          <a href="/work" class="text-muted hover:text-text transition-colors duration-150">Work</a>
+          <a href="/apps" class="text-muted hover:text-text transition-colors duration-150">Apps</a>
+          <a href="/web" class="text-muted hover:text-text transition-colors duration-150">Web</a>
+          <a href="/merch" class="text-muted hover:text-text transition-colors duration-150">Merch &amp; Art</a>
+          <a href="/about" class="text-muted hover:text-text transition-colors duration-150">About</a>
+        </div>
+
         <div class="flex flex-col gap-3 text-left">
           <h3 class="text-[11px] font-mono uppercase tracking-wider text-muted font-bold">Extensions</h3>
-          {extensions.length > 0 ? (
-            extensions.map((ext) => (
-              <a href={`/extensions/${ext.slug}`} class="text-muted hover:text-text transition-colors duration-150">{ext.data.title}</a>
-            ))
-          ) : (
-            <span class="text-muted text-xs italic">Coming soon</span>
-          )}
-          <a href="/extensions" class="text-accent hover:underline font-medium mt-1">View Directory &rarr;</a>
+          {extensions.map((ext) => (
+            <a href={`/extensions/${ext.slug}`} class="text-muted hover:text-text transition-colors duration-150">{ext.data.title}</a>
+          ))}
+          <a href="/extensions" class="text-accent hover:underline font-medium mt-1">Directory →</a>
         </div>
 
-        <!-- Resources -->
         <div class="flex flex-col gap-3 text-left">
           <h3 class="text-[11px] font-mono uppercase tracking-wider text-muted font-bold">Resources</h3>
-          <a href="/blog" class="text-muted hover:text-text transition-colors duration-150 font-medium">Developer Blog</a>
-          <a href="/feedback" class="text-muted hover:text-text transition-colors duration-150 font-medium">Feedback Desk</a>
-          <a href="/privacy" class="text-muted hover:text-text transition-colors duration-150 font-medium">Publisher Privacy</a>
-        </div>
-
-        <!-- Support -->
-        <div class="flex flex-col gap-3 text-left">
-          <h3 class="text-[11px] font-mono uppercase tracking-wider text-muted font-bold">Contact & Support</h3>
-          <p class="text-muted leading-relaxed text-xs">
-            Need help with an extension or want to request a custom tool? Get in touch:
-          </p>
-          <a href="mailto:support@bramlabs.co" class="text-accent hover:underline font-medium">support@bramlabs.co</a>
+          <a href="/blog" class="text-muted hover:text-text transition-colors duration-150">Blog</a>
+          <a href="/feedback" class="text-muted hover:text-text transition-colors duration-150">Feedback</a>
+          <a href="/privacy" class="text-muted hover:text-text transition-colors duration-150">Privacy</a>
+          <a href="/terms" class="text-muted hover:text-text transition-colors duration-150">Terms</a>
         </div>
       </div>
 
       <div class="max-w-6xl mx-auto px-6 mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4 text-muted">
         <p>&copy; {new Date().getFullYear()} BramLabs. All rights reserved.</p>
         <div class="flex gap-6">
-          <a href="/privacy" class="hover:text-text transition-colors duration-150">Global Privacy</a>
-          <a href="/terms" class="hover:text-text transition-colors duration-150">Terms of Service</a>
+          <a href="/privacy" class="hover:text-text transition-colors duration-150">Privacy</a>
+          <a href="/terms" class="hover:text-text transition-colors duration-150">Terms</a>
+          <a href="/merch" class="hover:text-text transition-colors duration-150">MBA portfolio</a>
         </div>
       </div>
     </footer>
 
-    <!-- Interactive Navigation Scripts -->
     <script is:inline>
       (function() {
-        // Scroll sentinel border handling
         const sentinel = document.getElementById('scroll-sentinel');
         const header = document.getElementById('site-header');
         if (sentinel && header) {
@@ -192,7 +211,6 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
           observer.observe(sentinel);
         }
 
-        // Mobile drawer panel toggle
         const menuBtn = document.getElementById('menu-btn');
         const closeBtn = document.getElementById('close-drawer-btn');
         const drawer = document.getElementById('mobile-drawer');
@@ -202,7 +220,7 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
           const openDrawer = () => {
             drawer.classList.remove('translate-x-full');
             overlay.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Stop body scrolling
+            document.body.style.overflow = 'hidden';
           };
 
           const closeDrawer = () => {
@@ -216,9 +234,8 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
           overlay.addEventListener('click', closeDrawer);
         }
 
-        // Theme toggle synchronization handling
         const toggles = document.querySelectorAll('.theme-toggle');
-        
+
         const updateUI = (theme) => {
           toggles.forEach(toggle => {
             const sunIcon = toggle.querySelector('.icon-sun');
@@ -241,11 +258,9 @@ const canonicalURL = new URL(Astro.url.pathname, siteUrl);
           });
         };
 
-        // Sync initial UI state
         const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
         updateUI(currentTheme);
 
-        // Bind click event to all toggles
         toggles.forEach(toggle => {
           toggle.addEventListener('click', () => {
             const current = document.documentElement.getAttribute('data-theme') || 'light';

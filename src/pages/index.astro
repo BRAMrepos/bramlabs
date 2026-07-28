@@ -1,262 +1,344 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Icon from '../components/Icon.astro';
+import WorkCard from '../components/WorkCard.astro';
 import { getCollection } from 'astro:content';
 
 const extensions = await getCollection('extensions');
+const apps = await getCollection('apps');
+const web = await getCollection('web');
+const art = await getCollection('art');
+
+const featuredWeb = web.filter((w) => w.data.featured);
+const featuredArt = art.filter((a) => a.data.featured).slice(0, 3);
+const featuredExt = extensions.find((e) => e.slug === 'story-peek') ?? extensions[0];
+const otherExt = extensions.filter((e) => e.slug !== 'story-peek').slice(0, 2);
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "DeveloperArchive",
+  "@type": "Organization",
   "name": "BramLabs",
   "url": "https://bramlabs.co",
-  "description": "Indie developer studio building micro browser extensions focused on privacy and user autonomy.",
-  "logo": "https://bramlabs.co/favicon.svg"
+  "description": "Indie product studio building apps, browser extensions, web products, and original merchandise for our own IP.",
+  "logo": "https://bramlabs.co/favicon.svg",
+  "email": "support@bramlabs.co",
 };
 ---
 
 <BaseLayout
-  title="Privacy-First Browser Extensions"
-  description="BramLabs builds lightweight, local-first, and privacy-respecting browser extensions designed to help you focus and protect your digital footprint."
+  title="Apps, Extensions, Web & Original Merch"
+  description="BramLabs is an indie product studio. We ship Amazon Appstore apps, Chrome extensions, web products like WorkflowAI, and original apparel designed only for our own IP."
   structuredData={structuredData}
 >
-  <!-- Hero Section -->
-  <section class="relative py-24 md:py-32 overflow-hidden flex items-center justify-center min-h-[70vh]">
-    <!-- Background Glow Blobs -->
-    <div class="bg-glow-blob"></div>
-    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(99,102,241,0.02),transparent_60%)]"></div>
-
-    <div class="max-w-4xl mx-auto px-6 w-full text-center flex flex-col items-center gap-8 relative z-10">
-      <!-- Badge -->
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-muted border border-accent/20 text-accent text-xs font-mono font-semibold hover:border-accent/40 transition-colors">
-        <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
-        Browser Extensions
-      </div>
-      <!-- Headline -->
-      <h1 class="text-display text-text max-w-3xl leading-[1.05] tracking-tight">
-        Lightweight browser extensions that <span class="bg-gradient-to-r from-accent via-indigo-400 to-accent bg-clip-text text-transparent">do one thing well.</span>
-      </h1>
-      <!-- Subtext -->
-      <p class="text-body text-muted max-w-2xl leading-relaxed">
-        Discover simple, beautifully designed browser utilities built to capture pages, manage audio volume, and browse content smoothly. No complex setups, no clutter.
-      </p>
-      <!-- CTAs -->
-      <div class="flex flex-col sm:flex-row gap-4 items-center justify-center w-full">
-        <a
-          href="/extensions"
-          class="bg-accent hover:bg-accent-hover text-white px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] shadow-lg shadow-accent/15 text-center flex items-center justify-center gap-2 group w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
-        >
-          Explore Extension Store
-          <span class="transition-transform group-hover:translate-x-1">&rarr;</span>
-        </a>
-        <a
-          href="/extensions"
-          class="border border-border bg-surface/40 backdrop-blur-sm text-text hover:bg-surface hover:border-accent/30 px-8 py-4 rounded-xl font-semibold transition-all duration-300 hover:scale-[1.02] text-center w-full sm:w-auto focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
-        >
-          View Directory
-        </a>
-      </div>
+  <!-- Hero -->
+  <section class="relative py-28 md:py-36 border-b border-border overflow-hidden">
+    <!-- Subtle background glow -->
+    <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] rounded-full opacity-40"
+           style="background: radial-gradient(ellipse at center, rgba(99,102,241,0.12) 0%, transparent 70%); filter: blur(60px);"></div>
     </div>
-  </section>
-
-  <!-- Pillars / Values Section -->
-  <section class="py-24 bg-bg border-y border-border">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="max-w-xl flex flex-col gap-4 mb-16 text-left">
-        <span class="text-[12px] font-mono text-accent uppercase tracking-wider font-semibold">Our Focus</span>
-        <h2 class="text-h2 text-text">Built for utility. Designed for simplicity.</h2>
-      </div>
-
-      <!-- Cards grid layout -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Card 1 -->
-        <div class="bg-surface border border-border/80 rounded-2xl p-8 flex flex-col gap-5 shadow-sm glow-card text-left">
-          <div class="w-12 h-12 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
-            <Icon name="Zap" class="w-6 h-6 text-accent" />
-          </div>
-          <h3 class="text-h3 text-text font-bold">Instant Utility</h3>
-          <p class="text-small text-muted leading-relaxed">
-            Designed to solve a specific browsing task in a single click. Install and get to work immediately without any setup hurdles.
-          </p>
+    <div class="relative max-w-6xl mx-auto px-6">
+      <div class="max-w-3xl flex flex-col gap-5">
+        <span class="inline-flex items-center gap-2 self-start px-3 py-1 rounded-full bg-accent-muted border border-accent/20 text-accent text-xs font-mono font-semibold">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent animate-pulse"></span>
+          Indie product studio
+        </span>
+        <h1 class="text-display text-text tracking-tight leading-[1.08]">
+          We build products<br class="hidden sm:block" /> and the things<br class="hidden sm:block" /> that belong to them.
+        </h1>
+        <p class="text-body text-muted max-w-xl leading-relaxed">
+          Apps, browser extensions, web tools, and original apparel — all from the same studio. Everything is produced in-house. Merch is for our own IP only.
+        </p>
+        <!-- Mini stats -->
+        <div class="flex flex-wrap gap-5 text-small text-muted pt-1">
+          <span class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0"></span>
+            {extensions.length} Chrome extensions live
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-accent flex-shrink-0"></span>
+            Active Appstore developer
+          </span>
+          <span class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-violet-400 flex-shrink-0"></span>
+            {web.length} web products shipped
+          </span>
         </div>
-
-        <!-- Card 2 -->
-        <div class="bg-surface border border-border/80 rounded-2xl p-8 flex flex-col gap-5 shadow-sm glow-card text-left">
-          <div class="w-12 h-12 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
-            <Icon name="Activity" class="w-6 h-6 text-accent" />
-          </div>
-          <h3 class="text-h3 text-text font-bold">Lightweight &amp; Fast</h3>
-          <p class="text-small text-muted leading-relaxed">
-            Optimized code built for minimal browser overhead. Runs smoothly in the background without affecting your tab load speed.
-          </p>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="bg-surface border border-border/80 rounded-2xl p-8 flex flex-col gap-5 shadow-sm glow-card text-left">
-          <div class="w-12 h-12 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
-            <Icon name="Sparkles" class="w-6 h-6 text-accent" />
-          </div>
-          <h3 class="text-h3 text-text font-bold">Native Integration</h3>
-          <p class="text-small text-muted leading-relaxed">
-            Interfaces designed to blend directly into your browser layout, offering an intuitive experience that feels completely native.
-          </p>
+        <div class="flex flex-col sm:flex-row gap-3 pt-3">
+          <a
+            href="/work"
+            class="bg-accent hover:bg-accent-hover text-white py-3 px-7 rounded-lg font-medium transition-colors text-center focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg outline-none"
+          >
+            View all work
+          </a>
+          <a
+            href="/extensions"
+            class="border border-border text-text hover:bg-surface py-3 px-7 rounded-lg font-medium transition-colors text-center focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg outline-none"
+          >
+            Extensions →
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Extensions Hub Section -->
-  <section class="py-24 bg-bg">
+  <!-- Trust strip -->
+  <section class="py-5 border-b border-border bg-surface">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 text-left">
-        <div class="max-w-xl flex flex-col gap-4">
-          <h2 class="text-h2 text-text">Everything we've built.</h2>
-          <p class="text-small text-muted">
-            Focused, lightweight browser tools designed to elevate your daily web browsing experience.
-          </p>
+      <ul class="flex flex-wrap items-center gap-x-8 gap-y-3 text-small text-muted">
+        <li class="flex items-center gap-2">
+          <Icon name="Smartphone" class="w-3.5 h-3.5 text-accent flex-shrink-0" />
+          Amazon Appstore developer
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="Puzzle" class="w-3.5 h-3.5 text-accent flex-shrink-0" />
+          Chrome Web Store publisher
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="Palette" class="w-3.5 h-3.5 text-accent flex-shrink-0" />
+          300 DPI print-ready art
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="ShieldCheck" class="w-3.5 h-3.5 text-accent flex-shrink-0" />
+          USPTO checks before publish
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Featured extension spotlight -->
+  {featuredExt && (
+    <section class="py-20 border-b border-border">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+          <div>
+            <span class="text-mono text-xs text-accent uppercase tracking-wider font-semibold">Featured extension</span>
+            <h2 class="text-h2 text-text mt-1">StoryPeek</h2>
+          </div>
+          <a href="/extensions" class="text-accent hover:underline font-medium text-sm">All extensions →</a>
         </div>
-        <a href="/extensions" class="text-accent hover:underline font-semibold transition-colors flex items-center gap-1 text-sm">
-          Browse all &rarr;
-        </a>
-      </div>
-
-      <!-- Asymmetrical Spotlight Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <!-- Featured Spotlight Card: StoryPeek -->
-        {(() => {
-          const storyPeek = extensions.find(e => e.slug === 'story-peek');
-          if (!storyPeek) return null;
-          return (
-            <div class="md:col-span-2 bg-surface border border-border/80 p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 shadow-sm glow-card text-left relative overflow-hidden rounded-2xl">
-              <div class="absolute -right-20 -bottom-20 w-48 h-48 rounded-full bg-accent/5 blur-3xl pointer-events-none"></div>
-              <div class="flex-grow flex flex-col md:flex-row items-start gap-6 max-w-3xl">
-                <div class="w-16 h-16 rounded-2xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent flex-shrink-0 shadow-sm">
-                  <Icon name={storyPeek.data.icon} class="w-8 h-8 text-accent" />
-                </div>
-                <div class="flex flex-col gap-3">
-                  <div class="flex items-center gap-3 flex-wrap">
-                    <h3 class="text-h2 text-text leading-tight">{storyPeek.data.title}</h3>
-                    <span class="text-mono text-[10px] px-2.5 py-0.5 rounded-full bg-accent-muted text-accent font-semibold border border-accent/10">Featured Release</span>
-                    <span class="text-mono text-xs text-muted">v{storyPeek.data.version}</span>
-                  </div>
-                  <p class="text-body text-muted leading-relaxed max-w-prose">
-                    {storyPeek.data.description}
-                  </p>
-                  <div class="flex flex-wrap gap-4 mt-2">
-                    {storyPeek.data.features.slice(0, 3).map((feat) => (
-                      <span class="flex items-center gap-1.5 text-xs text-muted font-medium">
-                        <Icon name="Check" class="w-4 h-4 text-accent" />
-                        {feat.title}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+        <!-- Wide featured card -->
+        <div class="bg-surface border border-border rounded-2xl p-8 md:p-10 shadow-sm grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          <div class="flex flex-col gap-5">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center flex-shrink-0">
+                <Icon name={featuredExt.data.icon} class="w-7 h-7 text-white" />
               </div>
-              
-              <div class="flex flex-col sm:flex-row md:flex-col gap-3 w-full md:w-auto flex-shrink-0">
-                <a
-                  href={storyPeek.data.storeUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-lg font-semibold transition-colors text-center text-sm shadow-sm w-full md:w-44 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer"
-                >
-                  Add to Chrome (Free)
-                </a>
-                <a href={`/extensions/${storyPeek.slug}`} class="border border-border text-text hover:bg-bg px-6 py-3 rounded-lg font-semibold transition-colors text-center text-sm w-full md:w-44 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none cursor-pointer">
-                  Learn More &rarr;
-                </a>
+              <div>
+                <h3 class="text-h3 text-text">{featuredExt.data.title}</h3>
+                <p class="text-mono text-xs text-muted mt-0.5">v{featuredExt.data.version} · Chrome extension</p>
               </div>
             </div>
-          );
-        })()}
-
-        <!-- Secondary Utilities: SnapElite and SonicShield -->
-        {extensions.filter(e => e.slug !== 'story-peek').map((ext) => (
-          <div class="bg-surface rounded-2xl border border-border/80 p-8 flex flex-col justify-between shadow-sm glow-card text-left relative overflow-hidden">
-            <div class="absolute -right-20 -bottom-20 w-36 h-36 rounded-full bg-accent/3 blur-3xl pointer-events-none"></div>
-            <div>
-              <div class="flex items-center justify-between mb-6 border-b border-border/50 pb-4">
-                <div class="flex items-center gap-4">
-                  <div class="w-12 h-12 rounded-xl bg-accent/5 border border-accent/15 flex items-center justify-center text-accent">
-                    <Icon name={ext.data.icon} class="w-6 h-6 text-accent" />
-                  </div>
-                  <div>
-                    <h3 class="text-h3 text-text leading-tight">{ext.data.title}</h3>
-                    <span class="text-mono text-xs text-muted mt-1 block">v{ext.data.version}</span>
-                  </div>
-                </div>
-                <span class="text-mono text-[10px] px-2 py-0.5 rounded-full bg-surface-2 text-muted border border-border">Preview</span>
-              </div>
-              
-              <p class="text-small text-muted leading-relaxed mb-6">
-                {ext.data.description}
-              </p>
-              
-              <div class="flex flex-col gap-2.5 mb-8">
-                {ext.data.features.slice(0, 2).map((feat) => (
-                  <span class="flex items-start gap-2 text-xs text-muted font-medium">
-                    <div class="mt-0.5 text-accent flex-shrink-0">
-                      <Icon name="Check" class="w-3.5 h-3.5 text-accent" />
-                    </div>
-                    <span><strong class="text-text">{feat.title}:</strong> {feat.description}</span>
-                  </span>
-                ))}
-              </div>
-            </div>
-            
-            <div class="border-t border-border/50 pt-5 flex items-center justify-between gap-4">
-              <a href={`/extensions/${ext.slug}`} class="text-accent hover:underline text-sm font-semibold flex items-center gap-1 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none">
-                Learn More
-                <Icon name="ArrowRight" class="w-4 h-4" />
-              </a>
+            <p class="text-body text-muted leading-relaxed">{featuredExt.data.description}</p>
+            <div class="flex flex-col sm:flex-row gap-3">
               <a
-                href={ext.data.storeUrl}
+                href={featuredExt.data.storeUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                class="border border-border text-text hover:bg-bg text-sm px-4 py-2 rounded-lg transition-colors font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent outline-none"
+                class="bg-accent hover:bg-accent-hover text-white py-3 px-6 rounded-lg font-medium transition-colors text-center text-sm focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 outline-none"
               >
-                Add to Chrome
+                Add to Chrome — Free
+              </a>
+              <a
+                href={`/extensions/${featuredExt.slug}`}
+                class="border border-border text-text hover:bg-bg py-3 px-6 rounded-lg font-medium transition-colors text-center text-sm focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 outline-none"
+              >
+                Learn more
               </a>
             </div>
           </div>
-        ))}
+          <div class="flex flex-col gap-4">
+            <h4 class="text-mono text-xs text-muted uppercase tracking-wider font-semibold">What it does</h4>
+            <ul class="flex flex-col gap-3">
+              {featuredExt.data.features.map((feat) => (
+                <li class="flex items-start gap-3 text-small text-muted">
+                  <Icon name="Check" class="w-4 h-4 text-accent flex-shrink-0 mt-0.5" />
+                  <span><span class="text-text font-medium">{feat.title}</span> — {feat.description}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Other extensions side by side -->
+        {otherExt.length > 0 && (
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+            {otherExt.map((ext) => (
+              <WorkCard
+                href={`/extensions/${ext.slug}`}
+                title={ext.data.title}
+                tagline={ext.data.tagline}
+                meta={`Extension · v${ext.data.version}`}
+                icon={ext.data.icon}
+                badge="Chrome"
+              />
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <!-- Four lanes -->
+  <section class="py-20 border-b border-border bg-surface">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-xl flex flex-col gap-3 mb-12">
+        <span class="text-mono text-xs text-accent uppercase tracking-wider font-semibold">What we build</span>
+        <h2 class="text-h2 text-text">Four lanes. One studio.</h2>
+        <p class="text-small text-muted">Each lane is real product work — not a service offering.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <a href="/apps" class="bg-bg border border-border rounded-xl p-6 flex flex-col gap-4 shadow-sm transition-all duration-200 hover:translate-y-[-2px] hover:border-accent/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+          <div class="w-10 h-10 rounded-lg bg-accent/5 border border-accent/15 flex items-center justify-center">
+            <Icon name="Smartphone" class="w-5 h-5 text-accent" />
+          </div>
+          <div>
+            <h3 class="text-h3 text-text">Apps</h3>
+            <p class="text-small text-muted leading-relaxed mt-1">
+              Original titles on Amazon Appstore under the BramLabs developer account.
+            </p>
+          </div>
+          <span class="text-accent text-sm font-medium mt-auto">Apps →</span>
+        </a>
+        <a href="/extensions" class="bg-bg border border-border rounded-xl p-6 flex flex-col gap-4 shadow-sm transition-all duration-200 hover:translate-y-[-2px] hover:border-accent/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+          <div class="w-10 h-10 rounded-lg bg-accent/5 border border-accent/15 flex items-center justify-center">
+            <Icon name="Puzzle" class="w-5 h-5 text-accent" />
+          </div>
+          <div>
+            <h3 class="text-h3 text-text">Extensions</h3>
+            <p class="text-small text-muted leading-relaxed mt-1">
+              StoryPeek, SnapElite, SonicShield — Chrome utilities with full support trees.
+            </p>
+          </div>
+          <span class="text-accent text-sm font-medium mt-auto">Extensions →</span>
+        </a>
+        <a href="/web" class="bg-bg border border-border rounded-xl p-6 flex flex-col gap-4 shadow-sm transition-all duration-200 hover:translate-y-[-2px] hover:border-accent/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+          <div class="w-10 h-10 rounded-lg bg-accent/5 border border-accent/15 flex items-center justify-center">
+            <Icon name="Globe" class="w-5 h-5 text-accent" />
+          </div>
+          <div>
+            <h3 class="text-h3 text-text">Web</h3>
+            <p class="text-small text-muted leading-relaxed mt-1">
+              Production sites and content systems, led by WorkflowAI.site.
+            </p>
+          </div>
+          <span class="text-accent text-sm font-medium mt-auto">Web →</span>
+        </a>
+        <a href="/merch" class="bg-bg border border-border rounded-xl p-6 flex flex-col gap-4 shadow-sm transition-all duration-200 hover:translate-y-[-2px] hover:border-accent/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent">
+          <div class="w-10 h-10 rounded-lg bg-accent/5 border border-accent/15 flex items-center justify-center">
+            <Icon name="Shirt" class="w-5 h-5 text-accent" />
+          </div>
+          <div>
+            <h3 class="text-h3 text-text">Art & Merch</h3>
+            <p class="text-small text-muted leading-relaxed mt-1">
+              300 DPI print-ready designs for our products only — USPTO checks before publish.
+            </p>
+          </div>
+          <span class="text-accent text-sm font-medium mt-auto">Merch →</span>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- Newsletter / CTA Section -->
-  <section class="py-24 bg-surface border-t border-border">
+  <!-- Web flagship spotlight -->
+  {featuredWeb.length > 0 && (
+    <section class="py-20 border-b border-border">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+          <div>
+            <span class="text-mono text-xs text-accent uppercase tracking-wider font-semibold">Web work</span>
+            <h2 class="text-h2 text-text mt-1">Shipped, not sketched.</h2>
+          </div>
+          <a href="/web" class="text-accent hover:underline font-medium text-sm">All web work →</a>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {featuredWeb.map((project) => (
+            <WorkCard
+              href={project.data.url}
+              title={project.data.title}
+              tagline={project.data.tagline}
+              meta={`Web · ${project.data.year}`}
+              icon={project.data.icon}
+              badge="Live site"
+              external
+            />
+          ))}
+          {apps.filter((a) => a.data.featured).map((app) => (
+            <WorkCard
+              href="/apps"
+              title={app.data.title}
+              tagline={app.data.tagline}
+              meta={`${app.data.platform} · ${app.data.year}`}
+              icon={app.data.icon}
+              badge={app.data.status === 'live' ? 'Live' : 'In progress'}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Merch brief section — MBA landing target -->
+  <section class="py-20 border-b border-border bg-surface">
     <div class="max-w-6xl mx-auto px-6">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center text-left">
-        <!-- Left column -->
-        <div class="lg:col-span-7 flex flex-col gap-4">
-          <h2 class="text-h2 text-text">Stay in the loop.</h2>
-          <p class="text-small text-muted max-w-prose">
-            New extensions, privacy guides, and release notes. No marketing. Unsubscribe anytime.
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div class="flex flex-col gap-5">
+          <span class="text-mono text-xs text-accent uppercase tracking-wider font-semibold">Merch on Demand</span>
+          <h2 class="text-h2 text-text">Original art for our own products.</h2>
+          <p class="text-small text-muted leading-relaxed">
+            BramLabs is an active Amazon Appstore developer expanding into Merch on Demand. We publish original apparel for our apps, games, extensions, and sites — not third-party IP, sports brands, or copyrighted characters.
+          </p>
+          <ul class="flex flex-col gap-2.5 text-small text-muted">
+            <li class="flex items-center gap-2"><Icon name="Check" class="w-4 h-4 text-accent flex-shrink-0" /> 300 DPI transparent PNG masters</li>
+            <li class="flex items-center gap-2"><Icon name="Check" class="w-4 h-4 text-accent flex-shrink-0" /> USPTO trademark screen before publish</li>
+            <li class="flex items-center gap-2"><Icon name="Check" class="w-4 h-4 text-accent flex-shrink-0" /> Amazon Content Policy review on every design</li>
+          </ul>
+          <a href="/merch" class="self-start text-accent hover:underline font-medium text-sm">Art & process →</a>
+        </div>
+        <!-- Art palette preview cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {featuredArt.slice(0, 4).map((piece) => (
+            <div class="rounded-xl border border-border overflow-hidden bg-bg shadow-sm">
+              <!-- Actual palette colour bar -->
+              <div class="h-16 flex overflow-hidden">
+                {piece.data.palette.map((hex) => (
+                  <div class="flex-1 h-full" style={`background-color: ${hex};`} title={hex} />
+                ))}
+              </div>
+              <div class="p-3 flex flex-col gap-0.5">
+                <h3 class="text-sm font-semibold text-text leading-tight">{piece.data.title}</h3>
+                <p class="text-mono text-[10px] text-muted">{piece.data.series} · {piece.data.printSpecs.dpi} DPI</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="bg-surface border border-border rounded-xl p-8 md:p-10 flex flex-col md:flex-row md:items-center justify-between gap-8 shadow-sm">
+        <div class="flex flex-col gap-3 max-w-xl">
+          <h2 class="text-h2 text-text">Developer reference</h2>
+          <p class="text-small text-muted leading-relaxed">
+            Amazon Appstore developer · Chrome publisher · Expanding into Merch on Demand for original apparel and branded goods tied to our own apps and games. Questions or verification: <a href="mailto:support@bramlabs.co" class="text-accent hover:underline">support@bramlabs.co</a>
           </p>
         </div>
-        <!-- Right column -->
-        <div class="lg:col-span-5 w-full">
-          <div class="flex flex-col gap-2 w-full">
-            <form class="flex flex-col sm:flex-row gap-3 w-full items-stretch" onsubmit="alert('Subscribed!'); return false;">
-              <input
-                type="email"
-                placeholder="your@email.com"
-                required
-                class="flex-grow bg-surface-2 border border-border rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent text-text placeholder:text-muted"
-              />
-              <button
-                type="submit"
-                class="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-lg text-sm font-semibold transition-colors duration-150 shadow-sm flex-shrink-0 cursor-pointer"
-              >
-                Subscribe
-              </button>
-            </form>
-            <span class="text-[11px] text-muted flex items-center gap-1 mt-1 justify-start">
-              <Icon name="Lock" class="w-3.5 h-3.5 text-accent" />
-              We value your privacy. Zero spam. Unsubscribe anytime.
-            </span>
-          </div>
+        <div class="flex flex-col sm:flex-row gap-3 flex-shrink-0">
+          <a
+            href="/about"
+            class="bg-accent hover:bg-accent-hover text-white py-3 px-6 rounded-lg font-medium transition-colors text-center focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg outline-none"
+          >
+            About the studio
+          </a>
+          <a
+            href="/merch"
+            class="border border-border text-text hover:bg-bg py-3 px-6 rounded-lg font-medium transition-colors text-center focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-bg outline-none"
+          >
+            MBA portfolio
+          </a>
         </div>
       </div>
     </div>

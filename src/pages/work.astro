@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import WorkCard from '../components/WorkCard.astro';
+import { getCollection } from 'astro:content';
+
+const extensions = await getCollection('extensions');
+const apps = await getCollection('apps');
+const web = await getCollection('web');
+const art = await getCollection('art');
+
+const filter = Astro.url.searchParams.get('type') ?? 'all';
+---
+
+<BaseLayout
+  title="Work"
+  description="All BramLabs work in one place: Amazon Appstore apps, Chrome extensions, web products, and original merch art."
+>
+  <section class="py-20">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="max-w-2xl flex flex-col gap-4 mb-10">
+        <h1 class="text-h1 text-text">Work</h1>
+        <p class="text-body text-muted">
+          Product work across apps, extensions, web, and original art for Merch on Demand.
+        </p>
+      </div>
+
+      <!-- Filters -->
+      <div class="flex flex-wrap gap-2 mb-12">
+        {[
+          { id: 'all', label: 'All' },
+          { id: 'apps', label: 'Apps' },
+          { id: 'extensions', label: 'Extensions' },
+          { id: 'web', label: 'Web' },
+          { id: 'art', label: 'Art & Merch' },
+        ].map((item) => (
+          <a
+            href={item.id === 'all' ? '/work' : `/work?type=${item.id}`}
+            class:list={[
+              'text-sm px-4 py-2 rounded-full border transition-colors font-medium',
+              filter === item.id
+                ? 'bg-accent text-white border-accent'
+                : 'border-border text-muted hover:text-text hover:border-accent/30',
+            ]}
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
+
+      {(filter === 'all' || filter === 'apps') && (
+        <div class="mb-14">
+          <h2 class="text-h3 text-text mb-6 flex items-center gap-2">
+            Apps
+            <span class="text-mono text-xs text-muted font-normal">{apps.length}</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {apps.map((app) => (
+              <WorkCard
+                href="/apps"
+                title={app.data.title}
+                tagline={app.data.tagline}
+                meta={`${app.data.platform} · ${app.data.status}`}
+                icon={app.data.icon}
+                badge={app.data.category}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {(filter === 'all' || filter === 'extensions') && (
+        <div class="mb-14">
+          <h2 class="text-h3 text-text mb-6 flex items-center gap-2">
+            Extensions
+            <span class="text-mono text-xs text-muted font-normal">{extensions.length}</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {extensions.map((ext) => (
+              <WorkCard
+                href={`/extensions/${ext.slug}`}
+                title={ext.data.title}
+                tagline={ext.data.tagline}
+                meta={`v${ext.data.version} · ${ext.data.lastUpdated}`}
+                icon={ext.data.icon}
+                badge="Chrome"
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {(filter === 'all' || filter === 'web') && (
+        <div class="mb-14">
+          <h2 class="text-h3 text-text mb-6 flex items-center gap-2">
+            Web
+            <span class="text-mono text-xs text-muted font-normal">{web.length}</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {web.map((project) => (
+              <WorkCard
+                href={project.data.url.startsWith('http') ? project.data.url : project.data.url}
+                title={project.data.title}
+                tagline={project.data.tagline}
+                meta={project.data.stack.slice(0, 3).join(' · ')}
+                icon={project.data.icon}
+                badge={project.data.year}
+                external={project.data.url.startsWith('http') && !project.data.url.includes('bramlabs.co')}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+
+      {(filter === 'all' || filter === 'art') && (
+        <div class="mb-4">
+          <h2 class="text-h3 text-text mb-6 flex items-center gap-2">
+            Art &amp; Merch
+            <span class="text-mono text-xs text-muted font-normal">{art.length}</span>
+          </h2>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {art.map((piece) => (
+              <WorkCard
+                href="/merch"
+                title={piece.data.title}
+                tagline={piece.data.description}
+                meta={`${piece.data.series} · ${piece.data.printSpecs.dpi} DPI`}
+                icon="Palette"
+                badge={piece.data.status === 'ready' ? 'Print-ready' : 'In progress'}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
