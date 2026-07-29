@@ -1,0 +1,404 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import DesignCard from "@/components/DesignCard.astro";
+import { designs, getDesign, getRelated } from "@/data/designs";
+
+export function getStaticPaths() {
+  return designs.map((d) => ({ params: { slug: d.slug } }));
+}
+
+const { slug } = Astro.params;
+const design = getDesign(slug!);
+if (!design) return Astro.redirect("/collection/");
+const related = getRelated(design);
+const n = String(design.order).padStart(2, "0");
+
+const artworkLd = {
+  "@context": "https://schema.org",
+  "@type": "VisualArtwork",
+  name: design.title,
+  description: design.fullDescription,
+  image: new URL(design.images.rawArtwork, Astro.site).href,
+  creator: { "@type": "Person", name: "Bram" },
+  artform: "Apparel graphic / vector illustration",
+};
+
+const crumbs = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://bramlabs.co/" },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Collection",
+      item: "https://bramlabs.co/collection/",
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: design.title,
+      item: new URL(`/designs/${design.slug}/`, Astro.site).href,
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title={design.seo.title}
+  description={design.seo.description}
+  image={design.images.rawArtwork}
+  type="article"
+  jsonLd={[artworkLd, crumbs]}
+>
+  <article class="section">
+    <div class="wrap">
+      <nav class="crumbs meta" aria-label="Breadcrumb">
+        <a href="/collection/">Collection</a>
+        <span aria-hidden="true">/</span>
+        <span>{design.title}</span>
+      </nav>
+      <p class="meta">{n} / {design.category}</p>
+      <h1 class="h-section">{design.title}</h1>
+      <p class="lede">{design.shortDescription}</p>
+
+      <div class="gallery">
+        <figure>
+          <img
+            src={design.images.primaryMockup}
+            alt={`Black heavyweight T-shirt featuring the ${design.title} graphic`}
+            width="800"
+            height="1000"
+            fetchpriority="high"
+          />
+          <figcaption class="meta">Garment application</figcaption>
+        </figure>
+        <figure>
+          <img
+            src={design.images.rawArtwork}
+            alt={`${design.title} raw artwork`}
+            width="800"
+            height="800"
+          />
+          <figcaption class="meta">Raw artwork</figcaption>
+        </figure>
+        <figure>
+          <img
+            src={design.images.detail}
+            alt={`${design.title} print detail crop`}
+            width="800"
+            height="800"
+            loading="lazy"
+          />
+          <figcaption class="meta">Print detail</figcaption>
+        </figure>
+      </div>
+
+      <div class="detail-grid">
+        <section>
+          <h2 class="h-card">The Concept</h2>
+          <p class="body">{design.fullDescription}</p>
+          {
+            design.conceptExtra?.map((p) => (
+              <p class="body extra">{p}</p>
+            ))
+          }
+          {
+            design.rejectedNote && (
+              <p class="body reject">
+                <strong>Not this:</strong> {design.rejectedNote}
+              </p>
+            )
+          }
+        </section>
+        <section>
+          <h2 class="h-card">Visual System</h2>
+          <dl class="sys">
+            <div>
+              <dt>Visual language</dt>
+              <dd>{design.visualLanguage.join("; ")}</dd>
+            </div>
+            <div>
+              <dt>Primary forms</dt>
+              <dd>{design.primaryForms.join("; ")}</dd>
+            </div>
+            <div>
+              <dt>Palette</dt>
+              <dd>
+                <ul class="swatches">
+                  {
+                    design.palette.map((c) => (
+                      <li>
+                        <span style={`background:${c.hex}`} />
+                        {c.name}
+                        <code>{c.hex}</code>
+                      </li>
+                    ))
+                  }
+                </ul>
+              </dd>
+            </div>
+            <div>
+              <dt>Application</dt>
+              <dd>{design.application}</dd>
+            </div>
+            <div>
+              <dt>Audience</dt>
+              <dd>{design.audience.join(", ")}</dd>
+            </div>
+            {
+              design.printNotes && (
+                <div>
+                  <dt>Print notes</dt>
+                  <dd>{design.printNotes}</dd>
+                </div>
+              )
+            }
+          </dl>
+        </section>
+      </div>
+
+      {
+        design.processStages && design.processStages.length > 0 && (
+          <section class="stages-block">
+            <h2 class="h-card">Process</h2>
+            <ol class="stages">
+              {design.processStages.map((s, i) => (
+                <li>
+                  <img src={s.image} alt="" width="640" height="640" loading="lazy" />
+                  <span class="meta">{String(i + 1).padStart(2, "0")}</span>
+                  <h3>{s.label}</h3>
+                  <p>{s.body}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+        )
+      }
+
+      <section class="on-garment">
+        <h2 class="h-card">On Garment</h2>
+        <p class="body on-note">
+          Portfolio mockups show scale and contrast intent. Physical samples and
+          marketplace photos will replace illustrated applications as they are produced.
+        </p>
+        <div class="on-grid">
+          <img
+            src={design.images.primaryMockup}
+            alt=""
+            width="800"
+            height="1000"
+            loading="lazy"
+          />
+          <img
+            src={design.images.rawArtwork}
+            alt=""
+            width="800"
+            height="800"
+            loading="lazy"
+          />
+        </div>
+      </section>
+
+      {
+        related.length > 0 && (
+          <section class="related">
+            <h2 class="h-card">Related Designs</h2>
+            <div class="related-grid">
+              {related.map((d) => (
+                <DesignCard design={d} />
+              ))}
+            </div>
+          </section>
+        )
+      }
+    </div>
+  </article>
+</BaseLayout>
+
+<style lang="scss">
+  .crumbs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    a:hover {
+      color: var(--ink);
+    }
+  }
+  .meta {
+    margin-bottom: 0.75rem;
+  }
+  .h-section {
+    margin-bottom: 1rem;
+  }
+  .lede {
+    margin-bottom: 2.5rem;
+  }
+  .gallery {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    @media (width >= 900px) {
+      grid-template-columns: 1.1fr 0.9fr 0.9fr;
+    }
+    figure {
+      border: none;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--canvas);
+      box-shadow: var(--shadow-soft);
+    }
+    img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 30%;
+    }
+    figure:nth-child(2) img,
+    figure:nth-child(3) img {
+      object-fit: contain;
+      object-position: center;
+      background: var(--paper);
+    }
+    figcaption {
+      padding: 0.65rem 0.85rem;
+      border-top: 1px solid var(--line);
+    }
+  }
+  .detail-grid {
+    display: grid;
+    gap: 2.5rem;
+    margin-bottom: 3.5rem;
+    @media (width >= 900px) {
+      grid-template-columns: 1.1fr 0.9fr;
+    }
+  }
+  .extra {
+    margin-top: 1rem;
+    color: var(--muted);
+  }
+  .reject {
+    margin-top: 1.25rem;
+    padding: 1rem 1.1rem;
+    border-left: 3px solid var(--orange);
+    background: var(--canvas);
+    font-size: 0.95rem;
+    color: var(--muted);
+    strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+  }
+  .sys {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    div {
+      border-top: 1px solid var(--line);
+      padding-top: 0.85rem;
+    }
+    dt {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.35rem;
+    }
+    dd {
+      font-size: 0.975rem;
+      line-height: 1.55;
+    }
+  }
+  .swatches {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+    li {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+    }
+    span {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      border: 1px solid var(--line);
+      flex-shrink: 0;
+    }
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+  }
+  .stages-block {
+    margin-bottom: 3.5rem;
+  }
+  .stages {
+    display: grid;
+    gap: 1.25rem;
+    margin-top: 1.25rem;
+    @media (width >= 800px) {
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    }
+    li {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    img {
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--canvas);
+      margin-bottom: 0.35rem;
+    }
+    h3 {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+  }
+  .on-garment {
+    margin-bottom: 3.5rem;
+  }
+  .on-note {
+    margin: 0.75rem 0 1.25rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .on-grid {
+    display: grid;
+    gap: 1rem;
+    @media (width >= 720px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    img {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--canvas);
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+  }
+  .related {
+    border-top: 1px solid var(--line);
+    padding-top: 2.5rem;
+  }
+  .related-grid {
+    display: grid;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    @media (width >= 800px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+</style>

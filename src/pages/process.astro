@@ -1,0 +1,225 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getDesign } from "@/data/designs";
+
+const cases = [
+  {
+    design: getDesign("rotation-dial")!,
+    focus: [
+      "Shift structure",
+      "Circular schedule geometry",
+      "Directional system",
+      "Technical hierarchy",
+      "Garment readability",
+    ],
+    body: "Rotation Dial translates continuous crew coverage into a wearable system diagram. Three arcs encode day, swing and night without becoming a logo lockup.",
+  },
+  {
+    design: getDesign("37-tabs-open")!,
+    focus: [
+      "Humor",
+      "Generic interface language",
+      "Avoiding browser-brand imitation",
+      "Tab rhythm",
+      "Typographic hierarchy",
+    ],
+    body: "37 Tabs Open uses generic interface chrome so the joke lands without imitating any browser vendor. Hierarchy is pure type and tab rhythm.",
+  },
+  {
+    design: getDesign("wireframe-anatomy")!,
+    focus: [
+      "Product-design language",
+      "Blueprint structure",
+      "Spacing callouts",
+      "Component abstraction",
+      "Apparel composition",
+    ],
+    body: "Wireframe Anatomy expands a product wireframe into a full composition — modules, chrome and dimension marks — readable as structure rather than a tiny phone icon.",
+  },
+];
+---
+
+<BaseLayout
+  title="Process — BramLabs"
+  description="Real case studies from the BramLabs apparel collection: Rotation Dial, 37 Tabs Open and Wireframe Anatomy."
+>
+  <section class="section">
+    <div class="wrap">
+      <header class="page-head">
+        <h1 class="h-section">Process</h1>
+        <p class="lede">
+          Three real case studies. Each follows a design from idea through
+          construction — not a set of generic process icons.
+        </p>
+      </header>
+
+      {
+        cases.map((c, i) => (
+          <article class="case" id={c.design.slug}>
+            <p class="meta accent">Case study {String(i + 1).padStart(2, "0")}</p>
+            <h2 class="h-section">{c.design.title}</h2>
+            <p class="body lead">{c.body}</p>
+            <div class="case-grid">
+              <img
+                src={c.design.images.rawArtwork}
+                alt={`${c.design.title} artwork`}
+                width="800"
+                height="800"
+                loading={i === 0 ? "eager" : "lazy"}
+              />
+              <img
+                src={c.design.images.primaryMockup}
+                alt={`${c.design.title} on garment`}
+                width="800"
+                height="1000"
+                loading="lazy"
+              />
+            </div>
+            <ul class="focus">
+              {c.focus.map((f) => (
+                <li>{f}</li>
+              ))}
+            </ul>
+            {c.design.processStages && (
+              <ol class="stages">
+                {c.design.processStages.map((s, j) => (
+                  <li>
+                    <img src={s.image} alt="" width="640" height="640" loading="lazy" />
+                    <span class="meta">{String(j + 1).padStart(2, "0")}</span>
+                    <h3>{s.label}</h3>
+                    <p>{s.body}</p>
+                  </li>
+                ))}
+              </ol>
+            )}
+            <a href={`/designs/${c.design.slug}/`} class="btn -link">
+              View design →
+            </a>
+          </article>
+        ))
+      }
+
+      <aside class="method">
+        <h2 class="h-card">General method</h2>
+        <ol>
+          <li><strong>Concept writing</strong> — the idea must stand without decoration.</li>
+          <li><strong>Sketch</strong> — find primary forms fast; discard logo thinking.</li>
+          <li><strong>Research</strong> — real structure (shifts, UI, audio) when it matters.</li>
+          <li><strong>Vector construction</strong> — hierarchy for chest distance.</li>
+          <li><strong>Garment pass</strong> — contrast, scale, fabric honesty.</li>
+          <li><strong>Policy review</strong> — original work only; no vendor kits.</li>
+        </ol>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .page-head {
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .case {
+    padding-bottom: 4rem;
+    margin-bottom: 3rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .accent {
+    color: var(--cyan);
+    margin-bottom: 0.75rem;
+  }
+  .lead {
+    margin: 1rem 0 1.75rem;
+    max-width: 40rem;
+    color: var(--muted);
+  }
+  .case-grid {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    @media (width >= 800px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    img {
+      width: 100%;
+      border: none;
+      border-radius: var(--radius-lg);
+      background: var(--canvas);
+      aspect-ratio: 1;
+      object-fit: cover;
+      object-position: center 28%;
+      box-shadow: var(--shadow-soft);
+    }
+    .case-grid img:first-child {
+      object-fit: contain;
+      object-position: center;
+      background: var(--paper);
+    }
+  }
+  .focus {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    li {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.75rem;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--muted);
+    }
+  }
+  .stages {
+    display: grid;
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+    @media (width >= 900px) {
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+    li {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    img {
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--canvas);
+      margin-bottom: 0.25rem;
+    }
+    h3 {
+      font-size: 0.975rem;
+      font-weight: 500;
+    }
+    p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+  }
+  .method {
+    max-width: 40rem;
+    ol {
+      margin-top: 1rem;
+      list-style: decimal;
+      padding-left: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+  }
+</style>

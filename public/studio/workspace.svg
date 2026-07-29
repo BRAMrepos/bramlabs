@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" fill="none">
+  <rect width="800" height="1000" fill="#D9D4C8"/>
+  <!-- desk surface -->
+  <rect x="0" y="620" width="800" height="380" fill="#C4BDB0"/>
+  <rect x="0" y="620" width="800" height="8" fill="#111315" opacity="0.08"/>
+  <!-- monitor -->
+  <rect x="160" y="180" width="480" height="320" rx="8" fill="#111315"/>
+  <rect x="180" y="200" width="440" height="260" fill="#1a2228"/>
+  <!-- art on screen -->
+  <circle cx="400" cy="330" r="70" stroke="#23C5EF" stroke-width="3" fill="none"/>
+  <path d="M400 280 A50 50 0 0 1 450 360" stroke="#FF862E" stroke-width="6" stroke-linecap="round" fill="none"/>
+  <rect x="340" y="500" width="120" height="16" rx="2" fill="#111315"/>
+  <rect x="370" y="516" width="60" height="40" fill="#B0A89A"/>
+  <!-- notebook -->
+  <rect x="80" y="680" width="200" height="140" rx="4" fill="#F4F1E9" transform="rotate(-6 180 750)"/>
+  <line x1="100" y1="720" x2="240" y2="705" stroke="#111315" stroke-width="1" opacity="0.2"/>
+  <line x1="105" y1="740" x2="235" y2="725" stroke="#111315" stroke-width="1" opacity="0.15"/>
+  <line x1="110" y1="760" x2="230" y2="745" stroke="#111315" stroke-width="1" opacity="0.15"/>
+  <!-- pen -->
+  <rect x="300" y="750" width="120" height="8" rx="2" fill="#111315" opacity="0.5" transform="rotate(12 360 754)"/>
+  <!-- coffee -->
+  <ellipse cx="620" cy="760" rx="40" ry="12" fill="#111315" opacity="0.15"/>
+  <rect x="590" y="700" width="60" height="60" rx="4" fill="#F4F1E9"/>
+  <ellipse cx="620" cy="700" rx="30" ry="8" fill="#8B6914" opacity="0.6"/>
+  <text x="60" y="960" font-family="ui-monospace,monospace" font-size="13" fill="#666963" letter-spacing="2">STUDIO DESK · ART DIRECTION</text>
+</svg>

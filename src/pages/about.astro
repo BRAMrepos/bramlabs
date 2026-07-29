@@ -1,0 +1,177 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="About — BramLabs"
+  description="BramLabs is an independent software and design studio founded by Bram, creating digital products and original apparel graphics."
+>
+  <section class="section">
+    <div class="wrap">
+      <header class="page-head">
+        <h1 class="h-section">About BramLabs</h1>
+        <p class="lede">
+          BramLabs is an independent software and design studio founded by Bram.
+          The studio creates focused digital products alongside original apparel
+          graphics inspired by technology, work systems and professional culture.
+        </p>
+      </header>
+
+      <section id="designer" class="block designer-block">
+        <h2 class="h-card">Designed by Bram</h2>
+        <div class="designer">
+          <figure class="portrait">
+            <img
+              src="/studio/workspace.svg"
+              alt="Stylized illustration of the BramLabs studio desk"
+              width="800"
+              height="1000"
+            />
+            <figcaption class="meta">
+              Workspace illustration — genuine portrait photography will replace this
+            </figcaption>
+          </figure>
+          <div class="bio">
+            <p class="body">
+              I’m Bram, founder of BramLabs. I design each apparel concept in-house,
+              moving from research and sketching through vector construction, garment
+              testing and production preparation.
+            </p>
+            <p class="body">
+              Software and graphics share the same desk. Systems thinking, clear
+              hierarchy and craft show up in both — but shirts are never treated as
+              app advertisements. If a graphic only works as a logo tile, it does not
+              ship as apparel.
+            </p>
+            <p class="body">
+              Tools of record include vector illustration, technical layout and
+              careful print preparation. The public portfolio shows optimized previews;
+              production files stay separate.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="block">
+        <h2 class="h-card">Principles</h2>
+        <ul class="principles">
+          <li>
+            <h3>Original concepts</h3>
+            <p>
+              Every design begins with a BramLabs-created idea rather than stock
+              artwork, licensed characters or copied branding.
+            </p>
+          </li>
+          <li>
+            <h3>Readable graphics</h3>
+            <p>
+              Every composition must work both as standalone art and as a garment
+              graphic seen at normal viewing distance.
+            </p>
+          </li>
+          <li>
+            <h3>Deliberate construction</h3>
+            <p>
+              Color, line weight, scale and garment placement are considered during
+              the design process — not added after a slogan.
+            </p>
+          </li>
+          <li>
+            <h3>Honest credentials</h3>
+            <p>
+              Software is listed publicly only when a real storefront URL exists.
+              Support pages stay available for products that need them.
+            </p>
+          </li>
+        </ul>
+      </section>
+
+      <section class="block">
+        <h2 class="h-card">Contact</h2>
+        <p class="body">
+          Studio inquiries: <a href="mailto:contact@bramlabs.co">contact@bramlabs.co</a
+          ><br />
+          Product support: <a href="mailto:support@bramlabs.co">support@bramlabs.co</a>
+        </p>
+        <p class="body meta-line">
+          Prefer the <a href="/contact/">contact page</a> for structured messages.
+        </p>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .page-head {
+    max-width: 42rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .block {
+    margin-bottom: 3.5rem;
+  }
+  .designer {
+    display: grid;
+    gap: 2rem;
+    margin-top: 1.25rem;
+    @media (width >= 900px) {
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+    }
+  }
+  .portrait {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--canvas);
+    img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+    figcaption {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--line);
+    }
+  }
+  .bio .body + .body {
+    margin-top: 1rem;
+    color: var(--muted);
+  }
+  .principles {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+    @media (width >= 800px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    li {
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+    }
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+    p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+  }
+  .meta-line {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+  .body a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

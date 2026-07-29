@@ -1,0 +1,156 @@
+[
+  {
+    "slug": "rotation-dial",
+    "n": "01",
+    "cat": "SHIFT WORK",
+    "title": "Rotation Dial",
+    "desc": "A continuous 24-hour shift system for crews that keep operations moving.",
+    "colors": [
+      "#F4F1E9",
+      "#23C5EF",
+      "#FF862E",
+      "#111315"
+    ]
+  },
+  {
+    "slug": "circadian-corrupted",
+    "n": "02",
+    "cat": "SHIFT WORK",
+    "title": "Circadian Rhythm: Corrupted",
+    "desc": "A disrupted sleep cycle rendered as controlled line interference.",
+    "colors": [
+      "#F4F1E9",
+      "#7976E8",
+      "#23C5EF",
+      "#111315"
+    ]
+  },
+  {
+    "slug": "24h-hand-off",
+    "n": "03",
+    "cat": "SHIFT WORK",
+    "title": "24H Hand-Off",
+    "desc": "Day, swing and night periods interlocking as one uninterrupted system.",
+    "colors": [
+      "#F4F1E9",
+      "#FF862E",
+      "#42C991",
+      "#111315"
+    ]
+  },
+  {
+    "slug": "37-tabs-open",
+    "n": "04",
+    "cat": "DEVELOPER CULTURE",
+    "title": "37 Tabs Open, All Important",
+    "desc": "Browser-tab humor with clean hierarchy — readable from across the room.",
+    "colors": [
+      "#F4F1E9",
+      "#23C5EF",
+      "#111315",
+      "#666963"
+    ]
+  },
+  {
+    "slug": "build-47",
+    "n": "05",
+    "cat": "DEVELOPER CULTURE",
+    "title": "Build 47",
+    "desc": "Negative-space typography about iteration, not perfection.",
+    "colors": [
+      "#F4F1E9",
+      "#111315",
+      "#FF862E"
+    ]
+  },
+  {
+    "slug": "wireframe-anatomy",
+    "n": "06",
+    "cat": "DEVELOPER CULTURE",
+    "title": "Wireframe Anatomy",
+    "desc": "Product-design language as a full composition, not a phone icon.",
+    "colors": [
+      "#F4F1E9",
+      "#111315",
+      "#23C5EF",
+      "#666963"
+    ]
+  },
+  {
+    "slug": "focus-waveform",
+    "n": "07",
+    "cat": "FOCUS",
+    "title": "Focus Is a Waveform",
+    "desc": "Attention as a single dominant wave with restrained annotation.",
+    "colors": [
+      "#F4F1E9",
+      "#7976E8",
+      "#111315"
+    ]
+  },
+  {
+    "slug": "signal-noise",
+    "n": "08",
+    "cat": "AUDIO",
+    "title": "Signal / Noise",
+    "desc": "Clean data against controlled visual interference.",
+    "colors": [
+      "#F4F1E9",
+      "#23C5EF",
+      "#FF862E",
+      "#111315"
+    ]
+  },
+  {
+    "slug": "streak-grid-365",
+    "n": "09",
+    "cat": "FOCUS",
+    "title": "Streak Grid: Day 365",
+    "desc": "A year of consistency expressed as modular units and one deliberate exception.",
+    "colors": [
+      "#F4F1E9",
+      "#42C991",
+      "#111315",
+      "#666963"
+    ]
+  },
+  {
+    "slug": "protect-your-ears",
+    "n": "10",
+    "cat": "AUDIO",
+    "title": "Protect Your Ears",
+    "desc": "Circular frequency notation for volume awareness and hearing safety.",
+    "colors": [
+      "#F4F1E9",
+      "#FF862E",
+      "#111315",
+      "#23C5EF"
+    ]
+  },
+  {
+    "slug": "maintenance-window",
+    "n": "11",
+    "cat": "DEVELOPER CULTURE",
+    "title": "Maintenance Window",
+    "desc": "System-status panels as typographic utility, not OS cosplay.",
+    "colors": [
+      "#F4F1E9",
+      "#111315",
+      "#42C991",
+      "#666963"
+    ]
+  },
+  {
+    "slug": "bramlabs-modular-grid",
+    "n": "12",
+    "cat": "STUDIO",
+    "title": "BramLabs Modular Grid",
+    "desc": "Studio identity as a modular coordinate system.",
+    "colors": [
+      "#F4F1E9",
+      "#23C5EF",
+      "#FF862E",
+      "#111315"
+    ]
+  }
+]

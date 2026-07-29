@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <rect width="800" height="800" fill="#F4F1E9"/>
+  <text x="60" y="60" font-family="ui-monospace,monospace" font-size="14" fill="#666963" letter-spacing="3">01 · ROUGH CONCEPT</text>
+  <!-- loose pencil-like arcs -->
+  <path d="M200 400 Q 300 200, 400 400 T 600 400" stroke="#111315" stroke-width="2" fill="none" opacity="0.4"/>
+  <path d="M220 420 Q 320 240, 420 420 T 580 420" stroke="#111315" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <circle cx="400" cy="400" r="160" stroke="#111315" stroke-width="1.5" stroke-dasharray="8 6" fill="none" opacity="0.5"/>
+  <circle cx="400" cy="400" r="8" fill="#111315" opacity="0.5"/>
+  <text x="400" y="620" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#666963">three periods · one loop?</text>
+  <path d="M150 650 L250 680 L200 700" stroke="#111315" stroke-width="1" opacity="0.3" fill="none"/>
+  <text x="270" y="690" font-family="ui-monospace,monospace" font-size="12" fill="#666963">day / swing / night</text>
+</svg>

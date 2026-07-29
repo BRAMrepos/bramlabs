@@ -1,0 +1,126 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getAllDesigns } from "@/data/designs";
+
+const designs = getAllDesigns();
+---
+
+<BaseLayout
+  title="Merch Portfolio Notes — BramLabs"
+  description="How BramLabs prepares apparel graphics for listings and production — portfolio notes, not an online store."
+  image="/og/collection.svg"
+>
+  <section class="section">
+    <div class="wrap narrow">
+      <header class="page-head">
+        <p class="eyebrow">Portfolio notes</p>
+        <h1 class="h-section">Merch is a portfolio, not a cart</h1>
+        <p class="lede">
+          BramLabs publishes original apparel graphics with garment applications
+          and process context. This page explains how designs are prepared for
+          marketplace listings — there is no checkout on this site.
+        </p>
+      </header>
+
+      <div class="blocks">
+        <section>
+          <h2 class="h-card">What you will find</h2>
+          <ul>
+            <li>Twelve original graphics with raw artwork and mock applications</li>
+            <li>Process case studies showing construction decisions</li>
+            <li>Designer authorship and studio credentials</li>
+          </ul>
+          <a href="/collection/" class="btn -primary">Browse the collection</a>
+        </section>
+        <section>
+          <h2 class="h-card">What you will not find</h2>
+          <ul>
+            <li>No shopping cart or fake inventory</li>
+            <li>No “add to bag” theatre</li>
+            <li>No third-party product embeds pretending to be a store</li>
+          </ul>
+          <a href="/process/" class="btn -ghost">See the process</a>
+        </section>
+        <section>
+          <h2 class="h-card">Production notes</h2>
+          <p class="body">
+            Portfolio previews are optimized for the web. Production files
+            (print-ready vectors, transparent exports, placement guides) are
+            maintained separately and reviewed for marketplace policy before any
+            listing submission.
+          </p>
+        </section>
+      </div>
+
+      <div class="strip">
+        <h2 class="h-card">Design index</h2>
+        <ul class="index">
+          {
+            designs.map((d) => (
+              <li>
+                <a href={`/designs/${d.slug}/`}>
+                  <span class="meta">{String(d.order).padStart(2, "0")}</span>
+                  <span>{d.title}</span>
+                  <span class="meta">{d.category}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .narrow {
+    max-width: 48rem;
+  }
+  .page-head {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .blocks {
+    display: grid;
+    gap: 2.5rem;
+    margin-bottom: 3.5rem;
+  }
+  .blocks h2 {
+    margin-bottom: 0.75rem;
+  }
+  .blocks ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
+    color: var(--muted);
+    li {
+      padding-left: 1rem;
+      position: relative;
+      &::before {
+        content: "–";
+        position: absolute;
+        left: 0;
+        color: var(--ink);
+      }
+    }
+  }
+  .index {
+    border-top: 1px solid var(--line);
+    margin-top: 1rem;
+    a {
+      display: grid;
+      grid-template-columns: 3rem 1fr auto;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+      &:hover span:nth-child(2) {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+    }
+  }
+</style>

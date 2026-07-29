@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <rect width="800" height="800" fill="#F4F1E9"/>
+  <text x="60" y="60" font-family="ui-monospace,monospace" font-size="14" fill="#666963" letter-spacing="3">02 · SHIFT RESEARCH</text>
+  <line x1="100" y1="200" x2="700" y2="200" stroke="#111315" stroke-width="1" opacity="0.2"/>
+  <rect x="160" y="280" width="160" height="200" rx="4" stroke="#111315" stroke-width="1.5" fill="none"/>
+  <text x="240" y="320" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12" fill="#666963">07:00 DAY</text>
+  <rect x="180" y="360" width="120" height="8" fill="#FF862E" opacity="0.6"/>
+  <rect x="180" y="380" width="80" height="8" fill="#111315" opacity="0.15"/>
+  <rect x="180" y="400" width="60" height="8" fill="#111315" opacity="0.15"/>
+  <rect x="360" y="280" width="160" height="200" rx="4" stroke="#111315" stroke-width="1.5" fill="none"/>
+  <text x="440" y="320" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12" fill="#666963">15:00 SWING</text>
+  <rect x="380" y="360" width="120" height="8" fill="#23C5EF" opacity="0.6"/>
+  <rect x="380" y="380" width="95" height="8" fill="#111315" opacity="0.15"/>
+  <rect x="380" y="400" width="80" height="8" fill="#111315" opacity="0.15"/>
+  <rect x="560" y="280" width="160" height="200" rx="4" stroke="#111315" stroke-width="1.5" fill="none"/>
+  <text x="640" y="320" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12" fill="#666963">23:00 NIGHT</text>
+  <rect x="580" y="360" width="120" height="8" fill="#111315" opacity="0.6"/>
+  <rect x="580" y="380" width="110" height="8" fill="#111315" opacity="0.15"/>
+  <rect x="580" y="400" width="100" height="8" fill="#111315" opacity="0.15"/>
+  <text x="400" y="580" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" fill="#666963">equal weight · continuous handoff</text>
+</svg>

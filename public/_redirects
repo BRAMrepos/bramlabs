@@ -1,0 +1,13 @@
+# Cloudflare Pages permanent redirects
+/apps /studio 301
+/apps/ /studio 301
+/extensions /studio 301
+/extensions/ /studio 301
+/web /studio 301
+/web/ /studio 301
+/company /about 301
+/company/ /about 301
+/work / 301
+/work/ / 301
+/blog /journal 301
+/blog/ /journal 301

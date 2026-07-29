@@ -1,0 +1,253 @@
+---
+const links = [
+  { href: "/collection/", label: "Collection" },
+  { href: "/process/", label: "Process" },
+  { href: "/studio/", label: "Studio" },
+  { href: "/journal/", label: "Journal" },
+  { href: "/about/", label: "About" },
+];
+const path = Astro.url.pathname;
+---
+
+<header class="site-header" data-header>
+  <div class="wrap header-inner">
+    <a href="/" class="logo" aria-label="BramLabs home">
+      <img src="/brand/mark.svg" alt="" width="28" height="28" class="logo-mark" />
+      <span class="logo-word">BramLabs</span>
+    </a>
+    <nav class="nav-desktop" aria-label="Primary">
+      <ul>
+        {
+          links.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                class:list={[{ active: path.startsWith(l.href.replace(/\/$/, "")) }]}
+              >
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+    <div class="header-actions">
+      <a href="/contact/" class="contact-link">Contact</a>
+      <button
+        type="button"
+        class="menu-btn"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu-overlay" data-menu-overlay hidden></div>
+<aside
+  id="mobile-menu"
+  class="mobile-menu"
+  data-mobile-menu
+  hidden
+  role="dialog"
+  aria-modal="true"
+  aria-label="Site menu"
+>
+  <div class="mobile-menu-inner">
+    <button type="button" class="menu-close" data-menu-close aria-label="Close menu">
+      Close
+    </button>
+    <nav aria-label="Mobile">
+      <ul>
+        {
+          [...links, { href: "/contact/", label: "Contact" }].map((l) => (
+            <li>
+              <a href={l.href}>{l.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</aside>
+
+<script>
+  const header = document.querySelector("[data-header]");
+  const toggle = document.querySelector("[data-menu-toggle]");
+  const menu = document.querySelector("[data-mobile-menu]");
+  const overlay = document.querySelector("[data-menu-overlay]");
+  const closeBtn = document.querySelector("[data-menu-close]");
+
+  const setOpen = (open: boolean) => {
+    if (!toggle || !menu || !overlay) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menu.hidden = !open;
+    overlay.hidden = !open;
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) {
+      (closeBtn as HTMLElement | null)?.focus();
+    } else {
+      (toggle as HTMLElement).focus();
+    }
+  };
+
+  toggle?.addEventListener("click", () => {
+    const open = toggle.getAttribute("aria-expanded") !== "true";
+    setOpen(open);
+  });
+  closeBtn?.addEventListener("click", () => setOpen(false));
+  overlay?.addEventListener("click", () => setOpen(false));
+  menu?.querySelectorAll("a").forEach((a) =>
+    a.addEventListener("click", () => setOpen(false)),
+  );
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") setOpen(false);
+  });
+
+  window.addEventListener(
+    "scroll",
+    () => {
+      const y = window.scrollY;
+      header?.classList.toggle("is-scrolled", y > 8);
+    },
+    { passive: true },
+  );
+</script>
+
+<style lang="scss">
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    background: color-mix(in oklab, var(--paper) 88%, transparent);
+    backdrop-filter: blur(14px) saturate(1.1);
+    -webkit-backdrop-filter: blur(14px) saturate(1.1);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--t) var(--ease), background var(--t);
+    &.is-scrolled {
+      border-bottom-color: var(--line);
+      background: color-mix(in oklab, var(--paper) 94%, transparent);
+    }
+  }
+  .header-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 44px;
+  }
+  .logo-mark {
+    width: 28px;
+    height: 28px;
+    display: block;
+    flex-shrink: 0;
+  }
+  .logo-word {
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    font-size: 1.0625rem;
+  }
+  .nav-desktop {
+    display: none;
+    @media (width >= 900px) {
+      display: block;
+    }
+    ul {
+      display: flex;
+      gap: 2rem;
+    }
+    a {
+      font-size: 0.9rem;
+      letter-spacing: 0.01em;
+      color: var(--muted);
+      padding: 0.35rem 0;
+      transition: color var(--t);
+      &:hover,
+      &.active {
+        color: var(--ink);
+      }
+      &.active {
+        box-shadow: inset 0 -1.5px 0 var(--ink);
+      }
+    }
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .contact-link {
+    display: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    @media (width >= 900px) {
+      display: inline;
+    }
+  }
+  .menu-btn {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-content: center;
+    gap: 6px;
+    @media (width >= 900px) {
+      display: none;
+    }
+    span {
+      display: block;
+      width: 20px;
+      height: 1.5px;
+      background: var(--ink);
+    }
+  }
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 150;
+    &[hidden] {
+      display: none;
+    }
+  }
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 160;
+    width: min(100%, 360px);
+    height: 100dvh;
+    background: var(--paper);
+    border-left: 1px solid var(--line);
+    &[hidden] {
+      display: none;
+    }
+  }
+  .mobile-menu-inner {
+    padding: 1.25rem 1.5rem 2rem;
+  }
+  .menu-close {
+    margin-bottom: 2rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    min-height: 44px;
+  }
+  .mobile-menu a {
+    display: block;
+    padding: 0.95rem 0;
+    font-size: 1.35rem;
+    letter-spacing: -0.02em;
+    border-bottom: 1px solid var(--line);
+  }
+</style>

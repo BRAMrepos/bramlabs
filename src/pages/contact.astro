@@ -1,0 +1,138 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Contact — BramLabs"
+  description="Contact BramLabs for studio inquiries or product support."
+>
+  <section class="section">
+    <div class="wrap narrow">
+      <header class="page-head">
+        <h1 class="h-section">Contact</h1>
+        <p class="lede">
+          For studio and design inquiries, write to contact. For product support
+          on published software, use support.
+        </p>
+      </header>
+
+      <ul class="channels">
+        <li>
+          <h2 class="h-card">Studio</h2>
+          <a href="mailto:contact@bramlabs.co">contact@bramlabs.co</a>
+          <p class="body">Collection, process, collaborations, general questions.</p>
+        </li>
+        <li>
+          <h2 class="h-card">Product support</h2>
+          <a href="mailto:support@bramlabs.co">support@bramlabs.co</a>
+          <p class="body">SonicShield, ClearCue, ShiftLedger and other products.</p>
+        </li>
+      </ul>
+
+      <form class="form" data-contact-form>
+        <label>
+          <span>Name</span>
+          <input name="name" type="text" required autocomplete="name" />
+        </label>
+        <label>
+          <span>Email</span>
+          <input name="email" type="email" required autocomplete="email" />
+        </label>
+        <label>
+          <span>Topic</span>
+          <select name="topic" required>
+            <option value="studio">Studio / design</option>
+            <option value="support">Product support</option>
+            <option value="other">Other</option>
+          </select>
+        </label>
+        <label>
+          <span>Message</span>
+          <textarea name="message" rows="6" required></textarea>
+        </label>
+        <button type="submit" class="btn -primary">Open in email</button>
+        <p class="hint meta" data-form-status>
+          Opens your email app with a prefilled message. Nothing is stored on this site.
+        </p>
+      </form>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>("[data-contact-form]");
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const fd = new FormData(form);
+    const topic = String(fd.get("topic") || "studio");
+    const to = topic === "support" ? "support@bramlabs.co" : "contact@bramlabs.co";
+    const subject = `BramLabs — ${topic}`;
+    const body = `Name: ${fd.get("name")}\nEmail: ${fd.get("email")}\nTopic: ${topic}\n\n${fd.get("message")}`;
+    window.location.href = `mailto:${to}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  });
+</script>
+
+<style lang="scss">
+  .narrow {
+    max-width: 40rem;
+  }
+  .page-head {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+  .channels {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+    @media (width >= 640px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    li {
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+    }
+    a {
+      display: inline-block;
+      margin: 0.5rem 0;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .body {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 2rem;
+  }
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  input,
+  textarea,
+  select {
+    min-height: 44px;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--canvas);
+  }
+  textarea {
+    min-height: 140px;
+    resize: vertical;
+  }
+  .hint {
+    line-height: 1.5;
+  }
+</style>

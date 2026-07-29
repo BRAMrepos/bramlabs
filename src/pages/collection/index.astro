@@ -1,0 +1,123 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import DesignCard from "@/components/DesignCard.astro";
+import { getAllDesigns, getCategories } from "@/data/designs";
+
+const designs = getAllDesigns();
+const categories = getCategories();
+---
+
+<BaseLayout
+  title="Collection — BramLabs"
+  description="Archive of original BramLabs apparel graphics: technical illustration, developer culture, shift work, focus and studio systems."
+  image="/og/collection.svg"
+>
+  <section class="section">
+    <div class="wrap">
+      <header class="page-head">
+        <h1 class="h-section">Collection</h1>
+        <p class="lede">
+          Structured archive of published BramLabs apparel graphics. Each piece
+          includes a garment application and independent raw artwork.
+        </p>
+      </header>
+
+      <div class="filters" role="group" aria-label="Filter by category" data-filters>
+        <button type="button" class="chip active" data-filter="all" aria-pressed="true">
+          All
+        </button>
+        {
+          categories.map((c) => (
+            <button type="button" class="chip" data-filter={c} aria-pressed="false">
+              {c}
+            </button>
+          ))
+        }
+      </div>
+
+      <div class="design-grid" data-grid>
+        {
+          designs.map((d) => (
+            <div class="grid-item" data-category={d.category}>
+              <DesignCard design={d} />
+            </div>
+          ))
+        }
+      </div>
+      <p class="empty meta" data-empty hidden>No designs in this category.</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const root = document.querySelector("[data-filters]");
+  const items = [...document.querySelectorAll<HTMLElement>("[data-category]")];
+  const empty = document.querySelector<HTMLElement>("[data-empty]");
+  root?.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const filter = btn.dataset.filter || "all";
+      root.querySelectorAll("[data-filter]").forEach((b) => {
+        b.classList.toggle("active", b === btn);
+        b.setAttribute("aria-pressed", String(b === btn));
+      });
+      let visible = 0;
+      items.forEach((el) => {
+        const show = filter === "all" || el.dataset.category === filter;
+        el.hidden = !show;
+        if (show) visible++;
+      });
+      if (empty) empty.hidden = visible > 0;
+    });
+  });
+</script>
+
+<style lang="scss">
+  .page-head {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    max-width: 40rem;
+  }
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
+  }
+  .chip {
+    min-height: 40px;
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--muted);
+    transition:
+      background var(--t),
+      color var(--t),
+      border-color var(--t);
+    &:hover {
+      border-color: var(--ink);
+      color: var(--ink);
+    }
+    &.active {
+      background: var(--ink);
+      border-color: var(--ink);
+      color: var(--canvas);
+    }
+  }
+  .design-grid {
+    display: grid;
+    gap: 3rem 2rem;
+    grid-template-columns: 1fr;
+    @media (width >= 720px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .empty {
+    margin-top: 2rem;
+  }
+</style>

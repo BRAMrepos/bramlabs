@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Terms — BramLabs"
+  description="Terms of use for bramlabs.co and related BramLabs materials."
+>
+  <section class="section">
+    <div class="wrap prose">
+      <h1 class="h-section">Terms</h1>
+      <p class="meta">Last updated: 1 January 2026</p>
+      <p>
+        By using bramlabs.co you agree to these terms. Portfolio graphics and
+        written content are owned by BramLabs unless otherwise noted. You may not
+        copy, redistribute or resell portfolio artwork without permission.
+      </p>
+      <h2>Software products</h2>
+      <p>
+        Individual apps and extensions may include additional license terms at the
+        point of distribution (for example Chrome Web Store or Amazon Appstore).
+      </p>
+      <h2>Site content</h2>
+      <p>
+        Information on this site is provided for general presentation of BramLabs
+        work. We may update pages without notice.
+      </p>
+      <h2>Contact</h2>
+      <p>
+        <a href="mailto:contact@bramlabs.co">contact@bramlabs.co</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .prose {
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .prose h1,
+  .prose h2 {
+    color: var(--ink);
+  }
+  .prose h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 0.75rem;
+  }
+  .prose a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

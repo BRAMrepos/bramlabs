@@ -1,0 +1,58 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="ClearCue Privacy — BramLabs"
+  description="Privacy information for ClearCue by BramLabs."
+>
+  <section class="section">
+    <div class="wrap prose">
+      <p class="meta"><a href="/studio/">Studio</a> · ClearCue</p>
+      <h1 class="h-section">ClearCue Privacy</h1>
+      <p class="meta">Last updated: 1 January 2026</p>
+      <p>ClearCue is designed to keep focus-session logic on device. Notification payloads are not sent to BramLabs servers for processing.</p>
+      <h2>What we collect</h2>
+      <p>
+        If you email support, we receive the content of your message and the address
+        you use to contact us. We use that information only to respond and improve the product.
+      </p>
+      <h2>What we do not do</h2>
+      <ul>
+        <li>We do not sell personal information</li>
+        <li>We do not use support email as an advertising audience</li>
+        <li>We do not require an account on bramlabs.co to read this policy</li>
+      </ul>
+      <h2>Contact</h2>
+      <p>
+        Privacy questions: <a href="mailto:support@bramlabs.co">support@bramlabs.co</a>
+      </p>
+      <p><a href="/privacy/">Site-wide privacy policy →</a></p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .prose {
+    max-width: 42rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .prose h1, .prose h2 { color: var(--ink); }
+  .prose h2 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-top: 0.75rem;
+  }
+  .prose ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+  }
+  .prose a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

@@ -1,0 +1,538 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import DesignCard from "@/components/DesignCard.astro";
+import { getFeaturedDesigns, getAllDesigns } from "@/data/designs";
+import { getPublishedSoftware } from "@/data/software";
+import { journalPosts } from "@/data/journal";
+
+const featured = getFeaturedDesigns();
+const all = getAllDesigns();
+const published = getPublishedSoftware();
+const posts = journalPosts.slice(0, 3);
+const hero = featured[0] ?? all[0];
+const processDesign = featured[0] ?? all[0];
+const sonic = published[0];
+---
+
+<BaseLayout
+  title="BramLabs — Original Apparel Graphics & Software Studio"
+  description="Original apparel graphics by BramLabs: technical illustration, developer culture, shift work, focus and modern professional themes."
+  image="/mockups/rotation-dial-tee.jpg"
+>
+  <section class="hero section">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <p class="eyebrow">Independent design & software studio</p>
+        <h1 class="h-hero">Original apparel graphics by BramLabs.</h1>
+        <p class="lede">
+          Technical illustration, typographic humor and visual systems created by
+          Bram for developers, shift workers, makers and focused minds.
+        </p>
+        <div class="hero-actions">
+          <a href="/collection/" class="btn -primary">Explore the Collection</a>
+          <a href="/about/#designer" class="btn -ghost">Meet the Designer</a>
+        </div>
+        <p class="hero-note">
+          Original graphics · garment applications · independent software
+        </p>
+      </div>
+      <div class="hero-visual">
+        <figure class="hero-garment">
+          <img
+            src={hero.images.primaryMockup}
+            alt={`Black heavyweight T-shirt featuring the ${hero.title} graphic`}
+            width="800"
+            height="1000"
+            fetchpriority="high"
+          />
+        </figure>
+        <figure class="hero-art">
+          <img
+            src={hero.images.rawArtwork}
+            alt={`${hero.title} raw artwork`}
+            width="800"
+            height="800"
+            fetchpriority="high"
+          />
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="collection">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h-section">Featured from the First Collection</h2>
+        <p class="lede">
+          Six highlights from twelve original graphics — technical illustration,
+          visual systems and restrained typography.
+        </p>
+        <p class="meta cats">Shift work · Developer culture · Focus · Audio · Studio</p>
+      </div>
+      <div class="design-grid">
+        {featured.map((d) => <DesignCard design={d} />)}
+      </div>
+      <div class="section-cta">
+        <a href="/collection/" class="btn -ghost">View all 12 designs</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section art-wall">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h-section">The Artwork</h2>
+        <p class="lede">
+          Each graphic is developed as an independent visual composition before
+          being adapted for apparel.
+        </p>
+      </div>
+      <div class="art-grid">
+        {
+          all.map((d) => (
+            <a href={`/designs/${d.slug}/`} class="art-tile">
+              <img
+                src={d.images.rawArtwork}
+                alt={`${d.title} raw artwork`}
+                width="800"
+                height="800"
+                loading="lazy"
+              />
+              <span class="visually-hidden">{d.title}</span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Featured process</p>
+        <h2 class="h-section">From Shift Schedule to Rotation Dial</h2>
+        <p class="lede">
+          Rotation Dial began as a visual study of the continuous handoff between
+          day, swing and night crews. Early sketches explored how three working
+          periods could form one uninterrupted system — without becoming an app icon.
+        </p>
+      </div>
+      <ol class="process-stages">
+        {
+          processDesign.processStages?.map((s, i) => (
+            <li>
+              <span class="meta accent">{String(i + 1).padStart(2, "0")}</span>
+              <h3>{s.label}</h3>
+              <p>{s.body}</p>
+              <img src={s.image} alt="" loading="lazy" width="640" height="640" />
+            </li>
+          ))
+        }
+      </ol>
+      <a href="/process/" class="btn -ghost">Explore the Complete Process</a>
+    </div>
+  </section>
+
+  <section class="section designer" id="designer">
+    <div class="wrap designer-grid">
+      <div class="designer-visual">
+        <figure class="desk">
+          <img
+            src="/studio/workspace.svg"
+            alt="Stylized studio desk with monitor showing technical dial artwork, notebook and coffee"
+            width="800"
+            height="1000"
+            loading="lazy"
+          />
+          <figcaption class="meta">
+            Studio workspace illustration — portrait photography forthcoming
+          </figcaption>
+        </figure>
+      </div>
+      <div>
+        <h2 class="h-section">Designed by Bram</h2>
+        <p class="body">
+          I’m the founder and designer behind BramLabs. I create each apparel
+          graphic from initial concept and sketch through vector construction,
+          garment testing and final application. My work draws from software
+          interfaces, technical diagrams, work systems, productivity and
+          professional subcultures.
+        </p>
+        <p class="body second">
+          Software and graphics share the same desk — systems thinking and craft —
+          without turning shirts into app ads.
+        </p>
+        <a href="/about/" class="btn -link">About the studio →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section studio">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h-section">Software Behind the Studio</h2>
+        <p class="lede">
+          Focused applications and browser utilities published by BramLabs —
+          listed only when a public storefront exists.
+        </p>
+      </div>
+      {
+        sonic && (
+          <article class="sonic-card">
+            <img
+              src={sonic.icon}
+              alt=""
+              width="64"
+              height="64"
+              class="sonic-icon"
+            />
+            <div>
+              <p class="meta">{sonic.platform}</p>
+              <h3 class="h-card">{sonic.title}</h3>
+              <p class="body">{sonic.longDescription || sonic.description}</p>
+              <ul class="bullets">
+                {sonic.bullets?.map((b) => (
+                  <li>{b}</li>
+                ))}
+              </ul>
+              <div class="soft-links">
+                <a
+                  href={sonic.externalUrl}
+                  class="btn -primary"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View public listing
+                </a>
+                {sonic.supportUrl && (
+                  <a href={sonic.supportUrl} class="btn -link">
+                    Support
+                  </a>
+                )}
+                {sonic.privacyUrl && (
+                  <a href={sonic.privacyUrl} class="btn -link">
+                    Privacy
+                  </a>
+                )}
+              </div>
+            </div>
+          </article>
+        )
+      }
+      <p class="body soft-note">
+        Additional mobile, browser and web products are currently in development.
+      </p>
+      <a href="/studio/" class="btn -ghost">Studio overview</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head row">
+        <h2 class="h-section">Journal</h2>
+        <a href="/journal/" class="btn -link">All posts →</a>
+      </div>
+      <div class="journal-grid">
+        {
+          posts.map((p) => (
+            <article>
+              <a href={`/journal/${p.slug}/`} class="j-card">
+                <img src={p.image} alt="" width="800" height="800" loading="lazy" />
+                <p class="meta">
+                  {p.dateLabel} · {p.category}
+                </p>
+                <h3 class="h-card">{p.title}</h3>
+                <p class="body">{p.excerpt}</p>
+                <p class="meta">By {p.byline}</p>
+              </a>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section standards">
+    <div class="wrap-content">
+      <p class="body standards-copy">
+        All BramLabs apparel graphics are developed in-house from original concepts
+        and vector artwork. Designs are reviewed for potential intellectual-property
+        and marketplace-policy conflicts before submission, while production files
+        are maintained separately from the optimized portfolio previews displayed
+        here. This site is a design portfolio — not an online storefront.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .hero {
+    padding-top: clamp(2rem, 5vw, 3rem);
+  }
+  .hero-grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+    @media (width >= 960px) {
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 3rem;
+      min-height: 72vh;
+    }
+  }
+  .hero-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+  }
+  .hero-note {
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+  .hero-visual {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: end;
+  }
+  .hero-garment,
+  .hero-art {
+    border: none;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--canvas);
+    box-shadow: var(--shadow-soft);
+  }
+  .hero-garment img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center 28%;
+  }
+  .hero-art img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    object-fit: contain;
+    background: var(--paper);
+  }
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    max-width: 42rem;
+    &.row {
+      max-width: none;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: end;
+      justify-content: space-between;
+    }
+  }
+  .section-cta {
+    margin-top: 2.5rem;
+  }
+  .cats {
+    margin-top: 0.25rem;
+  }
+  .design-grid {
+    display: grid;
+    gap: 3rem 2rem;
+    grid-template-columns: 1fr;
+    @media (width >= 720px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .art-wall {
+    background: var(--canvas);
+  }
+  .art-grid {
+    display: grid;
+    gap: 0.75rem;
+    grid-template-columns: repeat(2, 1fr);
+    @media (width >= 720px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @media (width >= 1100px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  .art-tile {
+    aspect-ratio: 1;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--paper);
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      transition: transform 400ms var(--ease);
+    }
+    &:hover img {
+      transform: scale(1.02);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      &:hover img {
+        transform: none;
+      }
+    }
+  }
+  .process-stages {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    @media (width >= 900px) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+    li {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      border-top: 2px solid var(--line);
+      padding-top: 1rem;
+    }
+    .accent {
+      color: var(--cyan);
+    }
+    h3 {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    p {
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+    img {
+      margin-top: 0.75rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--canvas);
+      aspect-ratio: 1;
+      object-fit: cover;
+    }
+  }
+  .designer-grid {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+    @media (width >= 900px) {
+      grid-template-columns: 0.9fr 1.1fr;
+    }
+  }
+  .desk {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--canvas);
+    img {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+    figcaption {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--line);
+    }
+  }
+  .second {
+    margin-top: 1rem;
+    color: var(--muted);
+  }
+  .sonic-card {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1.75rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--canvas);
+    margin-bottom: 1.5rem;
+    @media (width >= 720px) {
+      grid-template-columns: auto 1fr;
+      align-items: start;
+    }
+  }
+  .sonic-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+  }
+  .bullets {
+    margin: 1rem 0 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    li {
+      font-size: 0.95rem;
+      color: var(--muted);
+      padding-left: 1rem;
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.55em;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--cyan);
+      }
+    }
+  }
+  .soft-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+  }
+  .soft-note {
+    margin-bottom: 1.25rem;
+    color: var(--muted);
+  }
+  .journal-grid {
+    display: grid;
+    gap: 2rem;
+    @media (width >= 800px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  .j-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    img {
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--canvas);
+    }
+  }
+  .standards {
+    padding-top: 0;
+  }
+  .standards-copy {
+    max-width: 44rem;
+    font-size: 0.95rem;
+    border-top: 1px solid var(--line);
+    padding-top: 2rem;
+    color: var(--muted);
+  }
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+</style>
