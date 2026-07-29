@@ -5,6 +5,9 @@ interface Props {
   description: string;
   productName?: string;
   productLink?: string;
+  niche?: string;
+  inkSpec?: string;
+  garmentType?: string;
   motif: string;
   palette: string[];
   dpi: number;
@@ -21,6 +24,9 @@ const {
   description,
   productName,
   productLink,
+  niche,
+  inkSpec,
+  garmentType = "T-Shirt",
   motif,
   palette,
   dpi,
@@ -31,114 +37,150 @@ const {
   year,
 } = Astro.props;
 
-const statusLabel = status === 'ready' ? 'Print-ready' : status === 'in-progress' ? 'In progress' : 'Archived';
-const badgeStyle = status === 'ready' ? 'badge-emerald' : 'badge-amber';
+// Unique ID for client side view toggle
+const cardId = `art-card-${title.toLowerCase().replace(/[^a-z0-9]/g, '-')}`;
 ---
 
-<article class="glass-card flex flex-col overflow-hidden group">
-  <!-- Visual artwork motif preview -->
-  <div class="relative h-44 flex items-center justify-center overflow-hidden bg-[#09090b] border-b border-[var(--border-default)] p-6">
-    <!-- Background grid & accent glow -->
-    <div class="absolute inset-0 bg-[radial-gradient(#ffffff0a_1px,transparent_1px)] [background-size:12px_12px] opacity-40"></div>
-    <div
-      class="absolute w-32 h-32 rounded-full blur-2xl opacity-20 pointer-events-none"
-      style={`background: ${palette[0] || '#3b82f6'};`}
-    ></div>
+<article class="glass-card flex flex-col overflow-hidden group shadow-sm border border-[var(--border-default)] bg-[var(--bg-surface)]">
+  
+  <!-- Garment & Vector Display Box -->
+  <div class="relative h-64 sm:h-72 flex items-center justify-center overflow-hidden bg-slate-900 border-b border-[var(--border-default)] p-6">
+    
+    <!-- View Mode 1: Garment Mockup Display (default) -->
+    <div id={`${cardId}-mockup`} class="art-view-mockup relative z-10 w-full h-full flex flex-col items-center justify-center">
+      <!-- T-Shirt / Hoodie Garment Silhouette -->
+      <div class="relative w-44 h-52 flex items-center justify-center">
+        <!-- SVG T-Shirt Silhouette -->
+        <svg viewBox="0 0 200 220" class="w-full h-full drop-shadow-xl" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Shirt Base Path -->
+          <path d="M60 20 L20 45 L40 85 L60 70 L60 200 L140 200 L140 70 L160 85 L180 45 L140 20 L120 35 C105 45 95 45 80 35 Z" 
+                fill={garmentType.includes('Navy') ? '#0f172a' : garmentType.includes('Heather') ? '#334155' : garmentType.includes('Royal') ? '#1e3a8a' : '#09090b'} 
+                stroke="#475569" 
+                stroke-width="2"/>
+          <!-- Neck Collar -->
+          <path d="M80 35 C95 45 105 45 120 35" fill="none" stroke="#64748b" stroke-width="2.5"/>
+        </svg>
 
-    <!-- Vector Art Motif Display -->
-    <div class="relative z-10 flex flex-col items-center justify-center text-center gap-2 max-w-[200px]">
-      <div
-        class="w-16 h-16 rounded-2xl flex items-center justify-center border border-white/10 shadow-xl transition-transform duration-300 group-hover:scale-110"
-        style={`background: linear-gradient(135deg, ${palette[0] || '#3b82f6'}, ${palette[1] || '#6366f1'});`}
-      >
-        <span class="text-white font-mono font-bold text-xl tracking-tighter">
-          {title.split(' ').map(w => w[0]).join('').slice(0, 3)}
+        <!-- Printed Artwork Chest Graphic -->
+        <div class="absolute top-[38%] left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-20 h-20 flex flex-col items-center justify-center text-center p-1 pointer-events-none">
+          <div
+            class="w-12 h-12 rounded-xl flex items-center justify-center border border-white/20 shadow-md"
+            style={`background: linear-gradient(135deg, ${palette[0] || '#3b82f6'}, ${palette[1] || '#6366f1'});`}
+          >
+            <span class="text-white font-mono font-bold text-xs tracking-tighter">
+              {title.split(' ').map(w => w[0]).join('').slice(0, 3)}
+            </span>
+          </div>
+          <span class="text-[9px] font-mono font-bold text-white/90 truncate max-w-full mt-1.5 drop-shadow-sm">
+            {motif.slice(0, 22)}
+          </span>
+        </div>
+      </div>
+
+      <!-- Garment Badge -->
+      <span class="absolute bottom-2 left-2 text-[10px] font-mono font-semibold text-white/80 bg-black/60 px-2 py-0.5 rounded border border-white/10 backdrop-blur-sm">
+        {garmentType}
+      </span>
+    </div>
+
+    <!-- View Mode 2: Raw Vector Art (Checkerboard) -->
+    <div id={`${cardId}-raw`} class="art-view-raw hidden absolute inset-0 z-10 flex flex-col items-center justify-center bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:12px_12px] bg-slate-100 p-6">
+      <div class="flex flex-col items-center justify-center text-center gap-3">
+        <div
+          class="w-24 h-24 rounded-2xl flex flex-col items-center justify-center border border-slate-300 shadow-xl"
+          style={`background: linear-gradient(135deg, ${palette[0] || '#3b82f6'}, ${palette[1] || '#6366f1'});`}
+        >
+          <span class="text-white font-mono font-bold text-2xl tracking-tighter">
+            {title.split(' ').map(w => w[0]).join('').slice(0, 3)}
+          </span>
+          <span class="text-[10px] font-mono text-white/90 mt-1 font-bold uppercase">300 DPI PNG</span>
+        </div>
+        <span class="text-xs font-mono font-bold text-slate-800 bg-white px-2.5 py-1 rounded shadow-xs border border-slate-200">
+          Transparent 4500x5400 px Master
         </span>
       </div>
-      <span class="text-[11px] font-mono font-medium text-white/80 truncate max-w-full">
-        {motif}
-      </span>
     </div>
 
-    <!-- Series Tag -->
-    <div class="absolute top-2.5 left-2.5 pointer-events-none">
-      <span class="text-[10px] font-mono font-bold uppercase tracking-widest text-white/90 bg-black/60 px-2 py-0.5 rounded backdrop-blur-sm border border-white/10">
-        {series}
-      </span>
-    </div>
-
-    <!-- Year Tag -->
-    <div class="absolute top-2.5 right-2.5 pointer-events-none">
-      <span class="text-[10px] font-mono text-white/70 bg-black/40 px-2 py-0.5 rounded">
-        {year}
-      </span>
-    </div>
+    <!-- Interactive Toggle Button: Mockup vs Raw PNG -->
+    <button
+      type="button"
+      data-card-toggle={cardId}
+      class="card-view-toggle absolute top-3 right-3 z-20 px-2.5 py-1 rounded-md text-[10px] font-mono font-bold text-white bg-black/70 hover:bg-black/90 border border-white/20 shadow-md backdrop-blur-sm cursor-pointer transition-colors"
+    >
+      <span class="toggle-label">View Vector Art 📐</span>
+    </button>
   </div>
 
   <!-- Color Palette Stripe Bar -->
-  <div class="h-2 flex overflow-hidden border-b border-[var(--border-default)]">
+  <div class="h-1.5 flex overflow-hidden border-b border-[var(--border-default)]">
     {palette.map((hex) => (
       <div
-        class="flex-1 h-full transition-opacity hover:opacity-90"
+        class="flex-1 h-full"
         style={`background-color: ${hex};`}
         title={hex}
       />
     ))}
   </div>
 
-  <div class="p-5 flex flex-col gap-3.5 flex-grow">
-    <div class="flex items-start justify-between gap-3">
-      <div>
-        <h3 class="text-base font-bold text-[var(--text-primary)] leading-tight">{title}</h3>
-        {productName && (
-          <div class="mt-1 flex items-center gap-1.5 text-xs font-medium text-blue-400">
-            <span>Apparel for:</span>
-            {productLink ? (
-              <a href={productLink} class="hover:underline font-semibold flex items-center gap-0.5">
-                {productName} →
-              </a>
-            ) : (
-              <span class="font-semibold">{productName}</span>
-            )}
-          </div>
-        )}
-      </div>
-      <span class={`badge text-[10px] font-mono ${badgeStyle}`}>{statusLabel}</span>
-    </div>
-
-    <p class="text-xs text-[var(--text-secondary)] leading-relaxed">{description}</p>
-
-    <!-- Palette Swatches -->
-    <div class="flex gap-2 flex-wrap items-center pt-1">
-      {palette.map((hex) => (
-        <span class="inline-flex items-center gap-1.5 text-[10px] font-mono text-[var(--text-secondary)]">
-          <span
-            class="w-3.5 h-3.5 rounded-full border border-white/20 flex-shrink-0 shadow-xs"
-            style={`background-color: ${hex};`}
-            title={hex}
-          ></span>
-          {hex}
+  <!-- Compact 3-Line Info Section -->
+  <div class="p-5 flex flex-col gap-2.5 flex-grow">
+    
+    <!-- Line 1: Title & Target App Link -->
+    <div class="flex items-start justify-between gap-2">
+      <h3 class="text-base font-bold text-[var(--text-primary)] leading-tight">{title}</h3>
+      {productName && (
+        <span class="text-[11px] font-mono font-semibold text-blue-500 hover:underline flex-shrink-0">
+          {productLink ? (
+            <a href={productLink}>For {productName} →</a>
+          ) : (
+            <span>For {productName}</span>
+          )}
         </span>
-      ))}
+      )}
     </div>
 
-    <dl class="mt-auto pt-3 border-t border-[var(--border-default)] grid grid-cols-2 gap-2 text-xs">
-      <div>
-        <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">DPI</dt>
-        <dd class="text-[var(--text-primary)] font-semibold mt-0.5">{dpi}</dd>
+    <!-- Line 2: Target Niche -->
+    {niche && (
+      <div class="text-xs text-[var(--text-secondary)] flex items-center gap-1.5">
+        <span class="font-bold text-[var(--text-primary)]">Target Niche:</span>
+        <span class="truncate">{niche}</span>
       </div>
-      <div>
-        <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">Format</dt>
-        <dd class="text-[var(--text-primary)] font-semibold mt-0.5">{format}</dd>
+    )}
+
+    <!-- Line 3: Ink Spec & Print Specs -->
+    {inkSpec && (
+      <div class="text-xs text-[var(--text-muted)] flex items-center gap-1.5 font-mono">
+        <span class="font-semibold text-emerald-500">Ink Spec:</span>
+        <span class="truncate">{inkSpec}</span>
       </div>
-      <div class="col-span-2">
-        <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">Color Mode</dt>
-        <dd class="text-[var(--text-primary)] font-semibold mt-0.5">{color}</dd>
-      </div>
-      <div class="col-span-2">
-        <dt class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">Print Notes</dt>
-        <dd class="text-[var(--text-muted)] mt-0.5 leading-relaxed text-[11px]">{notes}</dd>
-      </div>
-    </dl>
+    )}
+
   </div>
 </article>
+
+<script is:inline>
+  (function() {
+    document.addEventListener('click', function(e) {
+      var btn = e.target && e.target.closest ? e.target.closest('[data-card-toggle]') : null;
+      if (btn) {
+        var cardId = btn.getAttribute('data-card-toggle');
+        var mockupEl = document.getElementById(cardId + '-mockup');
+        var rawEl = document.getElementById(cardId + '-raw');
+        var labelEl = btn.querySelector('.toggle-label');
+
+        if (mockupEl && rawEl) {
+          var isShowingRaw = !rawEl.classList.contains('hidden');
+          if (isShowingRaw) {
+            rawEl.classList.add('hidden');
+            mockupEl.classList.remove('hidden');
+            if (labelEl) labelEl.textContent = 'View Vector Art 📐';
+          } else {
+            mockupEl.classList.add('hidden');
+            rawEl.classList.remove('hidden');
+            if (labelEl) labelEl.textContent = 'View Garment Tee 👕';
+          }
+        }
+      }
+    });
+  })();
+</script>
