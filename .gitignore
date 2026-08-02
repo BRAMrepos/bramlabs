@@ -21,3 +21,5 @@ Thumbs.db
 
 # Astro cache
 .astro/
+.wrangler/
+

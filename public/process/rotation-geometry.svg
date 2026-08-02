@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <rect width="800" height="800" fill="#F4F1E9"/>
+  <text x="60" y="60" font-family="ui-monospace,monospace" font-size="14" fill="#666963" letter-spacing="3">03 · GEOMETRIC CONSTRUCTION</text>
+  <line x1="400" y1="100" x2="400" y2="700" stroke="#23C5EF" stroke-width="0.5" opacity="0.4"/>
+  <line x1="100" y1="400" x2="700" y2="400" stroke="#23C5EF" stroke-width="0.5" opacity="0.4"/>
+  <circle cx="400" cy="400" r="220" stroke="#111315" stroke-width="1" fill="none"/>
+  <circle cx="400" cy="400" r="160" stroke="#111315" stroke-width="1" fill="none"/>
+  <circle cx="400" cy="400" r="100" stroke="#111315" stroke-width="1" fill="none"/>
+  <path d="M400 180 A220 220 0 0 1 590 510" stroke="#FF862E" stroke-width="3" fill="none"/>
+  <path d="M590 510 A220 220 0 0 1 210 510" stroke="#23C5EF" stroke-width="3" fill="none"/>
+  <path d="M210 510 A220 220 0 0 1 400 180" stroke="#111315" stroke-width="3" fill="none" opacity="0.4"/>
+  <line x1="400" y1="400" x2="620" y2="400" stroke="#111315" stroke-width="0.5" opacity="0.25"/>
+  <line x1="400" y1="400" x2="510" y2="590.5255888325764" stroke="#111315" stroke-width="0.5" opacity="0.25"/>
+  <line x1="400" y1="400" x2="290.00000000000006" y2="590.5255888325765" stroke="#111315" stroke-width="0.5" opacity="0.25"/>
+  <line x1="400" y1="400" x2="180" y2="400" stroke="#111315" stroke-width="0.5" opacity="0.25"/>
+  <line x1="400" y1="400" x2="289.9999999999999" y2="209.47441116742354" stroke="#111315" stroke-width="0.5" opacity="0.25"/>
+  <line x1="400" y1="400" x2="510" y2="209.4744111674235" stroke="#111315" stroke-width="0.5" opacity="0.25"/>
+  <circle cx="400" cy="400" r="6" fill="#111315"/>
+</svg>

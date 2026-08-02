@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <!-- FOCUS IS A WAVEFORM / DEEP WORK STATE -->
+  <!-- Bounding Outer Frame -->
+  <rect x="70" y="80" width="660" height="640" rx="16" stroke="#F4F1E9" stroke-width="6"/>
+
+  <!-- Top Title Banner -->
+  <rect x="110" y="120" width="580" height="65" rx="8" fill="#00E5FF"/>
+  <text x="400" y="162" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="28" fill="#111315" letter-spacing="6">DEEP WORK STATE</text>
+
+  <!-- Amplitude Axis & Baseline -->
+  <line x1="120" y1="400" x2="680" y2="400" stroke="#F4F1E9" stroke-width="3" stroke-dasharray="12 12"/>
+  <line x1="400" y1="200" x2="400" y2="600" stroke="#F4F1E9" stroke-width="3" stroke-dasharray="12 12"/>
+
+  <!-- Bold High-Amplitude Waveform -->
+  <path d="M 120 400 Q 200 400 260 220 T 400 400 T 540 580 T 680 400" stroke="#00E5FF" stroke-width="16" stroke-linecap="round" fill="none"/>
+  <path d="M 120 400 Q 200 400 260 220 T 400 400 T 540 580 T 680 400" stroke="#FFD600" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+  <!-- Peak Focal Target Point -->
+  <circle cx="260" cy="220" r="28" fill="#FF5500"/>
+  <circle cx="260" cy="220" r="12" fill="#F4F1E9"/>
+  <line x1="260" y1="180" x2="260" y2="260" stroke="#F4F1E9" stroke-width="3"/>
+  <line x1="220" y1="220" x2="300" y2="220" stroke="#F4F1E9" stroke-width="3"/>
+  
+  <text x="310" y="228" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="22" fill="#FF5500" letter-spacing="2">PEAK FOCUS [100%]</text>
+
+  <!-- Big Punchy Bottom Headline -->
+  <text x="400" y="640" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="38" fill="#F4F1E9" letter-spacing="6">ATTENTION WAVEFORM</text>
+  <text x="400" y="685" text-anchor="middle" font-family="ui-monospace, monospace" font-weight="700" font-size="16" fill="#00E5FF" letter-spacing="6">ZERO DISTRACTION · MONOIDEISM ACTIVE</text>
+</svg>

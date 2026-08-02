@@ -1,14 +1,30 @@
-import { defineConfig } from 'astro/config';
-import mdx from '@astrojs/mdx';
-import tailwindcss from '@tailwindcss/vite';
+import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
+import cloudflare from "@astrojs/cloudflare";
+import react from "@astrojs/react";
 
-// https://astro.build/config
 export default defineConfig({
-  integrations: [mdx()],
+  site: "https://bramlabs.co",
+  // "server" mode: all pages are SSR by default.
+  // Static pages declare `export const prerender = true`.
+  // The /api/contact route stays server-rendered (prerender = false).
+  output: "server",
+  adapter: cloudflare({
+    platformProxy: {
+      enabled: true,
+    },
+  }),
+  trailingSlash: "always",
+  integrations: [
+    react(),
+    sitemap(),
+  ],
   vite: {
-    plugins: [tailwindcss()],
-    optimizeDeps: {
-      include: ['lucide-astro'],
+    resolve: {
+      alias: {
+        "@": new URL("./src", import.meta.url).pathname,
+      },
     },
   },
+  compressHTML: true,
 });

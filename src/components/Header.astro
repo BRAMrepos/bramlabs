@@ -1,0 +1,303 @@
+---
+const links = [
+  { href: "/collection/", label: "Collection" },
+  { href: "/process/",    label: "Process"    },
+  { href: "/merch/",      label: "Merch"      },
+  { href: "/journal/",   label: "Journal"    },
+  { href: "/about/",      label: "About"      },
+];
+const path = Astro.url.pathname;
+---
+
+<header class="site-header" data-header>
+  <div class="wrap header-inner">
+    <a href="/" class="logo" aria-label="BramLabs home">
+      <img src="/brand/mark.svg" alt="" width="28" height="28" class="logo-mark" />
+      <span class="logo-word">BramLabs</span>
+    </a>
+
+    <nav class="nav-desktop" aria-label="Primary">
+      <ul>
+        {
+          links.map((l) => (
+            <li>
+              <a
+                href={l.href}
+                class:list={[
+                  {
+                    active:
+                      l.href === "/collection/"
+                        ? path === "/collection/" || path.startsWith("/designs/")
+                        : path.startsWith(l.href.replace(/\/$/, "")),
+                  },
+                ]}
+              >
+                {l.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <a href="/contact/" class="contact-pill">Contact</a>
+      <button
+        type="button"
+        class="menu-btn"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        data-menu-toggle
+      >
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="menu-overlay" data-menu-overlay hidden></div>
+<aside
+  id="mobile-menu"
+  class="mobile-menu"
+  data-mobile-menu
+  hidden
+  role="dialog"
+  aria-modal="true"
+  aria-label="Site menu"
+>
+  <div class="mobile-menu-inner">
+    <button type="button" class="menu-close" data-menu-close aria-label="Close menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+      <span>Close</span>
+    </button>
+    <nav aria-label="Mobile">
+      <ul>
+        {
+          [...links, { href: "/contact/", label: "Contact" }].map((l) => (
+            <li>
+              <a href={l.href}>{l.label}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</aside>
+
+<script>
+  const header   = document.querySelector("[data-header]");
+  const toggle   = document.querySelector<HTMLButtonElement>("[data-menu-toggle]");
+  const menu     = document.querySelector<HTMLElement>("[data-mobile-menu]");
+  const overlay  = document.querySelector<HTMLElement>("[data-menu-overlay]");
+  const closeBtn = document.querySelector<HTMLElement>("[data-menu-close]");
+
+  const setOpen = (open: boolean) => {
+    if (!toggle || !menu || !overlay) return;
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    menu.hidden   = !open;
+    overlay.hidden = !open;
+    document.body.style.overflow = open ? "hidden" : "";
+    if (open) {
+      closeBtn?.focus();
+    } else {
+      toggle?.focus();
+    }
+  };
+
+  toggle?.addEventListener("click",  () => setOpen(toggle.getAttribute("aria-expanded") !== "true"));
+  closeBtn?.addEventListener("click", () => setOpen(false));
+  overlay?.addEventListener("click",  () => setOpen(false));
+  menu?.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setOpen(false)));
+  window.addEventListener("keydown", (e) => { if (e.key === "Escape") setOpen(false); });
+
+  window.addEventListener(
+    "scroll",
+    () => header?.classList.toggle("is-scrolled", window.scrollY > 8),
+    { passive: true },
+  );
+</script>
+
+<style lang="scss">
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-h);
+    background: color-mix(in oklab, var(--paper) 86%, transparent);
+    backdrop-filter: blur(16px) saturate(1.05);
+    -webkit-backdrop-filter: blur(16px) saturate(1.05);
+    border-bottom: 1px solid transparent;
+    transition:
+      border-color var(--t) var(--ease),
+      background var(--t) var(--ease);
+
+    &.is-scrolled {
+      border-bottom-color: var(--line);
+      background: color-mix(in oklab, var(--paper) 94%, transparent);
+    }
+  }
+
+  .header-inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 44px;
+    flex-shrink: 0;
+  }
+
+  .logo-mark {
+    width: 28px;
+    height: 28px;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .logo-word {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    font-size: 1.0625rem;
+  }
+
+  .nav-desktop {
+    display: none;
+
+    @media (width >= 900px) { display: block; }
+
+    ul {
+      display: flex;
+      gap: 2rem;
+    }
+
+    a {
+      font-size: 0.9375rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      color: var(--muted);
+      padding: 0.35rem 0;
+      transition: color var(--t) var(--ease);
+
+      &:hover,
+      &.active {
+        color: var(--ink);
+      }
+
+      &.active {
+        box-shadow: inset 0 -1.5px 0 var(--ink);
+      }
+    }
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .contact-pill {
+    display: none;
+    min-height: 38px;
+    padding: 0.45rem 1.1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--surface);
+    color: var(--ink);
+    transition:
+      border-color var(--t) var(--ease),
+      box-shadow var(--t) var(--ease);
+
+    @media (width >= 900px) {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    &:hover {
+      border-color: color-mix(in oklab, var(--ink) 30%, var(--line));
+      box-shadow: 0 2px 8px rgba(20, 20, 22, 0.06);
+    }
+  }
+
+  .menu-btn {
+    width: 44px;
+    height: 44px;
+    display: grid;
+    place-content: center;
+    gap: 6px;
+
+    @media (width >= 900px) { display: none; }
+
+    span {
+      display: block;
+      width: 18px;
+      height: 1.5px;
+      background: var(--ink);
+      border-radius: 1px;
+    }
+  }
+
+  .menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 17, 17, 0.3);
+    z-index: 150;
+    backdrop-filter: blur(2px);
+
+    &[hidden] { display: none; }
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 160;
+    width: min(100%, 360px);
+    height: 100dvh;
+    background: var(--paper);
+    border-left: 1px solid var(--line);
+    box-shadow: -12px 0 40px rgba(17, 17, 17, 0.06);
+
+    &[hidden] { display: none; }
+  }
+
+  .mobile-menu-inner {
+    padding: 1.35rem var(--s-4) var(--s-5);
+  }
+
+  .menu-close {
+    margin-bottom: var(--s-5);
+    font-size: 0.875rem;
+    color: var(--muted);
+    min-height: 44px;
+    transition: color var(--t);
+
+    &:hover { color: var(--ink); }
+  }
+
+  .mobile-menu a {
+    display: block;
+    padding: 1rem 0;
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    border-bottom: 1px solid var(--line);
+    transition: color var(--t);
+
+    &:hover { color: var(--muted); }
+  }
+</style>

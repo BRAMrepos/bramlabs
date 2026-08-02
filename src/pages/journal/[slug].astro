@@ -1,0 +1,81 @@
+---
+export const prerender = true;
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { journalPosts, getPost } from "@/data/journal";
+
+export function getStaticPaths() {
+  return journalPosts.map((p) => ({ params: { slug: p.slug } }));
+}
+
+const post = getPost(Astro.params.slug!);
+if (!post) return Astro.redirect("/journal/");
+
+const articleLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: post.title,
+  description: post.excerpt,
+  datePublished: post.date,
+  author: { "@type": "Person", name: post.byline },
+  image: new URL(post.image, Astro.site).href,
+};
+---
+
+<BaseLayout
+  title={`${post.title} — BramLabs`}
+  description={post.excerpt}
+  image={post.image}
+  type="article"
+  jsonLd={articleLd}
+>
+  <article class="section">
+    <div class="wrap article">
+      <p class="meta">
+        <a href="/journal/">Journal</a> · {post.category} · {post.dateLabel}
+      </p>
+      <h1 class="h-page">{post.title}</h1>
+      <p class="meta">By {post.byline}</p>
+      <img
+        class="hero"
+        src={post.image}
+        alt=""
+        width="1200"
+        height="800"
+        fetchpriority="high"
+      />
+      <div class="body-copy">
+        {post.body.map((p) => <p>{p}</p>)}
+      </div>
+      <a href="/journal/" class="btn -ghost">← Journal</a>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .article {
+    max-width: 42rem;
+  }
+  .h-section {
+    margin: 0.75rem 0 0.5rem;
+  }
+  .hero {
+    margin: 1.75rem 0;
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--canvas);
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+  .body-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 1.15rem;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 2rem;
+  }
+  .meta a:hover {
+    text-decoration: underline;
+  }
+</style>

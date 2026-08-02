@@ -1,0 +1,127 @@
+---
+const primary = [
+  { href: "/collection/", label: "Collection" },
+  { href: "/process/",    label: "Process"    },
+  { href: "/merch/",      label: "Merch"      },
+  { href: "/about/",      label: "About"      },
+];
+const secondary = [
+  { href: "/journal/", label: "Journal" },
+  { href: "/contact/", label: "Contact" },
+  { href: "/privacy/", label: "Privacy" },
+  { href: "/terms/",   label: "Terms"   },
+];
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="BramLabs home">
+          <img src="/brand/mark.svg" alt="" width="24" height="24" />
+          <span>BramLabs</span>
+        </a>
+        <p class="brand-desc">
+          Original apparel graphics by Bram — technical illustration for shift
+          work, developer culture, focus and modern professional themes.
+        </p>
+        <p class="brand-by">Designed by Bram · Portfolio, not a storefront</p>
+      </div>
+      <nav aria-label="Footer">
+        <ul>
+          {primary.map((l) => (
+            <li><a href={l.href}>{l.label}</a></li>
+          ))}
+        </ul>
+        <ul>
+          {secondary.map((l) => (
+            <li><a href={l.href}>{l.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p>© {new Date().getFullYear()} BramLabs</p>
+      <a href="mailto:contact@bramlabs.co">contact@bramlabs.co</a>
+    </div>
+  </div>
+</footer>
+
+<style lang="scss">
+  .site-footer {
+    border-top: 1px solid var(--line);
+    padding: var(--s-7) 0 var(--s-5);
+    background: var(--canvas);
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: var(--s-6);
+
+    @media (width >= 800px) {
+      grid-template-columns: 1.35fr 1fr;
+    }
+  }
+
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    letter-spacing: -0.02em;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+
+  .brand-desc {
+    margin-top: var(--s-3);
+    max-width: 28rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .brand-by {
+    margin-top: var(--s-2);
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--s-4);
+  }
+
+  nav a {
+    display: inline-block;
+    padding: 0.4rem 0;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    transition: color var(--t) var(--ease);
+
+    &:hover { color: var(--ink); }
+  }
+
+  .footer-bottom {
+    margin-top: var(--s-6);
+    padding-top: var(--s-4);
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    font-size: 0.8125rem;
+    color: var(--muted);
+
+    a {
+      transition: color var(--t);
+      &:hover { color: var(--ink); }
+    }
+  }
+</style>

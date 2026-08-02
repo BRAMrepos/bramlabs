@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <!-- WIREFRAME ANATOMY / BLUEPRINT -->
+  <!-- Outer Technical Frame with Corner Targets -->
+  <rect x="60" y="60" width="680" height="680" stroke="#00E5FF" stroke-width="6" fill="#111315"/>
+  <circle cx="60" cy="60" r="16" fill="#00E5FF"/>
+  <circle cx="740" cy="60" r="16" fill="#00E5FF"/>
+  <circle cx="60" cy="740" r="16" fill="#00E5FF"/>
+  <circle cx="740" cy="740" r="16" fill="#00E5FF"/>
+
+  <!-- Top Title Bar -->
+  <rect x="60" y="60" width="680" height="80" fill="#00E5FF"/>
+  <text x="400" y="115" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="32" fill="#111315" letter-spacing="6">SYSTEM ARCHITECTURE</text>
+
+  <!-- Large Blueprint Schematic Layout -->
+  <!-- Header Wireframe Box -->
+  <rect x="110" y="180" width="580" height="70" rx="8" stroke="#F4F1E9" stroke-width="4" stroke-dasharray="12 6"/>
+  <text x="130" y="222" font-family="ui-monospace, monospace" font-weight="800" font-size="20" fill="#00E5FF">[ NAV_HEADER // 100% W ]</text>
+
+  <!-- Hero Wireframe Box -->
+  <rect x="110" y="270" width="580" height="180" rx="8" stroke="#F4F1E9" stroke-width="6" fill="#00E5FF" fill-opacity="0.15"/>
+  <line x1="110" y1="270" x2="690" y2="450" stroke="#F4F1E9" stroke-width="2" opacity="0.4"/>
+  <line x1="690" y1="270" x2="110" y2="450" stroke="#F4F1E9" stroke-width="2" opacity="0.4"/>
+  <text x="400" y="370" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="36" fill="#F4F1E9" letter-spacing="4">HERO COMPONENT</text>
+
+  <!-- 3 Grid Column Wireframes -->
+  <rect x="110" y="470" width="170" height="150" rx="8" stroke="#F4F1E9" stroke-width="4"/>
+  <text x="195" y="555" text-anchor="middle" font-family="ui-monospace, monospace" font-weight="800" font-size="16" fill="#FF5500">COL_01</text>
+
+  <rect x="315" y="470" width="170" height="150" rx="8" stroke="#F4F1E9" stroke-width="4"/>
+  <text x="400" y="555" text-anchor="middle" font-family="ui-monospace, monospace" font-weight="800" font-size="16" fill="#FF5500">COL_02</text>
+
+  <rect x="520" y="470" width="170" height="150" rx="8" stroke="#F4F1E9" stroke-width="4"/>
+  <text x="605" y="555" text-anchor="middle" font-family="ui-monospace, monospace" font-weight="800" font-size="16" fill="#FF5500">COL_03</text>
+
+  <!-- Technical Dimension Callouts -->
+  <line x1="90" y1="180" x2="90" y2="620" stroke="#FF5500" stroke-width="3"/>
+  <polygon points="90,170 82,185 98,185" fill="#FF5500"/>
+  <polygon points="90,630 82,615 98,615" fill="#FF5500"/>
+
+  <line x1="110" y1="645" x2="690" y2="645" stroke="#FF5500" stroke-width="3"/>
+  <polygon points="100,645 115,637 115,653" fill="#FF5500"/>
+  <polygon points="700,645 685,637 685,653" fill="#FF5500"/>
+
+  <!-- Footer Tag -->
+  <text x="400" y="700" text-anchor="middle" font-family="ui-monospace, monospace" font-weight="800" font-size="18" fill="#F4F1E9" letter-spacing="4">PRODUCT DESIGN STRUCTURE // BLUEPRINT SPEC</text>
+</svg>

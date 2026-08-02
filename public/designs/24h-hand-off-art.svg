@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <!-- 24H HAND-OFF / SHIFT CREW CONTINUITY -->
+  <!-- Outer border badge -->
+  <rect x="70" y="70" width="660" height="660" rx="20" stroke="#F4F1E9" stroke-width="6"/>
+
+  <!-- Top Title Bar -->
+  <rect x="70" y="70" width="660" height="110" fill="#F4F1E9"/>
+  <text x="400" y="140" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="44" fill="#111315" letter-spacing="6">24H HAND-OFF</text>
+
+  <!-- 3 Giant Interlocking Shift Blocks -->
+  <!-- Day Shift Block -->
+  <g transform="translate(110, 220)">
+    <rect x="0" y="0" width="580" height="120" rx="12" fill="#F4F1E9"/>
+    <text x="30" y="55" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="28" fill="#111315" letter-spacing="2">DAY SHIFT</text>
+    <text x="30" y="90" font-family="ui-monospace, monospace" font-weight="700" font-size="18" fill="#111315" opacity="0.8">07:00 ➔ 15:00 · CREW A</text>
+    <!-- Giant Arrow Badge -->
+    <path d="M 480 30 L 530 60 L 480 90 Z" fill="#FF5500"/>
+  </g>
+
+  <!-- Swing Shift Block -->
+  <g transform="translate(110, 360)">
+    <rect x="0" y="0" width="580" height="120" rx="12" fill="#00E5FF"/>
+    <text x="30" y="55" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="28" fill="#111315" letter-spacing="2">SWING SHIFT</text>
+    <text x="30" y="90" font-family="ui-monospace, monospace" font-weight="700" font-size="18" fill="#111315" opacity="0.8">15:00 ➔ 23:00 · CREW B</text>
+    <path d="M 480 30 L 530 60 L 480 90 Z" fill="#111315"/>
+  </g>
+
+  <!-- Night Shift Block -->
+  <g transform="translate(110, 500)">
+    <rect x="0" y="0" width="580" height="120" rx="12" fill="#FF5500"/>
+    <text x="30" y="55" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="28" fill="#F4F1E9" letter-spacing="2">NIGHT SHIFT</text>
+    <text x="30" y="90" font-family="ui-monospace, monospace" font-weight="700" font-size="18" fill="#F4F1E9" opacity="0.9">23:00 ➔ 07:00 · CREW C</text>
+    <path d="M 480 30 L 530 60 L 480 90 Z" fill="#F4F1E9"/>
+  </g>
+
+  <!-- Footer Banner -->
+  <text x="400" y="685" text-anchor="middle" font-family="ui-monospace, monospace" font-weight="800" font-size="18" fill="#F4F1E9" letter-spacing="6">PASSED &amp; ACKNOWLEDGED · ZERO GAP</text>
+</svg>

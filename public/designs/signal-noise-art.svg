@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <!-- SIGNAL VS NOISE -->
+  <!-- Outer Badge Frame -->
+  <rect x="60" y="60" width="680" height="680" rx="20" stroke="#F4F1E9" stroke-width="6"/>
+
+  <!-- Vertical Divider Bar -->
+  <rect x="392" y="60" width="16" height="680" fill="#FF5500"/>
+
+  <!-- Left Side: NOISE (Dot Matrix Field & Scrambled Signal) -->
+  <rect x="70" y="70" width="310" height="550" fill="#111315"/>
+  <!-- Noise Dot Pattern -->
+  <circle cx="120" cy="140" r="8" fill="#F4F1E9" opacity="0.6"/>
+  <circle cx="220" cy="180" r="14" fill="#F4F1E9" opacity="0.4"/>
+  <circle cx="310" cy="130" r="6" fill="#F4F1E9" opacity="0.8"/>
+  <circle cx="160" cy="240" r="18" fill="#F4F1E9" opacity="0.3"/>
+  <circle cx="280" cy="280" r="10" fill="#F4F1E9" opacity="0.5"/>
+  <circle cx="100" cy="340" r="12" fill="#F4F1E9" opacity="0.7"/>
+  <circle cx="200" cy="380" r="22" fill="#F4F1E9" opacity="0.25"/>
+  <circle cx="320" cy="420" r="8" fill="#F4F1E9" opacity="0.6"/>
+  <circle cx="140" cy="480" r="16" fill="#F4F1E9" opacity="0.4"/>
+  <circle cx="260" cy="520" r="10" fill="#F4F1E9" opacity="0.7"/>
+  <!-- Noise Text -->
+  <rect x="90" y="550" width="270" height="60" rx="8" fill="#F4F1E9" fill-opacity="0.1"/>
+  <text x="225" y="590" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="28" fill="#F4F1E9" letter-spacing="4">NOISE</text>
+
+  <!-- Right Side: SIGNAL (Clean Bold Waveform) -->
+  <rect x="420" y="70" width="310" height="550" fill="#111315"/>
+  <!-- Single Clean Bold Wave -->
+  <path d="M 430 350 Q 500 150 570 350 T 710 350" stroke="#00E5FF" stroke-width="16" fill="none" stroke-linecap="round"/>
+  <!-- Peak Nodes -->
+  <circle cx="500" cy="210" r="18" fill="#FF5500"/>
+  <circle cx="640" cy="490" r="18" fill="#FF5500"/>
+  <!-- Signal Text -->
+  <rect x="440" y="550" width="270" height="60" rx="8" fill="#00E5FF"/>
+  <text x="575" y="590" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="28" fill="#111315" letter-spacing="4">SIGNAL</text>
+
+  <!-- Bottom Headline Tag -->
+  <text x="400" y="695" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="26" fill="#F4F1E9" letter-spacing="8">HIGH SIGNAL-TO-NOISE RATIO</text>
+</svg>

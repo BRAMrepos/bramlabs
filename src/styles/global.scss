@@ -1,0 +1,415 @@
+:root {
+  /* ──────────────────────────────────────────────────────────────
+     COLOR — V3's warm parchment palette (deliberate improvement on V2)
+     ────────────────────────────────────────────────────────────── */
+  --paper:   #f3efe6; /* warm parchment — page background          */
+  --canvas:  #faf8f3; /* slightly lighter — section alternates     */
+  --surface: #ffffff; /* pure white — cards, inputs                */
+  --ink:     #141416; /* near-black — primary text                 */
+  --muted:   #6b6860; /* warm mid-grey — secondary text            */
+  --line:    #ddd8cd; /* warm border                               */
+  --dark:    #0f1012; /* deep dark — not used in light theme       */
+
+  /* Artwork-only accent palette — keep chrome near-neutral */
+  --cyan:    #1fb8e0;
+  --orange:  #f07d2a;
+  --green:   #3bbb86;
+  --violet:  #6f6cd4;
+
+  /* ──────────────────────────────────────────────────────────────
+     TYPOGRAPHY
+     Display: hero / section / card titles
+     Sans: body, nav, buttons, eyebrows
+     Mono: system meta only (order numbers, categories, dates)
+     ────────────────────────────────────────────────────────────── */
+  --font-display: "Bricolage Grotesque Variable", "Bricolage Grotesque",
+    system-ui, sans-serif;
+  --font-sans: "Instrument Sans Variable", "Instrument Sans", system-ui,
+    -apple-system, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* ──────────────────────────────────────────────────────────────
+     SPACING — 8-step ladder (restored from V2; V3 dropped this)
+     Using these tokens ensures consistent rhythm across all pages.
+     ────────────────────────────────────────────────────────────── */
+  --s-1: 0.25rem;  /*  4px */
+  --s-2: 0.5rem;   /*  8px */
+  --s-3: 1rem;     /* 16px */
+  --s-4: 1.5rem;   /* 24px */
+  --s-5: 2rem;     /* 32px */
+  --s-6: 3rem;     /* 48px */
+  --s-7: 4rem;     /* 64px */
+  --s-8: 6rem;     /* 96px */
+
+  /* ──────────────────────────────────────────────────────────────
+     LAYOUT
+     ────────────────────────────────────────────────────────────── */
+  --max:     1400px;
+  --content: 1180px;
+  --gutter:  1.25rem;
+
+  /* ──────────────────────────────────────────────────────────────
+     BORDER RADIUS — editorial but not brutalist (compromise)
+     V2: 12/20px  |  V3: 2/6px  |  ours: 6/14px
+     ────────────────────────────────────────────────────────────── */
+  --radius:      6px;
+  --radius-lg:   14px;
+  --radius-pill: 999px;
+
+  /* ──────────────────────────────────────────────────────────────
+     MOTION
+     ────────────────────────────────────────────────────────────── */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --t:    220ms;
+
+  /* ──────────────────────────────────────────────────────────────
+     SHADOWS — three-tier system (restored from V2; V3 only had soft)
+     Soft: resting state  |  Card: elevated card  |  Lift: on-hover
+     ────────────────────────────────────────────────────────────── */
+  --shadow-soft: 0 1px 2px rgba(20, 20, 22, 0.04),
+                 0 12px 40px rgba(20, 20, 22, 0.06);
+  --shadow-card: 0 1px 2px rgba(20, 20, 22, 0.05),
+                 0 16px 48px rgba(20, 20, 22, 0.08);
+  --shadow-lift: 0 2px 4px rgba(20, 20, 22, 0.06),
+                 0 24px 64px rgba(20, 20, 22, 0.10);
+
+  /* ──────────────────────────────────────────────────────────────
+     HEADER
+     ────────────────────────────────────────────────────────────── */
+  --header-h: 72px;
+
+  /* ──────────────────────────────────────────────────────────────
+     RESPONSIVE GUTTERS
+     ────────────────────────────────────────────────────────────── */
+  @media (width >= 768px)  { --gutter: 2.25rem; }
+  @media (width >= 1024px) { --gutter: 3.5rem;  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   RESET
+   ────────────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   ACCESSIBILITY
+   ────────────────────────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  left: var(--gutter);
+  top: 0.75rem;
+  z-index: 10000;
+  padding: 0.55rem 1.1rem;
+  background: var(--ink);
+  color: var(--surface);
+  border-radius: var(--radius-pill);
+  font-size: 0.875rem;
+  font-weight: 500;
+  /* Hide off-screen without display:none so it's still focusable */
+  clip-path: inset(0 0 0 -100vw);
+  transform: translateX(-200%);
+  transition: transform 0.15s ease, clip-path 0.15s ease;
+
+  &:focus {
+    clip-path: none;
+    transform: translateX(0);
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   LAYOUT PRIMITIVES
+   ────────────────────────────────────────────────────────────────── */
+.wrap {
+  width: min(100% - var(--gutter) * 2, var(--max));
+  margin-inline: auto;
+}
+
+.wrap-content {
+  width: min(100% - var(--gutter) * 2, var(--content));
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: clamp(4.5rem, 10vw, 8rem);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   TYPE SCALE
+   ────────────────────────────────────────────────────────────────── */
+/* Section labels — sans, not mono (mono reserved for system meta) */
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* System meta only: order numbers, categories, dates, chips */
+.meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Hero — fluid from 44px → 68px */
+.h-hero {
+  font-family: var(--font-display);
+  font-size: clamp(2.75rem, 6.5vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1.06;
+  letter-spacing: -0.038em;
+  color: var(--ink);
+}
+
+/* Section heading — fluid from 30px → 48px */
+.h-section {
+  font-family: var(--font-display);
+  font-size: clamp(1.875rem, 4.5vw, 3rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+/* Page h1 — inner pages: between hero and section (34px → 44px) */
+.h-page {
+  font-family: var(--font-display);
+  font-size: clamp(2.125rem, 5vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+}
+
+/* Card heading — fluid from 20px → 28px */
+.h-card {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+/* Lead paragraph */
+.lede {
+  font-size: clamp(1.0625rem, 1.4vw, 1.1875rem);
+  line-height: 1.7;
+  color: var(--muted);
+  max-width: 36rem;
+}
+
+/* Body copy */
+.body {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--ink);
+  max-width: 40rem;
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   BUTTONS
+   Three variants: primary (ink fill), ghost (outline), link (underline)
+   All include micro-interactions — scale on active, shadow transitions.
+   ────────────────────────────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 46px;
+  padding: 0.7rem 1.45rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  transition:
+    background var(--t) var(--ease),
+    color var(--t) var(--ease),
+    border-color var(--t) var(--ease),
+    box-shadow var(--t) var(--ease),
+    opacity var(--t) var(--ease),
+    transform 120ms var(--ease);
+
+  &.-primary {
+    background: var(--ink);
+    color: var(--surface);
+    box-shadow: 0 1px 2px rgba(20, 20, 22, 0.08);
+
+    &:hover {
+      background: color-mix(in oklab, var(--ink) 88%, white);
+      box-shadow: 0 4px 16px rgba(20, 20, 22, 0.14);
+    }
+    &:active {
+      transform: scale(0.97);
+      box-shadow: 0 1px 4px rgba(20, 20, 22, 0.1);
+    }
+  }
+
+  &.-ghost {
+    border-color: var(--line);
+    background: transparent;
+    color: var(--ink);
+
+    &:hover {
+      border-color: color-mix(in oklab, var(--ink) 35%, var(--line));
+      background: var(--surface);
+      box-shadow: 0 2px 8px rgba(20, 20, 22, 0.05);
+    }
+    &:active {
+      transform: scale(0.97);
+    }
+  }
+
+  &.-link {
+    padding: 0.35rem 0;
+    min-height: auto;
+    border: none;
+    border-radius: 0;
+    font-weight: 500;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+    box-shadow: none;
+
+    &:hover { opacity: 0.62; }
+    &:active { transform: none; }
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   FORMS
+   ────────────────────────────────────────────────────────────────── */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+
+  label {
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+
+  input,
+  textarea,
+  select {
+    width: 100%;
+    padding: 0.85rem 1.05rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    transition: border-color var(--t), box-shadow var(--t);
+
+    &:focus {
+      outline: none;
+      border-color: color-mix(in oklab, var(--ink) 45%, var(--line));
+      box-shadow: 0 0 0 3px color-mix(in oklab, var(--ink) 7%, transparent);
+    }
+  }
+
+  textarea {
+    min-height: 148px;
+    resize: vertical;
+  }
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   SURFACE CARD
+   ────────────────────────────────────────────────────────────────── */
+.surface {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+}
+
+/* ──────────────────────────────────────────────────────────────────
+   PAGE-LEVEL PRIMITIVES
+   ────────────────────────────────────────────────────────────────── */
+.page-hero {
+  padding-top: clamp(2.5rem, 6vw, 4rem);
+  padding-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.page-head {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  margin-bottom: var(--s-6);
+  max-width: 38rem;
+}

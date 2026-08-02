@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <!-- PROTECT YOUR EARS / HEARING SAFETY -->
+  <!-- Outer Octagonal Hazard Badge -->
+  <polygon points="260,60 540,60 740,260 740,540 540,740 260,740 60,540 60,260" stroke="#FF5500" stroke-width="8" fill="#111315"/>
+
+  <!-- Top Title Banner -->
+  <text x="400" y="140" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="34" fill="#F4F1E9" letter-spacing="6">PROTECT YOUR EARS</text>
+  <text x="400" y="180" text-anchor="middle" font-family="ui-monospace, monospace" font-weight="800" font-size="18" fill="#FF5500" letter-spacing="4">[ DECIBEL LIMITER ACTIVE ]</text>
+
+  <!-- Concentric Decibel Radar Circles -->
+  <circle cx="400" cy="400" r="180" stroke="#F4F1E9" stroke-width="6" stroke-dasharray="16 16"/>
+  <circle cx="400" cy="400" r="130" stroke="#00E5FF" stroke-width="8"/>
+  <circle cx="400" cy="400" r="80" stroke="#FF5500" stroke-width="10"/>
+
+  <!-- Center Speaker/Ear Symbol -->
+  <circle cx="400" cy="400" r="40" fill="#FF5500"/>
+  <circle cx="400" cy="400" r="16" fill="#F4F1E9"/>
+
+  <!-- Danger Threshold Arcs -->
+  <path d="M 220 400 A 180 180 0 0 1 400 220" stroke="#FF5500" stroke-width="16" stroke-linecap="round"/>
+  <text x="310" y="270" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="22" fill="#FF5500">&gt; 85 dB DANGER</text>
+
+  <!-- Bottom Headline Tag -->
+  <rect x="160" y="610" width="480" height="60" rx="30" fill="#FF5500"/>
+  <text x="400" y="650" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="26" fill="#F4F1E9" letter-spacing="6">PRESERVE THE FREQUENCIES</text>
+</svg>

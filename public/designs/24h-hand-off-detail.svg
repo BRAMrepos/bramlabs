@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="120 120 560 560" fill="none">
+  <rect width="800" height="800" fill="#F4F1E9"/><rect x="120" y="120" width="560" height="560" fill="none" stroke="#111315" stroke-width="2" opacity="0.15"/>
+  <!-- three interlocking thick rings as handoff bands -->
+  <path d="M200 420 A200 200 0 1 1 600 420" stroke="#FF862E" stroke-width="36" stroke-linecap="round" fill="none"/>
+  <path d="M220 460 A180 180 0 1 1 580 460" stroke="#42C991" stroke-width="36" stroke-linecap="round" fill="none" opacity="0.9"/>
+  <path d="M240 500 A160 160 0 1 1 560 500" stroke="#111315" stroke-width="36" stroke-linecap="round" fill="none" opacity="0.35"/>
+  <!-- center node -->
+  <circle cx="400" cy="380" r="28" fill="#111315"/>
+  <circle cx="400" cy="380" r="12" fill="#F4F1E9"/>
+  <!-- transfer markers -->
+  <circle cx="200" cy="420" r="10" fill="#FF862E"/>
+  <circle cx="600" cy="420" r="10" fill="#FF862E"/>
+  <circle cx="220" cy="460" r="10" fill="#42C991"/>
+  <circle cx="580" cy="460" r="10" fill="#42C991"/>
+  <text x="400" y="100" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16" fill="#111315" letter-spacing="8">24H</text>
+  <text x="400" y="640" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" fill="#111315" letter-spacing="4">DAY → SWING → NIGHT</text>
+  <text x="400" y="680" text-anchor="middle" font-family="ui-monospace,monospace" font-size="12" fill="#666963" letter-spacing="3">UNINTERRUPTED COVERAGE</text>
+  <text x="130" y="410" font-family="ui-monospace,monospace" font-size="11" fill="#FF862E" letter-spacing="2">IN</text>
+  <text x="640" y="410" font-family="ui-monospace,monospace" font-size="11" fill="#FF862E" letter-spacing="2">OUT</text>
+</svg>

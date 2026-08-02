@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <!-- CIRCADIAN RHYTHM: CORRUPTED -->
+  <!-- Industrial framing box -->
+  <rect x="80" y="80" width="640" height="640" rx="16" stroke="#F4F1E9" stroke-width="6" opacity="0.9"/>
+  <rect x="100" y="100" width="600" height="600" rx="8" stroke="#7976E8" stroke-width="2" stroke-dasharray="8 8" opacity="0.5"/>
+
+  <!-- Top Status Badge Header -->
+  <rect x="120" y="130" width="560" height="60" rx="6" fill="#7976E8" fill-opacity="0.25" stroke="#7976E8" stroke-width="3"/>
+  <circle cx="160" cy="160" r="12" fill="#FF5500"/>
+  <text x="190" y="168" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="20" fill="#F4F1E9" letter-spacing="4">CIRCADIAN RHYTHM // STATUS: CORRUPTED</text>
+
+  <!-- Large Central Wave Lines with Glitch Offset -->
+  <!-- Baseline grid lines -->
+  <line x1="120" y1="260" x2="680" y2="260" stroke="#F4F1E9" stroke-width="2" opacity="0.3"/>
+  <line x1="120" y1="340" x2="680" y2="340" stroke="#F4F1E9" stroke-width="2" opacity="0.3"/>
+  <line x1="120" y1="420" x2="680" y2="420" stroke="#F4F1E9" stroke-width="2" opacity="0.3"/>
+  <line x1="120" y1="500" x2="680" y2="500" stroke="#F4F1E9" stroke-width="2" opacity="0.3"/>
+  <line x1="120" y1="580" x2="680" y2="580" stroke="#F4F1E9" stroke-width="2" opacity="0.3"/>
+
+  <!-- Bold Corrupted Sine Waves -->
+  <!-- Wave 1 (Violet) -->
+  <path d="M 120 420 C 220 220, 300 600, 400 420 S 580 240, 680 420" stroke="#7976E8" stroke-width="12" fill="none" stroke-linecap="round"/>
+  <!-- Wave 2 (Cyan Glitch) -->
+  <path d="M 120 440 C 240 260, 280 560, 410 410 S 560 200, 680 450" stroke="#00E5FF" stroke-width="8" stroke-dasharray="30 10" fill="none" stroke-linecap="round"/>
+  <!-- Wave 3 (Orange Disruption) -->
+  <path d="M 120 400 C 200 400, 320 280, 400 430 S 600 520, 680 400" stroke="#FF5500" stroke-width="6" stroke-dasharray="10 10" fill="none"/>
+
+  <!-- Orbit Ring Center -->
+  <circle cx="400" cy="420" r="110" stroke="#F4F1E9" stroke-width="6" fill="none"/>
+  <circle cx="400" cy="420" r="110" stroke="#FF5500" stroke-width="10" stroke-dasharray="60 120" fill="none"/>
+
+  <!-- Big Bold Typography Block at Bottom -->
+  <text x="400" y="640" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="36" fill="#F4F1E9" letter-spacing="6">NIGHT SHIFT DRIFT</text>
+  <text x="400" y="680" text-anchor="middle" font-family="ui-monospace, monospace" font-weight="700" font-size="16" fill="#00E5FF" letter-spacing="6">03:47 AM · PHASE REGRESSION</text>
+</svg>

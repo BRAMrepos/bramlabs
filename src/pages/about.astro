@@ -1,218 +1,174 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Icon from '../components/Icon.astro';
-
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "AboutPage",
-  "name": "About BramLabs Studio",
-  "url": "https://bramlabs.co/about",
-  "mainEntity": {
-    "@type": "Organization",
-    "name": "BramLabs",
-    "url": "https://bramlabs.co",
-    "email": "support@bramlabs.co",
-    "description": "Independent product studio building mobile apps, browser extensions, web platforms, and original brand merchandise for our own IP."
-  }
-};
+export const prerender = true;
+import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
 <BaseLayout
-  title="About BramLabs Studio"
-  description="BramLabs is an independent software product studio shipping Amazon Appstore apps, Chrome extensions, production web platforms, and original merch for our own IP."
-  structuredData={structuredData}
+  title="About — BramLabs"
+  description="BramLabs is an independent software and design studio founded by Bram, creating digital products and original apparel graphics."
 >
-  <!-- Hero Section -->
-  <section class="section-block pt-16 md:pt-24 border-b border-[var(--border-subtle)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-3xl flex flex-col gap-6">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-400/10 border border-sky-400/20 text-sky-400 text-xs font-mono font-semibold w-fit">
-          <Icon name="Smartphone" class="w-3.5 h-3.5" />
-          Independent Product Studio &amp; Appstore Developer
-        </div>
-        
-        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[var(--text-primary)] leading-[1.1]">
-          We build focused software tools<br />
-          <span class="text-gradient">and design original apparel IP.</span>
-        </h1>
-
-        <p class="text-[var(--text-secondary)] text-base sm:text-lg leading-relaxed">
-          BramLabs is an independent software studio founded on a clear mission: engineer low-friction utility software across mobile and browser platforms, and produce official print merchandise strictly for <strong class="text-[var(--text-primary)] font-semibold">our own software titles and studio IP</strong>.
+  <section class="section">
+    <div class="wrap">
+      <header class="page-head">
+        <h1 class="h-page">About BramLabs</h1>
+        <p class="lede">
+          BramLabs is an independent software and design studio founded by Bram.
+          The studio creates focused digital products alongside original apparel
+          graphics inspired by technology, work systems and professional culture.
         </p>
+      </header>
 
-        <!-- Studio Quick Stats -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 font-mono text-xs text-[var(--text-secondary)]">
-          <div class="glass-card p-4 flex flex-col gap-1">
-            <span class="text-[var(--text-muted)] text-[10px] uppercase font-bold">Appstore Status</span>
-            <span class="text-[var(--text-primary)] font-bold text-sm">Active Developer</span>
-          </div>
-          <div class="glass-card p-4 flex flex-col gap-1">
-            <span class="text-[var(--text-muted)] text-[10px] uppercase font-bold">Live Apps</span>
-            <span class="text-[var(--text-primary)] font-bold text-sm">ClearCue &amp; ShiftLedger</span>
-          </div>
-          <div class="glass-card p-4 flex flex-col gap-1">
-            <span class="text-[var(--text-muted)] text-[10px] uppercase font-bold">Chrome Store</span>
-            <span class="text-[var(--text-primary)] font-bold text-sm">SonicShield Live</span>
-          </div>
-          <div class="glass-card p-4 flex flex-col gap-1">
-            <span class="text-[var(--text-muted)] text-[10px] uppercase font-bold">IP Policy</span>
-            <span class="text-emerald-400 font-bold text-sm">100% Original</span>
+      <section id="designer" class="block designer-block">
+        <h2 class="h-card">Designed by Bram</h2>
+        <div class="designer">
+          <figure class="portrait">
+            <picture>
+              <source srcset="/studio/workspace.webp" type="image/webp" />
+              <img
+                src="/studio/workspace.jpg"
+                alt="BramLabs studio workspace with technical vector blueprints, fabric swatches and precision drafting tools"
+                width="800"
+                height="1000"
+              />
+            </picture>
+            <figcaption class="meta">
+              BramLabs Studio Workspace — Systems Design & Vector Craft
+            </figcaption>
+          </figure>
+          <div class="bio">
+            <p class="body">
+              I’m Bram, founder and designer behind BramLabs. I engineer each apparel concept in-house — moving from domain research and raw sketches through vector geometry, fabric colorway testing, and high-resolution print preparation.
+            </p>
+            <p class="body">
+              Software and graphics share the exact same desk. Systems thinking, clear hierarchy, and exact line weight carry over to both mediums — without turning garments into app promotional flyers. If a design doesn’t hold up as standalone architectural art from across the room, it doesn't ship.
+            </p>
+            <p class="body">
+              All vector artwork is constructed to Amazon Merch specifications (4500×5400 sRGB transparent master files). The public archive features high-fidelity preview renderings; original vector files remain protected studio IP.
+            </p>
           </div>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- Studio Ethos & Software Craftsmanship -->
-  <section class="section-block border-b border-[var(--border-subtle)] bg-[var(--bg-surface)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-xl mb-12">
-        <span class="text-[11px] font-mono uppercase tracking-widest text-[var(--text-muted)] font-semibold block mb-1">Foundational Vision</span>
-        <h2 class="text-[var(--text-primary)] mb-2">Software Craftsmanship</h2>
-        <p class="text-[var(--text-secondary)] text-sm">How we approach product design, performance, and user privacy.</p>
-      </div>
+      <section class="block">
+        <h2 class="h-card">Principles</h2>
+        <ul class="principles">
+          <li>
+            <h3>Original concepts</h3>
+            <p>
+              Every design begins with a BramLabs-created idea rather than stock
+              artwork, licensed characters or copied branding.
+            </p>
+          </li>
+          <li>
+            <h3>Readable graphics</h3>
+            <p>
+              Every composition must work both as standalone art and as a garment
+              graphic seen at normal viewing distance.
+            </p>
+          </li>
+          <li>
+            <h3>Deliberate construction</h3>
+            <p>
+              Color, line weight, scale and garment placement are considered during
+              the design process — not added after a slogan.
+            </p>
+          </li>
+          <li>
+            <h3>Honest credentials</h3>
+            <p>
+              Software is listed publicly only when a real storefront URL exists.
+              Support pages stay available for products that need them.
+            </p>
+          </li>
+        </ul>
+      </section>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="glass-card p-7 flex flex-col gap-3.5">
-          <div class="w-10 h-10 rounded-lg bg-blue-500/10 border border-blue-500/20 flex items-center justify-center text-blue-500 mb-1">
-            <Icon name="Zap" class="w-5 h-5" />
-          </div>
-          <h3 class="text-lg font-bold text-[var(--text-primary)]">01. Local-First &amp; Fast</h3>
-          <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-            Our applications execute directly on the user's device without requiring background telemetry or continuous server handshakes. Fast first-paints and lightweight memory footprints are non-negotiable.
-          </p>
-        </div>
-
-        <div class="glass-card p-7 flex flex-col gap-3.5">
-          <div class="w-10 h-10 rounded-lg bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-500 mb-1">
-            <Icon name="Lock" class="w-5 h-5" />
-          </div>
-          <h3 class="text-lg font-bold text-[var(--text-primary)]">02. Zero Paywall Bloat</h3>
-          <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-            Every product features full transparent privacy documentation, zero dark patterns, and simple core utilities that work straight out of the box.
-          </p>
-        </div>
-
-        <div class="glass-card p-7 flex flex-col gap-3.5">
-          <div class="w-10 h-10 rounded-lg bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 mb-1">
-            <Icon name="ShieldCheck" class="w-5 h-5" />
-          </div>
-          <h3 class="text-lg font-bold text-[var(--text-primary)]">03. In-House Apparel IP</h3>
-          <p class="text-xs text-[var(--text-secondary)] leading-relaxed">
-            We design print-ready vector artwork to complement our software titles. Every shirt and hoodie graphic originates from studio vector masters — zero third-party brands or copyrighted material.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Developer Credibility & Policy Compliance -->
-  <section class="section-block border-b border-[var(--border-subtle)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        
-        <div class="glass-card p-8 flex flex-col gap-4">
-          <div class="w-10 h-10 rounded-lg bg-emerald-400/10 border border-emerald-400/20 flex items-center justify-center text-emerald-400 mb-2">
-            <Icon name="Target" class="w-5 h-5" />
-          </div>
-          <h2 class="text-xl font-bold text-[var(--text-primary)]">Publisher Standards</h2>
-          <ul class="flex flex-col gap-3 text-xs sm:text-sm text-[var(--text-muted)]">
-            <li class="flex items-center gap-2.5">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span>Publish verified Android/Fire OS applications to the Amazon Appstore</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span>Maintain active Chrome Web Store extension listings with Manifest V3 security</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span>Operate production web platforms like WorkflowAI.site and BramLabs Publisher Hub</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-emerald-400 font-bold">✓</span>
-              <span>Maintain dedicated per-product terms, privacy statements, and changelogs</span>
-            </li>
-          </ul>
-        </div>
-
-        <div class="glass-card p-8 flex flex-col gap-4">
-          <div class="w-10 h-10 rounded-lg bg-sky-400/10 border border-sky-400/20 flex items-center justify-center text-sky-400 mb-2">
-            <Icon name="ShieldCheck" class="w-5 h-5" />
-          </div>
-          <h2 class="text-xl font-bold text-[var(--text-primary)]">Merch on Demand Compliance</h2>
-          <ul class="flex flex-col gap-3 text-xs sm:text-sm text-[var(--text-muted)]">
-            <li class="flex items-center gap-2.5">
-              <span class="text-sky-400 font-bold">✓</span>
-              <span>Strictly zero third-party brands, sports logos, or copyrighted characters</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-sky-400 font-bold">✓</span>
-              <span>300 DPI native resolution working files (4500x5400 px transparent PNG)</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-sky-400 font-bold">✓</span>
-              <span>Pre-flight USPTO trademark search before submitting print designs</span>
-            </li>
-            <li class="flex items-center gap-2.5">
-              <span class="text-sky-400 font-bold">✓</span>
-              <span>Pre-submission line-by-line review against Merch Content Policy</span>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- Four Disciplines Navigation -->
-  <section class="section-block border-b border-[var(--border-subtle)] bg-[var(--bg-surface)]">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="max-w-xl mb-10">
-        <span class="text-[11px] font-mono uppercase tracking-widest text-sky-400 font-semibold block mb-1">Directory</span>
-        <h2 class="text-[var(--text-primary)]">Explore Studio Lanes</h2>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {[
-          { href: '/apps',       icon: 'Smartphone', title: 'Mobile Apps',  desc: 'Amazon Appstore developer titles — ClearCue and ShiftLedger.' },
-          { href: '/extensions', icon: 'Puzzle',     title: 'Extensions',   desc: 'SonicShield, SnapElite, and Tab Snoozer Chrome utilities.' },
-          { href: '/web',        icon: 'Globe',      title: 'Web Platforms', desc: 'WorkflowAI.site and BramLabs Publisher Platform.' },
-          { href: '/merch',      icon: 'Shirt',      title: 'Apparel & Art', desc: '300 DPI print-ready vector series and compliance reference.' },
-        ].map((lane) => (
-          <a
-            href={lane.href}
-            class="glass-card p-6 flex flex-col gap-3 group"
-          >
-            <div class="w-10 h-10 rounded-lg bg-sky-400/10 border border-sky-400/20 flex items-center justify-center">
-              <Icon name={lane.icon} class="w-5 h-5 text-sky-400" />
-            </div>
-            <h3 class="text-base font-bold text-[var(--text-primary)] group-hover:text-sky-300 transition-colors">{lane.title}</h3>
-            <p class="text-xs text-[var(--text-muted)] leading-relaxed">{lane.desc}</p>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Studio Contact Reference -->
-  <section class="section-block">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="glass-card p-8 md:p-12 max-w-2xl">
-        <span class="text-[10px] font-mono uppercase tracking-widest text-[var(--text-muted)] font-bold mb-1 block">Developer Contact</span>
-        <h2 class="text-[var(--text-primary)] mb-3">Studio Contact &amp; Support</h2>
-        <p class="text-[var(--text-muted)] text-sm leading-relaxed mb-4">
-          For technical support, store reviewer inquiries, or Merch on Demand developer verification:
+      <section class="block">
+        <h2 class="h-card">Contact</h2>
+        <p class="body">
+          Studio inquiries: <a href="mailto:contact@bramlabs.co">contact@bramlabs.co</a
+          ><br />
+          Product support: <a href="mailto:support@bramlabs.co">support@bramlabs.co</a>
         </p>
-        <a href="mailto:support@bramlabs.co" class="text-sky-400 hover:underline font-bold text-xl block mb-6">
-          support@bramlabs.co
-        </a>
-        <div class="text-xs text-[var(--text-faint)] flex items-center gap-4 pt-4 border-t border-[var(--border-subtle)] font-mono">
-          <a href="/privacy" class="hover:text-[var(--text-muted)] transition-colors">Privacy Policy</a> · 
-          <a href="/terms" class="hover:text-[var(--text-muted)] transition-colors">Terms of Service</a> · 
-          <a href="/merch" class="hover:text-[var(--text-muted)] transition-colors">MBA Reference</a>
-        </div>
-      </div>
+        <p class="body meta-line">
+          Prefer the <a href="/contact/">contact page</a> for structured messages.
+        </p>
+      </section>
     </div>
   </section>
 </BaseLayout>
+
+<style lang="scss">
+  .page-head {
+    max-width: 42rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+  .block {
+    margin-bottom: 3.5rem;
+  }
+  .designer {
+    display: grid;
+    gap: 2rem;
+    margin-top: 1.25rem;
+    @media (width >= 900px) {
+      grid-template-columns: 0.9fr 1.1fr;
+      align-items: start;
+    }
+  }
+  .portrait {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--canvas);
+    img {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+    figcaption {
+      padding: 0.75rem 1rem;
+      border-top: 1px solid var(--line);
+    }
+  }
+  .bio .body + .body {
+    margin-top: 1rem;
+    color: var(--muted);
+  }
+  .principles {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1.25rem;
+    @media (width >= 800px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    li {
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+    }
+    h3 {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+    p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+    }
+  }
+  .meta-line {
+    margin-top: 1rem;
+    font-size: 0.95rem;
+    a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+  .body a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

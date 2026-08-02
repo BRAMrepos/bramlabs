@@ -1,6 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /extensions/*/thank-you
-Disallow: /extensions/*/activate
 
-Sitemap: https://bramlabs.co/sitemap.xml
+Sitemap: https://bramlabs.co/sitemap-index.xml

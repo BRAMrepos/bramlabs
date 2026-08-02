@@ -1,220 +1,398 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import Icon from '../../components/Icon.astro';
-import ArtCard from '../../components/ArtCard.astro';
-import { getCollection } from 'astro:content';
+export const prerender = true;
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import DesignCard from "@/components/DesignCard.astro";
+import { getAllDesigns, getFeaturedDesigns } from "@/data/designs";
 
-const art = (await getCollection('art')).sort((a, b) => Number(b.data.featured) - Number(a.data.featured));
-
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "BramLabs Apparel & IP Art Portfolio",
-  "url": "https://bramlabs.co/merch",
-  "description": "Original print-ready apparel graphics designed by BramLabs Studio for our software IP and evergreen gift niches.",
-  "isPartOf": {
-    "@type": "Organization",
-    "name": "BramLabs",
-    "url": "https://bramlabs.co"
-  }
-};
+const designs = getAllDesigns();
+const featured = getFeaturedDesigns();
+const niches = [...new Set(designs.map((d) => d.category))];
 ---
 
 <BaseLayout
-  title="Apparel Art Portfolio"
-  description="Original print-ready apparel graphics designed by BramLabs Studio for our software IP and evergreen gift niches."
-  structuredData={structuredData}
+  title="Merch Portfolio — BramLabs Original Apparel Graphics"
+  description="Original BramLabs apparel graphics portfolio for marketplace review: in-house concepts, garment mockups, process documentation and print-ready masters prepared to Merch specifications."
+  image="/mockups/rotation-dial-tee.jpg"
 >
+  <section class="section page-top">
+    <div class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">Merch portfolio</p>
+        <h1 class="h-page">Original apparel graphics for marketplace review</h1>
+        <p class="lede">
+          BramLabs is an independent design practice. This page is the application
+          portfolio for original apparel graphics — mockups, raw artwork and
+          construction notes. There is no checkout on this site.
+        </p>
+      </header>
 
-  <!-- High contrast portfolio canvas wrapper -->
-  <div class="bg-[#f8fafc] text-[#0f172a] min-h-screen">
+      <ul class="proof-bar" aria-label="Portfolio facts">
+        <li>
+          <strong>{designs.length}</strong>
+          <span>Original designs</span>
+        </li>
+        <li>
+          <strong>{niches.length}</strong>
+          <span>Intentional niches</span>
+        </li>
+        <li>
+          <strong>100%</strong>
+          <span>In-house concepts</span>
+        </li>
+        <li>
+          <strong>4500×5400</strong>
+          <span>Print master spec</span>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-    <!-- ========================================================
-         HERO SECTION (2-Line Max + Artist Context)
-         ======================================================== -->
-    <section class="py-12 md:py-16 border-b border-slate-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-3xl flex flex-col gap-3">
-          
-          <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 leading-tight">
-            Original apparel graphics by BramLabs.<br />
-            <span class="text-blue-600">Designed in-house, print-ready at 300 DPI.</span>
-          </h1>
+  <section class="section originality">
+    <div class="wrap grid-two">
+      <div>
+        <h2 class="h-card">Originality statement</h2>
+        <p class="body">
+          Every graphic begins as a BramLabs concept. Artwork is drawn and
+          constructed in-house as vector systems — not stock clipart, not licensed
+          characters, not brand marks, and not slight variations of existing
+          marketplace bestsellers.
+        </p>
+        <p class="body muted">
+          Rejected directions (app-icon containers, trademark-adjacent motifs,
+          literal clichés) are documented on design and process pages so the
+          construction trail is visible.
+        </p>
+      </div>
+      <div>
+        <h2 class="h-card">Print readiness</h2>
+        <ul class="checklist">
+          <li>Print masters: 4500×5400 px, sRGB, transparent PNG</li>
+          <li>Line weights and type tuned for chest-scale readability</li>
+          <li>Web previews optimized separately from production files</li>
+          <li>IP and marketplace-policy review before any listing submission</li>
+          <li>Garment mockups show application, not a live store inventory</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-          <p class="text-slate-600 text-base sm:text-lg leading-relaxed font-medium pt-1">
-            Active Amazon Appstore developer. Apparel designs created by BramLabs Lead Designer for our software IP and evergreen gift niches.
-          </p>
+  <section class="section" id="designs">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 class="h-section">Featured designs</h2>
+        <p class="lede">
+          Six highlights with garment application and raw artwork. Open any
+          piece for concept notes, palette and rejected directions.
+        </p>
+      </div>
+      <div class="design-grid">
+        {featured.map((d) => <DesignCard design={d} />)}
+      </div>
+      <div class="section-cta">
+        <a href="/collection/" class="btn -primary">View full collection</a>
+        <a href="/process/" class="btn -ghost">Process case studies</a>
+      </div>
+    </div>
+  </section>
 
-          <!-- Artist Context Line -->
-          <div class="flex items-center gap-3 pt-2 text-xs font-mono text-slate-500">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-200 text-slate-800 font-bold">
-              <Icon name="User" class="w-3.5 h-3.5 text-blue-600" />
-              Lead Artist: BramLabs Design Studio
-            </span>
-            <span>&bull;</span>
-            <span>8+ Years Vector &amp; Print Production</span>
-          </div>
+  <section class="section niches">
+    <div class="wrap">
+      <h2 class="h-card">Niches in this collection</h2>
+      <ul class="niche-list">
+        {
+          niches.map((n) => {
+            const count = designs.filter((d) => d.category === n).length;
+            return (
+              <li>
+                <span class="meta">{n}</span>
+                <span class="count">{count} design{count === 1 ? "" : "s"}</span>
+              </li>
+            );
+          })
+        }
+      </ul>
+      <p class="body muted niche-note">
+        Themes are intentional: shift work, developer culture, focus systems,
+        audio and studio craft — not random slogan spam.
+      </p>
+    </div>
+  </section>
 
+  <section class="section index-section">
+    <div class="wrap">
+      <h2 class="h-card">Complete design index</h2>
+      <ul class="index">
+        {
+          designs.map((d) => (
+            <li>
+              <a href={`/designs/${d.slug}/`}>
+                <span class="meta">{String(d.order).padStart(2, "0")}</span>
+                <span class="title">{d.title}</span>
+                <span class="meta cat">{d.category}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="section closer">
+    <div class="wrap closer-inner">
+      <div>
+        <h2 class="h-card">Designer</h2>
+        <p class="body">
+          Designed by Bram, founder of BramLabs. Research, sketch, vector
+          construction and print preparation happen in-house. For licensing or
+          partnership inquiries only — this is not a retail cart.
+        </p>
+        <div class="closer-actions">
+          <a href="/about/" class="btn -ghost">About the designer</a>
+          <a href="/contact/" class="btn -link">Contact →</a>
         </div>
       </div>
-    </section>
-
-    <!-- ========================================================
-         THE 10 APPAREL DESIGNS GRID (80% of Page)
-         ======================================================== -->
-    <section class="py-12 md:py-16 border-b border-slate-200">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
-          <div>
-            <span class="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 block mb-1">Portfolio</span>
-            <h2 class="text-2xl font-bold text-slate-900">Featured Garment Collection (10 Designs)</h2>
-            <p class="text-slate-600 text-sm mt-1">
-              Click "View Vector Art" on any card to toggle between the apparel mockup and the 300 DPI transparent master.
-            </p>
-          </div>
-          <span class="text-xs font-mono font-bold text-slate-500 bg-slate-200 px-3 py-1.5 rounded-lg flex-shrink-0">
-            10 / 10 Print Ready
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {art.map((piece) => (
-            <ArtCard
-              title={piece.data.title}
-              series={piece.data.series}
-              description={piece.data.description}
-              productName={piece.data.productName}
-              productLink={piece.data.productLink}
-              niche={piece.data.niche}
-              inkSpec={piece.data.inkSpec}
-              garmentType={piece.data.garmentType}
-              motif={piece.data.motif}
-              palette={piece.data.palette}
-              dpi={piece.data.printSpecs.dpi}
-              format={piece.data.printSpecs.format}
-              color={piece.data.printSpecs.color}
-              notes={piece.data.printSpecs.notes}
-              status={piece.data.status}
-              year={piece.data.year}
-            />
-          ))}
-        </div>
-
+      <div class="reviewer-box">
+        <p class="eyebrow">For reviewers</p>
+        <p class="body">
+          Primary portfolio URL: this page or
+          <a href="/collection/">/collection/</a>. Process proof:
+          <a href="/process/">/process/</a>. Designer:
+          <a href="/about/">/about/</a>.
+        </p>
       </div>
-    </section>
-
-    <!-- ========================================================
-         PROCESS STRIP: 4 REAL DESIGN PIPELINE STAGES
-         ======================================================== -->
-    <section class="py-12 md:py-16 border-b border-slate-200 bg-slate-100">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="max-w-xl mb-10">
-          <span class="text-xs font-mono font-bold uppercase tracking-widest text-blue-600 block mb-1">Authentic Process</span>
-          <h2 class="text-2xl font-bold text-slate-900">Design &amp; Print Production Pipeline</h2>
-          <p class="text-slate-600 text-sm mt-1">Every apparel piece goes through a 4-step vector and print pre-flight process.</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-3">
-            <span class="text-xs font-mono font-bold text-blue-600">STAGE 01</span>
-            <h3 class="text-base font-bold text-slate-900">Pencil &amp; Concept Sketch</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Initial composition sketch mapping text hierarchy, dial geometry, or signal wave layout.
-            </p>
-            <div class="mt-auto pt-3 border-t border-slate-100 text-[11px] font-mono text-slate-400">
-              Tooling: Paper &amp; Stylus
-            </div>
-          </div>
-
-          <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-3">
-            <span class="text-xs font-mono font-bold text-blue-600">STAGE 02</span>
-            <h3 class="text-base font-bold text-slate-900">Vector Nodes &amp; Paths</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Vector tracing in Illustrator. Precision Bezier curves, custom typography, and zero unwanted paths.
-            </p>
-            <div class="mt-auto pt-3 border-t border-slate-100 text-[11px] font-mono text-slate-400">
-              Tooling: Vector Editor
-            </div>
-          </div>
-
-          <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-3">
-            <span class="text-xs font-mono font-bold text-blue-600">STAGE 03</span>
-            <h3 class="text-base font-bold text-slate-900">Ink &amp; Color Separation</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Color separation into 1, 2, or 3 solid ink plates. Export at native 300 DPI (4500x5400 px transparent PNG).
-            </p>
-            <div class="mt-auto pt-3 border-t border-slate-100 text-[11px] font-mono text-slate-400">
-              Master: 300 DPI PNG
-            </div>
-          </div>
-
-          <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-3">
-            <span class="text-xs font-mono font-bold text-blue-600">STAGE 04</span>
-            <h3 class="text-base font-bold text-slate-900">Garment Print Mockup</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Pre-flight mockup on dark tees, hoodies, and heather fleece to verify placement and contrast.
-            </p>
-            <div class="mt-auto pt-3 border-t border-slate-100 text-[11px] font-mono text-slate-400">
-              Pre-flight: Tee &amp; Hoodie
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ========================================================
-         ARTIST PROFILE & COMPLIANCE BLOCK (SINGLE INSTANCE)
-         ======================================================== -->
-    <section class="py-12 md:py-16">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
-          <!-- Artist Profile -->
-          <div class="lg:col-span-6 bg-white p-8 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-4">
-            <div class="flex items-center gap-4">
-              <div class="w-12 h-12 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-lg font-mono flex-shrink-0">
-                BL
-              </div>
-              <div>
-                <h3 class="text-lg font-bold text-slate-900">BramLabs Lead Designer</h3>
-                <span class="text-xs font-mono text-slate-500">Vector Artist &amp; Print Designer</span>
-              </div>
-            </div>
-            <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Experienced graphic designer specializing in minimalist vector line art, technical typography, and screen print apparel graphics. Designing apparel for BramLabs software IP and evergreen gift niches.
-            </p>
-          </div>
-
-          <!-- Single Compliance Card (Four Lines Only) -->
-          <div class="lg:col-span-6 bg-white p-8 rounded-xl border border-slate-200 shadow-sm flex flex-col gap-3">
-            <span class="text-xs font-mono font-bold text-slate-400 uppercase tracking-wider">Quality &amp; Compliance Guarantee</span>
-            <h3 class="text-lg font-bold text-slate-900">Merch Technical Standards</h3>
-            <ul class="flex flex-col gap-2.5 text-xs text-slate-600 font-mono pt-1">
-              <li class="flex items-center gap-2">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span>300 DPI minimum resolution (4500x5400 px transparent PNG master)</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span>USPTO TESS trademark search executed per slogan and mark</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span>Pre-submission review against Merch Content Policy guidelines</span>
-              </li>
-              <li class="flex items-center gap-2">
-                <span class="text-emerald-600 font-bold">✓</span>
-                <span>Strictly 100% original studio artwork — zero third-party IP or logos</span>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-  </div>
-
+    </div>
+  </section>
 </BaseLayout>
+
+<style lang="scss">
+  .page-top {
+    padding-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .page-head {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 42rem;
+    margin-bottom: var(--s-6);
+  }
+
+  .proof-bar {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: var(--s-4) 0;
+
+    @media (width >= 720px) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    li {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    strong {
+      font-family: var(--font-display);
+      font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    span {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+  }
+
+  .originality {
+    background: var(--canvas);
+    padding-block: clamp(3rem, 7vw, 5rem);
+  }
+
+  .grid-two {
+    display: grid;
+    gap: var(--s-6);
+
+    @media (width >= 900px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .grid-two .h-card {
+    margin-bottom: 0.85rem;
+  }
+
+  .body.muted,
+  .muted {
+    color: var(--muted);
+  }
+
+  .body + .body {
+    margin-top: 1rem;
+  }
+
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+
+    li {
+      position: relative;
+      padding-left: 1.15rem;
+      color: var(--muted);
+      font-size: 0.975rem;
+      line-height: 1.55;
+
+      &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.55em;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--ink);
+      }
+    }
+  }
+
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    margin-bottom: var(--s-5);
+    max-width: 40rem;
+  }
+
+  .design-grid {
+    display: grid;
+    gap: var(--s-6) var(--s-5);
+    grid-template-columns: 1fr;
+
+    @media (width >= 720px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .section-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--s-5);
+  }
+
+  .niches {
+    background: var(--canvas);
+    padding-block: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .niche-list {
+    display: grid;
+    gap: 0;
+    margin-top: 1.25rem;
+    border-top: 1px solid var(--line);
+
+    @media (width >= 640px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .count {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+  }
+
+  .niche-note {
+    margin-top: 1.5rem;
+    max-width: 36rem;
+  }
+
+  .index-section {
+    padding-block: clamp(3rem, 6vw, 4.5rem);
+  }
+
+  .index {
+    margin-top: 1.25rem;
+    border-top: 1px solid var(--line);
+
+    a {
+      display: grid;
+      grid-template-columns: 3rem 1fr;
+      gap: 0.75rem 1rem;
+      padding: 0.9rem 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+
+      @media (width >= 640px) {
+        grid-template-columns: 3rem 1fr auto;
+      }
+
+      &:hover .title {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+    }
+
+    .title {
+      font-weight: 500;
+    }
+
+    .cat {
+      display: none;
+      @media (width >= 640px) { display: inline; }
+    }
+  }
+
+  .closer {
+    background: var(--canvas);
+    border-top: 1px solid var(--line);
+  }
+
+  .closer-inner {
+    display: grid;
+    gap: var(--s-5);
+
+    @media (width >= 900px) {
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: start;
+    }
+  }
+
+  .closer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1.25rem;
+  }
+
+  .reviewer-box {
+    padding: 1.35rem 1.5rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    background: var(--surface);
+    box-shadow: var(--shadow-soft);
+
+    .eyebrow {
+      margin-bottom: 0.65rem;
+    }
+
+    a {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+  }
+</style>

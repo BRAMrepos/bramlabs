@@ -1,0 +1,280 @@
+---
+export const prerender = true;
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Contact — BramLabs"
+  description="Contact BramLabs for studio inquiries or product support."
+>
+  <section class="section">
+    <div class="wrap narrow">
+      <header class="page-head">
+        <h1 class="h-page">Contact</h1>
+        <p class="lede">
+          For studio and design inquiries, write to contact. For product support
+          on published software, use support.
+        </p>
+      </header>
+
+      <ul class="channels">
+        <li>
+          <h2 class="h-card">Studio</h2>
+          <a href="mailto:contact@bramlabs.co">contact@bramlabs.co</a>
+          <p class="body">Collection, process, collaborations, general questions.</p>
+        </li>
+        <li>
+          <h2 class="h-card">Product support</h2>
+          <a href="mailto:support@bramlabs.co">support@bramlabs.co</a>
+          <p class="body">SonicShield, ClearCue, ShiftLedger and other products.</p>
+        </li>
+      </ul>
+
+      <form
+        class="form"
+        id="contact-form"
+        novalidate
+        aria-label="Send a message"
+      >
+        <div class="field">
+          <label for="cf-name">Name</label>
+          <input
+            id="cf-name"
+            name="name"
+            type="text"
+            required
+            autocomplete="name"
+            placeholder="Your name"
+          />
+        </div>
+
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input
+            id="cf-email"
+            name="email"
+            type="email"
+            required
+            autocomplete="email"
+            placeholder="you@example.com"
+          />
+        </div>
+
+        <div class="field">
+          <label for="cf-topic">Topic</label>
+          <select id="cf-topic" name="topic" required>
+            <option value="studio">Studio / design</option>
+            <option value="support">Product support</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <!-- Honeypot field for bot detection (hidden from real users) -->
+        <div class="hp-field" style="display:none;" aria-hidden="true">
+          <label for="cf-website">Website</label>
+          <input id="cf-website" name="website_hp" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="field">
+          <label for="cf-message">Message</label>
+          <textarea
+            id="cf-message"
+            name="message"
+            rows="6"
+            required
+            placeholder="What's on your mind?"
+          ></textarea>
+        </div>
+
+        <div class="form-footer">
+          <button type="submit" class="btn -primary" id="cf-submit">
+            <span class="btn-text">Send message</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+          <p class="hint meta" id="cf-status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <!-- Success / error banners (hidden until JS shows them, tabindex="-1" enables programmatic focus) -->
+      <div class="banner -success" id="cf-success" tabindex="-1" hidden>
+        <strong>Message sent.</strong> You'll hear back at the email you provided.
+      </div>
+      <div class="banner -error" id="cf-error" tabindex="-1" hidden>
+        <strong>Something went wrong.</strong>
+        <span id="cf-error-text"></span>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById("contact-form") as HTMLFormElement | null;
+  const submitBtn = document.getElementById("cf-submit") as HTMLButtonElement | null;
+  const status = document.getElementById("cf-status") as HTMLParagraphElement | null;
+  const successBanner = document.getElementById("cf-success") as HTMLDivElement | null;
+  const errorBanner = document.getElementById("cf-error") as HTMLDivElement | null;
+  const errorText = document.getElementById("cf-error-text") as HTMLSpanElement | null;
+
+  function setLoading(loading: boolean) {
+    if (!submitBtn) return;
+    submitBtn.disabled = loading;
+    submitBtn.classList.toggle("-loading", loading);
+    if (status) status.textContent = loading ? "Sending…" : "";
+  }
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+
+    setLoading(true);
+    if (successBanner) successBanner.hidden = true;
+    if (errorBanner) errorBanner.hidden = true;
+
+    const fd = new FormData(form);
+    const payload = {
+      name: fd.get("name") as string,
+      email: fd.get("email") as string,
+      topic: fd.get("topic") as string,
+      message: fd.get("message") as string,
+      website_hp: fd.get("website_hp") as string,
+    };
+
+    try {
+      const res = await fetch("/api/contact/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json() as { ok?: boolean; error?: string };
+
+      if (res.ok && data.ok) {
+        form.hidden = true;
+        if (successBanner) successBanner.hidden = false;
+        successBanner?.focus();
+      } else {
+        if (errorText) errorText.textContent = " " + (data.error ?? "Please try again.");
+        if (errorBanner) errorBanner.hidden = false;
+        errorBanner?.focus();
+      }
+    } catch {
+      if (errorText) errorText.textContent = " Network error. Please try again.";
+      if (errorBanner) errorBanner.hidden = false;
+      errorBanner?.focus();
+    } finally {
+      setLoading(false);
+    }
+  });
+</script>
+
+<style lang="scss">
+  .narrow {
+    max-width: 40rem;
+  }
+
+  .page-head {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .channels {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+
+    @media (width >= 640px) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    li {
+      border-top: 1px solid var(--line);
+      padding-top: 1rem;
+    }
+
+    a {
+      display: inline-block;
+      margin: 0.5rem 0;
+      font-weight: 500;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+
+      &:hover { opacity: 0.7; }
+    }
+
+    .body {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+    border-top: 1px solid var(--line);
+    padding-top: 2rem;
+  }
+
+  .form-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.25rem;
+  }
+
+  .hint {
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  /* Loading state */
+  .btn.-loading {
+    opacity: 0.7;
+    pointer-events: none;
+
+    .btn-text { opacity: 0.5; }
+  }
+
+  .btn-spinner {
+    display: none;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+
+  .btn.-loading .btn-spinner {
+    display: block;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Banners */
+  .banner {
+    margin-top: 1.5rem;
+    padding: 1rem 1.2rem;
+    border-radius: var(--radius);
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    outline: none;
+
+    &.-success {
+      background: color-mix(in oklab, var(--green) 12%, var(--surface));
+      border: 1px solid color-mix(in oklab, var(--green) 40%, var(--line));
+      color: var(--ink);
+    }
+
+    &.-error {
+      background: color-mix(in oklab, var(--orange) 10%, var(--surface));
+      border: 1px solid color-mix(in oklab, var(--orange) 40%, var(--line));
+      color: var(--ink);
+    }
+  }
+</style>

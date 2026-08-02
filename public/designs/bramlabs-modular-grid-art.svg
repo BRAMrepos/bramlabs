@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <!-- BRAMLABS MODULAR GRID BRANDING -->
+  <!-- Outer Heavy Frame -->
+  <rect x="60" y="60" width="680" height="680" rx="16" stroke="#F4F1E9" stroke-width="8" fill="#111315"/>
+
+  <!-- Top Studio Brand Header -->
+  <rect x="60" y="60" width="680" height="100" fill="#00E5FF"/>
+  <text x="400" y="130" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="44" fill="#111315" letter-spacing="8">BRAMLABS</text>
+
+  <!-- 3x3 Heavy Graphic Primitives Grid -->
+  <!-- Row 1 -->
+  <rect x="110" y="200" width="160" height="140" rx="10" fill="#FF5500"/>
+  <circle cx="190" cy="270" r="35" fill="#F4F1E9"/>
+
+  <rect x="320" y="200" width="160" height="140" rx="10" stroke="#F4F1E9" stroke-width="6" fill="none"/>
+  <rect x="360" y="240" width="80" height="60" fill="#00E5FF"/>
+
+  <rect x="530" y="200" width="160" height="140" rx="10" fill="#FFD600"/>
+  <polygon points="610,230 650,310 570,310" fill="#111315"/>
+
+  <!-- Row 2 -->
+  <rect x="110" y="370" width="160" height="140" rx="10" stroke="#00E5FF" stroke-width="6" fill="none"/>
+  <line x1="130" y1="390" x2="250" y2="490" stroke="#00E5FF" stroke-width="8"/>
+
+  <rect x="320" y="370" width="160" height="140" rx="10" fill="#F4F1E9"/>
+  <text x="400" y="455" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="48" fill="#111315">V47</text>
+
+  <rect x="530" y="370" width="160" height="140" rx="10" fill="#FF5500"/>
+  <circle cx="610" cy="440" r="30" stroke="#F4F1E9" stroke-width="8" fill="none"/>
+
+  <!-- Subheadline Banner -->
+  <rect x="110" y="550" width="580" height="80" rx="12" fill="#F4F1E9"/>
+  <text x="400" y="605" text-anchor="middle" font-family="system-ui, -apple-system, sans-serif" font-weight="900" font-size="32" fill="#111315" letter-spacing="6">MODULAR VECTOR SYSTEM</text>
+
+  <!-- Bottom Tag -->
+  <text x="400" y="700" text-anchor="middle" font-family="ui-monospace, monospace" font-weight="800" font-size="16" fill="#00E5FF" letter-spacing="6">ORIGINAL APPAREL GRAPHICS · EST 2026</text>
+</svg>

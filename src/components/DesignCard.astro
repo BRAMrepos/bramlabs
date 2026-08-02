@@ -1,0 +1,195 @@
+---
+import type { Design } from "@/data/designs";
+
+interface Props {
+  design: Design;
+  /** Compact mode: title + meta only, no description or raw panel */
+  compact?: boolean;
+  /** Featured: slightly larger heading */
+  featured?: boolean;
+}
+
+const { design, compact = false, featured = false } = Astro.props;
+const n = String(design.order).padStart(2, "0");
+const href = `/designs/${design.slug}/`;
+---
+
+<article class:list={["design-card", { compact, featured }]}>
+  {/*
+    Single anchor covers the entire card via ::after pseudo-element.
+    This satisfies WCAG 2.4.4 (no duplicate adjacent links to same URL)
+    and gives keyboard users one focusable target per card.
+  */}
+  <div class="card-media">
+    <picture>
+      <source srcset={design.images.primaryMockup.replace(/\.jpg$/, ".webp")} type="image/webp" />
+      <img
+        src={design.images.primaryMockup}
+        alt={`${design.shirtColor === "navy" ? "Navy blue" : "Black"} heavyweight T-shirt featuring the ${design.title} graphic`}
+        width="800"
+        height="1000"
+        loading={featured ? "eager" : "lazy"}
+        decoding="async"
+      />
+    </picture>
+    {
+      !compact && (
+        <div class="raw-panel" aria-hidden="true">
+          <img
+            src={design.images.rawArtwork}
+            alt=""
+            width="400"
+            height="400"
+            loading="lazy"
+          />
+        </div>
+      )
+    }
+  </div>
+  <div class="card-body">
+    <p class="meta">{n} / {design.category}</p>
+    <h3 class="h-card">
+      {/*
+        Primary link — ::after stretches to cover the card-media above it
+        so the entire visible card is clickable via one keyboard stop.
+      */}
+      <a href={href} class="card-link">{design.title}</a>
+    </h3>
+    {
+      !compact && (
+        <p class="desc">{design.shortDescription}</p>
+      )
+    }
+  </div>
+</article>
+
+<style lang="scss">
+  .design-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-3);
+    /* Stacking context so ::after is contained */
+    position: relative;
+  }
+
+  .card-media {
+    position: relative;
+    background: var(--canvas);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    /* Subtle border adds depth against the warm paper bg */
+    border: 1px solid color-mix(in oklab, var(--line) 70%, transparent);
+    box-shadow: var(--shadow-card);
+    transition:
+      box-shadow var(--t) var(--ease),
+      transform var(--t) var(--ease);
+
+    picture,
+    picture > img,
+    > img {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    picture > img,
+    > img {
+      object-fit: cover;
+      object-position: center 28%;
+      transition: transform 560ms var(--ease);
+    }
+  }
+
+  /*
+    The heading link's ::after stretches to cover both card-body AND card-media,
+    making the whole card a single interactive target for keyboard and mouse.
+  */
+  .card-link {
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      border-radius: var(--radius-lg);
+    }
+
+    /* Box-shadow focus ring — not clipped by overflow:hidden on card-media */
+    &:focus-visible {
+      outline: none;
+
+      &::after {
+        outline: 2px solid var(--ink);
+        outline-offset: 3px;
+      }
+    }
+  }
+
+  /* Hover lifts the media tile, scales the image */
+  .design-card:hover .card-media {
+    box-shadow: var(--shadow-lift);
+    transform: translateY(-2px);
+  }
+
+  .design-card:hover .card-media picture > img,
+  .design-card:hover .card-media > img {
+    transform: scale(1.025);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .design-card:hover .card-media picture > img,
+    .design-card:hover .card-media > img { transform: none; }
+    .design-card:hover .card-media { transform: none; }
+  }
+
+  .raw-panel {
+    position: absolute;
+    right: 0.85rem;
+    bottom: 0.85rem;
+    width: min(28%, 110px);
+    aspect-ratio: 1;
+    /* Dark bg so ivory SVG strokes show against the cream page */
+    background: #111315;
+    border-radius: var(--radius);
+    padding: 0.4rem;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 6px 20px rgba(20, 20, 22, 0.22);
+    z-index: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-width: 36rem;
+    padding-inline: 0.15rem;
+  }
+
+  .desc {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* Compact variant — used in spotlight grids */
+  .design-card.compact {
+    gap: 0.85rem;
+
+    .h-card {
+      font-size: 1.1rem;
+    }
+  }
+
+  /* Featured variant — slightly larger heading */
+  .design-card.featured {
+    .h-card {
+      font-size: clamp(1.35rem, 2vw, 1.65rem);
+    }
+  }
+</style>
