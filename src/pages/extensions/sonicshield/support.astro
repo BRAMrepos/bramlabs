@@ -1,0 +1,120 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="SonicShield Support — BramLabs"
+  description="Support for SonicShield by BramLabs."
+>
+  <section class="section">
+    <div class="wrap prose">
+      <p class="meta"><a href="/studio/">Studio</a> · SonicShield</p>
+      <h1 class="h-section">SonicShield Support</h1>
+      <p class="lead">Help with SonicShield volume protection, browser audio controls and installation.</p>
+
+      <h2>Contact support</h2>
+      <p>
+        Email <a href="mailto:support@bramlabs.co">support@bramlabs.co</a> with:
+      </p>
+      <ul>
+        <li>Product name (SonicShield)</li>
+        <li>Device / browser version</li>
+        <li>What you expected vs what happened</li>
+        <li>Screenshots if useful (no passwords or secrets)</li>
+      </ul>
+      <p>We aim to respond within a few business days.</p>
+
+      <h2>Common questions</h2>
+      <details>
+        <summary>How do I install or open SonicShield?</summary>
+        <p>
+          Use the official store listing when available, or the platform where you
+          originally installed the product. Avoid third-party APK or extension mirrors.
+        </p>
+      </details>
+      <details>
+        <summary>Why is a feature missing or different?</summary>
+        <p>
+          Products may ship in stages. If something regressed after an update, include
+          your version number and we will investigate.
+        </p>
+      </details>
+      <details>
+        <summary>Does BramLabs sell my data?</summary>
+        <p>
+          No. See the product privacy policy for what is collected when you contact
+          support or use network features.
+        </p>
+      </details>
+      <details>
+        <summary>How do I report a security issue?</summary>
+        <p>
+          Email support@bramlabs.co with subject line “Security” and a clear description.
+          Do not include exploit details in public forums.
+        </p>
+      </details>
+
+      <div class="actions">
+        <a class="btn -primary" href="mailto:support@bramlabs.co">support@bramlabs.co</a>
+        <a class="btn -link" href="/extensions/sonicshield/privacy/">Privacy policy →</a>
+        <a class="btn -link" href="https://chromewebstore.google.com/detail/sonicshield-volume-normal/dbgmnminphmfmajoaeijogfojjehhmcg" target="_blank" rel="noopener noreferrer">Chrome Web Store listing</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .prose {
+    max-width: 42rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .prose h1, .prose h2 {
+    color: var(--ink);
+  }
+  .prose h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-top: 1.25rem;
+  }
+  .lead {
+    font-size: 1.1rem;
+    color: var(--ink);
+  }
+  .prose ul {
+    list-style: disc;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+  details {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0.85rem 1rem;
+    background: var(--canvas);
+  }
+  summary {
+    cursor: pointer;
+    color: var(--ink);
+    font-weight: 500;
+    min-height: 28px;
+  }
+  details p {
+    margin-top: 0.65rem;
+  }
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 0.5rem;
+  }
+  .prose a:not(.btn) {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>
