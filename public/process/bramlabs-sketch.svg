@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <!-- 6x6 Coordinate Cells -->
+  <rect x="50" y="80" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="#23C5EF" opacity="0.95"/>
+      <text x="62" y="106" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">A1</text>
+  <rect x="166" y="80" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="178" y="106" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">A2</text>
+  <rect x="282" y="80" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="294" y="106" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">A3</text>
+  <rect x="398" y="80" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="410" y="106" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">A4</text>
+  <rect x="514" y="80" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="526" y="106" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">A5</text>
+  <rect x="630" y="80" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="642" y="106" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">A6</text>
+  <rect x="50" y="184" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="62" y="210" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">B1</text>
+  <rect x="166" y="184" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="178" y="210" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">B2</text>
+  <rect x="282" y="184" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="#23C5EF" opacity="0.95"/>
+      <text x="294" y="210" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">B3</text>
+  <rect x="398" y="184" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="410" y="210" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">B4</text>
+  <rect x="514" y="184" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="526" y="210" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">B5</text>
+  <rect x="630" y="184" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="642" y="210" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">B6</text>
+  <rect x="50" y="288" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="62" y="314" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">C1</text>
+  <rect x="166" y="288" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="178" y="314" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">C2</text>
+  <rect x="282" y="288" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="#23C5EF" opacity="0.95"/>
+      <text x="294" y="314" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">C3</text>
+  <rect x="398" y="288" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="410" y="314" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">C4</text>
+  <rect x="514" y="288" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="#23C5EF" opacity="0.95"/>
+      <text x="526" y="314" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">C5</text>
+  <rect x="630" y="288" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="642" y="314" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">C6</text>
+  <rect x="50" y="392" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="62" y="418" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">D1</text>
+  <rect x="166" y="392" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="#FF862E" opacity="0.95"/>
+      <text x="178" y="418" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">D2</text>
+  <rect x="282" y="392" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="294" y="418" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">D3</text>
+  <rect x="398" y="392" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="410" y="418" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">D4</text>
+  <rect x="514" y="392" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="526" y="418" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">D5</text>
+  <rect x="630" y="392" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="642" y="418" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">D6</text>
+  <rect x="50" y="496" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="62" y="522" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">E1</text>
+  <rect x="166" y="496" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="178" y="522" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">E2</text>
+  <rect x="282" y="496" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="294" y="522" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">E3</text>
+  <rect x="398" y="496" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="#FF862E" opacity="0.95"/>
+      <text x="410" y="522" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">E4</text>
+  <rect x="514" y="496" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="526" y="522" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">E5</text>
+  <rect x="630" y="496" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="#FF862E" opacity="0.95"/>
+      <text x="642" y="522" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">E6</text>
+  <rect x="50" y="600" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="62" y="626" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">F1</text>
+  <rect x="166" y="600" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="178" y="626" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">F2</text>
+  <rect x="282" y="600" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="294" y="626" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">F3</text>
+  <rect x="398" y="600" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="410" y="626" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">F4</text>
+  <rect x="514" y="600" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none" opacity="1"/>
+      <text x="526" y="626" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">F5</text>
+  <rect x="630" y="600" width="106" height="94" rx="8" stroke="#F4F1E9" stroke-width="2" fill="#FF862E" opacity="0.95"/>
+      <text x="642" y="626" font-family="ui-monospace,monospace" font-size="13" font-weight="800" fill="#F4F1E9">F6</text>
+
+  <text x="400" y="48" text-anchor="middle" font-family="system-ui,sans-serif" font-size="34" font-weight="900" fill="#F4F1E9" letter-spacing="6">BRAMLABS MODULAR MATRIX</text>
+  <text x="400" y="765" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="700" fill="rgba(244, 241, 233, 0.85)" letter-spacing="4">SYSTEM COORDINATE IDENTITY · 6×6 FIELD</text>
+</svg>

@@ -1,19 +1,52 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
-  <rect width="800" height="800" fill="#F4F1E9"/>
-  <text x="60" y="60" font-family="ui-monospace,monospace" font-size="14" fill="#666963" letter-spacing="3">03 · GEOMETRIC CONSTRUCTION</text>
-  <line x1="400" y1="100" x2="400" y2="700" stroke="#23C5EF" stroke-width="0.5" opacity="0.4"/>
-  <line x1="100" y1="400" x2="700" y2="400" stroke="#23C5EF" stroke-width="0.5" opacity="0.4"/>
-  <circle cx="400" cy="400" r="220" stroke="#111315" stroke-width="1" fill="none"/>
-  <circle cx="400" cy="400" r="160" stroke="#111315" stroke-width="1" fill="none"/>
-  <circle cx="400" cy="400" r="100" stroke="#111315" stroke-width="1" fill="none"/>
-  <path d="M400 180 A220 220 0 0 1 590 510" stroke="#FF862E" stroke-width="3" fill="none"/>
-  <path d="M590 510 A220 220 0 0 1 210 510" stroke="#23C5EF" stroke-width="3" fill="none"/>
-  <path d="M210 510 A220 220 0 0 1 400 180" stroke="#111315" stroke-width="3" fill="none" opacity="0.4"/>
-  <line x1="400" y1="400" x2="620" y2="400" stroke="#111315" stroke-width="0.5" opacity="0.25"/>
-  <line x1="400" y1="400" x2="510" y2="590.5255888325764" stroke="#111315" stroke-width="0.5" opacity="0.25"/>
-  <line x1="400" y1="400" x2="290.00000000000006" y2="590.5255888325765" stroke="#111315" stroke-width="0.5" opacity="0.25"/>
-  <line x1="400" y1="400" x2="180" y2="400" stroke="#111315" stroke-width="0.5" opacity="0.25"/>
-  <line x1="400" y1="400" x2="289.9999999999999" y2="209.47441116742354" stroke="#111315" stroke-width="0.5" opacity="0.25"/>
-  <line x1="400" y1="400" x2="510" y2="209.4744111674235" stroke="#111315" stroke-width="0.5" opacity="0.25"/>
-  <circle cx="400" cy="400" r="6" fill="#111315"/>
+  <!-- Outer Gauge Ring -->
+  <circle cx="400" cy="400" r="375" stroke="#F4F1E9" stroke-width="4" opacity="0.6"/>
+  <circle cx="400" cy="400" r="290" stroke="#F4F1E9" stroke-width="2" stroke-dasharray="4 8" opacity="0.4"/>
+
+  <!-- 24 Radial Hour Ticks -->
+  <line x1="400.0" y1="25.0" x2="400.0" y2="60.0" stroke="#F4F1E9" stroke-width="4" opacity="0.95"/>
+  <line x1="497.1" y1="37.8" x2="491.9" y2="57.1" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="587.5" y1="75.2" x2="577.5" y2="92.6" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="665.2" y1="134.8" x2="651.0" y2="149.0" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="724.8" y1="212.5" x2="707.4" y2="222.5" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="762.2" y1="302.9" x2="742.9" y2="308.1" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="775.0" y1="400.0" x2="740.0" y2="400.0" stroke="#F4F1E9" stroke-width="4" opacity="0.95"/>
+  <line x1="762.2" y1="497.1" x2="742.9" y2="491.9" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="724.8" y1="587.5" x2="707.4" y2="577.5" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="665.2" y1="665.2" x2="651.0" y2="651.0" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="587.5" y1="724.8" x2="577.5" y2="707.4" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="497.1" y1="762.2" x2="491.9" y2="742.9" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="400.0" y1="775.0" x2="400.0" y2="740.0" stroke="#F4F1E9" stroke-width="4" opacity="0.95"/>
+  <line x1="302.9" y1="762.2" x2="308.1" y2="742.9" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="212.5" y1="724.8" x2="222.5" y2="707.4" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="134.8" y1="665.2" x2="149.0" y2="651.0" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="75.2" y1="587.5" x2="92.6" y2="577.5" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="37.8" y1="497.1" x2="57.1" y2="491.9" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="25.0" y1="400.0" x2="60.0" y2="400.0" stroke="#F4F1E9" stroke-width="4" opacity="0.95"/>
+  <line x1="37.8" y1="302.9" x2="57.1" y2="308.1" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="75.2" y1="212.5" x2="92.6" y2="222.5" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="134.8" y1="134.8" x2="149.0" y2="149.0" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="212.5" y1="75.2" x2="222.5" y2="92.6" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+  <line x1="302.9" y1="37.8" x2="308.1" y2="57.1" stroke="#F4F1E9" stroke-width="2" opacity="0.6"/>
+
+  <!-- Heavy Continuous Shift Arcs -->
+  <path d="M400 110 A290 290 0 0 1 651 545" stroke="#FF862E" stroke-width="28" stroke-linecap="round" fill="none"/>
+  <path d="M651 545 A290 290 0 0 1 149 545" stroke="#23C5EF" stroke-width="28" stroke-linecap="round" fill="none"/>
+  <path d="M149 545 A290 290 0 0 1 400 110" stroke="#F4F1E9" stroke-width="28" stroke-linecap="round" fill="none" opacity="0.45"/>
+
+  <!-- Pointer Needle targeting 07:00 Handoff -->
+  <line x1="400" y1="400" x2="580" y2="220" stroke="#FF862E" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="580" cy="220" r="12" fill="#FF862E"/>
+
+  <!-- Center Target Crosshair -->
+  <circle cx="400" cy="400" r="32" fill="none" stroke="#F4F1E9" stroke-width="4"/>
+  <circle cx="400" cy="400" r="12" fill="#FF862E"/>
+
+  <!-- Labels -->
+  <text x="400" y="60" text-anchor="middle" font-family="ui-monospace,monospace" font-size="20" font-weight="800" fill="#F4F1E9" letter-spacing="4">07:00 · DAY SHIFT</text>
+  <text x="730" y="570" text-anchor="end" font-family="ui-monospace,monospace" font-size="18" font-weight="800" fill="#23C5EF" letter-spacing="2">15:00 · SWING</text>
+  <text x="70" y="570" text-anchor="start" font-family="ui-monospace,monospace" font-size="18" font-weight="800" fill="rgba(244, 241, 233, 0.85)" letter-spacing="2">23:00 · NIGHT</text>
+
+  <text x="400" y="455" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16" font-weight="800" fill="#F4F1E9" letter-spacing="6">CONTINUOUS ROTATION</text>
+  <text x="400" y="485" text-anchor="middle" font-family="ui-monospace,monospace" font-size="13" font-weight="700" fill="rgba(244, 241, 233, 0.85)" letter-spacing="3">24-HOUR CREW COVERAGE · BRAMLABS</text>
 </svg>

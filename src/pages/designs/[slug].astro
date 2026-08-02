@@ -2,7 +2,6 @@
 export const prerender = true;
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import DesignCard from "@/components/DesignCard.astro";
-import GarmentStudio from "@/components/GarmentStudio";
 import { designs, getDesign, getRelated } from "@/data/designs";
 
 export function getStaticPaths() {
@@ -100,18 +99,6 @@ const crumbs = {
           <figcaption class="meta">Print detail</figcaption>
         </figure>
       </div>
-
-      <section class="studio-3d-section">
-        <div class="studio-3d-head">
-          <h2 class="h-card">Interactive 3D Garment Studio</h2>
-          <p class="body meta">360° Studio Orbit · Decal Projection · Fabric Colorways</p>
-        </div>
-        <GarmentStudio
-          client:only="react"
-          designUrl={design.images.rawArtwork}
-          color={design.shirtColor === "navy" ? "#152238" : "#111315"}
-        />
-      </section>
 
       <div class="detail-grid">
         <section>
@@ -281,9 +268,9 @@ const crumbs = {
     }
     img {
       width: 100%;
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 1 / 1;
       object-fit: cover;
-      object-position: center 30%;
+      object-position: center;
     }
     figure:nth-child(2),
     figure:nth-child(3) {

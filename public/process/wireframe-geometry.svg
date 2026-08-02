@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <!-- Device Frame (Phone Outline) -->
+  <rect x="150" y="30" width="500" height="740" rx="44" stroke="#F4F1E9" stroke-width="4"/>
+  <rect x="175" y="80" width="450" height="640" rx="8" stroke="#F4F1E9" stroke-width="2" opacity="0.7"/>
+
+  <!-- Speaker Cutout -->
+  <rect x="330" y="50" width="140" height="12" rx="6" fill="#F4F1E9" opacity="0.6"/>
+
+  <!-- Nav Header -->
+  <rect x="195" y="105" width="110" height="18" rx="4" fill="#F4F1E9" opacity="0.45"/>
+  <rect x="495" y="102" width="110" height="24" rx="12" stroke="#23C5EF" stroke-width="2.5"/>
+
+  <!-- Hero Module -->
+  <rect x="195" y="145" width="410" height="170" rx="8" stroke="#F4F1E9" stroke-width="2.5" stroke-dasharray="8 5" fill="none"/>
+  <text x="400" y="235" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16" font-weight="800" fill="rgba(244, 241, 233, 0.85)" letter-spacing="3">HERO MODULE / 16:9</text>
+
+  <!-- Grid Cards -->
+  <rect x="195" y="335" width="195" height="140" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none"/>
+  <rect x="410" y="335" width="195" height="140" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none"/>
+
+  <!-- List Rows -->
+  <rect x="195" y="495" width="410" height="60" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none"/>
+  <rect x="195" y="575" width="410" height="60" rx="8" stroke="#F4F1E9" stroke-width="2" fill="none"/>
+  <rect x="195" y="655" width="410" height="50" rx="8" fill="#23C5EF" stroke="#23C5EF" stroke-width="2" opacity="0.3"/>
+
+  <!-- Side Callout Labels -->
+  <text x="60" y="400" text-anchor="middle" transform="rotate(-90 60 400)" font-family="ui-monospace,monospace" font-size="14" font-weight="800" fill="#23C5EF">640 PT VIEWPORT</text>
+  <text x="400" y="790" text-anchor="middle" font-family="system-ui,sans-serif" font-size="20" font-weight="800" fill="#F4F1E9" letter-spacing="5">WIREFRAME ANATOMY</text>
+</svg>

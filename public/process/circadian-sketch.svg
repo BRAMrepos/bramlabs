@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <!-- Mesh Grid -->
+  <line x1="30" y1="80" x2="770" y2="80" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="30" y1="170" x2="770" y2="170" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="30" y1="260" x2="770" y2="260" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="30" y1="350" x2="770" y2="350" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="30" y1="440" x2="770" y2="440" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="30" y1="530" x2="770" y2="530" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="30" y1="620" x2="770" y2="620" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="30" y1="710" x2="770" y2="710" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="50" y1="60" x2="50" y2="740" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="150" y1="60" x2="150" y2="740" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="250" y1="60" x2="250" y2="740" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="350" y1="60" x2="350" y2="740" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="450" y1="60" x2="450" y2="740" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="550" y1="60" x2="550" y2="740" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="650" y1="60" x2="650" y2="740" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+  <line x1="750" y1="60" x2="750" y2="740" stroke="#F4F1E9" stroke-width="1" opacity="0.18"/>
+
+  <!-- Outer Console Frame -->
+  <rect x="30" y="30" width="740" height="740" rx="14" stroke="#F4F1E9" stroke-width="3.5" opacity="0.7"/>
+
+  <!-- Status Header Pill -->
+  <rect x="60" y="60" width="480" height="44" rx="8" fill="rgba(139, 136, 255, 0.35)" stroke="#8B88FF" stroke-width="2.5"/>
+  <circle cx="88" cy="82" r="8" fill="#FF862E"/>
+  <text x="110" y="89" font-family="ui-monospace,monospace" font-size="15" font-weight="800" fill="#F4F1E9" letter-spacing="3">CIRCADIAN RHYTHM // STATUS: CORRUPTED</text>
+
+  <!-- Baseline Cyan Wave -->
+  <path d="M30 400 C 150 200, 250 200, 370 400 S 590 600, 710 400 S 750 200, 770 300" stroke="#23C5EF" stroke-width="5" stroke-dasharray="10 8" fill="none" opacity="0.85"/>
+
+  <!-- Corrupted Violet Wave (Extremely Bold Trace) -->
+  <path d="M30 420 C 130 560, 210 240, 290 600 S 430 100, 530 320 S 630 660, 710 220 S 750 480, 770 440" stroke="#8B88FF" stroke-width="9" stroke-linecap="round" fill="none"/>
+
+  <!-- Orbit Ring -->
+  <circle cx="400" cy="400" r="160" stroke="#F4F1E9" stroke-width="2.5" stroke-dasharray="6 8" fill="none" opacity="0.65"/>
+  <circle cx="400" cy="400" r="160" stroke="#FF862E" stroke-width="5" stroke-dasharray="45 110" fill="none"/>
+
+  <!-- Amplitude Node Marker -->
+  <circle cx="530" cy="320" r="11" fill="#8B88FF"/>
+  <line x1="530" y1="320" x2="530" y2="170" stroke="#8B88FF" stroke-width="2" stroke-dasharray="4 4"/>
+  <text x="530" y="155" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" font-weight="800" fill="#8B88FF">PHASE DRIFT // +4.2dB</text>
+
+  <!-- Bottom Title Block -->
+  <text x="400" y="695" text-anchor="middle" font-family="system-ui,sans-serif" font-size="46" font-weight="900" fill="#F4F1E9" letter-spacing="3">NIGHT SHIFT DRIFT</text>
+  <text x="400" y="730" text-anchor="middle" font-family="ui-monospace,monospace" font-size="14" font-weight="700" fill="rgba(244, 241, 233, 0.85)" letter-spacing="4">03:47 AM · PHASE REGRESSION</text>
+</svg>
