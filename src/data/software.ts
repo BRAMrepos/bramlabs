@@ -47,6 +47,11 @@ export const software: SoftwareProduct[] = [
       "Anonymous Instagram story viewing utility for the browser.",
     longDescription:
       "StoryPeek is a lightweight Chrome extension for viewing Instagram stories without the usual social-pressure signals of a full client session.",
+    bullets: [
+      "Lightweight Chrome extension utility",
+      "Private viewing workflow without active session signals",
+      "No account required for core extension features",
+    ],
     platform: "Chrome Web Store",
     status: "published",
     externalUrl:
@@ -97,6 +102,11 @@ export const software: SoftwareProduct[] = [
       "Web product for structured AI-assisted workflows.",
     longDescription:
       "WorkflowAI is a web product for structured, AI-assisted workflows — published separately from the apparel portfolio.",
+    bullets: [
+      "Structured prompt execution and task flow optimization",
+      "Web interface built for repeated technical workflows",
+      "Independent web application published by BramLabs",
+    ],
     platform: "Web",
     status: "published",
     externalUrl: "https://www.workflowai.site/",
