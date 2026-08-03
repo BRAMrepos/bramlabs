@@ -1,130 +1,72 @@
-/**
- * Composite SVG art onto unified master base tee (Black or Navy) → JPG/WebP mockups
- * 
- * Precise Garment Print Measurements & Soft Ink Blending:
- * - Base Canvas: 1024 x 1024 px flat lay studio photo
- * - Garment Collar Ribbing Bottom: y = 225 px
- * - Torso Width (pit to pit): 564 px (x: 230 to 794 px)
- * - Print Size: 520 px (corresponds to high-impact 11.8" chest print footprint)
- * - Print Top: 270 px (starts ~2.5" below front collar ribbing)
- * - Print Center: x = 512 px (horizontally centered)
- * - Ink Integration: 95% opacity modulation to blend rasterized vector art into cotton weave
- */
-import sharp from "sharp";
-import path from "path";
+import fs from 'fs';
+import path from 'path';
+import sharp from 'sharp';
 
-const mockupsDir = "public/mockups";
-const designsDir = "public/designs";
+const mockupsDir = 'C:/Users/hp/.gemini/antigravity/scratch/bramlabs-site/public/mockups';
+const designsDir = 'C:/Users/hp/.gemini/antigravity/scratch/bramlabs-site/public/designs';
 
-/**
- * Generate clean Studio Navy base from Master Black base without tinting drop shadows or paper bg.
- * Dark fabric pixels (RGB < 55) map to rich midnight navy (#121b30 -> #2a3f68).
- */
-async function ensureUnifiedBaseTees() {
-  const masterBlack = path.join(mockupsDir, "_base-tee-black.jpg");
-  const targetNavy = path.join(mockupsDir, "_base-tee-navy.jpg");
+const designsList = [
+  { slug: 'rotation-dial', color: 'black' },
+  { slug: 'circadian-corrupted', color: 'navy' },
+  { slug: '24h-hand-off', color: 'black' },
+  { slug: '37-tabs-open', color: 'navy' },
+  { slug: 'build-47', color: 'black' },
+  { slug: 'wireframe-anatomy', color: 'black' },
+  { slug: 'focus-waveform', color: 'black' },
+  { slug: 'signal-noise', color: 'black' },
+  { slug: 'streak-grid-365', color: 'black' },
+  { slug: 'protect-your-ears', color: 'navy' },
+  { slug: 'maintenance-window', color: 'navy' },
+  { slug: 'bramlabs-modular-grid', color: 'black' }
+];
 
-  const { data, info } = await sharp(masterBlack)
-    .raw()
-    .toBuffer({ resolveWithObject: true });
+async function generateMockups() {
+  for (const d of designsList) {
+    const baseFile = d.color === 'navy' 
+      ? path.join(mockupsDir, '_base-tee-navy.jpg') 
+      : path.join(mockupsDir, '_base-tee-black.jpg');
 
-  const output = Buffer.from(data);
+    const svgFile = path.join(designsDir, `${d.slug}-art.svg`);
+    const outJpg = path.join(mockupsDir, `${d.slug}-tee.jpg`);
+    const outWebp = path.join(mockupsDir, `${d.slug}-tee.webp`);
 
-  for (let i = 0; i < output.length; i += 3) {
-    const r = data[i];
-    const g = data[i + 1];
-    const b = data[i + 2];
-
-    // Target ONLY actual black fabric (dark pixels r<55, g<55, b<55)
-    // Drop shadows and paper background (r > 60) remain completely untouched!
-    if (r < 55 && g < 55 && b < 55) {
-      const lum = (r * 0.299 + g * 0.587 + b * 0.114) / 55;
-      output[i]     = Math.min(255, Math.round(18 + lum * 24));  // Red: #12 to #2a
-      output[i + 1] = Math.min(255, Math.round(27 + lum * 36));  // Green: #1b to #3f
-      output[i + 2] = Math.min(255, Math.round(48 + lum * 56));  // Blue: #30 to #68
+    if (!fs.existsSync(baseFile)) {
+      console.error(`Base file missing: ${baseFile}`);
+      continue;
     }
-  }
+    if (!fs.existsSync(svgFile)) {
+      console.error(`SVG file missing: ${svgFile}`);
+      continue;
+    }
 
-  await sharp(output, { raw: { width: info.width, height: info.height, channels: 3 } })
-    .jpeg({ quality: 96 })
-    .toFile(targetNavy);
-
-  console.log("✓ Generated clean Studio Navy base tee without shadow artifacts.");
-}
-
-const PRINT_SIZE = 350;
-const PRINT_TOP = 300;
-
-const designs = {
-  "rotation-dial":         { base: "public/mockups/_base-tee-black.jpg", size: 360, top: 290 },
-  "circadian-corrupted":   { base: "public/mockups/_base-tee-white.jpg", size: 350, top: 300 },
-  "24h-hand-off":          { base: "public/mockups/_base-tee-white.jpg", size: 350, top: 300 },
-  "37-tabs-open":          { base: "public/mockups/_base-tee-black.jpg", size: 340, top: 300 },
-  "build-47":              { base: "public/mockups/_base-tee-black.jpg", size: 340, top: 300 },
-  "wireframe-anatomy":     { base: "public/mockups/_base-tee-white.jpg", size: 350, top: 300 },
-  "focus-waveform":        { base: "public/mockups/_base-tee-black.jpg", size: 350, top: 300 },
-  "signal-noise":          { base: "public/mockups/_base-tee-black.jpg", size: 350, top: 300 },
-  "streak-grid-365":       { base: "public/mockups/_base-tee-navy.jpg",  size: 350, top: 300 },
-  "protect-your-ears":     { base: "public/mockups/_base-tee-black.jpg", size: 350, top: 300 },
-  "maintenance-window":    { base: "public/mockups/_base-tee-black.jpg", size: 350, top: 300 },
-  "bramlabs-modular-grid": { base: "public/mockups/_base-tee-navy.jpg",  size: 360, top: 290 },
-};
-
-async function compositeAll() {
-  console.log("BramLabs High-Impact Mockup Compositor");
-  await ensureUnifiedBaseTees();
-
-  for (const [slug, cfg] of Object.entries(designs)) {
-    const baseMeta = await sharp(cfg.base).metadata();
-    const W = baseMeta.width;
-
-    const printSize = cfg.size;
-    const printLeft = Math.round((W - printSize) / 2);
-    const printTop  = cfg.top;
-
-    // 1. Render SVG overlay at 300 DPI
-    const overlayRaw = await sharp(
-      path.join(designsDir, `${slug}-art.svg`),
-      { density: 300 }
-    )
-      .resize(printSize, printSize, {
-        fit: "contain",
-        background: { r: 0, g: 0, b: 0, alpha: 0 },
-      })
+    // Render SVG artwork to 400x400 PNG buffer
+    const graphicBuffer = await sharp(svgFile)
+      .resize(400, 400, { fit: 'contain' })
       .png()
       .toBuffer();
 
-    // 2. Modulate alpha to 95% for realistic screenprint ink integration into cotton
-    const { data, info } = await sharp(overlayRaw).raw().toBuffer({ resolveWithObject: true });
-    const alphaModulated = Buffer.from(data);
-    for (let i = 3; i < alphaModulated.length; i += 4) {
-      if (alphaModulated[i] > 0) {
-        alphaModulated[i] = Math.round(alphaModulated[i] * 0.95);
+    // Composite graphic onto base tee chest (centered around x: 200, y: 250 on an 800x1000 base image)
+    const baseMetadata = await sharp(baseFile).metadata();
+    const width = baseMetadata.width || 800;
+    const height = baseMetadata.height || 1000;
+
+    const left = Math.round((width - 400) / 2);
+    const top = Math.round(height * 0.26);
+
+    const composited = sharp(baseFile).composite([
+      {
+        input: graphicBuffer,
+        top: top,
+        left: left,
+        blend: 'over'
       }
-    }
+    ]);
 
-    const overlay = await sharp(alphaModulated, {
-      raw: { width: info.width, height: info.height, channels: 4 }
-    })
-      .png()
-      .toBuffer();
+    await composited.jpeg({ quality: 92 }).toFile(outJpg);
+    await composited.webp({ quality: 92 }).toFile(outWebp);
 
-    // 3. Composite onto garment base
-    await sharp(cfg.base)
-      .composite([{ input: overlay, left: printLeft, top: printTop }])
-      .jpeg({ quality: 96 })
-      .toFile(path.join(mockupsDir, `${slug}-tee.jpg`));
-
-    await sharp(cfg.base)
-      .composite([{ input: overlay, left: printLeft, top: printTop }])
-      .webp({ quality: 94 })
-      .toFile(path.join(mockupsDir, `${slug}-tee.webp`));
-
-    const shirtLabel = cfg.base.includes("navy") ? "navy" : "black";
-    console.log(`✓ [${shirtLabel.padEnd(5)}] ${slug}`);
+    console.log(`Generated mockup for ${d.slug} (${d.color}) -> ${d.slug}-tee.jpg & .webp`);
   }
-
-  console.log("\nAll 12 high-impact mockups successfully generated with 520px chest scale & 95% ink integration.");
 }
 
-compositeAll().catch(console.error);
+generateMockups().catch(console.error);

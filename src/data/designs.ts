@@ -54,31 +54,31 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Black",
     shirtColor: "black",
     images: {
-      primaryMockup: "/designs/design-01.svg",
-      rawArtwork: "/designs/design-01.svg",
+      primaryMockup: "/mockups/rotation-dial-tee.jpg",
+      rawArtwork: "/designs/rotation-dial-art.svg",
       detail: "/designs/rotation-dial-detail.svg",
     },
     relatedDesigns: ["37-tabs-open", "build-47", "maintenance-window"],
     processStages: [
       {
         label: "Concept Structure",
-        body: "Three equal circular arcs mapped to 24-hour crew rotation periods.",
-        image: "/designs/design-01.svg"
+        body: "Initial concept sketch and structural outline.",
+        image: "/process/rotation-dial-sketch.svg"
       },
       {
         label: "Geometric Construction",
-        body: "Centered dial, concentric tracks and 07/15/23 time markers aligned.",
-        image: "/designs/design-01.svg"
+        body: "Blueprint grid, center axis, and stroke guideline alignment.",
+        image: "/process/rotation-dial-geometry.svg"
       },
       {
         label: "Vector Master Art",
         body: "Clean vector paths tuned for chest-scale print on dark cotton.",
-        image: "/designs/design-01.svg"
+        image: "/designs/rotation-dial-art.svg"
       },
       {
         label: "Garment Application",
-        body: "Final composition tested on black heavyweight fabric.",
-        image: "/designs/design-01.svg"
+        body: "Final composition applied on dark heavyweight fabric.",
+        image: "/mockups/rotation-dial-tee.jpg"
       }
     ],
     seo: {
@@ -113,31 +113,31 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Navy",
     shirtColor: "navy",
     images: {
-      primaryMockup: "/designs/design-02.svg",
-      rawArtwork: "/designs/design-02.svg",
+      primaryMockup: "/mockups/circadian-corrupted-tee.jpg",
+      rawArtwork: "/designs/circadian-corrupted-art.svg",
       detail: "/designs/circadian-corrupted-detail.svg",
     },
     relatedDesigns: ["rotation-dial", "24h-hand-off", "focus-waveform"],
     processStages: [
       {
-        label: "Disruption Concept",
-        body: "Parallel baseline chart lines constructed before adding wave bends.",
-        image: "/designs/design-02.svg"
+        label: "Concept Structure",
+        body: "Initial concept sketch and structural outline.",
+        image: "/process/circadian-corrupted-sketch.svg"
       },
       {
-        label: "Parallel Grid Geometry",
-        body: "Waveform bends added to mark sleep cycle disruption with dashed orbit.",
-        image: "/designs/design-02.svg"
+        label: "Geometric Construction",
+        body: "Blueprint grid, center axis, and stroke guideline alignment.",
+        image: "/process/circadian-corrupted-geometry.svg"
       },
       {
         label: "Vector Master Art",
-        body: "Violet and cyan status accents styled for navy garment print.",
-        image: "/designs/design-02.svg"
+        body: "Clean vector paths tuned for chest-scale print on dark cotton.",
+        image: "/designs/circadian-corrupted-art.svg"
       },
       {
         label: "Garment Application",
-        body: "Printed on navy heavyweight cotton tee.",
-        image: "/designs/design-02.svg"
+        body: "Final composition applied on dark heavyweight fabric.",
+        image: "/mockups/circadian-corrupted-tee.jpg"
       }
     ],
     seo: {
@@ -172,31 +172,31 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Black",
     shirtColor: "black",
     images: {
-      primaryMockup: "/designs/design-03.svg",
-      rawArtwork: "/designs/design-03.svg",
+      primaryMockup: "/mockups/24h-hand-off-tee.jpg",
+      rawArtwork: "/designs/24h-hand-off-art.svg",
       detail: "/designs/24h-hand-off-detail.svg",
     },
     relatedDesigns: ["rotation-dial", "circadian-corrupted", "build-47"],
     processStages: [
       {
-        label: "Band Structure",
-        body: "Three horizontal coverage arcs mapped for shift handoff points.",
-        image: "/designs/design-03.svg"
+        label: "Concept Structure",
+        body: "Initial concept sketch and structural outline.",
+        image: "/process/24h-hand-off-sketch.svg"
       },
       {
-        label: "Transfer Nodes",
-        body: "Boundary dots inserted to indicate crew transitions.",
-        image: "/designs/design-03.svg"
+        label: "Geometric Construction",
+        body: "Blueprint grid, center axis, and stroke guideline alignment.",
+        image: "/process/24h-hand-off-geometry.svg"
       },
       {
         label: "Vector Master Art",
-        body: "Color-coded cyan, orange, and ivory plates aligned for chest scale.",
-        image: "/designs/design-03.svg"
+        body: "Clean vector paths tuned for chest-scale print on dark cotton.",
+        image: "/designs/24h-hand-off-art.svg"
       },
       {
         label: "Garment Application",
-        body: "Tested on black cotton crewneck tee.",
-        image: "/designs/design-03.svg"
+        body: "Final composition applied on dark heavyweight fabric.",
+        image: "/mockups/24h-hand-off-tee.jpg"
       }
     ],
     seo: {
@@ -231,31 +231,31 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Navy",
     shirtColor: "navy",
     images: {
-      primaryMockup: "/designs/design-04.svg",
-      rawArtwork: "/designs/design-04.svg",
+      primaryMockup: "/mockups/37-tabs-open-tee.jpg",
+      rawArtwork: "/designs/37-tabs-open-art.svg",
       detail: "/designs/37-tabs-open-detail.svg",
     },
     relatedDesigns: ["build-47", "wireframe-anatomy", "maintenance-window"],
     processStages: [
       {
-        label: "UI Frame Concept",
-        body: "Simplified browser window outline with tab strip.",
-        image: "/designs/design-04.svg"
+        label: "Concept Structure",
+        body: "Initial concept sketch and structural outline.",
+        image: "/process/37-tabs-open-sketch.svg"
       },
       {
-        label: "Tab Highlight & Address",
-        body: "Active cyan tab and address bar callout added.",
-        image: "/designs/design-04.svg"
+        label: "Geometric Construction",
+        body: "Blueprint grid, center axis, and stroke guideline alignment.",
+        image: "/process/37-tabs-open-geometry.svg"
       },
       {
-        label: "Typographic Focus",
-        body: "Bold 37 TABS OPEN typography set in heavy geometric sans.",
-        image: "/designs/design-04.svg"
+        label: "Vector Master Art",
+        body: "Clean vector paths tuned for chest-scale print on dark cotton.",
+        image: "/designs/37-tabs-open-art.svg"
       },
       {
         label: "Garment Application",
-        body: "Applied on navy heavyweight tee.",
-        image: "/designs/design-04.svg"
+        body: "Final composition applied on dark heavyweight fabric.",
+        image: "/mockups/37-tabs-open-tee.jpg"
       }
     ],
     seo: {
@@ -290,31 +290,31 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Black",
     shirtColor: "black",
     images: {
-      primaryMockup: "/designs/design-05.svg",
-      rawArtwork: "/designs/design-05.svg",
+      primaryMockup: "/mockups/build-47-tee.jpg",
+      rawArtwork: "/designs/build-47-art.svg",
       detail: "/designs/build-47-detail.svg",
     },
     relatedDesigns: ["rotation-dial", "37-tabs-open", "wireframe-anatomy"],
     processStages: [
       {
-        label: "Numeral Outline",
-        body: "Constructed massive outlined number 47.",
-        image: "/designs/design-05.svg"
+        label: "Concept Structure",
+        body: "Initial concept sketch and structural outline.",
+        image: "/process/build-47-sketch.svg"
       },
       {
-        label: "Corner Crop Marks",
-        body: "Technical crop marks and BUILD header aligned.",
-        image: "/designs/design-05.svg"
+        label: "Geometric Construction",
+        body: "Blueprint grid, center axis, and stroke guideline alignment.",
+        image: "/process/build-47-geometry.svg"
       },
       {
         label: "Vector Master Art",
-        body: "Final orange and ivory typography tuned for chest scale.",
-        image: "/designs/design-05.svg"
+        body: "Clean vector paths tuned for chest-scale print on dark cotton.",
+        image: "/designs/build-47-art.svg"
       },
       {
         label: "Garment Application",
-        body: "Printed on black cotton tee.",
-        image: "/designs/design-05.svg"
+        body: "Final composition applied on dark heavyweight fabric.",
+        image: "/mockups/build-47-tee.jpg"
       }
     ],
     seo: {
@@ -349,31 +349,31 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Black",
     shirtColor: "black",
     images: {
-      primaryMockup: "/designs/design-06.svg",
-      rawArtwork: "/designs/design-06.svg",
+      primaryMockup: "/mockups/wireframe-anatomy-tee.jpg",
+      rawArtwork: "/designs/wireframe-anatomy-art.svg",
       detail: "/designs/wireframe-anatomy-detail.svg",
     },
     relatedDesigns: ["37-tabs-open", "build-47", "bramlabs-modular-grid"],
     processStages: [
       {
-        label: "Device Frame Blueprint",
-        body: "Phone frame outline with CAD dimension brackets.",
-        image: "/designs/design-06.svg"
+        label: "Concept Structure",
+        body: "Initial concept sketch and structural outline.",
+        image: "/process/wireframe-anatomy-sketch.svg"
       },
       {
-        label: "Module Block Layout",
-        body: "Hero and content modules placed as open outlines.",
-        image: "/designs/design-06.svg"
+        label: "Geometric Construction",
+        body: "Blueprint grid, center axis, and stroke guideline alignment.",
+        image: "/process/wireframe-anatomy-geometry.svg"
       },
       {
         label: "Vector Master Art",
-        body: "Cyan dimension callouts aligned for blueprint contrast.",
-        image: "/designs/design-06.svg"
+        body: "Clean vector paths tuned for chest-scale print on dark cotton.",
+        image: "/designs/wireframe-anatomy-art.svg"
       },
       {
         label: "Garment Application",
-        body: "Printed on black cotton tee.",
-        image: "/designs/design-06.svg"
+        body: "Final composition applied on dark heavyweight fabric.",
+        image: "/mockups/wireframe-anatomy-tee.jpg"
       }
     ],
     seo: {
@@ -408,31 +408,31 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Black",
     shirtColor: "black",
     images: {
-      primaryMockup: "/designs/design-07.svg",
-      rawArtwork: "/designs/design-07.svg",
+      primaryMockup: "/mockups/focus-waveform-tee.jpg",
+      rawArtwork: "/designs/focus-waveform-art.svg",
       detail: "/designs/focus-waveform-detail.svg",
     },
     relatedDesigns: ["circadian-corrupted", "signal-noise", "protect-your-ears"],
     processStages: [
       {
-        label: "Waveform Path",
-        body: "Single continuous sine curve path drawn across baseline axis.",
-        image: "/designs/design-07.svg"
+        label: "Concept Structure",
+        body: "Initial concept sketch and structural outline.",
+        image: "/process/focus-waveform-sketch.svg"
       },
       {
-        label: "Resonance Peak",
-        body: "Primary cyan peak heightened with orange threshold mark.",
-        image: "/designs/design-07.svg"
+        label: "Geometric Construction",
+        body: "Blueprint grid, center axis, and stroke guideline alignment.",
+        image: "/process/focus-waveform-geometry.svg"
       },
       {
         label: "Vector Master Art",
-        body: "Clean vector waveform optimized for chest print.",
-        image: "/designs/design-07.svg"
+        body: "Clean vector paths tuned for chest-scale print on dark cotton.",
+        image: "/designs/focus-waveform-art.svg"
       },
       {
         label: "Garment Application",
-        body: "Applied on black heavyweight tee.",
-        image: "/designs/design-07.svg"
+        body: "Final composition applied on dark heavyweight fabric.",
+        image: "/mockups/focus-waveform-tee.jpg"
       }
     ],
     seo: {
@@ -467,31 +467,31 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Black",
     shirtColor: "black",
     images: {
-      primaryMockup: "/designs/design-08.svg",
-      rawArtwork: "/designs/design-08.svg",
+      primaryMockup: "/mockups/signal-noise-tee.jpg",
+      rawArtwork: "/designs/signal-noise-art.svg",
       detail: "/designs/signal-noise-detail.svg",
     },
     relatedDesigns: ["focus-waveform", "protect-your-ears", "37-tabs-open"],
     processStages: [
       {
-        label: "Split Layout",
-        body: "Vertical divider line bisecting clean path vs dot matrix.",
-        image: "/designs/design-08.svg"
+        label: "Concept Structure",
+        body: "Initial concept sketch and structural outline.",
+        image: "/process/signal-noise-sketch.svg"
       },
       {
-        label: "Signal Curve & Noise Dots",
-        body: "Cyan trajectory curve paired with scattered ivory dots.",
-        image: "/designs/design-08.svg"
+        label: "Geometric Construction",
+        body: "Blueprint grid, center axis, and stroke guideline alignment.",
+        image: "/process/signal-noise-geometry.svg"
       },
       {
         label: "Vector Master Art",
-        body: "Mono labels SIGNAL and NOISE styled at chest scale.",
-        image: "/designs/design-08.svg"
+        body: "Clean vector paths tuned for chest-scale print on dark cotton.",
+        image: "/designs/signal-noise-art.svg"
       },
       {
         label: "Garment Application",
-        body: "Printed on black cotton tee.",
-        image: "/designs/design-08.svg"
+        body: "Final composition applied on dark heavyweight fabric.",
+        image: "/mockups/signal-noise-tee.jpg"
       }
     ],
     seo: {
@@ -526,31 +526,31 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Black",
     shirtColor: "black",
     images: {
-      primaryMockup: "/designs/design-09.svg",
-      rawArtwork: "/designs/design-09.svg",
+      primaryMockup: "/mockups/streak-grid-365-tee.jpg",
+      rawArtwork: "/designs/streak-grid-365-art.svg",
       detail: "/designs/streak-grid-365-detail.svg",
     },
     relatedDesigns: ["build-47", "rotation-dial", "bramlabs-modular-grid"],
     processStages: [
       {
-        label: "Grid Construction",
-        body: "Modular 8x6 square cell matrix drawn.",
-        image: "/designs/design-09.svg"
+        label: "Concept Structure",
+        body: "Initial concept sketch and structural outline.",
+        image: "/process/streak-grid-365-sketch.svg"
       },
       {
-        label: "Active Streak Accent",
-        body: "Single orange cell highlighted to signify current day streak.",
-        image: "/designs/design-09.svg"
+        label: "Geometric Construction",
+        body: "Blueprint grid, center axis, and stroke guideline alignment.",
+        image: "/process/streak-grid-365-geometry.svg"
       },
       {
         label: "Vector Master Art",
-        body: "Bold 365 numeral and subtext integrated with matrix.",
-        image: "/designs/design-09.svg"
+        body: "Clean vector paths tuned for chest-scale print on dark cotton.",
+        image: "/designs/streak-grid-365-art.svg"
       },
       {
         label: "Garment Application",
-        body: "Printed on black cotton tee.",
-        image: "/designs/design-09.svg"
+        body: "Final composition applied on dark heavyweight fabric.",
+        image: "/mockups/streak-grid-365-tee.jpg"
       }
     ],
     seo: {
@@ -585,31 +585,31 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Navy",
     shirtColor: "navy",
     images: {
-      primaryMockup: "/designs/design-10.svg",
-      rawArtwork: "/designs/design-10.svg",
+      primaryMockup: "/mockups/protect-your-ears-tee.jpg",
+      rawArtwork: "/designs/protect-your-ears-art.svg",
       detail: "/designs/protect-your-ears-detail.svg",
     },
     relatedDesigns: ["focus-waveform", "signal-noise", "maintenance-window"],
     processStages: [
       {
-        label: "Ring Geometry",
-        body: "Concentric circular frequency rings constructed.",
-        image: "/designs/design-10.svg"
+        label: "Concept Structure",
+        body: "Initial concept sketch and structural outline.",
+        image: "/process/protect-your-ears-sketch.svg"
       },
       {
-        label: "dB Ceiling Tick",
-        body: "Orange 85 dB threshold tick and cyan limiter arc added.",
-        image: "/designs/design-10.svg"
+        label: "Geometric Construction",
+        body: "Blueprint grid, center axis, and stroke guideline alignment.",
+        image: "/process/protect-your-ears-geometry.svg"
       },
       {
         label: "Vector Master Art",
-        body: "PROTECT YOUR EARS title typography set in bold sans.",
-        image: "/designs/design-10.svg"
+        body: "Clean vector paths tuned for chest-scale print on dark cotton.",
+        image: "/designs/protect-your-ears-art.svg"
       },
       {
         label: "Garment Application",
-        body: "Applied on navy heavyweight tee.",
-        image: "/designs/design-10.svg"
+        body: "Final composition applied on dark heavyweight fabric.",
+        image: "/mockups/protect-your-ears-tee.jpg"
       }
     ],
     seo: {
@@ -644,31 +644,31 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Navy",
     shirtColor: "navy",
     images: {
-      primaryMockup: "/designs/design-11.svg",
-      rawArtwork: "/designs/design-11.svg",
+      primaryMockup: "/mockups/maintenance-window-tee.jpg",
+      rawArtwork: "/designs/maintenance-window-art.svg",
       detail: "/designs/maintenance-window-detail.svg",
     },
     relatedDesigns: ["build-47", "37-tabs-open", "bramlabs-modular-grid"],
     processStages: [
       {
-        label: "Panel Frame",
-        body: "Status panel window outline with header controls.",
-        image: "/designs/design-11.svg"
+        label: "Concept Structure",
+        body: "Initial concept sketch and structural outline.",
+        image: "/process/maintenance-window-sketch.svg"
       },
       {
-        label: "Scheduled Chip",
-        body: "Cyan SCHEDULED status chip and time range bar added.",
-        image: "/designs/design-11.svg"
+        label: "Geometric Construction",
+        body: "Blueprint grid, center axis, and stroke guideline alignment.",
+        image: "/process/maintenance-window-geometry.svg"
       },
       {
         label: "Vector Master Art",
-        body: "MAINTENANCE WINDOW bold title typography set.",
-        image: "/designs/design-11.svg"
+        body: "Clean vector paths tuned for chest-scale print on dark cotton.",
+        image: "/designs/maintenance-window-art.svg"
       },
       {
         label: "Garment Application",
-        body: "Printed on navy heavyweight cotton tee.",
-        image: "/designs/design-11.svg"
+        body: "Final composition applied on dark heavyweight fabric.",
+        image: "/mockups/maintenance-window-tee.jpg"
       }
     ],
     seo: {
@@ -703,31 +703,31 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Black",
     shirtColor: "black",
     images: {
-      primaryMockup: "/designs/design-12.svg",
-      rawArtwork: "/designs/design-12.svg",
+      primaryMockup: "/mockups/bramlabs-modular-grid-tee.jpg",
+      rawArtwork: "/designs/bramlabs-modular-grid-art.svg",
       detail: "/designs/bramlabs-modular-grid-detail.svg",
     },
     relatedDesigns: ["rotation-dial", "wireframe-anatomy", "streak-grid-365"],
     processStages: [
       {
-        label: "Coordinate Axis",
-        body: "4-quadrant axis lines and grid ticks constructed.",
-        image: "/designs/design-12.svg"
+        label: "Concept Structure",
+        body: "Initial concept sketch and structural outline.",
+        image: "/process/bramlabs-modular-grid-sketch.svg"
       },
       {
-        label: "Origin Accent Cells",
-        body: "Cyan and orange origin block cells placed.",
-        image: "/designs/design-12.svg"
+        label: "Geometric Construction",
+        body: "Blueprint grid, center axis, and stroke guideline alignment.",
+        image: "/process/bramlabs-modular-grid-geometry.svg"
       },
       {
         label: "Vector Master Art",
-        body: "BRAMLABS studio mark typography aligned.",
-        image: "/designs/design-12.svg"
+        body: "Clean vector paths tuned for chest-scale print on dark cotton.",
+        image: "/designs/bramlabs-modular-grid-art.svg"
       },
       {
         label: "Garment Application",
-        body: "Printed on black heavyweight cotton tee.",
-        image: "/designs/design-12.svg"
+        body: "Final composition applied on dark heavyweight fabric.",
+        image: "/mockups/bramlabs-modular-grid-tee.jpg"
       }
     ],
     seo: {

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <rect width="600" height="600" fill="#0f172a"/>
+  <g transform="translate(300, 300)">
+    <circle cx="0" cy="0" r="220" fill="none" stroke="#23C5EF" stroke-width="2" stroke-dasharray="6,6"/>
+    <circle cx="0" cy="0" r="160" fill="none" stroke="#FF862E" stroke-width="2"/>
+    <line x1="-240" y1="-240" x2="240" y2="240" stroke="#64748B" stroke-width="1" stroke-dasharray="3,3"/>
+    <line x1="-240" y1="240" x2="240" y2="-240" stroke="#64748B" stroke-width="1" stroke-dasharray="3,3"/>
+    <path d="M -160 0 A 160 160 0 0 1 0 -160" fill="none" stroke="#F4F1E9" stroke-width="8"/>
+    <path d="M 0 160 A 160 160 0 0 1 160 0" fill="none" stroke="#23C5EF" stroke-width="8"/>
+  </g>
+  <text x="300" y="550" fill="#23C5EF" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">STAGE 02: GEOMETRIC GRID</text>
+</svg>

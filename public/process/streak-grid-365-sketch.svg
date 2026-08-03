@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+  <rect width="600" height="600" fill="#09090b"/>
+  <g transform="translate(300, 300)" stroke="#64748B" stroke-width="1.5" fill="none" stroke-dasharray="4,4" opacity="0.6">
+    <circle cx="0" cy="0" r="220"/>
+    <line x1="-250" y1="0" x2="250" y2="0"/>
+    <line x1="0" y1="-250" x2="0" y2="250"/>
+    <circle cx="0" cy="0" r="140"/>
+  </g>
+  <text x="300" y="550" fill="#94A3B8" font-family="monospace" font-size="16" font-weight="bold" text-anchor="middle">STAGE 01: CONCEPT SKETCH</text>
+</svg>

@@ -154,10 +154,9 @@ const crumbs = {
           }
           {
             design.rejectedNote && (
-              <div class="reject-box">
-                <span class="reject-title">Iterative Boundary</span>
-                <p>{design.rejectedNote}</p>
-              </div>
+              <p class="rejected-note">
+                <strong>Rejected:</strong> {design.rejectedNote}
+              </p>
             )
           }
         </section>
@@ -464,31 +463,17 @@ const crumbs = {
     }
   }
 
-  .reject-box {
-    margin-top: 1.5rem;
-    padding: 1.1rem 1.25rem;
-    border-left: 3px solid var(--orange);
-    background: var(--surface);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    border-top: 1px solid var(--line);
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
+  .rejected-note {
+    margin-top: 1.25rem;
+    padding-left: 0.85rem;
+    border-left: 2px solid var(--line);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--muted);
 
-    .reject-title {
-      display: block;
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--orange);
-      margin-bottom: 0.35rem;
+    strong {
+      color: var(--ink);
       font-weight: 600;
-    }
-
-    p {
-      font-size: 0.95rem;
-      line-height: 1.55;
-      color: var(--muted);
     }
   }
 
