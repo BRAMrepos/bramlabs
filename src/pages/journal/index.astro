@@ -31,8 +31,8 @@ const remainingPosts = journalPosts.slice(1);
               <img
                 src={featuredPost.image}
                 alt={featuredPost.title}
-                width="800"
-                height="500"
+                width="600"
+                height="375"
                 loading="eager"
               />
               <span class="media-badge">FEATURED ESSAY</span>
@@ -61,7 +61,7 @@ const remainingPosts = journalPosts.slice(1);
         </article>
       )}
 
-      <!-- Journal Grid Header -->
+      <!-- Grid Header -->
       <div class="grid-header">
         <h2 class="h-section">Recent Essays</h2>
       </div>
@@ -76,8 +76,8 @@ const remainingPosts = journalPosts.slice(1);
                   <img
                     src={p.image}
                     alt={`${p.title} article illustration`}
-                    width="600"
-                    height="400"
+                    width="400"
+                    height="250"
                     loading="lazy"
                   />
                 </div>
@@ -140,7 +140,7 @@ const remainingPosts = journalPosts.slice(1);
     box-shadow: var(--shadow-sm);
 
     @media (width >= 840px) {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 0.9fr 1.1fr;
       align-items: center;
       padding: 2rem;
     }
@@ -152,21 +152,28 @@ const remainingPosts = journalPosts.slice(1);
     border-radius: var(--radius);
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
   }
 
   .media-container {
     position: relative;
     aspect-ratio: 16 / 10;
     width: 100%;
+    max-height: 320px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1.5rem;
+    background: #09090b;
+    overflow: hidden;
 
     img {
       max-width: 100%;
       max-height: 100%;
+      width: auto;
+      height: auto;
       object-fit: contain;
+      display: block;
     }
 
     .media-badge {
@@ -288,20 +295,28 @@ const remainingPosts = journalPosts.slice(1);
     display: block;
     background: #09090b;
     border-bottom: 1px solid var(--line);
+    width: 100%;
   }
 
   .card-img-wrap {
+    position: relative;
     aspect-ratio: 16 / 10;
     width: 100%;
+    max-height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 1.25rem;
+    background: #09090b;
+    overflow: hidden;
 
     img {
       max-width: 100%;
       max-height: 100%;
+      width: auto;
+      height: auto;
       object-fit: contain;
+      display: block;
     }
   }
 
