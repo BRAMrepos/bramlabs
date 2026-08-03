@@ -35,21 +35,16 @@ export const designs: Design[] = [
     title: "Rotation Dial",
     category: "SHIFT WORK",
     shortDescription:
-      "A continuous 24-hour shift system for crews that keep operations moving.",
+      "A continuous 24-hour shift coverage dial for crew rotations.",
     fullDescription:
-      "Rotation Dial is a technical 24-hour composition for people who work in rotations — nurses, EMS, plant operators, security. Three arcs represent day, swing and night handoffs around a shared center. Labels stay sparse so the geometry carries the idea at garment distance. It reads as a system diagram first and a product monogram never.",
-    conceptExtra: [
-      "The starting problem was simple: how do you show continuous coverage without drawing a clock face or a corporate logo? Early sketches stacked three horizontal bars. They felt like a status widget, not a garment graphic.",
-      "Equal arcs solved hierarchy. Day, swing and night share one center so no period 'wins'. Cyan and orange carry handoff energy; ink holds the night band quieter so the piece still works on black fabric.",
-      "Tick marks and sparse time labels exist for people who already know the rhythm. Everyone else should still read continuity, direction and craft.",
-    ],
-    printNotes:
-      "Designed for a large centered front print on heavyweight black cotton. Ivory, cyan and orange need solid opacity; line weights are tuned for chest-scale readability, not phone-icon detail.",
+      "Rotation Dial is a 24-hour coverage mark for people who work rotations. Three equal arcs — day, swing, night — share one center so no period dominates. Sparse ticks and time labels are for people who already know the rhythm; everyone else should still read continuity and craft.",
     rejectedNote:
-      "Rejected versions included an app-icon container, a hospital cross motif, and a literal analog clock — all of which pulled the piece toward branding or illustration cliché.",
-    audience: ["Shift workers", "EMS", "Nurses", "Plant operations"],
-    visualLanguage: ["Swiss technical diagrams", "Industrial control systems"],
-    primaryForms: ["Circular schedule", "Shift arcs", "Directional markers"],
+      "Rejected app-icon frames, hospital crosses, and literal clock faces — they turned it into branding instead of a system.",
+    printNotes:
+      "Large centered chest print; solid opacity; line weight tuned for fabric distance, not icon scale.",
+    audience: ["Shift workers", "Operations", "EMS"],
+    visualLanguage: ["Swiss technical diagrams", "Industrial controls"],
+    primaryForms: ["Circular schedule", "Shift arcs", "Sparse markers"],
     palette: [
       { name: "Warm ivory", hex: "#F4F1E9" },
       { name: "Electric cyan", hex: "#23C5EF" },
@@ -59,38 +54,33 @@ export const designs: Design[] = [
     application: "Heavyweight unisex tee — Black",
     shirtColor: "black",
     images: {
-      primaryMockup: "/mockups/rotation-dial-tee.jpg",
-      rawArtwork: "/designs/rotation-dial-art.svg",
+      primaryMockup: "/designs/design-01.svg",
+      rawArtwork: "/designs/design-01.svg",
       detail: "/designs/rotation-dial-detail.svg",
     },
     relatedDesigns: ["37-tabs-open", "build-47", "maintenance-window"],
     processStages: [
       {
-            "label": "Rough concept",
-            "body": "Early sketches explored how three working periods could form one uninterrupted loop.",
-            "image": "/process/rotation-sketch.svg"
+        label: "Concept Structure",
+        body: "Three equal circular arcs mapped to 24-hour crew rotation periods.",
+        image: "/designs/design-01.svg"
       },
       {
-            "label": "Shift research",
-            "body": "Mapped 07:00 / 15:00 / 23:00 handoffs into equal arcs with readable hierarchy.",
-            "image": "/process/rotation-research.svg"
+        label: "Geometric Construction",
+        body: "Centered dial, concentric tracks and 07/15/23 time markers aligned.",
+        image: "/designs/design-01.svg"
       },
       {
-            "label": "Geometric construction",
-            "body": "Centered dial, concentric tracks and directional pointer aligned on a strict grid.",
-            "image": "/process/rotation-geometry.svg"
+        label: "Vector Master Art",
+        body: "Clean vector paths tuned for chest-scale print on dark cotton.",
+        image: "/designs/design-01.svg"
       },
       {
-            "label": "Vector refinement",
-            "body": "Line weights, arc terminals and label spacing tightened for print at chest scale.",
-            "image": "/designs/rotation-dial-art.svg"
-      },
-      {
-            "label": "Garment application",
-            "body": "Final composition tested on dark heavyweight fabric for contrast and fold behavior.",
-            "image": "/mockups/rotation-dial-tee.jpg"
+        label: "Garment Application",
+        body: "Final composition tested on black heavyweight fabric.",
+        image: "/designs/design-01.svg"
       }
-],
+    ],
     seo: {
       title: "Rotation Dial Apparel Graphic — BramLabs",
       description:
@@ -106,17 +96,13 @@ export const designs: Design[] = [
     shortDescription:
       "A disrupted sleep cycle rendered as controlled line interference.",
     fullDescription:
-      "Night shifts break natural cycles. This piece keeps the language of scientific charts while introducing deliberate disruption — bent parallels, a dashed orbit and a status label. It is about living with irregular rest, not decorating a sleep app.",
-    conceptExtra: [
-      "The corruption is intentional and restrained. Curves bend only after a clear baseline is established, so the disruption reads as condition, not decoration.",
-      "Violet carries the corrupted status; cyan holds the orbit. Together they avoid the cliché of pure neon glitch aesthetics.",
-    ],
-    printNotes:
-      "Works centered on navy garments. Status type should remain legible when print size is reduced for smaller sizes.",
+      "Night shifts break natural cycles. Parallel tracks establish a baseline, then one controlled bend marks the disruption — condition, not decoration. A dashed orbit and short status line keep it in the language of charts, not sleep-app icons.",
     rejectedNote:
-      "Rejected full RGB glitch stacks and sleep-app moon icons.",
-    audience: ["Night shift", "On-call workers"],
-    visualLanguage: ["Data lines", "Controlled glitch"],
+      "Rejected full RGB glitch stacks and sleep-app moon icons that felt like app decoration.",
+    printNotes:
+      "Centered on navy fabric; status type remains sharp and legible at smaller garment sizes.",
+    audience: ["Night shift", "On-call crews"],
+    visualLanguage: ["Data lines", "Controlled disruption"],
     primaryForms: ["Parallel tracks", "Orbit ring", "Status type"],
     palette: [
       { name: "Ivory", hex: "#F4F1E9" },
@@ -124,110 +110,99 @@ export const designs: Design[] = [
       { name: "Cyan", hex: "#23C5EF" },
       { name: "Ink", hex: "#111315" },
     ],
-    application: "Heavyweight unisex tee — White",
-    shirtColor: "white",
+    application: "Heavyweight unisex tee — Navy",
+    shirtColor: "navy",
     images: {
-      primaryMockup: "/mockups/circadian-corrupted-tee.jpg",
-      rawArtwork: "/designs/circadian-corrupted-art.svg",
+      primaryMockup: "/designs/design-02.svg",
+      rawArtwork: "/designs/design-02.svg",
       detail: "/designs/circadian-corrupted-detail.svg",
     },
     relatedDesigns: ["rotation-dial", "24h-hand-off", "focus-waveform"],
     processStages: [
       {
-            "label": "Disruption concept",
-            "body": "Explored how night shift rest cycles can be rendered as controlled line interference.",
-            "image": "/process/circadian-sketch.svg"
+        label: "Disruption Concept",
+        body: "Parallel baseline chart lines constructed before adding wave bends.",
+        image: "/designs/design-02.svg"
       },
       {
-            "label": "Parallel grid geometry",
-            "body": "Constructed baseline scientific chart lines before introducing deliberate wave bends.",
-            "image": "/process/circadian-geometry.svg"
+        label: "Parallel Grid Geometry",
+        body: "Waveform bends added to mark sleep cycle disruption with dashed orbit.",
+        image: "/designs/design-02.svg"
       },
       {
-            "label": "Vector art master",
-            "body": "Final vector composition with violet and cyan status accents ready for screen master.",
-            "image": "/designs/circadian-corrupted-art.svg"
+        label: "Vector Master Art",
+        body: "Violet and cyan status accents styled for navy garment print.",
+        image: "/designs/design-02.svg"
       },
       {
-            "label": "Print detail crop",
-            "body": "Tuned line weights and dashed orbit spacing to maintain crispness at chest distance.",
-            "image": "/designs/circadian-corrupted-detail.svg"
-      },
-      {
-            "label": "Garment application",
-            "body": "Tested composition on white heavyweight cotton for crisp contrast and fabric drape.",
-            "image": "/mockups/circadian-corrupted-tee.jpg"
+        label: "Garment Application",
+        body: "Printed on navy heavyweight cotton tee.",
+        image: "/designs/design-02.svg"
       }
-],
+    ],
     seo: {
-      title: "Circadian Rhythm: Corrupted — BramLabs",
+      title: "Circadian Rhythm Corrupted Apparel Graphic — BramLabs",
       description:
-        "Original apparel graphic exploring disrupted circadian cycles through technical line systems.",
+        "Disrupted circadian rhythm graphic by BramLabs — technical data plot for night shift workers.",
     },
   },
   {
     slug: "24h-hand-off",
     order: 3,
-    featured: true,
+    featured: false,
     title: "24H Hand-Off",
     category: "SHIFT WORK",
     shortDescription:
-      "Day, swing and night periods interlocking as stacked coverage bands.",
+      "Interlocking stacked coverage bands marking crew shift handoffs.",
     fullDescription:
-      "Unlike a dial, 24H Hand-Off uses three interlocking coverage bands — day, swing, night — with transfer nodes at the edges. The composition is about continuity between crews rather than time of day. Hierarchy comes from arc weight, color coding and sparse labels.",
-    conceptExtra: [
-      "This piece exists to differentiate from Rotation Dial. Same world, different geometry: stacked transfer arcs instead of a single circular schedule.",
-      "IN/OUT markers make the handoff literal without turning the shirt into a flowchart poster.",
-    ],
-    printNotes: "Wide chest print on navy; keep band stroke weight bold enough for fabric.",
-    audience: ["Rotation crews", "Operations"],
-    visualLanguage: ["Circular systems", "Industrial color coding"],
-    primaryForms: ["Interlocking bands", "Transfer nodes", "Center mark"],
+      "Three interlocking coverage bands — day, swing, and night — stack with transfer nodes at the boundaries. The wide horizontal weight gives the chest graphic structure while sparse labels keep it technical.",
+    rejectedNote:
+      "Rejected flowchart boxes and corporate org-chart arrows.",
+    printNotes:
+      "Wide chest placement; high opacity cyan and orange ink plates on dark cotton.",
+    audience: ["Crew leads", "Dispatchers", "Operations"],
+    visualLanguage: ["System schematics", "Data transfer"],
+    primaryForms: ["Stacked bands", "Transfer nodes", "Coverage arcs"],
     palette: [
-      { name: "Ivory", hex: "#F4F1E9" },
+      { name: "Cyan", hex: "#23C5EF" },
       { name: "Orange", hex: "#FF862E" },
-      { name: "Green", hex: "#42C991" },
+      { name: "Ivory", hex: "#F4F1E9" },
       { name: "Ink", hex: "#111315" },
     ],
-    application: "Heavyweight unisex tee — White",
-    shirtColor: "white",
+    application: "Heavyweight unisex tee — Black",
+    shirtColor: "black",
     images: {
-      primaryMockup: "/mockups/24h-hand-off-tee.jpg",
-      rawArtwork: "/designs/24h-hand-off-art.svg",
+      primaryMockup: "/designs/design-03.svg",
+      rawArtwork: "/designs/design-03.svg",
       detail: "/designs/24h-hand-off-detail.svg",
     },
-    relatedDesigns: ["rotation-dial", "circadian-corrupted", "maintenance-window"],
+    relatedDesigns: ["rotation-dial", "circadian-corrupted", "build-47"],
     processStages: [
       {
-            "label": "Handoff arcs concept",
-            "body": "Mapped 24-hour crew handoff points into interlocking coverage arcs.",
-            "image": "/process/24h-sketch.svg"
+        label: "Band Structure",
+        body: "Three horizontal coverage arcs mapped for shift handoff points.",
+        image: "/designs/design-03.svg"
       },
       {
-            "label": "Coverage band geometry",
-            "body": "Balanced day, swing, and night band stroke weights around transfer nodes.",
-            "image": "/process/24h-geometry.svg"
+        label: "Transfer Nodes",
+        body: "Boundary dots inserted to indicate crew transitions.",
+        image: "/designs/design-03.svg"
       },
       {
-            "label": "Vector art master",
-            "body": "Constructed clean vector master with orange, green, and ivory color bands.",
-            "image": "/designs/24h-hand-off-art.svg"
+        label: "Vector Master Art",
+        body: "Color-coded cyan, orange, and ivory plates aligned for chest scale.",
+        image: "/designs/design-03.svg"
       },
       {
-            "label": "Print detail crop",
-            "body": "Tightened IN/OUT transfer labels for maximum chest-scale readability.",
-            "image": "/designs/24h-hand-off-detail.svg"
-      },
-      {
-            "label": "Garment application",
-            "body": "Applied vector composition to heavyweight white cotton for honest fabric contrast.",
-            "image": "/mockups/24h-hand-off-tee.jpg"
+        label: "Garment Application",
+        body: "Tested on black cotton crewneck tee.",
+        image: "/designs/design-03.svg"
       }
-],
+    ],
     seo: {
       title: "24H Hand-Off Apparel Graphic — BramLabs",
       description:
-        "Original stacked hand-off graphic representing continuous shift coverage.",
+        "24H Hand-Off crew shift graphic by BramLabs — technical diagram of 3-shift coverage.",
     },
   },
   {
@@ -235,192 +210,176 @@ export const designs: Design[] = [
     order: 4,
     featured: true,
     title: "37 Tabs Open, All Important",
-    category: "DEVELOPER CULTURE",
+    category: "TECH HUMOR",
     shortDescription:
-      "Browser-tab humor with clean hierarchy — readable from across the room.",
+      "A simplified browser tab row celebrating chaotic multitasking.",
     fullDescription:
-      "A joke every knowledge worker already knows, set in a generic interface language that avoids browser branding. Tabs stack, one is active, the status bar tells the truth: will_close_later.",
-    conceptExtra: [
-      "The hard rule was no vendor chrome — no chrome-like blues, no foxes, no fruit logos. Generic window controls and tab rhythm carry the joke.",
-      "Stacked ghost panels behind the main window imply depth without needing thirty-seven literal tabs.",
-    ],
-    printNotes: "Wide centered print on black; type must stay bold at reduced sizes.",
-    rejectedNote: "Rejected any layout that resembled a specific browser UI kit.",
-    audience: ["Developers", "Researchers", "Designers"],
-    visualLanguage: ["Interface chrome", "Typographic humor"],
-    primaryForms: ["Tab grid", "Status panel", "Window frame"],
+      "A simplified browser window frame with a single highlighted active tab. Large geometric typography '37 TABS OPEN' dominates the center, backed by an empty content panel for maximum negative space.",
+    rejectedNote:
+      "Rejected realistic browser window chrome and trademarked browser logos.",
+    printNotes:
+      "Heavy central typography; clean hairline border stays open on navy fabric.",
+    audience: ["Developers", "Power browsers", "Tech workers"],
+    visualLanguage: ["UI wireframes", "Minimalist typography"],
+    primaryForms: ["Window frame", "Active tab", "Bold type"],
     palette: [
-      { name: "Ivory", hex: "#F4F1E9" },
       { name: "Cyan", hex: "#23C5EF" },
+      { name: "Ivory", hex: "#F4F1E9" },
+      { name: "Orange", hex: "#FF862E" },
       { name: "Ink", hex: "#111315" },
     ],
-    application: "Heavyweight unisex tee — Black",
-    shirtColor: "black",
+    application: "Heavyweight unisex tee — Navy",
+    shirtColor: "navy",
     images: {
-      primaryMockup: "/mockups/37-tabs-open-tee.jpg",
-      rawArtwork: "/designs/37-tabs-open-art.svg",
+      primaryMockup: "/designs/design-04.svg",
+      rawArtwork: "/designs/design-04.svg",
       detail: "/designs/37-tabs-open-detail.svg",
     },
     relatedDesigns: ["build-47", "wireframe-anatomy", "maintenance-window"],
     processStages: [
       {
-            "label": "Joke capture",
-            "body": "Wrote the line first: '37 tabs open, all important'. The graphic makes it true.",
-            "image": "/process/37-sketch.svg"
+        label: "UI Frame Concept",
+        body: "Simplified browser window outline with tab strip.",
+        image: "/designs/design-04.svg"
       },
       {
-            "label": "Generic chrome",
-            "body": "Built a vendor-neutral window frame to avoid brand parody UI kits.",
-            "image": "/process/37-geometry.svg"
+        label: "Tab Highlight & Address",
+        body: "Active cyan tab and address bar callout added.",
+        image: "/designs/design-04.svg"
       },
       {
-            "label": "Vector art master",
-            "body": "Final composition featuring active cyan tab, stacked depth, and status log.",
-            "image": "/designs/37-tabs-open-art.svg"
+        label: "Typographic Focus",
+        body: "Bold 37 TABS OPEN typography set in heavy geometric sans.",
+        image: "/designs/design-04.svg"
       },
       {
-            "label": "Print detail crop",
-            "body": "Refined status type 'will_close_later' for sharp screen-print clarity.",
-            "image": "/designs/37-tabs-open-detail.svg"
-      },
-      {
-            "label": "Garment application",
-            "body": "Verified centered front print scale on heavyweight black cotton.",
-            "image": "/mockups/37-tabs-open-tee.jpg"
+        label: "Garment Application",
+        body: "Applied on navy heavyweight tee.",
+        image: "/designs/design-04.svg"
       }
-],
+    ],
     seo: {
-      title: "37 Tabs Open, All Important — BramLabs",
+      title: "37 Tabs Open Apparel Graphic — BramLabs",
       description:
-        "Original developer-culture apparel graphic about too many open tabs.",
+        "37 Tabs Open graphic tee by BramLabs — tech humor apparel for power browsers.",
     },
   },
   {
     slug: "build-47",
     order: 5,
-    featured: true,
+    featured: false,
     title: "Build 47",
-    category: "DEVELOPER CULTURE",
-    shortDescription: "Negative-space typography about iteration, not perfection.",
+    category: "ENGINEERING",
+    shortDescription:
+      "A bold iteration mark prioritizing shipping over polish.",
     fullDescription:
-      "Bold type, one number, one line. Build 47 is about shipping through iterations. The outlined numeral keeps weight without filling the entire chest. Construction marks and an iteration log frame turn a simple statement into a finished poster system.",
-    conceptExtra: [
-      "The number is the story. Forty-seven is late enough to feel real and early enough to feel ongoing.",
-      "Corner registration marks and a quiet grid make the piece feel engineered, not like a slogan generator.",
-    ],
+      "One number, one idea: iteration over polish. 'BUILD' sits small above a heavy outlined 47 so the numeral carries the chest. Quiet registration marks frame it like a finished blueprint sheet.",
+    rejectedNote:
+      "Rejected corporate version tags and complex release notes typography.",
     printNotes:
-      "Large type print on black. Outline stroke on '47' must remain open on fabric — test underbase on dark garments.",
-    rejectedNote: "Rejected soft script fonts and startup-style gradient fills.",
-    audience: ["Engineers", "Makers"],
-    visualLanguage: ["Typographic poster", "Construction marks"],
-    primaryForms: ["Wordmark", "Outlined number", "Registration corners"],
+      "Jersey-scale chest print; outlined 47 stroke requires sharp screen tension.",
+    audience: ["Engineers", "Makers", "Founders"],
+    visualLanguage: ["Typographic mark", "Construction blueprint"],
+    primaryForms: ["Wordmark", "Outlined numeral", "Crop marks"],
     palette: [
       { name: "Ivory", hex: "#F4F1E9" },
-      { name: "Ink", hex: "#111315" },
+      { name: "Cyan", hex: "#23C5EF" },
       { name: "Orange", hex: "#FF862E" },
+      { name: "Ink", hex: "#111315" },
     ],
     application: "Heavyweight unisex tee — Black",
     shirtColor: "black",
     images: {
-      primaryMockup: "/mockups/build-47-tee.jpg",
-      rawArtwork: "/designs/build-47-art.svg",
+      primaryMockup: "/designs/design-05.svg",
+      rawArtwork: "/designs/design-05.svg",
       detail: "/designs/build-47-detail.svg",
     },
-    relatedDesigns: ["37-tabs-open", "wireframe-anatomy", "maintenance-window"],
+    relatedDesigns: ["rotation-dial", "37-tabs-open", "wireframe-anatomy"],
     processStages: [
       {
-            "label": "Iteration numeral concept",
-            "body": "Selected '47' as the ideal number — ongoing iteration, not initial draft.",
-            "image": "/process/build-sketch.svg"
+        label: "Numeral Outline",
+        body: "Constructed massive outlined number 47.",
+        image: "/designs/design-05.svg"
       },
       {
-            "label": "Grid & corner geometry",
-            "body": "Framed large outlined typography with technical registration marks.",
-            "image": "/process/build-geometry.svg"
+        label: "Corner Crop Marks",
+        body: "Technical crop marks and BUILD header aligned.",
+        image: "/designs/design-05.svg"
       },
       {
-            "label": "Vector art master",
-            "body": "High-contrast vector composition tuned for large chest-scale printing.",
-            "image": "/designs/build-47-art.svg"
+        label: "Vector Master Art",
+        body: "Final orange and ivory typography tuned for chest scale.",
+        image: "/designs/design-05.svg"
       },
       {
-            "label": "Print detail crop",
-            "body": "Ensured outlined numeral strokes remain open and sharp on heavy cotton.",
-            "image": "/designs/build-47-detail.svg"
-      },
-      {
-            "label": "Garment application",
-            "body": "Tested print opacity and registration on heavyweight black fabric.",
-            "image": "/mockups/build-47-tee.jpg"
+        label: "Garment Application",
+        body: "Printed on black cotton tee.",
+        image: "/designs/design-05.svg"
       }
-],
+    ],
     seo: {
       title: "Build 47 Apparel Graphic — BramLabs",
-      description: "Original typographic apparel graphic about iteration and shipping.",
+      description:
+        "Build 47 iteration graphic by BramLabs — engineering apparel for builders.",
     },
   },
   {
     slug: "wireframe-anatomy",
     order: 6,
-    featured: true,
+    featured: false,
     title: "Wireframe Anatomy",
-    category: "DEVELOPER CULTURE",
+    category: "DESIGN & PRODUCT",
     shortDescription:
-      "Product-design language as a full composition, not a phone icon.",
+      "An architectural wireframe blueprint for digital product makers.",
     fullDescription:
-      "A complete wireframe environment: chrome, columns, modules and dimension callouts. It celebrates structure over polish — the language of product design before pixels get filled.",
-    conceptExtra: [
-      "Dimension lines are part of the composition, not afterthoughts. They teach the eye that this is structure, not a screenshot.",
-      "Cyan callouts stay sparse so the piece does not become a UI kit sticker sheet.",
-    ],
-    printNotes: "Centered print on navy; keep dashed hero module visible at reduced scale.",
-    audience: ["Product designers", "Developers"],
-    visualLanguage: ["Blueprint", "UI structure"],
-    primaryForms: ["Layout grid", "Module frames", "Callouts"],
+      "A simplified product wireframe rendered as an open outline device frame. Hero and module blocks remain empty negative space, bounded by cyan dimension brackets and CAD callouts.",
+    rejectedNote:
+      "Rejected filled OS UI components and stock illustration icons.",
+    printNotes:
+      "Single-pass cyan and white ink print; fine grid lines tuned for zero bleed.",
+    audience: ["UX designers", "Product managers", "Frontend engineers"],
+    visualLanguage: ["CAD blueprints", "Product wireframes"],
+    primaryForms: ["Device frame", "Dimension lines", "Module blocks"],
     palette: [
-      { name: "Ivory", hex: "#F4F1E9" },
-      { name: "Ink", hex: "#111315" },
       { name: "Cyan", hex: "#23C5EF" },
+      { name: "Ivory", hex: "#F4F1E9" },
+      { name: "Slate", hex: "#64748B" },
+      { name: "Ink", hex: "#111315" },
     ],
-    application: "Heavyweight unisex tee — White",
-    shirtColor: "white",
+    application: "Heavyweight unisex tee — Black",
+    shirtColor: "black",
     images: {
-      primaryMockup: "/mockups/wireframe-anatomy-tee.jpg",
-      rawArtwork: "/designs/wireframe-anatomy-art.svg",
+      primaryMockup: "/designs/design-06.svg",
+      rawArtwork: "/designs/design-06.svg",
       detail: "/designs/wireframe-anatomy-detail.svg",
     },
     relatedDesigns: ["37-tabs-open", "build-47", "bramlabs-modular-grid"],
     processStages: [
       {
-            "label": "Layout module sketch",
-            "body": "Drafted a complete product wireframe environment — modules, chrome, and dimensions.",
-            "image": "/process/wireframe-sketch.svg"
+        label: "Device Frame Blueprint",
+        body: "Phone frame outline with CAD dimension brackets.",
+        image: "/designs/design-06.svg"
       },
       {
-            "label": "Blueprint dimension geometry",
-            "body": "Calculated exact callout lines and bounding marks to emphasize structural design.",
-            "image": "/process/wireframe-geometry.svg"
+        label: "Module Block Layout",
+        body: "Hero and content modules placed as open outlines.",
+        image: "/designs/design-06.svg"
       },
       {
-            "label": "Vector art master",
-            "body": "Final vector blueprint artwork rendered in technical cyan and crisp white lines.",
-            "image": "/designs/wireframe-anatomy-art.svg"
+        label: "Vector Master Art",
+        body: "Cyan dimension callouts aligned for blueprint contrast.",
+        image: "/designs/design-06.svg"
       },
       {
-            "label": "Print detail crop",
-            "body": "Tightened dimension callouts so numbers remain legible at chest scale.",
-            "image": "/designs/wireframe-anatomy-detail.svg"
-      },
-      {
-            "label": "Garment application",
-            "body": "Applied full composition to white heavyweight tee for clean architectural feel.",
-            "image": "/mockups/wireframe-anatomy-tee.jpg"
+        label: "Garment Application",
+        body: "Printed on black cotton tee.",
+        image: "/designs/design-06.svg"
       }
-],
+    ],
     seo: {
       title: "Wireframe Anatomy Apparel Graphic — BramLabs",
       description:
-        "Original blueprint-style apparel graphic of product design structure.",
+        "Wireframe Anatomy blueprint graphic by BramLabs — UX and product design apparel.",
     },
   },
   {
@@ -428,61 +387,58 @@ export const designs: Design[] = [
     order: 7,
     featured: false,
     title: "Focus Is a Waveform",
-    category: "FOCUS",
+    category: "DEEP WORK",
     shortDescription:
-      "Attention as a single dominant wave with restrained annotation.",
+      "A single bold frequency wave resolving into a deep focus peak.",
     fullDescription:
-      "Focus rises, peaks and decays. One waveform carries the idea with a secondary echo and sparse type. Built for people who treat deep work as a rhythm, not a streak counter.",
-    conceptExtra: [
-      "Peak focus is marked once. Everything else is quiet so the metaphor does not become a dashboard.",
-    ],
-    printNotes: "Wide front print on black; violet must hold against dark fabric.",
-    audience: ["Knowledge workers", "Students"],
-    visualLanguage: ["Data visualization", "Minimal type"],
-    primaryForms: ["Wave path", "Baseline", "Peak marker"],
+      "A single bold waveform spanning the chest. Low noise baseline transitions into one sharp cyan resonance peak — a pure data gesture representing deep concentration.",
+    rejectedNote:
+      "Rejected multi-channel ECG grids and medical monitor displays.",
+    printNotes:
+      "Wide horizontal chest wave; single-color cyan highlight on black cotton.",
+    audience: ["ADHD focusers", "Meditators", "Deep workers"],
+    visualLanguage: ["Data curves", "Acoustic plots"],
+    primaryForms: ["Single waveform", "Resonance peak", "Baseline axis"],
     palette: [
-      { name: "Ivory", hex: "#F4F1E9" },
-      { name: "Violet", hex: "#7976E8" },
+      { name: "Electric cyan", hex: "#23C5EF" },
+      { name: "Signal orange", hex: "#FF862E" },
+      { name: "Warm ivory", hex: "#F4F1E9" },
       { name: "Ink", hex: "#111315" },
     ],
     application: "Heavyweight unisex tee — Black",
     shirtColor: "black",
     images: {
-      primaryMockup: "/mockups/focus-waveform-tee.jpg",
-      rawArtwork: "/designs/focus-waveform-art.svg",
+      primaryMockup: "/designs/design-07.svg",
+      rawArtwork: "/designs/design-07.svg",
       detail: "/designs/focus-waveform-detail.svg",
     },
-    relatedDesigns: ["streak-grid-365", "signal-noise", "protect-your-ears"],
+    relatedDesigns: ["circadian-corrupted", "signal-noise", "protect-your-ears"],
     processStages: [
       {
-            "label": "Signal frequency sketch",
-            "body": "Explored audio frequency waves representing deep focus and ambient noise isolation.",
-            "image": "/process/focus-sketch.svg"
+        label: "Waveform Path",
+        body: "Single continuous sine curve path drawn across baseline axis.",
+        image: "/designs/design-07.svg"
       },
       {
-            "label": "Harmonic wave geometry",
-            "body": "Calculated sine wave curves and amplitude envelope boundaries on a strict grid.",
-            "image": "/process/focus-geometry.svg"
+        label: "Resonance Peak",
+        body: "Primary cyan peak heightened with orange threshold mark.",
+        image: "/designs/design-07.svg"
       },
       {
-            "label": "Vector art master",
-            "body": "Final vector composition with electric cyan waveform and amplitude markers.",
-            "image": "/designs/focus-waveform-art.svg"
+        label: "Vector Master Art",
+        body: "Clean vector waveform optimized for chest print.",
+        image: "/designs/design-07.svg"
       },
       {
-            "label": "Print detail crop",
-            "body": "Fine-tuned wave stroke thickness to ensure continuous vector lines on fabric.",
-            "image": "/designs/focus-waveform-detail.svg"
-      },
-      {
-            "label": "Garment application",
-            "body": "Tested waveform composition on heavyweight black cotton shirt.",
-            "image": "/mockups/focus-waveform-tee.jpg"
+        label: "Garment Application",
+        body: "Applied on black heavyweight tee.",
+        image: "/designs/design-07.svg"
       }
-],
+    ],
     seo: {
-      title: "Focus Is a Waveform — BramLabs",
-      description: "Original focus-themed waveform apparel graphic by BramLabs.",
+      title: "Focus Is a Waveform Apparel Graphic — BramLabs",
+      description:
+        "Focus Is a Waveform graphic tee by BramLabs — deep work data curve illustration.",
     },
   },
   {
@@ -490,62 +446,58 @@ export const designs: Design[] = [
     order: 8,
     featured: false,
     title: "Signal / Noise",
-    category: "AUDIO",
-    shortDescription: "Clean data against controlled visual interference.",
+    category: "PRODUCTIVITY",
+    shortDescription:
+      "A split composition contrasting pure signal against entropy.",
     fullDescription:
-      "Half the field is particulate noise; the other half is a clean panel with a single readable wave. A vertical split makes the metaphor immediate without explaining it.",
-    conceptExtra: [
-      "Noise is generative but controlled — density without chaos. The orange gutter is the only hard separator.",
-    ],
-    printNotes: "High-detail noise side benefits from quality screen or DTG on black.",
-    audience: ["Engineers", "Audio enthusiasts"],
-    visualLanguage: ["Frequency plots", "Asymmetry"],
-    primaryForms: ["Noise field", "Signal panel", "Split gutter"],
+      "A vertical split composition: left side features a clean, solid trajectory curve ('SIGNAL'), right side features a controlled dot field ('NOISE'). Strong contrast for deep work advocates.",
+    rejectedNote:
+      "Rejected cliché Wi-Fi symbols and radio wave icons.",
+    printNotes:
+      "High contrast vertical divider; crisp dot matrix reproduction.",
+    audience: ["Productivity enthusiasts", "Audio engineers", "Minimalists"],
+    visualLanguage: ["Split plots", "Information theory"],
+    primaryForms: ["Clean trajectory", "Dot field", "Vertical divider"],
     palette: [
-      { name: "Ivory", hex: "#F4F1E9" },
       { name: "Cyan", hex: "#23C5EF" },
       { name: "Orange", hex: "#FF862E" },
+      { name: "Ivory", hex: "#F4F1E9" },
       { name: "Ink", hex: "#111315" },
     ],
     application: "Heavyweight unisex tee — Black",
     shirtColor: "black",
     images: {
-      primaryMockup: "/mockups/signal-noise-tee.jpg",
-      rawArtwork: "/designs/signal-noise-art.svg",
+      primaryMockup: "/designs/design-08.svg",
+      rawArtwork: "/designs/design-08.svg",
       detail: "/designs/signal-noise-detail.svg",
     },
-    relatedDesigns: ["protect-your-ears", "focus-waveform", "37-tabs-open"],
+    relatedDesigns: ["focus-waveform", "protect-your-ears", "37-tabs-open"],
     processStages: [
       {
-            "label": "Pipeline routing sketch",
-            "body": "Sketched audio & data pipeline routing through signal processing nodes.",
-            "image": "/process/signal-sketch.svg"
+        label: "Split Layout",
+        body: "Vertical divider line bisecting clean path vs dot matrix.",
+        image: "/designs/design-08.svg"
       },
       {
-            "label": "Bus architecture geometry",
-            "body": "Constructed signal path buses, input taps, and output routing nodes.",
-            "image": "/process/signal-geometry.svg"
+        label: "Signal Curve & Noise Dots",
+        body: "Cyan trajectory curve paired with scattered ivory dots.",
+        image: "/designs/design-08.svg"
       },
       {
-            "label": "Vector art master",
-            "body": "Final vector diagram with cyan signal flow paths and gain stage markers.",
-            "image": "/designs/signal-noise-art.svg"
+        label: "Vector Master Art",
+        body: "Mono labels SIGNAL and NOISE styled at chest scale.",
+        image: "/designs/design-08.svg"
       },
       {
-            "label": "Print detail crop",
-            "body": "Tuned signal arrow terminals and node labels for clean print reproduction.",
-            "image": "/designs/signal-noise-detail.svg"
-      },
-      {
-            "label": "Garment application",
-            "body": "Tested composition on heavyweight black cotton tee for maximum visual impact.",
-            "image": "/mockups/signal-noise-tee.jpg"
+        label: "Garment Application",
+        body: "Printed on black cotton tee.",
+        image: "/designs/design-08.svg"
       }
-],
+    ],
     seo: {
       title: "Signal / Noise Apparel Graphic — BramLabs",
       description:
-        "Original apparel graphic contrasting clean signal against visual noise.",
+        "Signal / Noise graphic tee by BramLabs — productivity and information theory apparel.",
     },
   },
   {
@@ -553,62 +505,58 @@ export const designs: Design[] = [
     order: 9,
     featured: false,
     title: "Streak Grid: Day 365",
-    category: "FOCUS",
+    category: "HABIT TRACKING",
     shortDescription:
-      "A year of consistency expressed as modular units and one deliberate exception.",
+      "A modular 365-day year matrix with one single active streak cell.",
     fullDescription:
-      "Three hundred sixty-five cells form a year. Most are quiet; day 365 is the accent. The piece is about sustained work without gamified noise.",
-    conceptExtra: [
-      "Legend matters. Without it, the orange cell is decoration. With it, the year becomes a story.",
-    ],
-    printNotes: "Large print recommended on navy so cell matrix remains readable.",
-    audience: ["Builders", "Habit trackers"],
-    visualLanguage: ["Calendar systems", "Modular grids"],
-    primaryForms: ["Cell matrix", "Legend", "Day 365 accent"],
+      "An abstract modular matrix of empty grid cells representing a year of discipline. A single cell is highlighted in signal orange alongside a bold '365' numeral.",
+    rejectedNote:
+      "Rejected literal GitHub contribution heatmaps and calendar grids.",
+    printNotes:
+      "Clean square cell alignment; high contrast orange focal point.",
+    audience: ["Habit trackers", "Runners", "Self-improvement"],
+    visualLanguage: ["Modular matrix", "Progress grids"],
+    primaryForms: ["Square cells", "Active block", "Bold numeral"],
     palette: [
-      { name: "Ivory", hex: "#F4F1E9" },
-      { name: "Orange", hex: "#FF862E" },
+      { name: "Signal orange", hex: "#FF862E" },
+      { name: "Electric cyan", hex: "#23C5EF" },
+      { name: "Warm ivory", hex: "#F4F1E9" },
       { name: "Ink", hex: "#111315" },
     ],
-    application: "Heavyweight unisex tee — Navy",
-    shirtColor: "navy",
+    application: "Heavyweight unisex tee — Black",
+    shirtColor: "black",
     images: {
-      primaryMockup: "/mockups/streak-grid-365-tee.jpg",
-      rawArtwork: "/designs/streak-grid-365-art.svg",
+      primaryMockup: "/designs/design-09.svg",
+      rawArtwork: "/designs/design-09.svg",
       detail: "/designs/streak-grid-365-detail.svg",
     },
-    relatedDesigns: ["focus-waveform", "build-47", "bramlabs-modular-grid"],
+    relatedDesigns: ["build-47", "rotation-dial", "bramlabs-modular-grid"],
     processStages: [
       {
-            "label": "Consecutive log sketch",
-            "body": "Sketched consecutive activity streak nodes and defensive perimeter boundaries.",
-            "image": "/process/streak-sketch.svg"
+        label: "Grid Construction",
+        body: "Modular 8x6 square cell matrix drawn.",
+        image: "/designs/design-09.svg"
       },
       {
-            "label": "Shield node geometry",
-            "body": "Constructed interlocking streak counter nodes and shield geometry.",
-            "image": "/process/streak-geometry.svg"
+        label: "Active Streak Accent",
+        body: "Single orange cell highlighted to signify current day streak.",
+        image: "/designs/design-09.svg"
       },
       {
-            "label": "Vector art master",
-            "body": "Final vector master with signal orange streak badge and shield lines.",
-            "image": "/designs/streak-grid-365-art.svg"
+        label: "Vector Master Art",
+        body: "Bold 365 numeral and subtext integrated with matrix.",
+        image: "/designs/design-09.svg"
       },
       {
-            "label": "Print detail crop",
-            "body": "Refined node connection lines for crisp chest-scale screen printing.",
-            "image": "/designs/streak-grid-365-detail.svg"
-      },
-      {
-            "label": "Garment application",
-            "body": "Applied graphic to heavyweight navy tee for high-contrast presentation.",
-            "image": "/mockups/streak-grid-365-tee.jpg"
+        label: "Garment Application",
+        body: "Printed on black cotton tee.",
+        image: "/designs/design-09.svg"
       }
-],
+    ],
     seo: {
-      title: "Streak Grid: Day 365 — BramLabs",
+      title: "Streak Grid Day 365 Apparel Graphic — BramLabs",
       description:
-        "Original apparel graphic representing a year of consistent work.",
+        "Streak Grid Day 365 graphic tee by BramLabs — habit tracking and discipline apparel.",
     },
   },
   {
@@ -616,64 +564,58 @@ export const designs: Design[] = [
     order: 10,
     featured: false,
     title: "Protect Your Ears",
-    category: "AUDIO",
+    category: "AUDIO & SOUND",
     shortDescription:
-      "Circular frequency notation for volume awareness and hearing safety.",
+      "Concentric decibel frequency rings marking an acoustic safety ceiling.",
     fullDescription:
-      "Concentric rings, threshold arc and a limiter center form a hearing-safety metaphor. Connected to the studio's interest in audio tools — without becoming an app icon on fabric.",
-    conceptExtra: [
-      "The threshold arc is the thesis. Rings alone were too decorative; the cyan threshold makes protection active.",
-    ],
-    printNotes: "Circular composition on black; keep threshold stroke bold on dark fabric.",
-    rejectedNote: "Rejected headphone silhouettes and waveform clip-art.",
-    audience: ["Music listeners", "Audio workers"],
-    visualLanguage: ["Frequency rings", "Scientific labeling"],
-    primaryForms: ["Concentric circles", "Threshold arc", "Center limiter"],
+      "Concentric frequency rings form a bold circular badge with an orange threshold tick at 85 dB. Designed for live sound techs, musicians, and audio engineers.",
+    rejectedNote:
+      "Rejected headphone silhouettes and ear plug illustrations.",
+    printNotes:
+      "Circular chest badge; high-density cyan and orange ink on navy fabric.",
+    audience: ["Audio engineers", "Live sound techs", "Musicians"],
+    visualLanguage: ["Acoustic plots", "Decibel limiters"],
+    primaryForms: ["Concentric rings", "Threshold tick", "dB ceiling"],
     palette: [
-      { name: "Ivory", hex: "#F4F1E9" },
-      { name: "Orange", hex: "#FF862E" },
+      { name: "Electric cyan", hex: "#23C5EF" },
+      { name: "Signal orange", hex: "#FF862E" },
+      { name: "Warm ivory", hex: "#F4F1E9" },
       { name: "Ink", hex: "#111315" },
-      { name: "Cyan", hex: "#23C5EF" },
     ],
-    application: "Heavyweight unisex tee — Black",
-    shirtColor: "black",
+    application: "Heavyweight unisex tee — Navy",
+    shirtColor: "navy",
     images: {
-      primaryMockup: "/mockups/protect-your-ears-tee.jpg",
-      rawArtwork: "/designs/protect-your-ears-art.svg",
+      primaryMockup: "/designs/design-10.svg",
+      rawArtwork: "/designs/design-10.svg",
       detail: "/designs/protect-your-ears-detail.svg",
     },
-    relatedDesigns: ["signal-noise", "focus-waveform", "rotation-dial"],
+    relatedDesigns: ["focus-waveform", "signal-noise", "maintenance-window"],
     processStages: [
       {
-            "label": "Recovery boundary sketch",
-            "body": "Sketched off-duty recovery boundaries and system shield perimeters.",
-            "image": "/process/protect-sketch.svg"
+        label: "Ring Geometry",
+        body: "Concentric circular frequency rings constructed.",
+        image: "/designs/design-10.svg"
       },
       {
-            "label": "Perimeter shield geometry",
-            "body": "Constructed shield geometry and status indicator lines around the core.",
-            "image": "/process/protect-geometry.svg"
+        label: "dB Ceiling Tick",
+        body: "Orange 85 dB threshold tick and cyan limiter arc added.",
+        image: "/designs/design-10.svg"
       },
       {
-            "label": "Vector art master",
-            "body": "Final vector graphic with protective green and cyan accent bands.",
-            "image": "/designs/protect-your-ears-art.svg"
+        label: "Vector Master Art",
+        body: "PROTECT YOUR EARS title typography set in bold sans.",
+        image: "/designs/design-10.svg"
       },
       {
-            "label": "Print detail crop",
-            "body": "Tightened perimeter line spacing for chest-scale clarity.",
-            "image": "/designs/protect-your-ears-detail.svg"
-      },
-      {
-            "label": "Garment application",
-            "body": "Tested print application on black heavyweight cotton tee.",
-            "image": "/mockups/protect-your-ears-tee.jpg"
+        label: "Garment Application",
+        body: "Applied on navy heavyweight tee.",
+        image: "/designs/design-10.svg"
       }
-],
+    ],
     seo: {
       title: "Protect Your Ears Apparel Graphic — BramLabs",
       description:
-        "Original audio-safety inspired apparel graphic with circular frequency forms.",
+        "Protect Your Ears decibel graphic tee by BramLabs — audio engineer and live sound apparel.",
     },
   },
   {
@@ -681,63 +623,58 @@ export const designs: Design[] = [
     order: 11,
     featured: false,
     title: "Maintenance Window",
-    category: "DEVELOPER CULTURE",
+    category: "DEV OPS",
     shortDescription:
-      "System-status panels as typographic utility, not OS cosplay.",
+      "A scheduled system ops panel dialog for site reliability engineers.",
     fullDescription:
-      "A generic operations panel: scheduled window, impact line, scope, owner, acknowledge and snooze. No vendor chrome — just the ritual language of people who keep systems alive at odd hours.",
-    conceptExtra: [
-      "Every row is a real on-call ritual. The joke is recognition, not parody of a specific monitoring product.",
-    ],
-    printNotes: "Panel must stay large enough for row labels to read on black.",
-    rejectedNote: "Rejected OS window chrome and brand-colored status pills.",
-    audience: ["SRE", "On-call engineers"],
-    visualLanguage: ["Utility UI", "Status rows"],
-    primaryForms: ["Window chrome", "Status list", "Action buttons"],
+      "A clean status panel frame with bold text 'MAINTENANCE WINDOW' and a highlighted 'SCHEDULED' chip. Celebrates the quiet late-night work of keeping systems online.",
+    rejectedNote:
+      "Rejected OS dialog boxes and cartoon wrench icons.",
+    printNotes:
+      "Centered panel layout; crisp status chip line definition on navy cotton.",
+    audience: ["DevOps", "Site reliability engineers", "Sysadmins"],
+    visualLanguage: ["Ops dashboards", "Status panels"],
+    primaryForms: ["Panel frame", "Status chip", "Time range"],
     palette: [
+      { name: "Cyan", hex: "#23C5EF" },
+      { name: "Orange", hex: "#FF862E" },
       { name: "Ivory", hex: "#F4F1E9" },
-      { name: "Ink", hex: "#111315" },
-      { name: "Green", hex: "#42C991" },
+      { name: "Slate", hex: "#94A3B8" },
     ],
-    application: "Heavyweight unisex tee — Black",
-    shirtColor: "black",
+    application: "Heavyweight unisex tee — Navy",
+    shirtColor: "navy",
     images: {
-      primaryMockup: "/mockups/maintenance-window-tee.jpg",
-      rawArtwork: "/designs/maintenance-window-art.svg",
+      primaryMockup: "/designs/design-11.svg",
+      rawArtwork: "/designs/design-11.svg",
       detail: "/designs/maintenance-window-detail.svg",
     },
-    relatedDesigns: ["rotation-dial", "37-tabs-open", "24h-hand-off"],
+    relatedDesigns: ["build-47", "37-tabs-open", "bramlabs-modular-grid"],
     processStages: [
       {
-            "label": "Downtime window sketch",
-            "body": "Sketched scheduled downtime windows: 02:00 - 04:00 system maintenance.",
-            "image": "/process/maintenance-sketch.svg"
+        label: "Panel Frame",
+        body: "Status panel window outline with header controls.",
+        image: "/designs/design-11.svg"
       },
       {
-            "label": "Status bar geometry",
-            "body": "Constructed status indicator bar and maintenance window progress track.",
-            "image": "/process/maintenance-geometry.svg"
+        label: "Scheduled Chip",
+        body: "Cyan SCHEDULED status chip and time range bar added.",
+        image: "/designs/design-11.svg"
       },
       {
-            "label": "Vector art master",
-            "body": "Final vector graphic with warning amber accent and technical system type.",
-            "image": "/designs/maintenance-window-art.svg"
+        label: "Vector Master Art",
+        body: "MAINTENANCE WINDOW bold title typography set.",
+        image: "/designs/design-11.svg"
       },
       {
-            "label": "Print detail crop",
-            "body": "Tuned status label typography for sharp chest-scale legibility.",
-            "image": "/designs/maintenance-window-detail.svg"
-      },
-      {
-            "label": "Garment application",
-            "body": "Tested composition contrast on dark black heavyweight cotton.",
-            "image": "/mockups/maintenance-window-tee.jpg"
+        label: "Garment Application",
+        body: "Printed on navy heavyweight cotton tee.",
+        image: "/designs/design-11.svg"
       }
-],
+    ],
     seo: {
       title: "Maintenance Window Apparel Graphic — BramLabs",
       description:
-        "Original developer-culture graphic about scheduled system maintenance.",
+        "Maintenance Window ops graphic tee by BramLabs — DevOps and SRE apparel.",
     },
   },
   {
@@ -745,89 +682,65 @@ export const designs: Design[] = [
     order: 12,
     featured: false,
     title: "BramLabs Modular Grid",
-    category: "STUDIO",
-    shortDescription: "Studio identity as a modular coordinate system.",
+    category: "STUDIO BRAND",
+    shortDescription:
+      "The official BramLabs studio coordinate grid and brand mark.",
     fullDescription:
-      "A six-by-six coordinate field with selective accent fills. It is the studio's modular mark — construction lines, indices and quiet color — ready for front prints and future back placements.",
-    conceptExtra: [
-      "Coordinates are part of the identity. The grid is a system you can extend, not a one-off logo lockup.",
-    ],
-    printNotes: "Centered front on navy; optional back placement of full grid.",
-    audience: ["Studio", "Design community"],
-    visualLanguage: ["Modular identity", "Coordinates"],
-    primaryForms: ["Grid cells", "Axis labels", "Accent modules"],
+      "A 4-quadrant coordinate grid badge featuring cyan and orange origin cells. The foundational design system mark for BramLabs software IP.",
+    rejectedNote:
+      "Rejected corporate wallpaper patterns and complex monograms.",
+    printNotes:
+      "Balanced chest monogram; clean axis line intersection on dark fleece.",
+    audience: ["Studio brand supporters", "Software architects"],
+    visualLanguage: ["Coordinate grids", "Design token systems"],
+    primaryForms: ["4-quadrant grid", "Origin cells", "Studio mark"],
     palette: [
-      { name: "Ivory", hex: "#F4F1E9" },
-      { name: "Cyan", hex: "#23C5EF" },
-      { name: "Orange", hex: "#FF862E" },
+      { name: "Electric cyan", hex: "#23C5EF" },
+      { name: "Signal orange", hex: "#FF862E" },
+      { name: "Warm ivory", hex: "#F4F1E9" },
       { name: "Ink", hex: "#111315" },
     ],
-    application: "Heavyweight unisex tee — Navy",
-    shirtColor: "navy",
+    application: "Heavyweight unisex tee — Black",
+    shirtColor: "black",
     images: {
-      primaryMockup: "/mockups/bramlabs-modular-grid-tee.jpg",
-      rawArtwork: "/designs/bramlabs-modular-grid-art.svg",
+      primaryMockup: "/designs/design-12.svg",
+      rawArtwork: "/designs/design-12.svg",
       detail: "/designs/bramlabs-modular-grid-detail.svg",
     },
-    relatedDesigns: ["wireframe-anatomy", "build-47", "streak-grid-365"],
+    relatedDesigns: ["rotation-dial", "wireframe-anatomy", "streak-grid-365"],
     processStages: [
       {
-            "label": "Grid matrix sketch",
-            "body": "Drafted modular grid structure establishing primary asset container boundaries.",
-            "image": "/process/bramlabs-sketch.svg"
+        label: "Coordinate Axis",
+        body: "4-quadrant axis lines and grid ticks constructed.",
+        image: "/designs/design-12.svg"
       },
       {
-            "label": "Modular system geometry",
-            "body": "Constructed 4-column module grid with Swiss typographic hierarchy.",
-            "image": "/process/bramlabs-geometry.svg"
+        label: "Origin Accent Cells",
+        body: "Cyan and orange origin block cells placed.",
+        image: "/designs/design-12.svg"
       },
       {
-            "label": "Vector art master",
-            "body": "Final brand matrix graphic with cyan accents and technical specifications.",
-            "image": "/designs/bramlabs-modular-grid-art.svg"
+        label: "Vector Master Art",
+        body: "BRAMLABS studio mark typography aligned.",
+        image: "/designs/design-12.svg"
       },
       {
-            "label": "Print detail crop",
-            "body": "Verified grid line weight to ensure sharp line separation during printing.",
-            "image": "/designs/bramlabs-modular-grid-detail.svg"
-      },
-      {
-            "label": "Garment application",
-            "body": "Applied graphic to navy heavyweight tee for clean, structured composition.",
-            "image": "/mockups/bramlabs-modular-grid-tee.jpg"
+        label: "Garment Application",
+        body: "Printed on black heavyweight cotton tee.",
+        image: "/designs/design-12.svg"
       }
-],
+    ],
     seo: {
-      title: "BramLabs Modular Grid — BramLabs",
+      title: "BramLabs Modular Grid Apparel Graphic — BramLabs",
       description:
-        "Original modular identity grid apparel graphic from the BramLabs studio.",
+        "BramLabs Modular Grid graphic tee — official studio design token apparel.",
     },
-  },
+  }
 ];
 
-export function getDesign(slug: string): Design | undefined {
-  return designs.find((d) => d.slug === slug);
-}
+export function getAllDesigns() { return designs.slice().sort((a, b) => a.order - b.order); }
+export function getFeaturedDesigns() { return designs.filter((d) => d.featured); }
+export function getDesign(slug) { return designs.find((d) => d.slug === slug); }
+export function getRelated(design, limit = 3) { if (!design.relatedDesigns || design.relatedDesigns.length === 0) return designs.filter((d) => d.slug !== design.slug).slice(0, limit); return design.relatedDesigns.map((s) => getDesign(s)).filter((d) => d !== undefined).slice(0, limit); }
 
-export function getAllDesigns(): Design[] {
-  return [...designs].sort((a, b) => a.order - b.order);
-}
-
-/** Homepage / highlight set — only explicitly featured designs */
-export function getFeaturedDesigns(): Design[] {
-  return getAllDesigns().filter((d) => d.featured);
-}
-
-export function getDesignsByCategory(category: string): Design[] {
-  return getAllDesigns().filter((d) => d.category === category);
-}
-
-export function getCategories(): string[] {
-  return [...new Set(designs.map((d) => d.category))];
-}
-
-export function getRelated(design: Design): Design[] {
-  return design.relatedDesigns
-    .map((s) => getDesign(s))
-    .filter((d): d is Design => Boolean(d));
-}
+export function getCategories() { return Array.from(new Set(designs.map((d) => d.category))); }
