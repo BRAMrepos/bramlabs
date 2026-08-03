@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+    <rect width="600" height="600" fill="#0f172a"/>
+    <g transform="translate(60, 100)">
+      <line x1="0" y1="180" x2="480" y2="180" stroke="#475569" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <path d="M 0 180 L 220 180 C 270 180, 290 80, 350 80 C 410 80, 430 280, 480 280" fill="none" stroke="#7976E8" stroke-width="10"/>
+      <circle cx="350" cy="80" r="6" fill="#23C5EF"/>
+    </g>
+    <text x="300" y="550" fill="#7976E8" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">STAGE 03: VECTOR MASTER ART</text>
+  </svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" width="600" height="600">
+    <rect width="600" height="600" fill="#09090b"/>
+    <g transform="translate(300, 280)">
+      <line x1="-220" y1="0" x2="220" y2="0" stroke="#F4F1E9" stroke-width="3"/>
+      <line x1="0" y1="-220" x2="0" y2="220" stroke="#F4F1E9" stroke-width="3"/>
+      <rect x="-160" y="-160" width="320" height="320" fill="none" stroke="#F4F1E9" stroke-width="1.5" stroke-dasharray="4,4"/>
+      <rect x="15" y="-90" width="75" height="75" rx="6" fill="#23C5EF"/>
+      <rect x="-90" y="15" width="75" height="75" rx="6" fill="#FF862E"/>
+    </g>
+    <text x="300" y="550" fill="#23C5EF" font-family="monospace" font-size="14" font-weight="bold" text-anchor="middle">STAGE 03: VECTOR MASTER ART</text>
+  </svg>
