@@ -52,22 +52,22 @@ async function ensureUnifiedBaseTees() {
   console.log("✓ Generated clean Studio Navy base tee without shadow artifacts.");
 }
 
-const PRINT_SIZE = 520;
-const PRINT_TOP = 270;
+const PRINT_SIZE = 350;
+const PRINT_TOP = 300;
 
 const designs = {
-  "rotation-dial":         { base: "public/mockups/_base-tee-black.jpg", size: PRINT_SIZE, top: PRINT_TOP },
-  "circadian-corrupted":   { base: "public/mockups/_base-tee-navy.jpg",  size: PRINT_SIZE, top: PRINT_TOP },
-  "24h-hand-off":          { base: "public/mockups/_base-tee-navy.jpg",  size: PRINT_SIZE, top: PRINT_TOP },
-  "37-tabs-open":          { base: "public/mockups/_base-tee-black.jpg", size: PRINT_SIZE, top: PRINT_TOP },
-  "build-47":              { base: "public/mockups/_base-tee-black.jpg", size: PRINT_SIZE, top: PRINT_TOP },
-  "wireframe-anatomy":     { base: "public/mockups/_base-tee-navy.jpg",  size: PRINT_SIZE, top: PRINT_TOP },
-  "focus-waveform":        { base: "public/mockups/_base-tee-black.jpg", size: PRINT_SIZE, top: PRINT_TOP },
-  "signal-noise":          { base: "public/mockups/_base-tee-black.jpg", size: PRINT_SIZE, top: PRINT_TOP },
-  "streak-grid-365":       { base: "public/mockups/_base-tee-navy.jpg",  size: PRINT_SIZE, top: PRINT_TOP },
-  "protect-your-ears":     { base: "public/mockups/_base-tee-black.jpg", size: PRINT_SIZE, top: PRINT_TOP },
-  "maintenance-window":    { base: "public/mockups/_base-tee-black.jpg", size: PRINT_SIZE, top: PRINT_TOP },
-  "bramlabs-modular-grid": { base: "public/mockups/_base-tee-navy.jpg",  size: PRINT_SIZE, top: PRINT_TOP },
+  "rotation-dial":         { base: "public/mockups/_base-tee-black.jpg", size: 360, top: 290 },
+  "circadian-corrupted":   { base: "public/mockups/_base-tee-white.jpg", size: 350, top: 300 },
+  "24h-hand-off":          { base: "public/mockups/_base-tee-white.jpg", size: 350, top: 300 },
+  "37-tabs-open":          { base: "public/mockups/_base-tee-black.jpg", size: 340, top: 300 },
+  "build-47":              { base: "public/mockups/_base-tee-black.jpg", size: 340, top: 300 },
+  "wireframe-anatomy":     { base: "public/mockups/_base-tee-white.jpg", size: 350, top: 300 },
+  "focus-waveform":        { base: "public/mockups/_base-tee-black.jpg", size: 350, top: 300 },
+  "signal-noise":          { base: "public/mockups/_base-tee-black.jpg", size: 350, top: 300 },
+  "streak-grid-365":       { base: "public/mockups/_base-tee-navy.jpg",  size: 350, top: 300 },
+  "protect-your-ears":     { base: "public/mockups/_base-tee-black.jpg", size: 350, top: 300 },
+  "maintenance-window":    { base: "public/mockups/_base-tee-black.jpg", size: 350, top: 300 },
+  "bramlabs-modular-grid": { base: "public/mockups/_base-tee-navy.jpg",  size: 360, top: 290 },
 };
 
 async function compositeAll() {

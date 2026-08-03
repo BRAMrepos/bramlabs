@@ -219,10 +219,11 @@ const cases = allProcessDesigns.map((d) => {
     }
     img {
       aspect-ratio: 1;
-      object-fit: cover;
+      object-fit: contain;
+      padding: 0.5rem;
       border: 1px solid var(--line);
       border-radius: var(--radius);
-      background: var(--canvas);
+      background: var(--paper);
       margin-bottom: 0.25rem;
     }
     h3 {

@@ -28,54 +28,156 @@ const articleLd = {
   type="article"
   jsonLd={articleLd}
 >
-  <article class="section">
-    <div class="wrap article">
-      <p class="meta">
-        <a href="/journal/">Journal</a> · {post.category} · {post.dateLabel}
-      </p>
-      <h1 class="h-page">{post.title}</h1>
-      <p class="meta">By {post.byline}</p>
-      <img
-        class="hero"
-        src={post.image}
-        alt=""
-        width="1200"
-        height="800"
-        fetchpriority="high"
-      />
-      <div class="body-copy">
-        {post.body.map((p) => <p>{p}</p>)}
+  <article class="section py-12 md:py-20">
+    <div class="wrap article-wrap">
+      
+      {/* Header Breadcrumbs */}
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/journal/">Journal</a>
+        <span aria-hidden="true">/</span>
+        <span>{post.category}</span>
+      </nav>
+
+      {/* Meta Bar */}
+      <div class="article-meta">
+        <span class="category-tag">{post.category}</span>
+        <span class="dot">•</span>
+        <span class="date-tag">{post.dateLabel}</span>
+        <span class="dot">•</span>
+        <span class="author-tag">By {post.byline}</span>
       </div>
-      <a href="/journal/" class="btn -ghost">← Journal</a>
+
+      <h1 class="h-page">{post.title}</h1>
+      <p class="lede">{post.excerpt}</p>
+
+      {/* Hero Illustration */}
+      <div class="hero-img-wrap">
+        <img
+          src={post.image}
+          alt={post.title}
+          width="1200"
+          height="800"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+
+      {/* Article Body Content */}
+      <div class="body-copy">
+        {post.body.map((paragraph) => (
+          <p>{paragraph}</p>
+        ))}
+      </div>
+
+      {/* Footer Navigation */}
+      <div class="article-footer">
+        <a href="/journal/" class="btn -ghost">← Back to Journal</a>
+        <a href="/collection/" class="btn -primary">Explore Collection →</a>
+      </div>
+
     </div>
   </article>
 </BaseLayout>
 
-<style>
-  .article {
-    max-width: 42rem;
+<style lang="scss">
+  .article-wrap {
+    max-width: 44rem;
+    margin-inline: auto;
   }
-  .h-section {
-    margin: 0.75rem 0 0.5rem;
+
+  .crumbs {
+    display: flex;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+
+    a:hover {
+      color: var(--ink);
+    }
   }
-  .hero {
-    margin: 1.75rem 0;
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 1rem;
+
+    .category-tag {
+      color: var(--accent);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .dot {
+      color: var(--line);
+    }
+  }
+
+  .h-page {
+    font-family: var(--font-heading);
+    font-size: 2.25rem;
+    line-height: 1.15;
+    font-weight: 700;
+    margin-bottom: 1rem;
+
+    @media (width >= 768px) {
+      font-size: 3rem;
+    }
+  }
+
+  .lede {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-img-wrap {
     width: 100%;
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    background: var(--canvas);
     aspect-ratio: 16 / 10;
-    object-fit: cover;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--canvas);
+    padding: 2rem;
+    margin-bottom: 3rem;
+    box-shadow: var(--shadow-sm);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
   }
+
   .body-copy {
     display: flex;
     flex-direction: column;
-    gap: 1.15rem;
-    color: var(--muted);
+    gap: 1.5rem;
+    color: var(--ink);
+    font-size: 1.075rem;
     line-height: 1.75;
-    margin-bottom: 2rem;
+    margin-bottom: 3.5rem;
+
+    p {
+      margin: 0;
+    }
   }
-  .meta a:hover {
-    text-decoration: underline;
+
+  .article-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2rem;
+    border-top: 1px solid var(--line);
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 </style>

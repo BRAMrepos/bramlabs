@@ -12,6 +12,7 @@ interface Props {
 const { design, compact = false, featured = false } = Astro.props;
 const n = String(design.order).padStart(2, "0");
 const href = `/designs/${design.slug}/`;
+const isLightShirt = design.shirtColor === "white";
 ---
 
 <article class:list={["design-card", { compact, featured }]}>
@@ -25,7 +26,7 @@ const href = `/designs/${design.slug}/`;
       <source srcset={design.images.primaryMockup.replace(/\.jpg$/, ".webp")} type="image/webp" />
       <img
         src={design.images.primaryMockup}
-        alt={`${design.shirtColor === "navy" ? "Navy blue" : "Black"} heavyweight T-shirt featuring the ${design.title} graphic`}
+        alt={`${design.shirtColor === "navy" ? "Navy blue" : isLightShirt ? "White" : "Black"} heavyweight T-shirt featuring the ${design.title} graphic`}
         width="800"
         height="1000"
         loading={featured ? "eager" : "lazy"}
@@ -34,7 +35,7 @@ const href = `/designs/${design.slug}/`;
     </picture>
     {
       !compact && (
-        <div class="raw-panel" aria-hidden="true">
+        <div class:list={["raw-panel", { "light-panel": isLightShirt }]} aria-hidden="true">
           <img
             src={design.images.rawArtwork}
             alt=""
@@ -148,17 +149,22 @@ const href = `/designs/${design.slug}/`;
     bottom: 0.85rem;
     width: min(26%, 100px);
     aspect-ratio: 1;
-    /* Dark bg so ivory SVG strokes show against the cream page */
     background: #111315;
     border-radius: var(--radius);
     padding: 0.4rem;
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 0 6px 20px rgba(20, 20, 22, 0.22);
     z-index: 2;
     opacity: 0;
     transform: translateY(6px);
     transition: opacity var(--t) var(--ease), transform var(--t) var(--ease);
     pointer-events: none;
+
+    &.light-panel {
+      background: #FFFFFF;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    }
 
     img {
       width: 100%;

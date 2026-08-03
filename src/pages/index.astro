@@ -189,27 +189,44 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
     </div>
   </section>
 
-  <!-- 6. SOFTWARE STRIP (quiet credentials) ──────────────── -->
+  <!-- 6. SOFTWARE CREDENTIALS STRIP ────────────────────── -->
   {
     published.length > 0 && (
       <section class="section soft-strip" aria-labelledby="soft-strip-heading">
         <div class="wrap soft-inner">
-          <h2 class="soft-label" id="soft-strip-heading">Also ships software</h2>
-          <ul class="soft-links">
+          <div class="soft-head">
+            <div>
+              <p class="eyebrow">Studio Credentials</p>
+              <h2 class="h-section text-xl md:text-2xl font-bold" id="soft-strip-heading">Also Ships Software</h2>
+            </div>
+            <a href="/studio/" class="btn -ghost">All Studio Credentials →</a>
+          </div>
+
+          <div class="soft-grid">
             {published.map((p) => (
-              <li>
-                <a
-                  href={p.externalUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {p.title}
-                  <span class="meta">{p.platform}</span>
-                </a>
-              </li>
+              <a
+                href={p.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="soft-card"
+              >
+                <div class="soft-icon">
+                  {p.icon ? (
+                    <img src={p.icon} alt="" width="44" height="44" />
+                  ) : (
+                    <span class="icon-fallback">{p.title.slice(0, 2).toUpperCase()}</span>
+                  )}
+                </div>
+                <div class="soft-info">
+                  <div class="soft-title-row">
+                    <h3 class="soft-title">{p.title}</h3>
+                    <span class="soft-platform">{p.platform}</span>
+                  </div>
+                  <p class="soft-desc">{p.description}</p>
+                </div>
+              </a>
             ))}
-          </ul>
-          <a href="/studio/" class="btn -link">Credentials on Studio →</a>
+          </div>
         </div>
       </section>
     )
@@ -365,7 +382,8 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
       border-radius: var(--radius);
       background: var(--paper);
       aspect-ratio: 1;
-      object-fit: cover;
+      object-fit: contain;
+      padding: 0.5rem;
     }
   }
 
@@ -447,7 +465,7 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
   }
 
   .soft-strip {
-    padding-block: var(--s-5);
+    padding-block: clamp(3rem, 6vw, 4.5rem);
     border-top: 1px solid var(--line);
     background: var(--canvas);
   }
@@ -455,37 +473,112 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
   .soft-inner {
     display: flex;
     flex-direction: column;
-    gap: var(--s-3);
+    gap: 1.75rem;
   }
 
-  .soft-label {
-    font-family: var(--font-sans);
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--muted);
-    /* Visually styled as a label, semantically an h2 */
-  }
-
-  .soft-links {
+  .soft-head {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.65rem 1.25rem;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem;
+  }
 
-    a {
-      display: inline-flex;
-      flex-direction: column;
-      gap: 0.15rem;
-      font-weight: 500;
-      font-size: 0.95rem;
-      padding: 0.35rem 0;
-      transition: color var(--t);
+  .soft-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 1fr;
 
-      &:hover { color: var(--muted); }
+    @media (width >= 640px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
 
-      .meta {
-        text-transform: none;
-        letter-spacing: 0.02em;
+    @media (width >= 1024px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .soft-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 1rem 1.15rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), border-color var(--t) var(--ease);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lift);
+      border-color: color-mix(in oklab, var(--ink) 25%, var(--line));
+
+      .soft-title {
+        color: var(--accent);
       }
     }
+  }
+
+  .soft-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--canvas);
+    border: 1px solid var(--line);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .soft-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .soft-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .soft-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    transition: color 200ms var(--ease);
+  }
+
+  .soft-platform {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+    background: var(--canvas);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    border: 1px solid var(--line);
+    white-space: nowrap;
+  }
+
+  .soft-desc {
+    font-size: 0.825rem;
+    color: var(--muted);
+    line-height: 1.45;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 </style>

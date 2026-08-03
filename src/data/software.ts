@@ -38,7 +38,7 @@ export const software: SoftwareProduct[] = [
     status: "published",
     externalUrl:
       "https://chromewebstore.google.com/detail/sonicshield-volume-normal/dbgmnminphmfmajoaeijogfojjehhmcg",
-    icon: "/studio/sonicshield-mark.svg",
+    icon: "/studio/sonicshield-mark.png",
   },
   {
     slug: "storypeek",
@@ -56,6 +56,7 @@ export const software: SoftwareProduct[] = [
     status: "published",
     externalUrl:
       "https://chromewebstore.google.com/detail/storypeek-%E2%80%94-anonymous-ins/fbcmgjmagfglmkinlmbbgicipemheoll",
+    icon: "/studio/storypeek-mark.png",
   },
   {
     slug: "clearcue",
@@ -75,6 +76,7 @@ export const software: SoftwareProduct[] = [
       "https://www.amazon.com/ClearCue-Spoken-Routine-Reminders-Talking/dp/B0H9PLZ8XR/",
     supportUrl: "/apps/clearcue/support/",
     privacyUrl: "/apps/clearcue/privacy/",
+    icon: "/studio/clearcue-mark.png",
   },
   {
     slug: "shiftledger",
@@ -94,6 +96,7 @@ export const software: SoftwareProduct[] = [
       "https://www.amazon.com/ShiftLedger-Shift-overtime-tracking-utility/dp/B0H9JP65GF/",
     supportUrl: "/apps/shiftledger/support/",
     privacyUrl: "/apps/shiftledger/privacy/",
+    icon: "/studio/shiftledger-mark.png",
   },
   {
     slug: "workflowai",
@@ -110,10 +113,10 @@ export const software: SoftwareProduct[] = [
     platform: "Web",
     status: "published",
     externalUrl: "https://www.workflowai.site/",
+    icon: "/studio/workflowai-mark.svg",
   },
 ];
 
-/** Products safe to list as public credentials (live storefront URL required). */
 export function getPublishedSoftware(): SoftwareProduct[] {
   return software.filter(
     (p) => p.status === "published" && Boolean(p.externalUrl),

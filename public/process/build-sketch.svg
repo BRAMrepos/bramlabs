@@ -1,36 +1,36 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
   <!-- Blueprint Grid Lines -->
-  <line x1="80" y1="30" x2="80" y2="770" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="188" y1="30" x2="188" y2="770" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="296" y1="30" x2="296" y2="770" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="404" y1="30" x2="404" y2="770" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="512" y1="30" x2="512" y2="770" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="620" y1="30" x2="620" y2="770" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="728" y1="30" x2="728" y2="770" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="30" y1="80" x2="770" y2="80" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="30" y1="188" x2="770" y2="188" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="30" y1="296" x2="770" y2="296" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="30" y1="404" x2="770" y2="404" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="30" y1="512" x2="770" y2="512" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="30" y1="620" x2="770" y2="620" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
-  <line x1="30" y1="728" x2="770" y2="728" stroke="#F4F1E9" stroke-width="0.75" opacity="0.15"/>
+  <line x1="80" y1="30" x2="80" y2="770" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="188" y1="30" x2="188" y2="770" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="296" y1="30" x2="296" y2="770" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="404" y1="30" x2="404" y2="770" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="512" y1="30" x2="512" y2="770" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="620" y1="30" x2="620" y2="770" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="728" y1="30" x2="728" y2="770" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="30" y1="80" x2="770" y2="80" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="30" y1="188" x2="770" y2="188" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="30" y1="296" x2="770" y2="296" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="30" y1="404" x2="770" y2="404" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="30" y1="512" x2="770" y2="512" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="30" y1="620" x2="770" y2="620" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
+  <line x1="30" y1="728" x2="770" y2="728" stroke="#1C1917" stroke-width="0.75" opacity="0.15"/>
 
   <!-- Frame -->
-  <rect x="40" y="40" width="720" height="720" stroke="#F4F1E9" stroke-width="3" opacity="0.6"/>
+  <rect x="40" y="40" width="720" height="720" stroke="#1C1917" stroke-width="3" opacity="0.6"/>
   <path d="M40 100 L40 40 L100 40 M760 100 L760 40 L700 40 M40 700 L40 760 L100 760 M760 700 L760 760 L700 760" stroke="#FF862E" stroke-width="4"/>
 
   <!-- Header -->
-  <text x="400" y="120" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16" font-weight="800" fill="rgba(244, 241, 233, 0.85)" letter-spacing="8">SYSTEM ITERATION LOG</text>
+  <text x="400" y="120" text-anchor="middle" font-family="ui-monospace,monospace" font-size="16" font-weight="800" fill="#1C1917" letter-spacing="8">SYSTEM ITERATION LOG</text>
 
   <!-- Title "BUILD" -->
-  <text x="400" y="300" text-anchor="middle" font-family="system-ui,sans-serif" font-size="130" font-weight="900" fill="#F4F1E9" letter-spacing="-4">BUILD</text>
+  <text x="400" y="300" text-anchor="middle" font-family="system-ui,sans-serif" font-size="130" font-weight="900" fill="#1C1917" letter-spacing="-4">BUILD</text>
 
   <!-- Colossal Outlined "47" -->
-  <text x="400" y="540" text-anchor="middle" font-family="system-ui,sans-serif" font-size="290" font-weight="900" fill="none" stroke="#F4F1E9" stroke-width="6" letter-spacing="-10">47</text>
+  <text x="400" y="540" text-anchor="middle" font-family="system-ui,sans-serif" font-size="290" font-weight="900" fill="none" stroke="#1C1917" stroke-width="6" letter-spacing="-10">47</text>
   <rect x="120" y="570" width="560" height="10" fill="#FF862E"/>
 
   <!-- Status Footer -->
-  <text x="400" y="650" text-anchor="middle" font-family="ui-monospace,monospace" font-size="20" font-weight="800" fill="#F4F1E9" letter-spacing="8">SHIP WHEN READY</text>
-  <text x="80" y="720" font-family="ui-monospace,monospace" font-size="14" font-weight="700" fill="rgba(244, 241, 233, 0.85)">REV 47 · PASSED</text>
-  <text x="720" y="720" text-anchor="end" font-family="ui-monospace,monospace" font-size="14" font-weight="700" fill="rgba(244, 241, 233, 0.85)">NO PERFECTION GATE</text>
+  <text x="400" y="650" text-anchor="middle" font-family="ui-monospace,monospace" font-size="20" font-weight="800" fill="#1C1917" letter-spacing="8">SHIP WHEN READY</text>
+  <text x="80" y="720" font-family="ui-monospace,monospace" font-size="14" font-weight="700" fill="#1C1917">REV 47 · PASSED</text>
+  <text x="720" y="720" text-anchor="end" font-family="ui-monospace,monospace" font-size="14" font-weight="700" fill="#1C1917">NO PERFECTION GATE</text>
 </svg>
