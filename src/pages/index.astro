@@ -3,13 +3,19 @@ export const prerender = true;
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import DesignCard from "@/components/DesignCard.astro";
 import { getFeaturedDesigns, getAllDesigns } from "@/data/designs";
-import { getPublishedSoftware } from "@/data/software";
+import { software } from "@/data/software";
 
 const featured = getFeaturedDesigns();
 const all = getAllDesigns();
 const hero = featured[0] ?? all[0];
 const processDesign = all.find((d) => d.processStages?.length) ?? hero;
-const published = getPublishedSoftware();
+
+// Explicit 4 software items in exact user-requested order
+const targetSoftwareSlugs = ["shiftledger", "clearcue", "workflowai", "sonicshield"];
+const published = targetSoftwareSlugs
+  .map((slug) => software.find((s) => s.slug === slug))
+  .filter((s): s is NonNullable<typeof s> => s !== undefined);
+
 const processStages = (processDesign.processStages ?? []).slice(0, 4);
 ---
 
@@ -117,37 +123,43 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
   <!-- 4. ORIGINALITY & CRAFT STANDARDS ───────────────── -->
   <section class="section standards">
     <div class="wrap">
+      <div class="standards-header">
+        <p class="eyebrow">Studio Craft &amp; Standards</p>
+        <h2 class="h-section">Original work. Print-ready masters.</h2>
+        <p class="lede">
+          This site is a design portfolio — not an online storefront. Production files stay separate from web previews to guarantee technical authenticity and marketplace readiness.
+        </p>
+      </div>
+
       <div class="standards-grid">
-        <div>
-          <p class="eyebrow">Studio Craft</p>
-          <h2 class="h-section">Original work. Print-ready masters.</h2>
-          <p class="lede">
-            This site is a design portfolio — not an online storefront. Production files stay separate from web previews to guarantee technical authenticity.
-          </p>
-          <div class="standards-actions">
-            <a href="/collection/" class="btn -primary">Explore Collection</a>
-            <a href="/about/" class="btn -ghost">About BramLabs</a>
-          </div>
+        <div class="standard-card">
+          <span class="card-num">01</span>
+          <h3 class="card-title">In-House Concepts</h3>
+          <p class="card-desc">100% vector illustration crafted from scratch. Zero stock clipart, licensed characters, or third-party brand marks.</p>
         </div>
 
-        <ul class="standards-list">
-          <li>
-            <strong>01 / In-House Concepts</strong>
-            <span>100% vector illustration crafted from scratch. Zero stock clipart, licensed characters, or third-party brand marks.</span>
-          </li>
-          <li>
-            <strong>02 / Construction Trail</strong>
-            <span>Documented evolution showing sketches, geometric grids, and rejected directions on every process page.</span>
-          </li>
-          <li>
-            <strong>03 / Print-Ready Masters</strong>
-            <span>High-resolution vector assets and 4500×5400 px sRGB transparent PNG print masters maintained offline at 300 DPI.</span>
-          </li>
-          <li>
-            <strong>04 / Policy &amp; IP Review</strong>
-            <span>Each graphic is screened against USPTO trademark databases and content policies prior to publication.</span>
-          </li>
-        </ul>
+        <div class="standard-card">
+          <span class="card-num">02</span>
+          <h3 class="card-title">Construction Trail</h3>
+          <p class="card-desc">Documented evolution showing sketches, geometric grids, and rejected directions on every process page.</p>
+        </div>
+
+        <div class="standard-card">
+          <span class="card-num">03</span>
+          <h3 class="card-title">Print-Ready Masters</h3>
+          <p class="card-desc">High-resolution vector assets and 4500×5400 px sRGB transparent PNG print masters maintained offline at 300 DPI.</p>
+        </div>
+
+        <div class="standard-card">
+          <span class="card-num">04</span>
+          <h3 class="card-title">Policy &amp; IP Review</h3>
+          <p class="card-desc">Each graphic is screened against USPTO trademark databases and content policies prior to publication.</p>
+        </div>
+      </div>
+
+      <div class="standards-actions">
+        <a href="/collection/" class="btn -primary">Explore Collection</a>
+        <a href="/about/" class="btn -ghost">About BramLabs</a>
       </div>
     </div>
   </section>
@@ -393,42 +405,60 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
     }
   }
 
+  /* Improved Standards Section Layout */
   .standards {
     padding-block: clamp(3.5rem, 8vw, 5.5rem);
   }
 
+  .standards-header {
+    margin-bottom: var(--s-6);
+    max-width: 44rem;
+  }
+
   .standards-grid {
     display: grid;
-    gap: var(--s-6);
+    gap: 1.5rem;
+    grid-template-columns: 1fr;
+    margin-bottom: var(--s-6);
 
-    @media (width >= 900px) {
-      grid-template-columns: 0.9fr 1.1fr;
-      align-items: start;
+    @media (width >= 640px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (width >= 1024px) {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 
-  .standards-list {
-    display: grid;
-    gap: 1.25rem;
+  .standard-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding-top: 1.25rem;
+    border-top: 2px solid var(--line);
+    transition: border-color 250ms var(--ease);
 
-    li {
-      display: flex;
-      flex-direction: column;
-      gap: 0.25rem;
-      padding-top: 1rem;
-      border-top: 1px solid var(--line);
+    &:hover {
+      border-color: var(--ink);
     }
 
-    strong {
+    .card-num {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--cyan);
+    }
+
+    .card-title {
       font-family: var(--font-display);
+      font-size: 1.05rem;
       font-weight: 600;
-      font-size: 1rem;
       color: var(--ink);
     }
 
-    span {
+    .card-desc {
+      font-size: 0.875rem;
       color: var(--muted);
-      font-size: 0.9rem;
       line-height: 1.55;
     }
   }
@@ -436,8 +466,8 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
   .standards-actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.75rem;
-    margin-top: var(--s-4);
   }
 
   .designer-grid {
@@ -503,7 +533,7 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
     }
 
     @media (width >= 1024px) {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 
