@@ -10,6 +10,8 @@ export function getStaticPaths() {
 const post = getPost(Astro.params.slug!);
 if (!post) return Astro.redirect("/journal/");
 
+const related = journalPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
+
 const articleLd = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -22,7 +24,7 @@ const articleLd = {
 ---
 
 <BaseLayout
-  title={`${post.title} — BramLabs`}
+  title={`${post.title} — BramLabs Journal`}
   description={post.excerpt}
   image={post.image}
   type="article"
@@ -44,13 +46,15 @@ const articleLd = {
         <span class="dot">•</span>
         <span class="date-tag">{post.dateLabel}</span>
         <span class="dot">•</span>
+        <span class="read-tag">{post.readTime}</span>
+        <span class="dot">•</span>
         <span class="author-tag">By {post.byline}</span>
       </div>
 
       <h1 class="h-page">{post.title}</h1>
       <p class="lede">{post.excerpt}</p>
 
-      {/* Hero Illustration */}
+      {/* Dark Vector Hero Illustration Container */}
       <div class="hero-img-wrap">
         <img
           src={post.image}
@@ -60,7 +64,15 @@ const articleLd = {
           loading="eager"
           fetchpriority="high"
         />
+        <div class="hero-img-badge">Studio Master Art</div>
       </div>
+
+      {/* Pull Quote Block if Available */}
+      {post.pullQuote && (
+        <blockquote class="pull-quote">
+          <p>“{post.pullQuote}”</p>
+        </blockquote>
+      )}
 
       {/* Article Body Content */}
       <div class="body-copy">
@@ -69,11 +81,48 @@ const articleLd = {
         ))}
       </div>
 
+      {/* Insight Box Callout if Available */}
+      {post.insightBox && (
+        <div class="insight-box">
+          <span class="insight-label">Studio Takeaway</span>
+          <p>{post.insightBox}</p>
+        </div>
+      )}
+
+      {/* Author Bio Footer Box */}
+      <div class="author-bio-card">
+        <div class="author-avatar">B</div>
+        <div class="author-info">
+          <span class="author-name">Bram — Designer &amp; Founder</span>
+          <p class="author-desc">Designing original vector apparel graphics and building focused software tools at BramLabs.</p>
+        </div>
+      </div>
+
       {/* Footer Navigation */}
       <div class="article-footer">
         <a href="/journal/" class="btn -ghost">← Back to Journal</a>
         <a href="/collection/" class="btn -primary">Explore Collection →</a>
       </div>
+
+      {/* Related Essays Section */}
+      {related.length > 0 && (
+        <section class="related-section">
+          <h2 class="related-heading">More Studio Writing</h2>
+          <div class="related-grid">
+            {related.map((r) => (
+              <a href={`/journal/${r.slug}/`} class="related-card">
+                <div class="r-img-wrap">
+                  <img src={r.image} alt={r.title} width="400" height="300" loading="lazy" />
+                </div>
+                <div class="r-info">
+                  <span class="r-cat">{r.category}</span>
+                  <h3 class="r-title">{r.title}</h3>
+                </div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
 
     </div>
   </article>
@@ -106,10 +155,11 @@ const articleLd = {
     font-size: 0.8rem;
     color: var(--muted);
     margin-bottom: 1rem;
+    flex-wrap: wrap;
 
     .category-tag {
       color: var(--accent);
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
@@ -121,14 +171,10 @@ const articleLd = {
 
   .h-page {
     font-family: var(--font-heading);
-    font-size: 2.25rem;
+    font-size: clamp(2.25rem, 4.5vw, 3.25rem);
     line-height: 1.15;
     font-weight: 700;
     margin-bottom: 1rem;
-
-    @media (width >= 768px) {
-      font-size: 3rem;
-    }
   }
 
   .lede {
@@ -139,21 +185,57 @@ const articleLd = {
   }
 
   .hero-img-wrap {
+    position: relative;
     width: 100%;
     aspect-ratio: 16 / 10;
     border-radius: var(--radius-lg);
     overflow: hidden;
     border: 1px solid var(--line);
-    background: var(--canvas);
+    background: #09090b;
     padding: 2rem;
     margin-bottom: 3rem;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     img {
-      width: 100%;
-      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
       display: block;
+    }
+
+    .hero-img-badge {
+      position: absolute;
+      bottom: 0.75rem;
+      right: 0.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: #F4F1E9;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(6px);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+  }
+
+  .pull-quote {
+    margin: 2.5rem 0;
+    padding: 1.5rem 1.75rem;
+    border-left: 3px solid var(--accent);
+    background: var(--surface);
+    border-radius: 0 var(--radius) var(--radius) 0;
+
+    p {
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      line-height: 1.5;
+      font-weight: 600;
+      color: var(--ink);
+      margin: 0;
     }
   }
 
@@ -164,9 +246,82 @@ const articleLd = {
     color: var(--ink);
     font-size: 1.075rem;
     line-height: 1.75;
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.5rem;
 
     p {
+      margin: 0;
+    }
+  }
+
+  .insight-box {
+    margin-bottom: 3rem;
+    padding: 1.25rem 1.5rem;
+    border: 1px solid var(--line);
+    background: var(--canvas);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+
+    .insight-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--cyan);
+    }
+
+    p {
+      font-size: 0.95rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+  }
+
+  .author-bio-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    margin-bottom: 2.5rem;
+
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--paper);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 1.2rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .author-info {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .author-name {
+      font-family: var(--font-display);
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .author-desc {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.4;
       margin: 0;
     }
   }
@@ -179,5 +334,87 @@ const articleLd = {
     border-top: 1px solid var(--line);
     gap: 1rem;
     flex-wrap: wrap;
+    margin-bottom: 4rem;
+  }
+
+  /* Related Essays */
+  .related-section {
+    padding-top: 2.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .related-heading {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+  }
+
+  .related-grid {
+    display: grid;
+    gap: 1.25rem;
+    grid-template-columns: 1fr;
+
+    @media (width >= 600px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .related-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: transform 200ms var(--ease), border-color 200ms var(--ease);
+
+    &:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+
+      .r-title {
+        color: var(--accent);
+      }
+    }
+  }
+
+  .r-img-wrap {
+    background: #09090b;
+    aspect-ratio: 16 / 9;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  .r-info {
+    padding: 1.15rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .r-cat {
+    font-family: var(--font-mono);
+    font-size: 0.725rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .r-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.35;
+    transition: color 200ms var(--ease);
   }
 </style>

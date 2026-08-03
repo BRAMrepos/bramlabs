@@ -2,33 +2,78 @@
 export const prerender = true;
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { journalPosts } from "@/data/journal";
+
+const featuredPost = journalPosts[0];
+const remainingPosts = journalPosts.slice(1);
 ---
 
 <BaseLayout
-  title="Journal — BramLabs"
-  description="Process notes, studio writing and apparel development from BramLabs."
+  title="Journal — BramLabs Studio Writing & Essays"
+  description="Process notes, design research, technical decisions, and apparel craft by Bram."
 >
-  <section class="section">
+  <section class="section py-10 md:py-16">
     <div class="wrap">
+      
+      <!-- Page Header -->
       <header class="page-head">
-        <p class="eyebrow">Studio Writing & Essays</p>
+        <p class="eyebrow">Studio Writing &amp; Essays</p>
         <h1 class="h-page">Journal</h1>
         <p class="lede">
           Process notes, design research, technical decisions, and apparel craft by Bram.
         </p>
       </header>
 
+      <!-- Featured Post Hero Block -->
+      {featuredPost && (
+        <article class="featured-card">
+          <a href={`/journal/${featuredPost.slug}/`} class="featured-img-link" aria-label={featuredPost.title}>
+            <div class="featured-img-wrap">
+              <img
+                src={featuredPost.image}
+                alt={featuredPost.title}
+                width="800"
+                height="800"
+                loading="eager"
+              />
+              <span class="img-badge">FEATURED ESSAY</span>
+            </div>
+          </a>
+
+          <div class="featured-content">
+            <div class="card-meta">
+              <span class="category-badge">{featuredPost.category}</span>
+              <span class="dot">•</span>
+              <span class="date-label">{featuredPost.dateLabel}</span>
+              <span class="dot">•</span>
+              <span class="read-time">{featuredPost.readTime}</span>
+            </div>
+
+            <h2 class="h-featured">
+              <a href={`/journal/${featuredPost.slug}/`}>{featuredPost.title}</a>
+            </h2>
+
+            <p class="excerpt">{featuredPost.excerpt}</p>
+
+            <div class="featured-footer">
+              <span class="byline">By {featuredPost.byline}</span>
+              <a href={`/journal/${featuredPost.slug}/`} class="btn -primary">Read Article →</a>
+            </div>
+          </div>
+        </article>
+      )}
+
+      <!-- Journal Grid (Remaining 5 Posts) -->
       <div class="journal-grid">
         {
-          journalPosts.map((p) => (
+          remainingPosts.map((p) => (
             <article class="journal-card">
               <a href={`/journal/${p.slug}/`} class="card-img-link" aria-label={p.title}>
                 <div class="card-img-wrap">
                   <img
                     src={p.image}
                     alt={`${p.title} article illustration`}
-                    width="800"
-                    height="800"
+                    width="600"
+                    height="600"
                     loading="lazy"
                   />
                 </div>
@@ -36,21 +81,22 @@ import { journalPosts } from "@/data/journal";
               <div class="card-content">
                 <div class="card-meta">
                   <span class="category-badge">{p.category}</span>
-                  <span class="date-label">{p.dateLabel}</span>
+                  <span class="date-label">{p.readTime}</span>
                 </div>
-                <h2 class="h-card">
+                <h3 class="h-card">
                   <a href={`/journal/${p.slug}/`}>{p.title}</a>
-                </h2>
+                </h3>
                 <p class="excerpt">{p.excerpt}</p>
                 <div class="card-footer">
                   <span class="byline">By {p.byline}</span>
-                  <a href={`/journal/${p.slug}/`} class="read-more">Read article →</a>
+                  <a href={`/journal/${p.slug}/`} class="read-more">Read →</a>
                 </div>
               </div>
             </article>
           ))
         }
       </div>
+
     </div>
   </section>
 </BaseLayout>
@@ -60,28 +106,154 @@ import { journalPosts } from "@/data/journal";
     display: flex;
     flex-direction: column;
     gap: 0.75rem;
-    margin-bottom: 3.5rem;
-    max-width: 40rem;
+    margin-bottom: 3rem;
+    max-width: 42rem;
   }
 
   .h-page {
     font-family: var(--font-heading);
-    font-size: 2.75rem;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
     font-weight: 700;
     line-height: 1.1;
   }
 
   .lede {
-    font-size: 1.125rem;
+    font-size: 1.15rem;
     color: var(--muted);
     line-height: 1.6;
   }
 
+  /* Featured Post Block */
+  .featured-card {
+    display: grid;
+    gap: 2rem;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 3.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
+
+    @media (width >= 840px) {
+      grid-template-columns: 1.1fr 1fr;
+      align-items: center;
+    }
+
+    &:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+  }
+
+  .featured-img-link {
+    display: block;
+    background: #09090b;
+    height: 100%;
+  }
+
+  .featured-img-wrap {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .img-badge {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.6rem;
+      background: var(--cyan);
+      color: #09090b;
+      border-radius: 4px;
+    }
+  }
+
+  .featured-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+  }
+
+  .card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.775rem;
+
+    .dot {
+      color: var(--line);
+    }
+
+    .read-time {
+      color: var(--muted);
+    }
+  }
+
+  .category-badge {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .date-label {
+    color: var(--muted);
+  }
+
+  .h-featured {
+    font-family: var(--font-heading);
+    font-size: clamp(1.65rem, 3vw, 2.15rem);
+    font-weight: 700;
+    line-height: 1.25;
+
+    a {
+      color: var(--ink);
+      transition: color 200ms var(--ease);
+
+      &:hover {
+        color: var(--accent);
+      }
+    }
+  }
+
+  .excerpt {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .featured-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--line);
+    margin-top: 0.5rem;
+  }
+
+  /* Journal Grid */
   .journal-grid {
     display: grid;
     gap: 2rem;
+    grid-template-columns: 1fr;
 
-    @media (width >= 680px) {
+    @media (width >= 640px) {
       grid-template-columns: repeat(2, 1fr);
     }
 
@@ -98,9 +270,7 @@ import { journalPosts } from "@/data/journal";
     border-radius: var(--radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-    transition:
-      box-shadow var(--t) var(--ease),
-      transform var(--t) var(--ease);
+    transition: box-shadow var(--t) var(--ease), transform var(--t) var(--ease);
 
     &:hover {
       box-shadow: var(--shadow-lift);
@@ -119,7 +289,7 @@ import { journalPosts } from "@/data/journal";
   .card-img-link {
     display: block;
     overflow: hidden;
-    background: var(--canvas);
+    background: #09090b;
     border-bottom: 1px solid var(--line);
   }
 
@@ -148,27 +318,8 @@ import { journalPosts } from "@/data/journal";
     flex: 1;
   }
 
-  .card-meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-  }
-
-  .category-badge {
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--accent);
-    font-weight: 600;
-  }
-
-  .date-label {
-    color: var(--muted);
-  }
-
   .h-card {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     font-weight: 600;
     line-height: 1.35;
 
@@ -178,20 +329,13 @@ import { journalPosts } from "@/data/journal";
     }
   }
 
-  .excerpt {
-    font-size: 0.925rem;
-    color: var(--muted);
-    line-height: 1.55;
-    flex: 1;
-  }
-
   .card-footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding-top: 1rem;
     border-top: 1px solid var(--line);
-    margin-top: 0.5rem;
+    margin-top: auto;
     font-size: 0.85rem;
   }
 
@@ -201,7 +345,7 @@ import { journalPosts } from "@/data/journal";
   }
 
   .read-more {
-    font-weight: 500;
+    font-weight: 600;
     color: var(--accent);
     &:hover {
       text-decoration: underline;
