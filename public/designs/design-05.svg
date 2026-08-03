@@ -1,23 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
-  <rect width="1000" height="1000" fill="#09090b"/>
   <g transform="translate(500, 500)">
-    <!-- Technical Corner Crop Marks -->
-    <!-- Top-Left -->
     <path d="M -360 -300 L -360 -360 L -300 -360" fill="none" stroke="#FF862E" stroke-width="6"/>
-    <!-- Top-Right -->
     <path d="M 300 -360 L 360 -360 L 360 -300" fill="none" stroke="#FF862E" stroke-width="6"/>
-    <!-- Bottom-Left -->
     <path d="M -360 300 L -360 360 L -300 360" fill="none" stroke="#FF862E" stroke-width="6"/>
-    <!-- Bottom-Right -->
     <path d="M 300 360 L 360 360 L 360 300" fill="none" stroke="#FF862E" stroke-width="6"/>
-
-    <!-- Small Header Label -->
     <text x="0" y="-230" fill="#23C5EF" font-family="monospace" font-size="32" font-weight="bold" letter-spacing="12" text-anchor="middle">BUILD</text>
-
-    <!-- Massive Outlined Number 47 -->
     <text x="0" y="150" fill="none" stroke="#F4F1E9" stroke-width="16" stroke-linejoin="miter" font-family="sans-serif" font-size="340" font-weight="900" letter-spacing="-10" text-anchor="middle">47</text>
-
-    <!-- Subtext -->
     <text x="0" y="270" fill="#F4F1E9" font-family="monospace" font-size="22" font-weight="bold" letter-spacing="6" text-anchor="middle">SHIP WHEN READY // ITERATION 47</text>
   </g>
 </svg>

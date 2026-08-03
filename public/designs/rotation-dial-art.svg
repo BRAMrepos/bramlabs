@@ -1,31 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
-  <rect width="1000" height="1000" fill="#09090b"/>
   <g transform="translate(500, 500)">
-    <!-- Outer tick ring -->
     <circle cx="0" cy="0" r="380" fill="none" stroke="#F4F1E9" stroke-width="2" stroke-dasharray="4, 16" opacity="0.4"/>
     <circle cx="0" cy="0" r="360" fill="none" stroke="#F4F1E9" stroke-width="1.5" opacity="0.2"/>
-    
-    <!-- 3 Shift Arcs -->
-    <!-- Arc 1: Day Shift (07:00 - 15:00) Cyan -->
     <path d="M 0 -320 A 320 320 0 0 1 277 160" fill="none" stroke="#23C5EF" stroke-width="28" stroke-linecap="butt"/>
-    <!-- Arc 2: Swing Shift (15:00 - 23:00) Orange -->
     <path d="M 242 210 A 320 320 0 0 1 -277 160" fill="none" stroke="#FF862E" stroke-width="28" stroke-linecap="butt"/>
-    <!-- Arc 3: Night Shift (23:00 - 07:00) Ivory -->
     <path d="M -277 110 A 320 320 0 0 1 -40 -317" fill="none" stroke="#F4F1E9" stroke-width="28" stroke-linecap="butt"/>
-    
-    <!-- Inner Guideline Ring -->
     <circle cx="0" cy="0" r="260" fill="none" stroke="#F4F1E9" stroke-width="2" stroke-dasharray="8, 8" opacity="0.3"/>
-    
-    <!-- Center Empty Hole Ring -->
     <circle cx="0" cy="0" r="160" fill="none" stroke="#F4F1E9" stroke-width="4"/>
     <circle cx="0" cy="0" r="140" fill="none" stroke="#23C5EF" stroke-width="2" opacity="0.5"/>
-
-    <!-- Time Markers -->
     <text x="0" y="-395" fill="#F4F1E9" font-family="monospace" font-size="26" font-weight="bold" text-anchor="middle">07:00</text>
     <text x="340" y="210" fill="#23C5EF" font-family="monospace" font-size="26" font-weight="bold" text-anchor="start">15:00</text>
     <text x="-340" y="210" fill="#FF862E" font-family="monospace" font-size="26" font-weight="bold" text-anchor="end">23:00</text>
-    
-    <!-- Center Label -->
     <text x="0" y="-10" fill="#F4F1E9" font-family="monospace" font-size="18" font-weight="bold" letter-spacing="4" text-anchor="middle">ROTATION</text>
     <text x="0" y="22" fill="#23C5EF" font-family="monospace" font-size="14" font-weight="bold" letter-spacing="6" text-anchor="middle">24H COVERAGE</text>
   </g>

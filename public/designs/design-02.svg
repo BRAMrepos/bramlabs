@@ -1,28 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
-  <rect width="1000" height="1000" fill="#0f172a"/>
   <g transform="translate(100, 200)">
-    <!-- Background Grid Lines -->
-    <line x1="0" y1="100" x2="800" y2="100" stroke="#334155" stroke-width="1.5" stroke-dasharray="6,6"/>
-    <line x1="0" y1="200" x2="800" y2="200" stroke="#334155" stroke-width="1.5" stroke-dasharray="6,6"/>
-    <line x1="0" y1="300" x2="800" y2="300" stroke="#334155" stroke-width="1.5" stroke-dasharray="6,6"/>
-    <line x1="0" y1="400" x2="800" y2="400" stroke="#334155" stroke-width="1.5" stroke-dasharray="6,6"/>
-
-    <!-- Dashed Cyan Orbit Ring -->
+    <line x1="0" y1="100" x2="800" y2="100" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,6"/>
+    <line x1="0" y1="200" x2="800" y2="200" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,6"/>
+    <line x1="0" y1="300" x2="800" y2="300" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,6"/>
+    <line x1="0" y1="400" x2="800" y2="400" stroke="#475569" stroke-width="1.5" stroke-dasharray="6,6"/>
     <circle cx="500" cy="250" r="220" fill="none" stroke="#23C5EF" stroke-width="3" stroke-dasharray="10,12" opacity="0.6"/>
-
-    <!-- Baseline Straight Tracks -->
     <path d="M 0 150 L 350 150" stroke="#F4F1E9" stroke-width="8" stroke-linecap="round"/>
     <path d="M 0 250 L 350 250" stroke="#F4F1E9" stroke-width="8" stroke-linecap="round"/>
     <path d="M 0 350 L 350 350" stroke="#F4F1E9" stroke-width="8" stroke-linecap="round"/>
-
-    <!-- Corrupted Bent Track (Violet) -->
     <path d="M 350 250 C 420 250, 450 120, 550 120 C 650 120, 680 380, 800 380" fill="none" stroke="#7976E8" stroke-width="12" stroke-linecap="round"/>
-    
-    <!-- Connecting Continued Baseline Tracks -->
     <path d="M 350 150 Q 500 150 800 150" stroke="#F4F1E9" stroke-width="4" stroke-dasharray="8,8" opacity="0.4"/>
     <path d="M 350 350 Q 500 350 800 350" stroke="#F4F1E9" stroke-width="4" stroke-dasharray="8,8" opacity="0.4"/>
-
-    <!-- Status Text Callouts -->
     <text x="0" y="520" fill="#F4F1E9" font-family="monospace" font-size="32" font-weight="bold" letter-spacing="6">NIGHT SHIFT DRIFT</text>
     <text x="0" y="560" fill="#7976E8" font-family="monospace" font-size="16" font-weight="bold" letter-spacing="3">STATUS: CONTROLLED DISRUPTION // 03:00 HRS</text>
   </g>

@@ -1,25 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
-  <rect width="1000" height="1000" fill="#09090b"/>
   <g transform="translate(500, 480)">
-    <!-- Stacked Coverage Bands -->
-    <!-- Day Band -->
     <path d="M -320 -140 L 180 -140 A 40 40 0 0 1 220 -100 A 40 40 0 0 1 180 -60 L -320 -60" fill="none" stroke="#23C5EF" stroke-width="16" stroke-linecap="round"/>
-    <!-- Swing Band -->
     <path d="M -180 -20 L 320 -20 A 40 40 0 0 1 360 20 A 40 40 0 0 1 320 60 L -180 60" fill="none" stroke="#FF862E" stroke-width="16" stroke-linecap="round"/>
-    <!-- Night Band -->
     <path d="M -320 100 L 180 100 A 40 40 0 0 1 220 140 A 40 40 0 0 1 180 180 L -320 180" fill="none" stroke="#F4F1E9" stroke-width="16" stroke-linecap="round"/>
-
-    <!-- Transfer Node Dots -->
     <circle cx="180" cy="-100" r="14" fill="#23C5EF"/>
     <circle cx="-180" cy="20" r="14" fill="#FF862E"/>
     <circle cx="180" cy="140" r="14" fill="#F4F1E9"/>
-
-    <!-- Labels -->
     <text x="-340" y="-90" fill="#23C5EF" font-family="monospace" font-size="20" font-weight="bold" text-anchor="end">DAY</text>
     <text x="380" y="30" fill="#FF862E" font-family="monospace" font-size="20" font-weight="bold" text-anchor="start">SWING</text>
     <text x="-340" y="150" fill="#F4F1E9" font-family="monospace" font-size="20" font-weight="bold" text-anchor="end">NIGHT</text>
-
-    <!-- Title -->
     <text x="0" y="290" fill="#F4F1E9" font-family="monospace" font-size="34" font-weight="bold" letter-spacing="8" text-anchor="middle">24H HAND-OFF</text>
   </g>
 </svg>

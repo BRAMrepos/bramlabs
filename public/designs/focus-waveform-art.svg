@@ -1,24 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000" width="1000" height="1000">
-  <rect width="1000" height="1000" fill="#09090b"/>
   <g transform="translate(100, 500)">
-    <!-- Horizontal Baseline Axis -->
-    <line x1="0" y1="0" x2="800" y2="0" stroke="#334155" stroke-width="3" stroke-dasharray="8,8"/>
-
-    <!-- Waveform Path: Low noise transitioning to sharp Cyan Focus peak -->
-    <path d="M 0 0 Q 80 -40 160 0 T 320 0 C 380 0, 420 -280, 480 -280 C 540 -280, 580 180, 640 0 Q 720 30 800 0" 
-          fill="none" stroke="#23C5EF" stroke-width="12" stroke-linecap="round"/>
-    
-    <!-- Secondary Waveform Layer (Ivory) -->
-    <path d="M 0 0 Q 100 60 200 0 T 400 0 C 440 0, 480 -140, 520 0 Q 660 80 800 0" 
-          fill="none" stroke="#F4F1E9" stroke-width="4" opacity="0.6"/>
-
-    <!-- Peak Callout Point -->
+    <line x1="0" y1="0" x2="800" y2="0" stroke="#475569" stroke-width="3" stroke-dasharray="8,8"/>
+    <path d="M 0 0 Q 80 -40 160 0 T 320 0 C 380 0, 420 -280, 480 -280 C 540 -280, 580 180, 640 0 Q 720 30 800 0" fill="none" stroke="#23C5EF" stroke-width="12" stroke-linecap="round"/>
+    <path d="M 0 0 Q 100 60 200 0 T 400 0 C 440 0, 480 -140, 520 0 Q 660 80 800 0" fill="none" stroke="#F4F1E9" stroke-width="4" opacity="0.6"/>
     <circle cx="480" cy="-280" r="12" fill="#FF862E"/>
     <line x1="480" y1="-280" x2="480" y2="-340" stroke="#FF862E" stroke-width="2" stroke-dasharray="4,4"/>
     <text x="480" y="-360" fill="#FF862E" font-family="monospace" font-size="20" font-weight="bold" text-anchor="middle">40 Hz PEAK RESONANCE</text>
-
-    <!-- Labels -->
     <text x="0" y="160" fill="#F4F1E9" font-family="monospace" font-size="34" font-weight="bold" letter-spacing="8">FOCUS IS A WAVEFORM</text>
-    <text x="0" y="200" fill="#64748B" font-family="monospace" font-size="16" font-weight="bold" letter-spacing="4">NOISE ENTROPY // DEEP STATE SIGNAL</text>
+    <text x="0" y="200" fill="#94A3B8" font-family="monospace" font-size="16" font-weight="bold" letter-spacing="4">NOISE ENTROPY // DEEP STATE SIGNAL</text>
   </g>
 </svg>
