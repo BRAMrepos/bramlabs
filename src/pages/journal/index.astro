@@ -23,44 +23,48 @@ const remainingPosts = journalPosts.slice(1);
         </p>
       </header>
 
-      <!-- Featured Post Hero Block -->
+      <!-- Featured Post Block -->
       {featuredPost && (
-        <article class="featured-card">
-          <a href={`/journal/${featuredPost.slug}/`} class="featured-img-link" aria-label={featuredPost.title}>
-            <div class="featured-img-wrap">
+        <article class="featured-block">
+          <a href={`/journal/${featuredPost.slug}/`} class="featured-media" aria-label={featuredPost.title}>
+            <div class="media-container">
               <img
                 src={featuredPost.image}
                 alt={featuredPost.title}
                 width="800"
-                height="800"
+                height="500"
                 loading="eager"
               />
-              <span class="img-badge">FEATURED ESSAY</span>
+              <span class="media-badge">FEATURED ESSAY</span>
             </div>
           </a>
 
-          <div class="featured-content">
-            <div class="card-meta">
-              <span class="category-badge">{featuredPost.category}</span>
+          <div class="featured-text">
+            <div class="meta-row">
+              <span class="category">{featuredPost.category}</span>
               <span class="dot">•</span>
-              <span class="date-label">{featuredPost.dateLabel}</span>
+              <span class="date">{featuredPost.dateLabel}</span>
               <span class="dot">•</span>
               <span class="read-time">{featuredPost.readTime}</span>
             </div>
 
-            <h2 class="h-featured">
+            <h2 class="featured-title">
               <a href={`/journal/${featuredPost.slug}/`}>{featuredPost.title}</a>
             </h2>
 
             <p class="excerpt">{featuredPost.excerpt}</p>
 
-            <div class="featured-footer">
-              <span class="byline">By {featuredPost.byline}</span>
+            <div class="featured-actions">
               <a href={`/journal/${featuredPost.slug}/`} class="btn -primary">Read Article →</a>
             </div>
           </div>
         </article>
       )}
+
+      <!-- Journal Grid Header -->
+      <div class="grid-header">
+        <h2 class="h-section">Recent Essays</h2>
+      </div>
 
       <!-- Journal Grid (Remaining 5 Posts) -->
       <div class="journal-grid">
@@ -73,7 +77,7 @@ const remainingPosts = journalPosts.slice(1);
                     src={p.image}
                     alt={`${p.title} article illustration`}
                     width="600"
-                    height="600"
+                    height="400"
                     loading="lazy"
                   />
                 </div>
@@ -81,7 +85,7 @@ const remainingPosts = journalPosts.slice(1);
               <div class="card-content">
                 <div class="card-meta">
                   <span class="category-badge">{p.category}</span>
-                  <span class="date-label">{p.readTime}</span>
+                  <span class="date-label">{p.dateLabel}</span>
                 </div>
                 <h3 class="h-card">
                   <a href={`/journal/${p.slug}/`}>{p.title}</a>
@@ -105,8 +109,8 @@ const remainingPosts = journalPosts.slice(1);
   .page-head {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: 3rem;
+    gap: 0.5rem;
+    margin-bottom: 2.5rem;
     max-width: 42rem;
   }
 
@@ -123,43 +127,41 @@ const remainingPosts = journalPosts.slice(1);
     line-height: 1.6;
   }
 
-  /* Featured Post Block */
-  .featured-card {
+  /* Featured Post Layout */
+  .featured-block {
     display: grid;
     gap: 2rem;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    margin-bottom: 3.5rem;
+    margin-bottom: 4rem;
+    padding: 1.5rem;
     box-shadow: var(--shadow-sm);
-    transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease);
 
     @media (width >= 840px) {
-      grid-template-columns: 1.1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       align-items: center;
-    }
-
-    &:hover {
-      box-shadow: var(--shadow-md);
-      transform: translateY(-2px);
+      padding: 2rem;
     }
   }
 
-  .featured-img-link {
+  .featured-media {
     display: block;
     background: #09090b;
-    height: 100%;
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  .featured-img-wrap {
+  .media-container {
     position: relative;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    padding: 1.5rem;
 
     img {
       max-width: 100%;
@@ -167,58 +169,50 @@ const remainingPosts = journalPosts.slice(1);
       object-fit: contain;
     }
 
-    .img-badge {
+    .media-badge {
       position: absolute;
-      top: 1rem;
-      left: 1rem;
+      top: 0.75rem;
+      left: 0.75rem;
       font-family: var(--font-mono);
-      font-size: 0.7rem;
+      font-size: 0.675rem;
       font-weight: 700;
       letter-spacing: 0.05em;
-      padding: 0.25rem 0.6rem;
+      padding: 0.2rem 0.5rem;
       background: var(--cyan);
       color: #09090b;
       border-radius: 4px;
     }
   }
 
-  .featured-content {
+  .featured-text {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    padding: 2rem;
+    gap: 0.85rem;
   }
 
-  .card-meta {
+  .meta-row {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     font-family: var(--font-mono);
     font-size: 0.775rem;
+    color: var(--muted);
+
+    .category {
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
 
     .dot {
       color: var(--line);
     }
-
-    .read-time {
-      color: var(--muted);
-    }
   }
 
-  .category-badge {
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--accent);
-    font-weight: 700;
-  }
-
-  .date-label {
-    color: var(--muted);
-  }
-
-  .h-featured {
+  .featured-title {
     font-family: var(--font-heading);
-    font-size: clamp(1.65rem, 3vw, 2.15rem);
+    font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 700;
     line-height: 1.25;
 
@@ -233,24 +227,32 @@ const remainingPosts = journalPosts.slice(1);
   }
 
   .excerpt {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: var(--muted);
     line-height: 1.6;
   }
 
-  .featured-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 1.25rem;
-    border-top: 1px solid var(--line);
+  .featured-actions {
     margin-top: 0.5rem;
+  }
+
+  /* Grid Header */
+  .grid-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--line);
+
+    .h-section {
+      font-family: var(--font-heading);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
   }
 
   /* Journal Grid */
   .journal-grid {
     display: grid;
-    gap: 2rem;
+    gap: 2rem 1.5rem;
     grid-template-columns: 1fr;
 
     @media (width >= 640px) {
@@ -276,10 +278,6 @@ const remainingPosts = journalPosts.slice(1);
       box-shadow: var(--shadow-lift);
       transform: translateY(-2px);
 
-      .card-img-wrap img {
-        transform: scale(1.03);
-      }
-
       .h-card a {
         color: var(--accent);
       }
@@ -288,13 +286,11 @@ const remainingPosts = journalPosts.slice(1);
 
   .card-img-link {
     display: block;
-    overflow: hidden;
     background: #09090b;
     border-bottom: 1px solid var(--line);
   }
 
   .card-img-wrap {
-    position: relative;
     aspect-ratio: 16 / 10;
     width: 100%;
     display: flex;
@@ -303,23 +299,41 @@ const remainingPosts = journalPosts.slice(1);
     padding: 1.25rem;
 
     img {
-      width: 100%;
-      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
       object-fit: contain;
-      transition: transform 400ms var(--ease);
     }
   }
 
   .card-content {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    padding: 1.5rem;
+    gap: 0.65rem;
+    padding: 1.25rem;
     flex: 1;
   }
 
+  .card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .category-badge {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  .date-label {
+    color: var(--muted);
+  }
+
   .h-card {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     font-weight: 600;
     line-height: 1.35;
 
@@ -333,7 +347,7 @@ const remainingPosts = journalPosts.slice(1);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 1rem;
+    padding-top: 0.85rem;
     border-top: 1px solid var(--line);
     margin-top: auto;
     font-size: 0.85rem;
@@ -347,6 +361,7 @@ const remainingPosts = journalPosts.slice(1);
   .read-more {
     font-weight: 600;
     color: var(--accent);
+
     &:hover {
       text-decoration: underline;
     }
