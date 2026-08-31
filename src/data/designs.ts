@@ -738,9 +738,28 @@ export const designs: Design[] = [
   }
 ];
 
-export function getAllDesigns() { return designs.slice().sort((a, b) => a.order - b.order); }
-export function getFeaturedDesigns() { return designs.filter((d) => d.featured); }
-export function getDesign(slug) { return designs.find((d) => d.slug === slug); }
-export function getRelated(design, limit = 3) { if (!design.relatedDesigns || design.relatedDesigns.length === 0) return designs.filter((d) => d.slug !== design.slug).slice(0, limit); return design.relatedDesigns.map((s) => getDesign(s)).filter((d) => d !== undefined).slice(0, limit); }
+export function getAllDesigns(): Design[] {
+  return designs.slice().sort((a, b) => a.order - b.order);
+}
 
-export function getCategories() { return Array.from(new Set(designs.map((d) => d.category))); }
+export function getFeaturedDesigns(): Design[] {
+  return designs.filter((d) => d.featured);
+}
+
+export function getDesign(slug: string): Design | undefined {
+  return designs.find((d) => d.slug === slug);
+}
+
+export function getRelated(design: Design, limit = 3): Design[] {
+  if (!design.relatedDesigns || design.relatedDesigns.length === 0) {
+    return designs.filter((d) => d.slug !== design.slug).slice(0, limit);
+  }
+  return design.relatedDesigns
+    .map((s) => getDesign(s))
+    .filter((d): d is Design => d !== undefined)
+    .slice(0, limit);
+}
+
+export function getCategories(): string[] {
+  return Array.from(new Set(designs.map((d) => d.category)));
+}

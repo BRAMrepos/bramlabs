@@ -13,22 +13,12 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.1.7",
-    "@astrojs/react": "^6.0.2",
     "@astrojs/sitemap": "^3.4.1",
     "@fontsource-variable/bricolage-grotesque": "^5.3.0",
     "@fontsource-variable/instrument-sans": "^5.2.8",
     "@fontsource/geist-mono": "^5.3.0",
-    "@react-three/drei": "^10.7.7",
-    "@react-three/fiber": "^9.7.0",
-    "@types/react": "^19.2.18",
-    "@types/react-dom": "^19.2.4",
-    "@types/three": "^0.185.3",
     "astro": "^7.1.6",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "resend": "^6.18.1",
-    "sass": "^1.89.2",
-    "three": "^0.185.1"
+    "sass": "^1.89.2"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",

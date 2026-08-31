@@ -1,117 +1,131 @@
 # BramLabs Site — Agent Rules
 
+> This file describes the project **as it actually is**. If you find a claim here that
+> contradicts the code, the code wins — fix this file in the same commit.
+
 ## Stack (non-negotiable)
-- Framework: Astro 5 with Content Collections
-- Styling: Tailwind CSS v4 (NOT v3 — use CSS custom properties, not config file)
-- Language: TypeScript strict mode throughout
-- Icons: Lucide (import only what is used, never import the full set)
-- Fonts: Bricolage Grotesque (headings) + Instrument Sans (body) + Geist Mono (code/labels)
-  — load via `@fontsource` packages, never from Google Fonts CDN (GDPR/privacy)
-- No UI component libraries (Shadcn, DaisyUI, etc.) — build components from scratch
+
+- **Framework:** Astro 7, `output: "static"` with the Cloudflare adapter.
+  Every page prerenders by default. A route becomes server-rendered *only* by
+  declaring `export const prerender = false` — currently just `src/pages/api/*`.
+  Never add `export const prerender = true`; it is the default and is noise.
+- **Styling:** SCSS with CSS custom properties. `src/styles/global.scss` is the only
+  global stylesheet, imported once by `BaseLayout.astro`. **There is no Tailwind.**
+  Page- and component-level styles go in scoped `<style lang="scss">` blocks.
+- **Content:** plain TypeScript data modules in `src/data/`. **There are no Astro
+  content collections** and no `src/content/` directory.
+- **Language:** TypeScript strict (`astro/tsconfigs/strict`). Path alias `@/*` → `src/*`.
+- **Fonts:** Bricolage Grotesque (display) + Instrument Sans (body) + Geist Mono
+  (system meta) — loaded via `@fontsource` packages in `BaseLayout.astro`,
+  never from the Google Fonts CDN (GDPR/privacy).
+- **Icons:** inline SVG, written by hand. No icon library is installed.
+- **No UI framework.** React, Three.js and friends were removed — do not reintroduce
+  them. If a component genuinely needs client JS, write a plain `<script>` in the
+  `.astro` file (see `Header.astro` and `contact.astro` for the established pattern).
+- **Dependencies:** ask before adding any. The runtime dependency list is deliberately
+  10 packages long.
 
 ## Project structure
-- src/content/extensions/ — one .mdx per extension
-- src/content/blog/ — one .mdx per blog post
-- src/components/ — shared components only
-- src/layouts/ — BaseLayout.astro (used on every page)
-- No page-level styles. All styling via Tailwind utility classes
 
-## Design system — follow exactly, do not deviate
+```
+src/
+  data/          designs.ts · software.ts · journal.ts   ← sources of truth
+  layouts/       BaseLayout.astro (wraps every page)
+  components/    shared components only
+  pages/         file-based routes
+  styles/        global.scss (the only global stylesheet)
+public/          static assets served verbatim, incl. _headers and _redirects
+scripts/         one-off Node asset generators (uses sharp)
+```
 
-### Color palette (Warm Craft direction)
-- --color-bg: #F6F2EC
-- --color-surface: #FFFFFF
-- --color-text: #1C1917
-- --color-muted: #8C7F72
-- --color-accent: #2B4FFF
-- --color-accent-hover: #1A3CE8
-- --color-dark-bg: #111318
-- --color-dark-surface: #1C1F28
-- --color-border: #E5DED5
+`src/data/software.ts` drives every product page. Adding a product is a data edit —
+if you find yourself creating a new `.astro` file per product, stop and extend the
+dynamic route instead.
 
-### Typography scale
-- Display (hero headings): Bricolage Grotesque, 56px/60px, weight 700
-- H1: 40px/44px, weight 700
-- H2: 28px/34px, weight 600
-- H3: 20px/26px, weight 600
-- Body: Instrument Sans, 16px/26px, weight 400
-- Small/caption: 14px/20px
-- Mono labels (version numbers, extension IDs): Geist Mono, 13px
+## Design system
+
+The tokens live at the top of `src/styles/global.scss` and are the single source of
+truth. Use the CSS variables — never hardcode a hex value in a component.
+
+### Color
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `--paper` | `#f3efe6` | page background (warm parchment) |
+| `--canvas` | `#faf8f3` | alternating section background |
+| `--surface` | `#ffffff` | cards, inputs |
+| `--ink` | `#141416` | primary text |
+| `--muted` | `#6b6860` | secondary text |
+| `--line` | `#ddd8cd` | borders |
+| `--cyan` `--orange` `--green` `--violet` | | **artwork accents only** — keep site chrome near-neutral |
+
+The site is light-only by design. Do not add a dark mode without asking.
 
 ### Spacing
-- Use only multiples of 4px (Tailwind's default 4px grid)
-- Section vertical padding: always py-20 (80px) minimum, py-32 (128px) for hero
-- Container max-width: max-w-6xl, centered, px-6
 
-### Border radius
-- Cards: rounded-xl (12px)
-- Buttons: rounded-lg (8px)
-- Badges/chips: rounded-full
-- Never mix these — pick one per element type and be consistent
+Use the ladder: `--s-1` (4px) through `--s-8` (96px). No arbitrary pixel values.
+
+### Radius
+
+`--radius` (6px) for cards and inputs, `--radius-lg` (14px) for large surfaces,
+`--radius-pill` for buttons and chips. Buttons are pills — do not give them 8px corners.
 
 ### Shadows
-- Cards: shadow-sm only. Never shadow-lg or shadow-xl on flat designs
-- No drop shadows on text
-- No neumorphic or glassmorphism effects
 
-## Component rules
+`--shadow-soft` (resting), `--shadow-card` (elevated), `--shadow-lift` (hover).
+Never invent a new shadow.
 
-### Hero sections
-- Single clear headline (max 8 words), subtitle max 2 lines
-- One primary CTA button (accent color), one secondary (ghost/outline)
-- Show the extension in action — a screenshot or GIF directly below or beside the headline
-- NO gradient blobs, NO animated particle backgrounds, NO floating decorative shapes
+### Motion
 
-### Feature sections
-- Max 3 columns on desktop
-- Each feature: icon (Lucide, 20px, stroke-width 1.5), heading, 2 sentences max
-- Icons: use accent color, NOT emoji
+`--t` (220ms) and `--ease`. Hover lift is `translateY(-2px)` and nothing more.
 
-### Cards (extension directory)
-- White background on the warm off-white page bg
-- 1px border using --color-border
-- shadow-sm
-- Hover: translate-y-[-2px] with transition-transform duration-200 — nothing more
+## Global utility classes
 
-### Buttons
-- Primary: bg-accent text-white, py-3 px-6, font-medium, rounded-lg
-- Secondary: border border-accent text-accent bg-transparent
-- Never use gradient backgrounds on buttons
-- Focus ring: ring-2 ring-accent ring-offset-2 (accessibility)
+These already exist in `global.scss`. Use them instead of restyling from scratch:
 
-### Navigation
-- Sticky, bg-[#F6F2EC]/90 backdrop-blur-sm
-- Logo left, links center or right
-- Active link: text-accent font-medium
-- Mobile: hamburger menu with slide-in drawer, NOT a full-page overlay
+- Layout: `.wrap`, `.wrap-content`, `.section`, `.surface`
+- Type: `.h-hero`, `.h-section`, `.h-page`, `.h-card`, `.lede`, `.body`, `.eyebrow`, `.meta`
+- Buttons: `.btn.-primary`, `.btn.-ghost`, `.btn.-link`
+- Forms: `.field`
+- Headers: `.page-hero`, `.page-head`
 
-## What NOT to generate (hard stops)
+`.eyebrow` is sans-serif. `.meta` is mono and reserved for **system data only** —
+dates, version numbers, categories, counts. Do not set body copy in mono.
 
-### Visual
-- No purple or blue gradient hero backgrounds
-- No "floating" card grids with heavy box shadows
-- No emoji used as icons or bullet points
-- No stock illustration-style SVGs (the generic "person with laptop" style)
-- No animated counters ("5,000+ happy users" incrementing on scroll)
-- No generic testimonial blocks with avatars unless real reviews are provided
-- No "as featured in" logo rows unless explicitly asked
+## Content rules
 
-### Code
-- No inline styles (style="...") — use Tailwind classes only
-- No !important in CSS
-- No hardcoded pixel values outside of the design system above
-- No jQuery, no Alpine.js, no extra JS frameworks
-- Astro Islands only for components that genuinely need client-side JS
-- No console.log left in committed code
+- Write as a developer talking to another developer: direct, specific, honest.
+- Banned marketing words: *supercharge, boost, seamlessly, powerful, effortless,
+  revolutionary, game-changing*.
+- Never ship placeholder copy. No "Lorem ipsum", no "Product Name Here".
+- No emoji as icons or bullets.
+- No invented metrics, testimonials, user counts, or "as featured in" rows.
 
-### Content
-- Do not write placeholder copy like "Lorem ipsum" or "Extension Name Here"
-- Do not use "Supercharge", "Boost", "Seamlessly", "Powerful", "Effortless" in marketing copy
-- Write copy as a developer talking to another developer — direct, specific, honest
+## Hard stops
+
+- No inline `style="..."` attributes; no `!important`.
+- No hardcoded hex colors or pixel values outside the token system.
+- No new npm dependencies without asking first.
+- No `console.log` in committed code (the `console.error` calls in API routes are
+  intentional — they surface in Cloudflare logs).
+- **Never break a URL under `/apps/*`, `/extensions/*` or `/software/*`.** Several of
+  these exact paths are filed with Amazon Appstore and the Chrome Web Store as the
+  official support and privacy URLs for live listings. They must 301, never 404.
+
+## Legal and product-page obligations
+
+Every product with `status: "published"` in `software.ts` **must** have a reachable
+privacy page and support page. This is a store-policy requirement, not a nicety —
+Chrome Web Store and Amazon Appstore both check. The dynamic routes under
+`/software/[slug]/` generate these from product data, so the obligation is met by
+filling in the data, not by writing pages.
 
 ## Verification steps (run after every UI task)
-- Check that fonts loaded from @fontsource, not external CDN
-- Check that no new npm dependencies were added without asking first
-- Test mobile layout at 375px and 768px
-- Run `astro check` to confirm TypeScript errors are zero
-- Verify each new page has proper <title>, meta description, and og:image
+
+1. `npm run build` — must pass.
+2. `npx astro check` — TypeScript errors must be zero.
+3. Confirm the built page count in `dist/client` matches expectations
+   (`find dist/client -name index.html | wc -l`).
+4. Test mobile layout at 375px and 768px.
+5. Every new page needs a `<title>`, a meta description, and an OG image.
+6. Fonts must still load from `@fontsource`, not a CDN.
