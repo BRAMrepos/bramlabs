@@ -208,7 +208,9 @@ const products = getPublishedSoftware();
 
     setLoading(true);
     try {
-      const res = await fetch("/api/feedback", {
+      // Trailing slash is required: astro.config sets trailingSlash "always",
+      // so POSTing to /api/feedback (no slash) 404s.
+      const res = await fetch("/api/feedback/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

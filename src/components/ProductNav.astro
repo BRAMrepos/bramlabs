@@ -50,7 +50,15 @@ const tabs = [
   .product-nav {
     border-bottom: 1px solid var(--line);
     margin-bottom: var(--s-5);
+    /* Scrolls only when the tabs outgrow narrow screens; the track itself
+       should never be visible. */
     overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     ul {
       display: flex;

@@ -17,7 +17,7 @@ are server-rendered — currently just the form endpoints under `src/pages/api/`
 
 ```bash
 npm install
-npm run dev            # 0.0.0.0:8080
+npm run dev            # http://localhost:4321
 npm run build
 npm run preview
 npm run typecheck      # astro check
