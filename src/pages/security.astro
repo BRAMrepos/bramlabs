@@ -1,0 +1,130 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPublishedSoftware } from "@/data/software";
+
+const products = getPublishedSoftware();
+---
+
+<BaseLayout
+  title="Security — BramLabs"
+  description="How to report a security vulnerability in a BramLabs product, what happens next, and what is in scope."
+>
+  <section class="section">
+    <div class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">Vulnerability disclosure</p>
+        <h1 class="h-page">Reporting a security issue</h1>
+        <p class="lede">
+          If you have found a vulnerability in a BramLabs product or in
+          bramlabs.co, report it privately and it will be looked at. There is no
+          bug bounty programme — but there is a real person who reads the inbox.
+        </p>
+      </header>
+
+      <div class="prose">
+        <h2>How to report</h2>
+        <p>
+          Email <a href="mailto:support@bramlabs.co">support@bramlabs.co</a> with
+          "Security" in the subject line. Include:
+        </p>
+        <ul>
+          <li>Which product and version is affected</li>
+          <li>The steps to reproduce it, in enough detail to follow</li>
+          <li>What an attacker could actually do with it</li>
+          <li>Any proof-of-concept — as an attachment, not a public link</li>
+        </ul>
+        <p>
+          Please do not open a public issue, post details on social media, or
+          include them in a store review before the issue is resolved.
+        </p>
+
+        <h2>What happens next</h2>
+        <ol>
+          <li>
+            <strong>Acknowledgement within 5 business days.</strong> If you have not
+            heard back by then, resend — assume the mail was lost rather than
+            ignored.
+          </li>
+          <li>
+            <strong>Assessment within 10 business days,</strong> with a
+            reproduction attempt and a severity judgement shared with you.
+          </li>
+          <li>
+            <strong>A fix, or a written explanation of why not.</strong> Timelines
+            depend on severity and on store review queues, which are outside
+            BramLabs' control.
+          </li>
+          <li>
+            <strong>Credit, if you want it.</strong> Say so in your report and
+            you will be named in the release notes.
+          </li>
+        </ol>
+
+        <h2>In scope</h2>
+        <ul>
+          {
+            products.map((p) => (
+              <li>
+                <a href={`/software/${p.slug}/`}>{p.title}</a> — {p.platform}
+              </li>
+            ))
+          }
+          <li>bramlabs.co, including the contact and feedback endpoints</li>
+        </ul>
+
+        <h2>Out of scope</h2>
+        <p>
+          These are known, accepted, or not something BramLabs can act on:
+        </p>
+        <ul>
+          <li>
+            Reports from automated scanners with no demonstrated exploitability
+          </li>
+          <li>
+            Missing security headers on pages that carry no user data, absent a
+            concrete attack
+          </li>
+          <li>
+            Denial of service, volumetric testing, or anything that degrades the
+            service for other people
+          </li>
+          <li>
+            Social engineering of BramLabs, its users, or store review staff
+          </li>
+          <li>
+            Vulnerabilities in third-party platforms themselves — report those to
+            Amazon, Google or Cloudflare directly
+          </li>
+          <li>
+            Issues requiring a physically compromised or rooted device, or an
+            attacker who already has the victim's credentials
+          </li>
+        </ul>
+
+        <h2>Safe harbour</h2>
+        <p>
+          Research conducted in good faith under this policy is welcome. If you
+          stay within scope, avoid accessing or modifying other people's data,
+          avoid degrading the service, and give a reasonable window before public
+          disclosure, BramLabs will not pursue or support legal action against
+          you for it.
+        </p>
+
+        <h2>Machine-readable policy</h2>
+        <p>
+          The same contact details are published at
+          <a href="/.well-known/security.txt">/.well-known/security.txt</a>
+          following RFC 9116.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .prose ol {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+  }
+</style>

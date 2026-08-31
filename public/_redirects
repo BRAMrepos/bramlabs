@@ -1,15 +1,56 @@
 # Cloudflare Pages permanent redirects
-/apps /studio 301
-/apps/ /studio 301
-/extensions /studio 301
-/extensions/ /studio 301
-/web /studio 301
-/web/ /studio 301
-/company /about 301
-/company/ /about 301
-/work / 301
-/work/ / 301
-/blog /journal 301
-/blog/ /journal 301
-/merch /collection/ 301
-/merch/ /collection/ 301
+#
+# CRITICAL: the /apps/* and /extensions/* paths below are filed with Amazon
+# Appstore and the Chrome Web Store as the official support and privacy URLs
+# for live listings. They must keep resolving. Never delete a rule here just
+# because the old page is gone — that is exactly when the rule is needed.
+#
+# `trailingSlash: "always"` is set in astro.config.mjs, so every path needs
+# both the bare and trailing-slash form.
+
+# ── Product pages: /apps + /extensions -> /software ──────────────────
+/apps/clearcue/privacy      /software/clearcue/privacy/      301
+/apps/clearcue/privacy/     /software/clearcue/privacy/      301
+/apps/clearcue/support      /software/clearcue/support/      301
+/apps/clearcue/support/     /software/clearcue/support/      301
+/apps/clearcue              /software/clearcue/              301
+/apps/clearcue/             /software/clearcue/              301
+
+/apps/shiftledger/privacy   /software/shiftledger/privacy/   301
+/apps/shiftledger/privacy/  /software/shiftledger/privacy/   301
+/apps/shiftledger/support   /software/shiftledger/support/   301
+/apps/shiftledger/support/  /software/shiftledger/support/   301
+/apps/shiftledger           /software/shiftledger/           301
+/apps/shiftledger/          /software/shiftledger/           301
+
+/extensions/sonicshield/privacy   /software/sonicshield/privacy/  301
+/extensions/sonicshield/privacy/  /software/sonicshield/privacy/  301
+/extensions/sonicshield/support   /software/sonicshield/support/  301
+/extensions/sonicshield/support/  /software/sonicshield/support/  301
+/extensions/sonicshield           /software/sonicshield/          301
+/extensions/sonicshield/          /software/sonicshield/          301
+
+# ── Section roots and older structure ────────────────────────────────
+# Kept above the splat rules below: Cloudflare matches in file order, and a
+# splat earlier in the file forces every later rule through a slower path.
+/apps              /software/    301
+/apps/             /software/    301
+/extensions        /software/    301
+/extensions/       /software/    301
+/studio            /software/    301
+/studio/           /software/    301
+/web               /software/    301
+/web/              /software/    301
+/company           /about/       301
+/company/          /about/       301
+/work              /             301
+/work/             /             301
+/blog              /journal/     301
+/blog/             /journal/     301
+/merch             /collection/  301
+/merch/            /collection/  301
+
+# ── Catch-all for anything else under the retired namespaces ──────────
+# Splats last, on purpose.
+/apps/*            /software/    301
+/extensions/*      /software/    301

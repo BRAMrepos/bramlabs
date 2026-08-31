@@ -1,0 +1,10 @@
+# BramLabs vulnerability disclosure policy (RFC 9116)
+# Human-readable version: https://bramlabs.co/security/
+# Please put "Security" in the subject line.
+
+Contact: mailto:support@bramlabs.co
+Contact: https://bramlabs.co/security/
+Expires: 2027-08-31T00:00:00.000Z
+Preferred-Languages: en
+Canonical: https://bramlabs.co/.well-known/security.txt
+Policy: https://bramlabs.co/security/

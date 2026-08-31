@@ -1,0 +1,130 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProductNav from "@/components/ProductNav.astro";
+import { getPublishedSoftware, type SoftwareProduct } from "@/data/software";
+
+/**
+ * Only products that actually have release history get a changelog page.
+ * An empty changelog is worse than no changelog, so this generates zero
+ * paths until `changelog` entries exist in software.ts.
+ */
+export function getStaticPaths() {
+  return getPublishedSoftware()
+    .filter((product) => (product.changelog?.length ?? 0) > 0)
+    .map((product) => ({
+      params: { slug: product.slug },
+      props: { product },
+    }));
+}
+
+interface Props {
+  product: SoftwareProduct;
+}
+
+const { product } = Astro.props;
+const entries = product.changelog ?? [];
+---
+
+<BaseLayout
+  title={`${product.title} Changelog — BramLabs`}
+  description={`Release history for ${product.title}.`}
+>
+  <section class="section">
+    <div class="wrap">
+      <p class="doc-meta breadcrumb">
+        <a href="/software/">Software</a> ·
+        <a href={`/software/${product.slug}/`}>{product.title}</a> · Changelog
+      </p>
+      <h1 class="h-page">{product.title} Changelog</h1>
+
+      <ProductNav slug={product.slug} current="changelog" hasChangelog />
+
+      <ol class="releases">
+        {
+          entries.map((entry) => (
+            <li class="release">
+              <div class="release-head">
+                <h2 class="version">{entry.version}</h2>
+                <time class="doc-meta" datetime={entry.date}>
+                  {new Date(entry.date).toLocaleDateString("en-GB", {
+                    day: "numeric",
+                    month: "short",
+                    year: "numeric",
+                  })}
+                </time>
+              </div>
+              <ul class="changes">
+                {entry.changes.map((c) => (
+                  <li>{c}</li>
+                ))}
+              </ul>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .breadcrumb {
+    margin-bottom: var(--s-3);
+
+    a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--line);
+
+      &:hover {
+        color: var(--ink);
+      }
+    }
+  }
+
+  .releases {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 44rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-5);
+  }
+
+  .release {
+    border-top: 2px solid var(--line);
+    padding-top: var(--s-3);
+  }
+
+  .release-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-3);
+    flex-wrap: wrap;
+  }
+
+  .version {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .changes {
+    list-style: disc;
+    padding-left: 1.2rem;
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    color: var(--muted);
+    font-size: 0.925rem;
+    line-height: 1.6;
+
+    li::marker {
+      color: var(--muted);
+    }
+  }
+</style>

@@ -1,0 +1,271 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProductNav from "@/components/ProductNav.astro";
+import { getPublishedSoftware, type SoftwareProduct } from "@/data/software";
+
+export function getStaticPaths() {
+  return getPublishedSoftware().map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+interface Props {
+  product: SoftwareProduct;
+}
+
+const { product } = Astro.props;
+
+const faqLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: product.faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
+};
+---
+
+<BaseLayout
+  title={`${product.title} Support — BramLabs`}
+  description={`Help with ${product.title}: common questions, how to report a bug, and how to reach BramLabs support.`}
+  jsonLd={faqLd}
+>
+  <section class="section">
+    <div class="wrap">
+      <p class="doc-meta breadcrumb">
+        <a href="/software/">Software</a> ·
+        <a href={`/software/${product.slug}/`}>{product.title}</a> · Support
+      </p>
+      <h1 class="h-page">{product.title} Support</h1>
+
+      <ProductNav
+        slug={product.slug}
+        current="support"
+        hasChangelog={Boolean(product.changelog?.length)}
+      />
+
+      <div class="support-grid">
+        <div class="prose">
+          <h2>Common questions</h2>
+          <div class="faq">
+            {
+              product.faq.map((item) => (
+                <details>
+                  <summary>{item.q}</summary>
+                  <p>{item.a}</p>
+                </details>
+              ))
+            }
+          </div>
+
+          <h2>Reporting a bug</h2>
+          <p>
+            A report gets fixed faster when it says what you expected and what
+            happened instead. Include:
+          </p>
+          <ul>
+            <li>The product name ({product.title}) and its version, if you can see it</li>
+            <li>Your device or browser, and its version</li>
+            <li>What you were doing when it went wrong</li>
+            <li>What you expected to happen, and what happened instead</li>
+            <li>A screenshot if it helps — with any passwords or personal details cropped out</li>
+          </ul>
+          <p>
+            Reports are usually answered within a few business days. There is no
+            support account to create.
+          </p>
+
+          <h2>Reporting a security issue</h2>
+          <p>
+            Do not post vulnerability details publicly. Send them to
+            <a href="mailto:support@bramlabs.co">support@bramlabs.co</a> — see the
+            <a href="/security/">security page</a> for what to include and what to
+            expect.
+          </p>
+
+          <h2>Installing safely</h2>
+          <p>
+            Install {product.title} only from
+            {
+              product.externalUrl ? (
+                <>
+                  {" "}
+                  <a href={product.externalUrl} target="_blank" rel="noopener noreferrer">
+                    its official {product.platform} listing
+                  </a>
+                </>
+              ) : (
+                <> its official {product.platform} listing</>
+              )
+            }. Third-party APK sites and extension mirrors repackage builds and
+            cannot be verified — anything installed from one of those is not
+            supported.
+          </p>
+        </div>
+
+        <aside class="contact-card">
+          <h2 class="h-card">Get in touch</h2>
+          <p>
+            The feedback form routes straight to {product.title}, so you do not
+            have to explain which product you mean.
+          </p>
+          <div class="card-actions">
+            <a href={`/feedback/?product=${product.slug}`} class="btn -primary">
+              Send feedback
+            </a>
+            <a href="mailto:support@bramlabs.co" class="btn -ghost">
+              support@bramlabs.co
+            </a>
+          </div>
+          <hr />
+          <ul class="quick-links">
+            <li><a href={`/software/${product.slug}/privacy/`}>Privacy policy</a></li>
+            {
+              product.externalUrl && (
+                <li>
+                  <a href={product.externalUrl} target="_blank" rel="noopener noreferrer">
+                    {product.platform} listing ↗
+                  </a>
+                </li>
+              )
+            }
+            <li><a href="/software/">All BramLabs software</a></li>
+          </ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .breadcrumb {
+    margin-bottom: var(--s-3);
+
+    a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--line);
+
+      &:hover {
+        color: var(--ink);
+      }
+    }
+  }
+
+  .support-grid {
+    display: grid;
+    gap: var(--s-6);
+    align-items: start;
+
+    @media (width >= 900px) {
+      grid-template-columns: minmax(0, 1fr) 19rem;
+      gap: var(--s-7);
+    }
+  }
+
+  .faq {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  details {
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 0.85rem 1rem;
+    background: var(--surface);
+    transition: border-color var(--t) var(--ease);
+
+    &[open] {
+      border-color: color-mix(in oklab, var(--ink) 25%, var(--line));
+    }
+  }
+
+  summary {
+    cursor: pointer;
+    color: var(--ink);
+    font-weight: 500;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    min-height: 28px;
+
+    &::-webkit-details-marker {
+      display: none;
+    }
+
+    &::after {
+      content: "+";
+      font-family: var(--font-mono);
+      color: var(--muted);
+      flex-shrink: 0;
+      transition: transform var(--t) var(--ease);
+    }
+  }
+
+  details[open] summary::after {
+    content: "−";
+  }
+
+  details p {
+    margin-top: 0.65rem;
+    color: var(--muted);
+  }
+
+  .contact-card {
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: var(--s-4);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+
+    @media (width >= 900px) {
+      position: sticky;
+      top: calc(var(--header-h) + 1rem);
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    hr {
+      border: 0;
+      border-top: 1px solid var(--line);
+      margin: 0.25rem 0;
+    }
+  }
+
+  .card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .quick-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.875rem;
+
+    a {
+      color: var(--muted);
+      transition: color var(--t) var(--ease);
+
+      &:hover {
+        color: var(--ink);
+      }
+    }
+  }
+</style>

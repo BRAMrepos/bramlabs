@@ -1,0 +1,294 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProductNav from "@/components/ProductNav.astro";
+import { getPublishedSoftware, type SoftwareProduct } from "@/data/software";
+
+export function getStaticPaths() {
+  return getPublishedSoftware().map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+interface Props {
+  product: SoftwareProduct;
+}
+
+const { product } = Astro.props;
+
+const appLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  name: product.title,
+  description: product.description,
+  applicationCategory: "UtilitiesApplication",
+  operatingSystem: product.availability,
+  url: `https://bramlabs.co/software/${product.slug}/`,
+  ...(product.externalUrl ? { installUrl: product.externalUrl } : {}),
+  publisher: {
+    "@type": "Organization",
+    name: "BramLabs",
+    url: "https://bramlabs.co",
+  },
+  offers: {
+    "@type": "Offer",
+    price: "0",
+    priceCurrency: "USD",
+  },
+};
+---
+
+<BaseLayout
+  title={`${product.title} — ${product.tagline} — BramLabs`}
+  description={product.description}
+  jsonLd={appLd}
+>
+  <section class="section">
+    <div class="wrap">
+      <header class="product-hero">
+        <div class="hero-main">
+          {
+            product.icon && (
+              <img
+                src={product.icon}
+                alt=""
+                width="72"
+                height="72"
+                class="hero-icon"
+              />
+            )
+          }
+          <div class="hero-text">
+            <p class="eyebrow">{product.tagline}</p>
+            <h1 class="h-page">{product.title}</h1>
+            <p class="lede">{product.longDescription}</p>
+
+            <dl class="spec">
+              <div>
+                <dt>Platform</dt>
+                <dd>{product.platform}</dd>
+              </div>
+              <div>
+                <dt>Runs on</dt>
+                <dd>{product.availability}</dd>
+              </div>
+            </dl>
+
+            <div class="hero-actions">
+              {
+                product.externalUrl && (
+                  <a
+                    href={product.externalUrl}
+                    class="btn -primary"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Get {product.title} ↗
+                  </a>
+                )
+              }
+              <a href={`/software/${product.slug}/support/`} class="btn -ghost">
+                Support
+              </a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <ProductNav slug={product.slug} current="overview" hasChangelog={Boolean(product.changelog?.length)} />
+
+      <section class="features" aria-labelledby="features-heading">
+        <h2 class="h-card" id="features-heading">What it does</h2>
+        <ul class="feature-grid">
+          {
+            product.features.map((f) => (
+              <li class="feature">
+                <h3>{f.title}</h3>
+                <p>{f.body}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </section>
+
+      <section class="privacy-strip" aria-labelledby="privacy-heading">
+        <div>
+          <p class="eyebrow">Privacy</p>
+          <h2 class="h-card" id="privacy-heading">{product.privacy.summary}</h2>
+        </div>
+        <a href={`/software/${product.slug}/privacy/`} class="btn -ghost">
+          Read the full policy →
+        </a>
+      </section>
+
+      <section class="help-strip">
+        <h2 class="h-card">Something not working?</h2>
+        <p class="body muted">
+          Support answers common questions and tells you exactly what to include
+          in a bug report. If you would rather just send it, the feedback form
+          routes straight to {product.title}.
+        </p>
+        <div class="help-actions">
+          <a href={`/software/${product.slug}/support/`} class="btn -primary">
+            {product.title} support
+          </a>
+          <a href={`/feedback/?product=${product.slug}`} class="btn -ghost">
+            Report a bug
+          </a>
+        </div>
+      </section>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .product-hero {
+    padding-bottom: var(--s-5);
+  }
+
+  .hero-main {
+    display: flex;
+    gap: var(--s-4);
+    align-items: flex-start;
+  }
+
+  .hero-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--line);
+    background: var(--surface);
+    object-fit: cover;
+    flex-shrink: 0;
+
+    @media (width < 640px) {
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  .hero-text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-2);
+    min-width: 0;
+  }
+
+  .lede {
+    max-width: 40rem;
+  }
+
+  .spec {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2) var(--s-5);
+    margin-top: var(--s-2);
+
+    div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    dt {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    dd {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--ink);
+    }
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--s-3);
+  }
+
+  .features {
+    margin-top: var(--s-6);
+  }
+
+  .feature-grid {
+    display: grid;
+    gap: var(--s-4);
+    margin-top: var(--s-4);
+    grid-template-columns: 1fr;
+
+    @media (width >= 700px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .feature {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    border-top: 2px solid var(--line);
+    padding-top: var(--s-3);
+    transition: border-color var(--t) var(--ease);
+
+    &:hover {
+      border-color: var(--ink);
+    }
+
+    h3 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+  }
+
+  .privacy-strip {
+    margin-top: var(--s-6);
+    padding: var(--s-4);
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-3);
+
+    h2 {
+      max-width: 44rem;
+      margin-top: 0.25rem;
+    }
+  }
+
+  .help-strip {
+    margin-top: var(--s-6);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    .muted {
+      color: var(--muted);
+      max-width: 44rem;
+    }
+  }
+
+  .help-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--s-2);
+  }
+</style>

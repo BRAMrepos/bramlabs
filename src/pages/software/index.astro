@@ -1,0 +1,308 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import {
+  getSoftwareByPlatform,
+  getPublishedSoftware,
+  assertPublishedProductsAreComplete,
+} from "@/data/software";
+
+// Fails the build if a published product is missing store-required content.
+assertPublishedProductsAreComplete();
+
+const groups = getSoftwareByPlatform();
+const all = getPublishedSoftware();
+---
+
+<BaseLayout
+  title="Software — BramLabs"
+  description="Independent software from BramLabs: shift and routine apps for Android, browser utilities for Chrome, and web products. Every product has its own support and privacy documentation."
+>
+  <section class="section">
+    <div class="wrap">
+      <header class="page-head">
+        <p class="eyebrow">Products</p>
+        <h1 class="h-page">Independent software from BramLabs</h1>
+        <p class="lede">
+          {all.length} products, each with its own support page and privacy policy.
+          Small tools that do one job — built and maintained by one person.
+        </p>
+      </header>
+
+      {
+        groups.map((group) => (
+          <div class="platform-group">
+            <h2 class="group-title">{group.platform}</h2>
+            <ul class="product-list">
+              {group.items.map((p) => (
+                <li>
+                  <article class="product-card">
+                    <a href={`/software/${p.slug}/`} class="card-link">
+                      {p.icon ? (
+                        <img src={p.icon} alt="" width="56" height="56" class="icon" />
+                      ) : (
+                        <div class="icon icon-fallback" aria-hidden="true">
+                          <span>{p.title.slice(0, 2).toUpperCase()}</span>
+                        </div>
+                      )}
+                      <div class="card-body">
+                        <h3 class="card-title">{p.title}</h3>
+                        <p class="card-tagline">{p.tagline}</p>
+                        <p class="card-desc">{p.description}</p>
+                      </div>
+                    </a>
+                    <div class="card-links">
+                      <a href={`/software/${p.slug}/`}>Overview</a>
+                      <a href={`/software/${p.slug}/support/`}>Support</a>
+                      <a href={`/software/${p.slug}/privacy/`}>Privacy</a>
+                      {p.externalUrl && (
+                        <a href={p.externalUrl} target="_blank" rel="noopener noreferrer">
+                          Get it ↗
+                        </a>
+                      )}
+                    </div>
+                  </article>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+
+      <div class="ops">
+        <div class="ops-block">
+          <h2 class="h-card">Support &amp; feedback</h2>
+          <p class="body muted">
+            Bug reports, feature requests and questions all go to the same place.
+            Pick the product on the form and it routes correctly.
+          </p>
+          <div class="ops-actions">
+            <a href="/feedback/" class="btn -primary">Send feedback</a>
+            <a href="/contact/" class="btn -ghost">Contact the studio</a>
+          </div>
+        </div>
+
+        <div class="ops-block">
+          <h2 class="h-card">Policies</h2>
+          <ul class="ops-list">
+            <li><a href="/privacy/">Site-wide privacy policy</a></li>
+            <li><a href="/terms/">Terms of use</a></li>
+            <li><a href="/security/">Report a security issue</a></li>
+            <li><a href="mailto:support@bramlabs.co">support@bramlabs.co</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="apparel-strip">
+        <div>
+          <p class="eyebrow">Also from the studio</p>
+          <h2 class="h-card">Original apparel graphics</h2>
+          <p class="body muted">
+            The same desk produces technical vector illustration for apparel —
+            twelve original pieces, each with its construction trail documented.
+          </p>
+        </div>
+        <div class="strip-actions">
+          <a href="/collection/" class="btn -ghost">View the collection →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .platform-group {
+    margin-bottom: var(--s-6);
+  }
+
+  .group-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.11em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-bottom: 0.65rem;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--s-4);
+  }
+
+  .product-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--s-3);
+    grid-template-columns: 1fr;
+
+    @media (width >= 760px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .product-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    transition:
+      transform var(--t) var(--ease),
+      box-shadow var(--t) var(--ease),
+      border-color var(--t) var(--ease);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lift);
+      border-color: color-mix(in oklab, var(--ink) 25%, var(--line));
+    }
+
+    &:focus-within {
+      border-color: var(--ink);
+    }
+  }
+
+  .card-link {
+    display: flex;
+    gap: var(--s-3);
+    padding: var(--s-4);
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: var(--canvas);
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .icon-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--muted);
+  }
+
+  .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  .card-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .card-desc {
+    margin-top: 0.35rem;
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 var(--s-3);
+    padding: 0.75rem var(--s-4);
+    border-top: 1px solid var(--line);
+    background: var(--canvas);
+
+    a {
+      font-size: 0.8rem;
+      color: var(--muted);
+      padding: 0.25rem 0;
+      transition: color var(--t) var(--ease);
+
+      &:hover {
+        color: var(--ink);
+      }
+    }
+  }
+
+  .ops {
+    display: grid;
+    gap: var(--s-5);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+
+    @media (width >= 760px) {
+      grid-template-columns: 1.3fr 1fr;
+      gap: var(--s-6);
+    }
+  }
+
+  .ops-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+
+    .muted {
+      color: var(--muted);
+      max-width: 34rem;
+    }
+  }
+
+  .ops-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: var(--s-2);
+  }
+
+  .ops-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+
+    a {
+      font-size: 0.925rem;
+      color: var(--muted);
+      transition: color var(--t) var(--ease);
+
+      &:hover {
+        color: var(--ink);
+      }
+    }
+  }
+
+  .apparel-strip {
+    margin-top: var(--s-6);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--s-4);
+
+    .muted {
+      color: var(--muted);
+      max-width: 34rem;
+      margin-top: 0.4rem;
+    }
+  }
+</style>

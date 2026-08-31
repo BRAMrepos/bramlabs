@@ -1,0 +1,233 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ProductNav from "@/components/ProductNav.astro";
+import { getPublishedSoftware, type SoftwareProduct } from "@/data/software";
+
+export function getStaticPaths() {
+  return getPublishedSoftware().map((product) => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+interface Props {
+  product: SoftwareProduct;
+}
+
+const { product } = Astro.props;
+const { privacy } = product;
+
+const effective = new Date(privacy.effectiveDate).toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
+---
+
+<BaseLayout
+  title={`${product.title} Privacy Policy — BramLabs`}
+  description={`How ${product.title} handles personal information. ${privacy.summary}`}
+>
+  <section class="section">
+    <div class="wrap">
+      <p class="doc-meta breadcrumb">
+        <a href="/software/">Software</a> ·
+        <a href={`/software/${product.slug}/`}>{product.title}</a> · Privacy
+      </p>
+      <h1 class="h-page">{product.title} Privacy Policy</h1>
+      <p class="doc-meta effective">Effective {effective}</p>
+
+      <ProductNav
+        slug={product.slug}
+        current="privacy"
+        hasChangelog={Boolean(product.changelog?.length)}
+      />
+
+      <div class="prose">
+        <p class="summary">{privacy.summary}</p>
+
+        <p>
+          This policy covers <strong>{product.title}</strong> specifically. The
+          <a href="/privacy/">site-wide policy</a> covers bramlabs.co itself. Where
+          the two differ, this page governs {product.title}.
+        </p>
+
+        <h2>What is collected</h2>
+        {
+          privacy.collectsPersonalData ? (
+            <p>
+              {product.title} processes the data set out in the table below. Each
+              row states what is collected, why, and how long it is kept.
+            </p>
+          ) : (
+            <p>
+              {product.title} does not require an account and does not collect
+              personal information during normal use. The only data BramLabs
+              receives is what you send deliberately — for example, by emailing
+              support.
+            </p>
+          )
+        }
+
+        <div class="table-scroll">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th scope="col">Category</th>
+                <th scope="col">What</th>
+                <th scope="col">Why</th>
+                <th scope="col">Kept for</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                privacy.practices.map((row) => (
+                  <tr>
+                    <th scope="row">{row.category}</th>
+                    <td>{row.collected}</td>
+                    <td>{row.purpose}</td>
+                    <td>{row.retention}</td>
+                  </tr>
+                ))
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <h2>What is never done</h2>
+        <ul>
+          <li>Personal information is not sold, and never has been.</li>
+          <li>
+            Contact and support addresses are not used as an advertising audience
+            and are not shared with advertisers or data brokers.
+          </li>
+          <li>
+            No advertising trackers or cross-site profiling scripts are embedded
+            in {product.title}.
+          </li>
+          <li>
+            No account on bramlabs.co is required to read this policy or to
+            contact support about {product.title}.
+          </li>
+        </ul>
+
+        <h2>Who else processes data</h2>
+        {
+          privacy.processors.length === 0 ? (
+            <p>
+              No third-party processors handle {product.title} data.
+            </p>
+          ) : (
+            <>
+              <p>
+                These providers process data on BramLabs' behalf, under their own
+                terms, only for the purpose listed:
+              </p>
+              <ul>
+                {privacy.processors.map((proc) => (
+                  <li>
+                    <strong>{proc.name}</strong> — {proc.purpose}
+                    {proc.url && (
+                      <>
+                        {" "}
+                        <a href={proc.url} target="_blank" rel="noopener noreferrer">
+                          Their privacy policy ↗
+                        </a>
+                      </>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )
+        }
+
+        <h2>Your rights</h2>
+        <p>
+          Depending on where you live, you may have the right to access a copy of
+          the personal data held about you, to have it corrected, to have it
+          deleted, to restrict or object to how it is processed, and to receive it
+          in a portable format. Under the GDPR these rights apply to individuals in
+          the UK and EEA; under the CCPA/CPRA, California residents have comparable
+          rights, including the right not to be discriminated against for
+          exercising them.
+        </p>
+        <p>
+          To exercise any of these, email
+          <a href="mailto:support@bramlabs.co">support@bramlabs.co</a> and say which
+          product you are writing about. Requests are answered within 30 days. There
+          is no charge, and no account is needed.
+        </p>
+        <p>
+          Because BramLabs does not sell personal information to anyone, there is
+          nothing to opt out of under "Do Not Sell or Share My Personal
+          Information."
+        </p>
+
+        <h2>Children</h2>
+        <p>
+          {product.title} is not directed at children under 13, and BramLabs does
+          not knowingly collect personal information from them. If you believe a
+          child has provided personal information, email
+          <a href="mailto:support@bramlabs.co">support@bramlabs.co</a> and it will
+          be deleted.
+        </p>
+
+        <h2>Security</h2>
+        <p>
+          Data in transit is protected with TLS. Access to the support inbox is
+          limited to BramLabs. No system is perfectly secure, so if you find a
+          vulnerability please report it through the
+          <a href="/security/">security page</a> rather than posting it publicly.
+        </p>
+
+        <h2>Changes to this policy</h2>
+        <p>
+          If this policy changes materially, the effective date at the top of the
+          page is updated and the previous version is superseded. Continuing to use
+          {" "}{product.title} after a change means the revised policy applies. The
+          current version took effect on {effective}.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          BramLabs — <a href="mailto:support@bramlabs.co">support@bramlabs.co</a>
+          <br />
+          For anything not related to a specific product, use
+          <a href="mailto:contact@bramlabs.co">contact@bramlabs.co</a> or the
+          <a href="/contact/">contact form</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style lang="scss">
+  .breadcrumb {
+    margin-bottom: var(--s-3);
+
+    a {
+      color: var(--muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--line);
+
+      &:hover {
+        color: var(--ink);
+      }
+    }
+  }
+
+  .effective {
+    margin-top: 0.5rem;
+    margin-bottom: var(--s-5);
+  }
+
+  .summary {
+    font-size: 1.05rem;
+    color: var(--ink);
+    border-left: 3px solid var(--ink);
+    padding-left: var(--s-3);
+    line-height: 1.6;
+  }
+</style>

@@ -1,0 +1,420 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPublishedSoftware } from "@/data/software";
+
+const products = getPublishedSoftware();
+---
+
+<BaseLayout
+  title="Feedback — BramLabs"
+  description="Report a bug, request a feature, or ask a question about any BramLabs product. No account needed, and an email address is optional."
+>
+  <section class="section">
+    <div class="wrap narrow">
+      <header class="page-head">
+        <p class="eyebrow">Bug reports &amp; feature requests</p>
+        <h1 class="h-page">Send feedback</h1>
+        <p class="lede">
+          One form for every product. No account, and the email field is optional —
+          though without it there is no way to reply or ask a follow-up question.
+        </p>
+      </header>
+
+      <form class="form" id="fb-form" novalidate aria-label="Send feedback">
+        <div class="field">
+          <label for="fb-product">Which product?</label>
+          <select id="fb-product" name="product" required>
+            {products.map((p) => <option value={p.slug}>{p.title}</option>)}
+            <option value="site">bramlabs.co (this website)</option>
+          </select>
+        </div>
+
+        <fieldset class="field kind-field">
+          <legend>What kind of feedback?</legend>
+          <div class="kinds">
+            <label class="kind">
+              <input type="radio" name="kind" value="bug" checked />
+              <span>Bug report</span>
+            </label>
+            <label class="kind">
+              <input type="radio" name="kind" value="feature" />
+              <span>Feature request</span>
+            </label>
+            <label class="kind">
+              <input type="radio" name="kind" value="question" />
+              <span>Question</span>
+            </label>
+            <label class="kind">
+              <input type="radio" name="kind" value="other" />
+              <span>Other</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="field">
+          <label for="fb-message">What happened?</label>
+          <p class="field-hint" id="fb-message-hint">
+            For a bug: what you did, what you expected, what happened instead.
+          </p>
+          <textarea
+            id="fb-message"
+            name="message"
+            rows="7"
+            required
+            maxlength="4000"
+            aria-describedby="fb-message-hint"
+          ></textarea>
+        </div>
+
+        <div class="row">
+          <div class="field">
+            <label for="fb-version">Version <span class="optional">optional</span></label>
+            <input
+              id="fb-version"
+              name="version"
+              type="text"
+              maxlength="60"
+              placeholder="e.g. 1.4.2"
+            />
+          </div>
+          <div class="field">
+            <label for="fb-environment">Device or browser <span class="optional">optional</span></label>
+            <input
+              id="fb-environment"
+              name="environment"
+              type="text"
+              maxlength="200"
+              placeholder="e.g. Pixel 8, Android 15"
+            />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="fb-email">Your email <span class="optional">optional</span></label>
+          <p class="field-hint" id="fb-email-hint">
+            Only used to reply to you about this report. Nothing else.
+          </p>
+          <input
+            id="fb-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            maxlength="200"
+            placeholder="you@example.com"
+            aria-describedby="fb-email-hint"
+          />
+        </div>
+
+        <div class="hp-field" aria-hidden="true">
+          <label for="fb-website">Website</label>
+          <input id="fb-website" name="website_hp" type="text" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div class="form-footer">
+          <button type="submit" class="btn -primary" id="fb-submit">
+            <span class="btn-text">Send feedback</span>
+          </button>
+          <p class="hint meta" id="fb-status" role="status" aria-live="polite"></p>
+        </div>
+      </form>
+
+      <div class="banner -success" id="fb-success" tabindex="-1" hidden>
+        <strong>Sent.</strong>
+        <span>Thanks — it lands in the support inbox. If you left an email you'll get a reply.</span>
+      </div>
+      <div class="banner -error" id="fb-error" tabindex="-1" hidden>
+        <strong>Not sent.</strong>
+        <span id="fb-error-text"></span>
+      </div>
+
+      <aside class="alt">
+        <h2 class="h-card">Other ways to reach the studio</h2>
+        <ul>
+          <li>
+            Product support pages have the common fixes:
+            {
+              products.map((p, i) => (
+                <>
+                  {i > 0 && ", "}
+                  <a href={`/software/${p.slug}/support/`}>{p.title}</a>
+                </>
+              ))
+            }
+          </li>
+          <li>
+            Security vulnerabilities go to the <a href="/security/">security page</a>,
+            not this form.
+          </li>
+          <li>
+            Studio, design and collaboration enquiries: <a href="/contact/">contact page</a>.
+          </li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById("fb-form") as HTMLFormElement | null;
+  const submitBtn = document.getElementById("fb-submit") as HTMLButtonElement | null;
+  const status = document.getElementById("fb-status") as HTMLParagraphElement | null;
+  const productSelect = document.getElementById("fb-product") as HTMLSelectElement | null;
+  const successBanner = document.getElementById("fb-success") as HTMLDivElement | null;
+  const errorBanner = document.getElementById("fb-error") as HTMLDivElement | null;
+  const errorText = document.getElementById("fb-error-text") as HTMLSpanElement | null;
+
+  // Deep link: /feedback/?product=clearcue preselects the product, so the
+  // "Report a bug" buttons on product pages arrive with context.
+  if (productSelect) {
+    const wanted = new URLSearchParams(window.location.search).get("product");
+    if (wanted) {
+      const match = Array.from(productSelect.options).find((o) => o.value === wanted);
+      if (match) productSelect.value = wanted;
+    }
+  }
+
+  function setLoading(loading: boolean) {
+    if (!submitBtn) return;
+    submitBtn.disabled = loading;
+    submitBtn.setAttribute("aria-busy", String(loading));
+    const label = submitBtn.querySelector(".btn-text");
+    if (label) label.textContent = loading ? "Sending…" : "Send feedback";
+  }
+
+  function hideBanners() {
+    successBanner?.setAttribute("hidden", "");
+    errorBanner?.setAttribute("hidden", "");
+  }
+
+  function showError(msg: string) {
+    if (errorText) errorText.textContent = msg;
+    errorBanner?.removeAttribute("hidden");
+    errorBanner?.focus();
+  }
+
+  form?.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    hideBanners();
+    if (status) status.textContent = "";
+
+    const data = new FormData(form);
+    const message = String(data.get("message") ?? "").trim();
+
+    if (!message) {
+      showError("Add a message describing what happened.");
+      (document.getElementById("fb-message") as HTMLTextAreaElement | null)?.focus();
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const res = await fetch("/api/feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          product: data.get("product"),
+          kind: data.get("kind"),
+          message,
+          email: data.get("email"),
+          version: data.get("version"),
+          environment: data.get("environment"),
+          website_hp: data.get("website_hp"),
+        }),
+      });
+
+      const payload = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+      };
+
+      if (res.ok && payload.ok) {
+        form.reset();
+        successBanner?.removeAttribute("hidden");
+        successBanner?.focus();
+      } else {
+        showError(payload.error ?? "Something went wrong. Please try again.");
+      }
+    } catch {
+      showError("Couldn't reach the server. Check your connection and try again.");
+    } finally {
+      setLoading(false);
+    }
+  });
+</script>
+
+<style lang="scss">
+  .narrow {
+    max-width: 44rem;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--s-4);
+  }
+
+  .row {
+    display: grid;
+    gap: var(--s-4);
+    grid-template-columns: 1fr;
+
+    @media (width >= 600px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .field-hint {
+    font-size: 0.825rem;
+    color: var(--muted);
+    margin-top: -0.15rem;
+  }
+
+  .optional {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 0.35rem;
+  }
+
+  .kind-field {
+    border: 0;
+    padding: 0;
+    margin: 0;
+
+    legend {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--ink);
+      padding: 0;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .kinds {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .kind {
+    position: relative;
+    display: inline-flex;
+
+    input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    span {
+      display: inline-block;
+      padding: 0.5rem 0.95rem;
+      font-size: 0.875rem;
+      color: var(--muted);
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-pill);
+      cursor: pointer;
+      transition:
+        color var(--t) var(--ease),
+        border-color var(--t) var(--ease),
+        background var(--t) var(--ease);
+    }
+
+    input:checked + span {
+      color: var(--paper);
+      background: var(--ink);
+      border-color: var(--ink);
+    }
+
+    input:focus-visible + span {
+      outline: 2px solid var(--ink);
+      outline-offset: 2px;
+    }
+
+    &:hover input:not(:checked) + span {
+      border-color: color-mix(in oklab, var(--ink) 35%, var(--line));
+      color: var(--ink);
+    }
+  }
+
+  /* Off-screen rather than display:none — some bots skip hidden inputs. */
+  .hp-field {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .form-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3);
+  }
+
+  .banner {
+    margin-top: var(--s-4);
+    padding: 0.9rem 1.1rem;
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    font-size: 0.925rem;
+    line-height: 1.6;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+
+    strong {
+      color: var(--ink);
+    }
+
+    &.-success {
+      background: color-mix(in oklab, var(--green) 10%, var(--surface));
+      border-color: color-mix(in oklab, var(--green) 35%, var(--line));
+    }
+
+    &.-error {
+      background: color-mix(in oklab, var(--orange) 10%, var(--surface));
+      border-color: color-mix(in oklab, var(--orange) 35%, var(--line));
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--ink);
+      outline-offset: 2px;
+    }
+  }
+
+  .alt {
+    margin-top: var(--s-6);
+    padding-top: var(--s-5);
+    border-top: 1px solid var(--line);
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: var(--s-3) 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      font-size: 0.925rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      text-decoration-color: var(--line);
+
+      &:hover {
+        text-decoration-color: var(--ink);
+      }
+    }
+  }
+</style>

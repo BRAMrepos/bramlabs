@@ -1,0 +1,86 @@
+---
+/**
+ * Sub-navigation shared by every page under /software/[slug]/.
+ * Keeps the product's own pages reachable from each other so a visitor who
+ * arrives on a privacy page from a store listing can find the product.
+ */
+interface Props {
+  slug: string;
+  current: "overview" | "privacy" | "support" | "changelog";
+  hasChangelog?: boolean;
+}
+
+const { slug, current, hasChangelog = false } = Astro.props;
+
+const tabs = [
+  { key: "overview", label: "Overview", href: `/software/${slug}/` },
+  { key: "support", label: "Support", href: `/software/${slug}/support/` },
+  { key: "privacy", label: "Privacy", href: `/software/${slug}/privacy/` },
+  ...(hasChangelog
+    ? [
+        {
+          key: "changelog",
+          label: "Changelog",
+          href: `/software/${slug}/changelog/`,
+        },
+      ]
+    : []),
+] as const;
+---
+
+<nav class="product-nav" aria-label="Product pages">
+  <ul>
+    {
+      tabs.map((t) => (
+        <li>
+          <a
+            href={t.href}
+            class:list={[{ active: t.key === current }]}
+            aria-current={t.key === current ? "page" : undefined}
+          >
+            {t.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style lang="scss">
+  .product-nav {
+    border-bottom: 1px solid var(--line);
+    margin-bottom: var(--s-5);
+    overflow-x: auto;
+
+    ul {
+      display: flex;
+      gap: var(--s-4);
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    a {
+      display: inline-block;
+      padding: 0.6rem 0;
+      font-size: 0.9rem;
+      color: var(--muted);
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+      transition:
+        color var(--t) var(--ease),
+        border-color var(--t) var(--ease);
+
+      &:hover {
+        color: var(--ink);
+      }
+
+      &.active {
+        color: var(--ink);
+        font-weight: 500;
+        border-bottom-color: var(--ink);
+      }
+    }
+  }
+</style>
