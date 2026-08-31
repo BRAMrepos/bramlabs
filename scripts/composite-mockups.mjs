@@ -1,9 +1,15 @@
 import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
+import { fileURLToPath } from 'node:url';
 
-const mockupsDir = 'C:/Users/hp/.gemini/antigravity/scratch/bramlabs-site/public/mockups';
-const designsDir = 'C:/Users/hp/.gemini/antigravity/scratch/bramlabs-site/public/designs';
+// Paths were hardcoded to one machine's absolute filesystem; derived now.
+const root = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+const mockupsDir = path.join(root, 'public', 'mockups');
+const designsDir = path.join(root, 'public', 'designs');
+// Base garment photos are generator input, not site assets — they live
+// outside public/ so they are not deployed.
+const basesDir = path.join(root, 'assets', 'mockup-bases');
 
 const designsList = [
   { slug: 'rotation-dial', color: 'black' },
@@ -23,8 +29,8 @@ const designsList = [
 async function generateMockups() {
   for (const d of designsList) {
     const baseFile = d.color === 'navy' 
-      ? path.join(mockupsDir, '_base-tee-navy.jpg') 
-      : path.join(mockupsDir, '_base-tee-black.jpg');
+      ? path.join(basesDir, '_base-tee-navy.jpg')
+      : path.join(basesDir, '_base-tee-black.jpg');
 
     const svgFile = path.join(designsDir, `${d.slug}-art.svg`);
     const outJpg = path.join(mockupsDir, `${d.slug}-tee.jpg`);

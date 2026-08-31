@@ -157,7 +157,7 @@ ${clampLines(subtitle, 34, 2)
 
   const png = await sharp(bg)
     .composite([{ input: art, left: W - PANEL + (PANEL - 330) / 2, top: (H - 330) / 2 }])
-    .png({ compressionLevel: 9 })
+    .png({ compressionLevel: 9, palette: true, quality: 92 })
     .toBuffer();
 
   await writeFile(join(outDir, `design-${slug}.png`), png);
@@ -165,7 +165,7 @@ ${clampLines(subtitle, 34, 2)
 }
 
 async function render(name, svg) {
-  const png = await sharp(Buffer.from(svg)).png({ compressionLevel: 9 }).toBuffer();
+  const png = await sharp(Buffer.from(svg)).png({ compressionLevel: 9, palette: true, quality: 92 }).toBuffer();
   await writeFile(join(outDir, `${name}.png`), png);
   console.log(`  ${name}.png  ${(png.length / 1024).toFixed(0)} KB`);
 }
@@ -239,10 +239,13 @@ async function main() {
   if (Array.isArray(designs)) {
     for (const d of designs) {
       // Prefer the raster master; the .svg source is unusable as og:image.
+      // Art masters live in assets/, not public/ — they are generator input
+      // and were shipping ~7 MB of never-requested bytes to visitors.
       const art = join(
         root,
-        "public",
-        d.images.rawArtwork.replace(/\.svg$/, ".png"),
+        "assets",
+        "art-masters",
+        d.images.rawArtwork.replace(/^\/designs\//, "").replace(/\.svg$/, ".png"),
       );
       try {
         await renderDesignCard(d.slug, d.title, d.seo?.description ?? d.title, art);

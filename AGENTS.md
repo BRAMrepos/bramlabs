@@ -35,7 +35,8 @@ src/
   pages/         file-based routes
   styles/        global.scss (the only global stylesheet)
 public/          static assets served verbatim, incl. _headers and _redirects
-scripts/         one-off Node asset generators (uses sharp)
+assets/          NOT deployed — generator input only (art masters, base photos)
+scripts/         Node asset generators and the build verifier (uses sharp)
 ```
 
 `src/data/software.ts` drives every product page. Adding a product is a data edit —
@@ -120,12 +121,24 @@ Chrome Web Store and Amazon Appstore both check. The dynamic routes under
 `/software/[slug]/` generate these from product data, so the obligation is met by
 filling in the data, not by writing pages.
 
+## Assets
+
+`public/` ships to every visitor. Files that only a build script reads — art
+masters, base garment photographs — belong in `assets/`, which is not deployed.
+An unreferenced 1.4 MB PNG in `public/` is not downloaded by visitors, but it
+is still uploaded on every deploy and counts against the Pages file budget.
+Separating these cut the deployed build from 15 MB to 7 MB.
+
 ## Verification steps (run after every UI task)
 
-1. `npm run build` — must pass.
-2. `npx astro check` — TypeScript errors must be zero.
-3. Confirm the built page count in `dist/client` matches expectations
-   (`find dist/client -name index.html | wc -l`).
-4. Test mobile layout at 375px and 768px.
-5. Every new page needs a `<title>`, a meta description, and an OG image.
-6. Fonts must still load from `@fontsource`, not a CDN.
+Run `npm run check` — that is `typecheck && build && verify`, exactly what CI
+runs. `npm run verify` is the important one: it fails if a published product is
+missing its privacy or support page, if a legacy store URL stops resolving, if
+any `og:image` is missing or an SVG, if an internal link is dead, or if a page
+lacks a title or description.
+
+Then, by hand:
+- Test mobile layout at 375px and 768px.
+- Confirm fonts still load from `@fontsource`, not a CDN.
+- If you added images, check whether they belong in `assets/` rather than
+  `public/`.

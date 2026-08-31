@@ -22,6 +22,9 @@ npm run build
 npm run preview
 npm run typecheck      # astro check
 npm run generate:art   # regenerate vector art / mockups / process assets
+npm run generate:og    # regenerate the 1200x630 social cards in public/og/
+npm run verify         # gate the built output (run after build)
+npm run check          # typecheck + build + verify, same as CI
 ```
 
 ## Content
@@ -36,6 +39,7 @@ npm run generate:art   # regenerate vector art / mockups / process assets
 | `public/process/` | Process stage illustrations |
 | `public/og/` | Social share cards |
 | `public/studio/` | Product marks + workspace illustration |
+| `assets/` | **Not deployed.** Generator input only — art masters, base garment photos, image masters |
 
 ### Add a product
 
@@ -51,6 +55,15 @@ stores check for these.
 2. Append a record to `src/data/designs.ts`. Set `featured: true` only for homepage
    highlights.
 3. Rebuild.
+
+## Assets
+
+`public/` is deployed verbatim, so anything in it ships to every visitor.
+Generator *input* — the 4500px art masters, the base garment photographs, the
+full-size image masters — lives in `assets/` instead. Moving those out cut the
+deployed build from 15 MB to 7 MB; nothing in `public/` was unreferenced.
+
+If you add a large source file that only a script reads, put it in `assets/`.
 
 ## Environment
 
