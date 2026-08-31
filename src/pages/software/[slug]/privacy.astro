@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ProductNav from "@/components/ProductNav.astro";
-import { getPublishedSoftware, type SoftwareProduct } from "@/data/software";
+import { getDocumentedSoftware, type SoftwareProduct } from "@/data/software";
+import { strings } from "@/data/i18n";
 
 export function getStaticPaths() {
-  return getPublishedSoftware().map((product) => ({
+  return getDocumentedSoftware().map((product) => ({
     params: { slug: product.slug },
     props: { product },
   }));
@@ -15,35 +16,83 @@ interface Props {
 }
 
 const { product } = Astro.props;
-const { privacy } = product;
+const { privacy, privacyDocument } = product;
+const t = strings(product.locale);
 
-const effective = new Date(privacy.effectiveDate).toLocaleDateString("en-GB", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-});
+const effective = new Date(privacy.effectiveDate).toLocaleDateString(
+  t.dateLocale,
+  { day: "numeric", month: "long", year: "numeric" },
+);
 ---
 
 <BaseLayout
-  title={`${product.title} Privacy Policy — BramLabs`}
-  description={`How ${product.title} handles personal information. ${privacy.summary}`}
+  title={
+    privacyDocument
+      ? `${privacyDocument.title} — ${product.title} — BramLabs`
+      : `${product.title} Privacy Policy — BramLabs`
+  }
+  description={privacy.summary}
   image={`/og/product-${product.slug}.png`}
+  lang={t.htmlLang}
 >
   <section class="section">
     <div class="wrap">
       <p class="doc-meta breadcrumb">
-        <a href="/software/">Software</a> ·
-        <a href={`/software/${product.slug}/`}>{product.title}</a> · Privacy
+        <a href="/software/">{t.breadcrumbRoot}</a> ·
+        <a href={`/software/${product.slug}/`}>{product.title}</a> · {t.navPrivacy}
       </p>
-      <h1 class="h-page">{product.title} Privacy Policy</h1>
-      <p class="doc-meta effective">Effective {effective}</p>
+      <h1 class="h-page">
+        {privacyDocument ? privacyDocument.title : `${product.title} Privacy Policy`}
+      </h1>
+      <p class="doc-meta effective">
+        {privacyDocument
+          ? privacyDocument.standfirst
+          : `${t.effective} ${effective}`}
+      </p>
 
       <ProductNav
         slug={product.slug}
         current="privacy"
         hasChangelog={Boolean(product.changelog?.length)}
+        locale={product.locale}
       />
 
+      {/*
+        An authored document is rendered verbatim: this wording is what was
+        filed with the store, so it is never paraphrased by the template below.
+      */}
+      {
+        privacyDocument ? (
+          <div class="prose">
+            <p class="summary">{privacyDocument.summary}</p>
+            {privacyDocument.sections.map((sec) => (
+              <>
+                {sec.heading && <h2>{sec.heading}</h2>}
+                {sec.paragraphs?.map((para) => (
+                  <p class="keep-breaks">{para}</p>
+                ))}
+                {sec.bullets && (
+                  <ul>
+                    {sec.bullets.map((b) => (
+                      <li>
+                        {b.strong ? (
+                          <>
+                            <strong>{b.strong}</strong> — {b.text}
+                          </>
+                        ) : (
+                          b.text
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {sec.trailingParagraphs?.map((para) => (
+                  <p class="keep-breaks">{para}</p>
+                ))}
+              </>
+            ))}
+          </div>
+        ) : (
       <div class="prose">
         <p class="summary">{privacy.summary}</p>
 
@@ -199,6 +248,8 @@ const effective = new Date(privacy.effectiveDate).toLocaleDateString("en-GB", {
           <a href="/contact/">contact form</a>.
         </p>
       </div>
+        )
+      }
     </div>
   </section>
 </BaseLayout>
@@ -222,6 +273,11 @@ const effective = new Date(privacy.effectiveDate).toLocaleDateString("en-GB", {
   .effective {
     margin-top: 0.5rem;
     margin-bottom: var(--s-5);
+  }
+
+  /* The Verantwortlicher address block is one paragraph with real newlines. */
+  .keep-breaks {
+    white-space: pre-line;
   }
 
   .summary {

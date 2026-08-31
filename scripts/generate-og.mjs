@@ -215,7 +215,9 @@ async function main() {
 
   if (Array.isArray(software)) {
     for (const p of software) {
-      if (p.status !== "published") continue;
+      // Matches getDocumentedSoftware(): submitted products have pages too,
+      // so they need a card or their links preview as a blank image.
+      if (p.status !== "published" && p.status !== "submitted") continue;
       await render(
         `product-${p.slug}`,
         card({

@@ -59,6 +59,37 @@ export type FaqItem = {
   a: string;
 };
 
+/** Language a product's own pages are written in. */
+export type Locale = "en" | "de";
+
+/**
+ * A section of a hand-written legal document.
+ *
+ * Some products need a policy that is authored, not generated — a different
+ * language, a jurisdiction-specific structure, or claims too specific for the
+ * template (e.g. "this app holds no INTERNET permission"). Those are stored
+ * verbatim here and rendered through the site's own chrome, so the wording is
+ * never paraphrased by a template.
+ */
+export type LegalSection = {
+  heading: string;
+  /** Paragraphs, rendered in order. */
+  paragraphs?: string[];
+  /** Bullet list. `strong` is bolded and followed by an en dash. */
+  bullets?: { strong?: string; text: string }[];
+  /** Paragraphs rendered after the bullet list. */
+  trailingParagraphs?: string[];
+};
+
+export type LegalDocument = {
+  title: string;
+  /** Line under the title, e.g. "Android-App ... Stand: 31. August 2026". */
+  standfirst: string;
+  /** Lead paragraph, styled as the document summary. */
+  summary: string;
+  sections: LegalSection[];
+};
+
 export type Feature = {
   title: string;
   body: string;
@@ -91,8 +122,20 @@ export type SoftwareProduct = {
     | "retired";
   externalUrl?: string;
   icon?: string;
+  /**
+   * Language this product's pages are written in. Defaults to "en".
+   * Drives <html lang>, date formatting and the sub-navigation labels.
+   */
+  locale?: Locale;
   features: Feature[];
   privacy: PrivacyProfile;
+  /**
+   * A hand-written policy that replaces the generated one. Use when the
+   * wording is legally load-bearing and must not be paraphrased — a German
+   * Datenschutzerklaerung, for instance. `privacy` is still required, because
+   * the summary and effective date feed cards and metadata.
+   */
+  privacyDocument?: LegalDocument;
   faq: FaqItem[];
   changelog?: ChangelogEntry[];
   /**
@@ -132,6 +175,152 @@ const CLOUDFLARE: Processor = {
 };
 
 export const software: SoftwareProduct[] = [
+  {
+    slug: "arbeitszeit",
+    title: "Arbeitszeit",
+    tagline: "Arbeitszeiterfassung für Deutschland",
+    description:
+      "Arbeitszeiten, Pausen und Zuschläge erfassen — vollständig offline auf dem Gerät.",
+    longDescription:
+      "Arbeitszeit erfasst Arbeitszeiten, Pausen, Urlaub und Krankheit und rechnet Zuschläge und Stunden gegen deinen Vertrag. Die App besitzt keine Internet-Berechtigung: alles bleibt auf deinem Gerät.",
+    platform: "Android",
+    availability: "Android, auf Deutsch",
+    status: "submitted",
+    locale: "de",
+    icon: "/studio/arbeitszeit-mark.svg",
+    // Filed with the store before the move to /software/. Must never 404.
+    legacyPaths: ["/apps/arbeitszeit/privacy/", "/apps/arbeitszeit/support/"],
+    features: [
+      {
+        title: "Zeiten und Pausen",
+        body: "Arbeitszeiten, Pausen und Abwesenheiten wie Urlaub und Krankheit an einer Stelle.",
+      },
+      {
+        title: "Vertrag und Zuschläge",
+        body: "Wochenstunden, Arbeitstage, Zuschlagssätze und Stundenlohn hinterlegen und gegen die Lohnabrechnung abgleichen.",
+      },
+      {
+        title: "Ohne Internet",
+        body: "Die App hat keine Internet-Berechtigung und kann technisch keine Daten übertragen.",
+      },
+    ],
+    privacy: {
+      summary:
+        "Die App besitzt keine Internet-Berechtigung. Alle Einträge bleiben im app-privaten Speicher deines Geräts.",
+      collectsPersonalData: false,
+      practices: [],
+      processors: [],
+      effectiveDate: "2026-08-31",
+      verified: true,
+    },
+    // Authored, not generated: this is the wording filed with the store.
+    privacyDocument: {
+      title: "Datenschutzerklärung",
+      standfirst: "Android-App \u201eArbeitszeit\u201c \u00b7 Stand: 31. August 2026",
+      summary:
+        "Diese App verarbeitet keine personenbezogenen Daten auf unseren Systemen. Sie besitzt keine Berechtigung für den Internetzugriff und ist technisch nicht in der Lage, Daten zu übertragen. Alles, was du einträgst, bleibt auf deinem Gerät.",
+      sections: [
+        {
+          heading: "1. Verantwortlicher",
+          paragraphs: [
+            "Bramlabs\nBraim\nBerlin N21\n14050\nE-Mail: contact@bramlabs.co",
+          ],
+        },
+        {
+          heading: "2. Welche Daten verarbeitet werden",
+          paragraphs: ["Ausschließlich die Angaben, die du selbst in der App erfasst:"],
+          bullets: [
+            { text: "Arbeitszeiten, Pausen und Abwesenheiten (Urlaub, Krankheit)" },
+            {
+              text: "Vertragsdaten wie Wochenstunden, Arbeitstage, Zuschlagssätze und Stundenlohn",
+            },
+            {
+              text: "Angaben für den Stundenzettel: Name, Personalnummer, Abteilung, Arbeitgeber",
+            },
+            { text: "Beträge, die du zum Abgleich von deiner Lohnabrechnung abtippst" },
+          ],
+          trailingParagraphs: [
+            "Die App erhebt keine Geräte-, Standort- oder Nutzungsdaten. Sie enthält keine Analyse-, Tracking- oder Werbebausteine und keine Absturzberichterstattung an Dritte.",
+          ],
+        },
+        {
+          heading: "3. Wo die Daten gespeichert werden",
+          paragraphs: [
+            "Ausschließlich in einem app-privaten Bereich deines Gerätes, auf den andere Apps keinen Zugriff haben. Die automatische Google-Sicherung (allowBackup) ist abgeschaltet, deine Zeiten werden also nicht in eine Cloud gespiegelt. Es gibt keine Server und keine Konten.",
+            "Sicherungen erstellst du selbst über \u201eDaten exportieren\u201c. Wohin diese Datei geht, entscheidest ausschließlich du; ab dem Verlassen der App liegt sie in deiner Verantwortung.",
+          ],
+        },
+        {
+          heading: "4. Berechtigungen",
+          bullets: [
+            {
+              strong: "Benachrichtigungen",
+              text: "damit der Schichtwecker melden kann. Wird erst angefragt, wenn du ihn einschaltest.",
+            },
+            {
+              strong: "Start nach Neustart",
+              text: "Wecker überstehen einen Geräteneustart nicht von selbst; die App setzt sie danach neu.",
+            },
+            {
+              strong: "Fingerabdruck / Gerätesperre",
+              text: "ausschließlich zum Entsperren der App. Die Prüfung übernimmt Android; die App erhält nur die Antwort \u201eja\u201c oder \u201enein\u201c und niemals biometrische Daten.",
+            },
+          ],
+          trailingParagraphs: [
+            "Eine Berechtigung für den Internetzugriff besitzt die App nicht.",
+          ],
+        },
+        {
+          heading: "5. Weitergabe an Dritte",
+          paragraphs: [
+            "Es findet keine Weitergabe statt. Es gibt keine Auftragsverarbeiter, keine Dienste Dritter und keine Datenübermittlung in Drittländer.",
+          ],
+        },
+        {
+          heading: "6. Rechtsgrundlage und Speicherdauer",
+          paragraphs: [
+            "Da keine Daten an uns übermittelt werden, findet durch uns keine Verarbeitung im Sinne der DSGVO statt. Die auf deinem Gerät gespeicherten Angaben bleiben dort, bis du sie über \u201eAlle Daten löschen\u201c entfernst oder die App deinstallierst.",
+          ],
+        },
+        {
+          heading: "7. Deine Rechte",
+          paragraphs: [
+            "Dir stehen die Rechte aus Art. 15 bis 21 DSGVO zu. Da uns keine Daten vorliegen, gibt es bei uns nichts, worüber wir Auskunft erteilen oder was wir berichtigen oder löschen könnten. Auskunft verschaffst du dir jederzeit selbst über die Export-Funktion, Löschung über \u201eAlle Daten löschen\u201c oder das Deinstallieren der App.",
+            "Unabhängig davon steht dir ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu.",
+          ],
+        },
+        {
+          heading: "8. Änderungen",
+          paragraphs: [
+            "Ändert sich der Funktionsumfang der App in einer Weise, die eine Datenverarbeitung auslöst, wird diese Erklärung vorher angepasst und das Datum oben aktualisiert.",
+          ],
+        },
+      ],
+    },
+    faq: [
+      {
+        q: "Wo werden meine Zeiten gespeichert?",
+        a: "Ausschließlich in einem app-privaten Bereich deines Geräts. Die App hat keine Internet-Berechtigung und kann Daten technisch nicht übertragen. Es gibt keine Server und keine Konten.",
+      },
+      {
+        q: "Werden meine Daten in der Google-Cloud gesichert?",
+        a: "Nein. Die automatische Google-Sicherung (allowBackup) ist abgeschaltet. Sicherungen erstellst du selbst über \u201eDaten exportieren\u201c.",
+      },
+      {
+        q: "Was passiert bei einem Gerätewechsel?",
+        a: "Exportiere deine Daten vor dem Wechsel über \u201eDaten exportieren\u201c und importiere die Datei auf dem neuen Gerät. Ohne Export gehen die Einträge beim Deinstallieren verloren.",
+      },
+      {
+        q: "Warum meldet sich der Schichtwecker nicht?",
+        a: "Der Wecker braucht die Benachrichtigungs-Berechtigung. Prüfe außerdem, ob die Akku-Optimierung für die App eingeschränkt ist — viele Hersteller unterdrücken sonst geplante Alarme.",
+      },
+      {
+        q: "Wie lösche ich alle Daten?",
+        a: "Über \u201eAlle Daten löschen\u201c in der App oder durch Deinstallieren. Bei uns liegt nichts, was gelöscht werden müsste.",
+      },
+    ],
+  },
+
   {
     slug: "shiftledger",
     title: "ShiftLedger",
@@ -451,6 +640,25 @@ export function getPublishedSoftware(): SoftwareProduct[] {
   );
 }
 
+/**
+ * Products that get their own pages on this site.
+ *
+ * Deliberately wider than `getPublishedSoftware`: a store submission has to
+ * name a privacy-policy URL, and that URL must already resolve at the moment
+ * you submit — before any listing exists to link back to. So "submitted"
+ * products are documented here even though they have no externalUrl yet.
+ */
+export function getDocumentedSoftware(): SoftwareProduct[] {
+  return software.filter(
+    (p) => p.status === "published" || p.status === "submitted",
+  );
+}
+
+/** True when the product has a store listing a visitor can actually open. */
+export function isLive(p: SoftwareProduct): boolean {
+  return p.status === "published" && Boolean(p.externalUrl);
+}
+
 export function getInDevelopmentSoftware(): SoftwareProduct[] {
   return software.filter((p) => p.status === "in-development");
 }
@@ -463,18 +671,19 @@ export function getSoftwareByPlatform(): {
   platform: string;
   items: SoftwareProduct[];
 }[] {
-  const order = ["Amazon Appstore", "Chrome Web Store", "Web"];
+  const order = ["Android", "Amazon Appstore", "Chrome Web Store", "Web"];
+  const documented = getDocumentedSoftware();
   return order
     .map((platform) => ({
       platform,
-      items: getPublishedSoftware().filter((p) => p.platform === platform),
+      items: documented.filter((p) => p.platform === platform),
     }))
     .filter((g) => g.items.length > 0);
 }
 
 /** Products still needing their privacy claims confirmed against the build. */
 export function getUnverifiedPrivacy(): SoftwareProduct[] {
-  return getPublishedSoftware().filter((p) => !p.privacy.verified);
+  return getDocumentedSoftware().filter((p) => !p.privacy.verified);
 }
 
 /**
@@ -483,11 +692,13 @@ export function getUnverifiedPrivacy(): SoftwareProduct[] {
  */
 export function assertPublishedProductsAreComplete(): void {
   const problems: string[] = [];
-  for (const p of getPublishedSoftware()) {
+  for (const p of getDocumentedSoftware()) {
     if (!p.privacy.summary.trim()) {
       problems.push(`${p.slug}: privacy.summary is empty`);
     }
-    if (p.privacy.practices.length === 0) {
+    // A generated policy needs table rows. An authored document supplies its
+    // own structure, so the empty-practices check does not apply to it.
+    if (!p.privacyDocument && p.privacy.practices.length === 0) {
       problems.push(
         `${p.slug}: privacy.practices is empty — support correspondence at minimum must be declared`,
       );

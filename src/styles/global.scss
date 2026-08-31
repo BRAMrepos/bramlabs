@@ -253,6 +253,35 @@ ol {
   line-height: 1.1;
   letter-spacing: -0.03em;
   color: var(--ink);
+  /* German compounds ("Datenschutzerklaerung") are longer than the 375px
+     viewport at this size. Break rather than overflow the page. */
+  overflow-wrap: break-word;
+  text-wrap: balance;
+}
+
+/* Long-word languages get real hyphenation. Scoped to :lang(de) so English
+   pages are untouched.
+
+   Headings deliberately do NOT set overflow-wrap: break-word — that breaks
+   anywhere and beats hyphens to it, stranding a single letter on its own
+   line. Hyphenation alone gives "Datenschutz-" / "erklaerung"; the slightly
+   smaller floor keeps the longest compound on one line where it can. */
+:lang(de) {
+  .h-page,
+  .h-section,
+  .h-card,
+  .prose {
+    hyphens: auto;
+  }
+
+  .h-page {
+    font-size: clamp(1.75rem, 4.4vw, 2.75rem);
+    overflow-wrap: normal;
+  }
+
+  .prose {
+    overflow-wrap: break-word;
+  }
 }
 
 /* Card heading — fluid from 20px → 28px */

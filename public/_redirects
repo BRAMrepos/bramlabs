@@ -9,6 +9,13 @@
 # both the bare and trailing-slash form.
 
 # ── Product pages: /apps + /extensions -> /software ──────────────────
+/apps/arbeitszeit/privacy    /software/arbeitszeit/privacy/   301
+/apps/arbeitszeit/privacy/   /software/arbeitszeit/privacy/   301
+/apps/arbeitszeit/support    /software/arbeitszeit/support/   301
+/apps/arbeitszeit/support/   /software/arbeitszeit/support/   301
+/apps/arbeitszeit            /software/arbeitszeit/           301
+/apps/arbeitszeit/           /software/arbeitszeit/           301
+
 /apps/clearcue/privacy      /software/clearcue/privacy/      301
 /apps/clearcue/privacy/     /software/clearcue/privacy/      301
 /apps/clearcue/support      /software/clearcue/support/      301

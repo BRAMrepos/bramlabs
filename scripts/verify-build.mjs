@@ -2,7 +2,9 @@
  * Post-build gate. Run against dist/ after `npm run build`.
  *
  * Catches the failure modes this site has actually had:
- *  - a published product with no privacy or support page (store-policy risk)
+ *  - a documented product with no privacy or support page (store-policy risk).
+ *    Covers "submitted" as well as "published": a store submission must name a
+ *    privacy URL that already resolves, so those pages matter most before launch.
  *  - an og:image pointing at a file that does not exist, or at an SVG
  *    (most social crawlers reject SVG outright)
  *  - an internal link to a page that was renamed or deleted
@@ -75,16 +77,18 @@ async function main() {
     redirects.has(url) ||
     splats.some((s) => url.startsWith(s));
 
-  // ── 1. every published product has its store-required pages ──────
-  const { getPublishedSoftware } = await import("../src/data/software.ts");
-  const products = getPublishedSoftware();
+  // ── 1. every documented product has its store-required pages ─────
+  const { getDocumentedSoftware } = await import("../src/data/software.ts");
+  const products = getDocumentedSoftware();
   for (const p of products) {
     for (const kind of ["", "privacy/", "support/"]) {
       const url = `/software/${p.slug}/${kind}`;
       if (!pages.has(url)) fail(`${p.title}: missing page ${url}`);
     }
   }
-  notes.push(`${products.length} published products, each with overview + privacy + support`);
+  notes.push(
+    `${products.length} documented products, each with overview + privacy + support`,
+  );
 
   // ── 2. legacy store URLs still resolve ───────────────────────────
   // These exact paths are filed with Amazon and the Chrome Web Store.

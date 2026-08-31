@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ProductNav from "@/components/ProductNav.astro";
-import { getPublishedSoftware, type SoftwareProduct } from "@/data/software";
+import { getDocumentedSoftware, type SoftwareProduct } from "@/data/software";
+import { strings } from "@/data/i18n";
 
 export function getStaticPaths() {
-  return getPublishedSoftware().map((product) => ({
+  return getDocumentedSoftware().map((product) => ({
     params: { slug: product.slug },
     props: { product },
   }));
@@ -15,6 +16,7 @@ interface Props {
 }
 
 const { product } = Astro.props;
+const t = strings(product.locale);
 
 const faqLd = {
   "@context": "https://schema.org",
@@ -36,8 +38,8 @@ const faqLd = {
   <section class="section">
     <div class="wrap">
       <p class="doc-meta breadcrumb">
-        <a href="/software/">Software</a> ·
-        <a href={`/software/${product.slug}/`}>{product.title}</a> · Support
+        <a href="/software/">{t.breadcrumbRoot}</a> ·
+        <a href={`/software/${product.slug}/`}>{product.title}</a> · {t.navSupport}
       </p>
       <h1 class="h-page">{product.title} Support</h1>
 
@@ -45,11 +47,12 @@ const faqLd = {
         slug={product.slug}
         current="support"
         hasChangelog={Boolean(product.changelog?.length)}
+        locale={product.locale}
       />
 
       <div class="support-grid">
         <div class="prose">
-          <h2>Common questions</h2>
+          <h2>{t.commonQuestions}</h2>
           <div class="faq">
             {
               product.faq.map((item) => (
@@ -61,60 +64,39 @@ const faqLd = {
             }
           </div>
 
-          <h2>Reporting a bug</h2>
-          <p>
-            A report gets fixed faster when it says what you expected and what
-            happened instead. Include:
-          </p>
+          <h2>{t.bugHeading}</h2>
+          <p>{t.bugIntro}</p>
           <ul>
-            <li>The product name ({product.title}) and its version, if you can see it</li>
-            <li>Your device or browser, and its version</li>
-            <li>What you were doing when it went wrong</li>
-            <li>What you expected to happen, and what happened instead</li>
-            <li>A screenshot if it helps — with any passwords or personal details cropped out</li>
+            {t.bugBullets(product.title).map((b) => (
+              <li>{b}</li>
+            ))}
           </ul>
+          <p>{t.bugResponse}</p>
+
+          <h2>{t.securityHeading}</h2>
           <p>
-            Reports are usually answered within a few business days. There is no
-            support account to create.
+            {t.securityBody} <a href="/security/">{t.securityLink}</a>
           </p>
 
-          <h2>Reporting a security issue</h2>
-          <p>
-            Do not post vulnerability details publicly. Send them to
-            <a href="mailto:support@bramlabs.co">support@bramlabs.co</a> — see the
-            <a href="/security/">security page</a> for what to include and what to
-            expect.
-          </p>
-
-          <h2>Installing safely</h2>
-          <p>
-            Install {product.title} only from
-            {
-              product.externalUrl ? (
-                <>
-                  {" "}
-                  <a href={product.externalUrl} target="_blank" rel="noopener noreferrer">
-                    its official {product.platform} listing
-                  </a>
-                </>
-              ) : (
-                <> its official {product.platform} listing</>
-              )
-            }. Third-party APK sites and extension mirrors repackage builds and
-            cannot be verified — anything installed from one of those is not
-            supported.
-          </p>
+          <h2>{t.installHeading}</h2>
+          <p>{t.installBody(product.title, product.platform)}</p>
+          {
+            product.externalUrl && (
+              <p>
+                <a href={product.externalUrl} target="_blank" rel="noopener noreferrer">
+                  {t.storeListing(product.platform)}
+                </a>
+              </p>
+            )
+          }
         </div>
 
         <aside class="contact-card">
-          <h2 class="h-card">Get in touch</h2>
-          <p>
-            The feedback form routes straight to {product.title}, so you do not
-            have to explain which product you mean.
-          </p>
+          <h2 class="h-card">{t.getInTouch}</h2>
+          <p>{t.contactCardBody(product.title)}</p>
           <div class="card-actions">
             <a href={`/feedback/?product=${product.slug}`} class="btn -primary">
-              Send feedback
+              {t.sendFeedback}
             </a>
             <a href="mailto:support@bramlabs.co" class="btn -ghost">
               support@bramlabs.co
@@ -122,17 +104,19 @@ const faqLd = {
           </div>
           <hr />
           <ul class="quick-links">
-            <li><a href={`/software/${product.slug}/privacy/`}>Privacy policy</a></li>
+            <li>
+              <a href={`/software/${product.slug}/privacy/`}>{t.privacyPolicyLink}</a>
+            </li>
             {
               product.externalUrl && (
                 <li>
                   <a href={product.externalUrl} target="_blank" rel="noopener noreferrer">
-                    {product.platform} listing ↗
+                    {t.storeListing(product.platform)}
                   </a>
                 </li>
               )
             }
-            <li><a href="/software/">All BramLabs software</a></li>
+            <li><a href="/software/">{t.allSoftware}</a></li>
           </ul>
         </aside>
       </div>

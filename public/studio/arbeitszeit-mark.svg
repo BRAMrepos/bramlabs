@@ -1,0 +1,33 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="arbz-bg" x1="8" y1="2" x2="40" y2="46" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2f9e6e"></stop>
+      <stop offset="0.52" stop-color="#1d7f5c"></stop>
+      <stop offset="1" stop-color="#14624a"></stop>
+    </linearGradient>
+    <linearGradient id="arbz-shine" x1="24" y1="0" x2="24" y2="26" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff" stop-opacity="0.26"></stop>
+      <stop offset="1" stop-color="#fff" stop-opacity="0"></stop>
+    </linearGradient>
+  </defs>
+  <!-- App tile -->
+  <rect width="48" height="48" rx="12.5" fill="url(#arbz-bg)"></rect>
+  <rect width="48" height="48" rx="12.5" fill="url(#arbz-shine)"></rect>
+  <!-- Crisp edge -->
+  <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="11.75" stroke="#fff" stroke-opacity="0.18" stroke-width="1.5"></rect>
+  <!-- Timesheet card: the app is a Stundenzettel before it is anything else -->
+  <rect x="12" y="11.5" width="24" height="25" rx="3.4" fill="#fff" fill-opacity="0.95"></rect>
+  <!-- Binding holes -->
+  <circle cx="18.5" cy="10.5" r="1.9" fill="#fff"></circle>
+  <circle cx="29.5" cy="10.5" r="1.9" fill="#fff"></circle>
+  <!-- Logged rows: two complete, one running -->
+  <g fill="#14624a">
+    <rect x="15.6" y="17.4" width="11.4" height="2.1" rx="1.05"></rect>
+    <rect x="15.6" y="22.2" width="8.4" height="2.1" rx="1.05" fill-opacity="0.62"></rect>
+  </g>
+  <!-- Running entry, marked in the accent, sitting proud of the card -->
+  <circle cx="30.6" cy="30.4" r="7.1" fill="url(#arbz-bg)" stroke="#fff" stroke-width="2.2"></circle>
+  <g stroke="#fff" stroke-width="1.9" stroke-linecap="round">
+    <path d="M30.6 26.9V30.6L33 32"></path>
+  </g>
+</svg>

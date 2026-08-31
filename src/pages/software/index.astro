@@ -2,7 +2,8 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import {
   getSoftwareByPlatform,
-  getPublishedSoftware,
+  getDocumentedSoftware,
+  isLive,
   assertPublishedProductsAreComplete,
 } from "@/data/software";
 
@@ -10,7 +11,7 @@ import {
 assertPublishedProductsAreComplete();
 
 const groups = getSoftwareByPlatform();
-const all = getPublishedSoftware();
+const all = getDocumentedSoftware();
 ---
 
 <BaseLayout
@@ -46,7 +47,10 @@ const all = getPublishedSoftware();
                         </div>
                       )}
                       <div class="card-body">
-                        <h3 class="card-title">{p.title}</h3>
+                        <div class="title-row">
+                          <h3 class="card-title">{p.title}</h3>
+                          {!isLive(p) && <span class="status-badge">In review</span>}
+                        </div>
                         <p class="card-tagline">{p.tagline}</p>
                         <p class="card-desc">{p.description}</p>
                       </div>
@@ -55,7 +59,7 @@ const all = getPublishedSoftware();
                       <a href={`/software/${p.slug}/`}>Overview</a>
                       <a href={`/software/${p.slug}/support/`}>Support</a>
                       <a href={`/software/${p.slug}/privacy/`}>Privacy</a>
-                      {p.externalUrl && (
+                      {isLive(p) && p.externalUrl && (
                         <a href={p.externalUrl} target="_blank" rel="noopener noreferrer">
                           Get it ↗
                         </a>
@@ -196,6 +200,25 @@ const all = getPublishedSoftware();
     flex-direction: column;
     gap: 0.2rem;
     min-width: 0;
+  }
+
+  .title-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .status-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-pill);
+    padding: 0.12rem 0.45rem;
+    white-space: nowrap;
   }
 
   .card-title {

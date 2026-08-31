@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ProductNav from "@/components/ProductNav.astro";
-import { getPublishedSoftware, type SoftwareProduct } from "@/data/software";
+import { getDocumentedSoftware, isLive, type SoftwareProduct } from "@/data/software";
+import { strings } from "@/data/i18n";
 
 export function getStaticPaths() {
-  return getPublishedSoftware().map((product) => ({
+  return getDocumentedSoftware().map((product) => ({
     params: { slug: product.slug },
     props: { product },
   }));
@@ -15,6 +16,8 @@ interface Props {
 }
 
 const { product } = Astro.props;
+const t = strings(product.locale);
+const live = isLive(product);
 
 const appLd = {
   "@context": "https://schema.org",
@@ -43,6 +46,7 @@ const appLd = {
   description={product.description}
   jsonLd={appLd}
   image={`/og/product-${product.slug}.png`}
+  lang={t.htmlLang}
 >
   <section class="section">
     <div class="wrap">
@@ -66,40 +70,50 @@ const appLd = {
 
             <dl class="spec">
               <div>
-                <dt>Platform</dt>
+                <dt>{t.platformLabel}</dt>
                 <dd>{product.platform}</dd>
               </div>
               <div>
-                <dt>Runs on</dt>
+                <dt>{t.runsOnLabel}</dt>
                 <dd>{product.availability}</dd>
               </div>
             </dl>
 
+            {!live && <p class="review-note">{t.notYetListed}</p>}
+
             <div class="hero-actions">
               {
-                product.externalUrl && (
+                live && product.externalUrl && (
                   <a
                     href={product.externalUrl}
                     class="btn -primary"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Get {product.title} ↗
+                    {t.getIt} {product.title} ↗
                   </a>
                 )
               }
-              <a href={`/software/${product.slug}/support/`} class="btn -ghost">
-                Support
+              <a
+                href={`/software/${product.slug}/support/`}
+                class:list={["btn", live ? "-ghost" : "-primary"]}
+              >
+                {t.navSupport}
               </a>
             </div>
           </div>
         </div>
       </header>
 
-      <ProductNav slug={product.slug} current="overview" hasChangelog={Boolean(product.changelog?.length)} />
+      <ProductNav
+        slug={product.slug}
+        current="overview"
+        hasChangelog={Boolean(product.changelog?.length)}
+        locale={product.locale}
+      />
 
       <section class="features" aria-labelledby="features-heading">
-        <h2 class="h-card" id="features-heading">What it does</h2>
+        <h2 class="h-card" id="features-heading">{t.whatItDoes}</h2>
         <ul class="feature-grid">
           {
             product.features.map((f) => (
@@ -114,27 +128,23 @@ const appLd = {
 
       <section class="privacy-strip" aria-labelledby="privacy-heading">
         <div>
-          <p class="eyebrow">Privacy</p>
+          <p class="eyebrow">{t.privacyEyebrow}</p>
           <h2 class="h-card" id="privacy-heading">{product.privacy.summary}</h2>
         </div>
         <a href={`/software/${product.slug}/privacy/`} class="btn -ghost">
-          Read the full policy →
+          {t.readFullPolicy}
         </a>
       </section>
 
       <section class="help-strip">
-        <h2 class="h-card">Something not working?</h2>
-        <p class="body muted">
-          Support answers common questions and tells you exactly what to include
-          in a bug report. If you would rather just send it, the feedback form
-          routes straight to {product.title}.
-        </p>
+        <h2 class="h-card">{t.troubleHeading}</h2>
+        <p class="body muted">{t.troubleBody(product.title)}</p>
         <div class="help-actions">
           <a href={`/software/${product.slug}/support/`} class="btn -primary">
-            {product.title} support
+            {t.supportCta(product.title)}
           </a>
           <a href={`/feedback/?product=${product.slug}`} class="btn -ghost">
-            Report a bug
+            {t.reportBug}
           </a>
         </div>
       </section>
@@ -204,6 +214,19 @@ const appLd = {
       font-size: 0.9rem;
       color: var(--ink);
     }
+  }
+
+  .review-note {
+    margin-top: var(--s-3);
+    padding: 0.7rem 0.9rem;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--ink);
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--orange);
+    border-radius: var(--radius);
+    max-width: 40rem;
   }
 
   .hero-actions {

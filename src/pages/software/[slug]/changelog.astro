@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ProductNav from "@/components/ProductNav.astro";
-import { getPublishedSoftware, type SoftwareProduct } from "@/data/software";
+import { getDocumentedSoftware, type SoftwareProduct } from "@/data/software";
 
 /**
  * Only products that actually have release history get a changelog page.
@@ -9,7 +9,7 @@ import { getPublishedSoftware, type SoftwareProduct } from "@/data/software";
  * paths until `changelog` entries exist in software.ts.
  */
 export function getStaticPaths() {
-  return getPublishedSoftware()
+  return getDocumentedSoftware()
     .filter((product) => (product.changelog?.length ?? 0) > 0)
     .map((product) => ({
       params: { slug: product.slug },

@@ -4,23 +4,28 @@
  * Keeps the product's own pages reachable from each other so a visitor who
  * arrives on a privacy page from a store listing can find the product.
  */
+import { strings } from "@/data/i18n";
+import type { Locale } from "@/data/software";
+
 interface Props {
   slug: string;
   current: "overview" | "privacy" | "support" | "changelog";
   hasChangelog?: boolean;
+  locale?: Locale;
 }
 
-const { slug, current, hasChangelog = false } = Astro.props;
+const { slug, current, hasChangelog = false, locale = "en" } = Astro.props;
+const t = strings(locale);
 
 const tabs = [
-  { key: "overview", label: "Overview", href: `/software/${slug}/` },
-  { key: "support", label: "Support", href: `/software/${slug}/support/` },
-  { key: "privacy", label: "Privacy", href: `/software/${slug}/privacy/` },
+  { key: "overview", label: t.navOverview, href: `/software/${slug}/` },
+  { key: "support", label: t.navSupport, href: `/software/${slug}/support/` },
+  { key: "privacy", label: t.navPrivacy, href: `/software/${slug}/privacy/` },
   ...(hasChangelog
     ? [
         {
           key: "changelog",
-          label: "Changelog",
+          label: t.navChangelog,
           href: `/software/${slug}/changelog/`,
         },
       ]
