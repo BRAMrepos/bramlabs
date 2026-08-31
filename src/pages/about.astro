@@ -1,19 +1,25 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPublishedSoftware } from "@/data/software";
+import { getAllDesigns } from "@/data/designs";
+
+const products = getPublishedSoftware();
+const designs = getAllDesigns();
 ---
 
 <BaseLayout
   title="About — BramLabs"
-  description="BramLabs is an independent software and design studio founded by Bram, creating digital products and original apparel graphics."
+  description="BramLabs is an independent studio run by Bram, publishing small software products and original apparel graphics from one desk."
 >
   <section class="section">
     <div class="wrap">
       <header class="page-head">
         <h1 class="h-page">About BramLabs</h1>
         <p class="lede">
-          BramLabs is an independent software and design studio founded by Bram.
-          The studio creates focused digital products alongside original apparel
-          graphics inspired by technology, work systems and professional culture.
+          BramLabs is an independent studio run by Bram. It publishes
+          {products.length} software products — shift and routine apps, browser
+          utilities, and web tools — alongside {designs.length} original apparel
+          graphics. Everything comes off one desk.
         </p>
       </header>
 
@@ -36,13 +42,28 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
           </figure>
           <div class="bio">
             <p class="body">
-              I’m Bram, founder and designer behind BramLabs. I engineer each apparel concept in-house — moving from domain research and raw sketches through vector geometry, fabric colorway testing, and high-resolution print preparation.
+              I’m Bram. I write the software, design the graphics, answer the
+              support mail and keep the privacy policies current. There is no
+              team behind this — when you email support, you get me.
             </p>
             <p class="body">
-              Software and graphics share the exact same desk. Systems thinking, clear hierarchy, and exact line weight carry over to both mediums — without turning garments into app promotional flyers. If a design doesn’t hold up as standalone architectural art from across the room, it doesn't ship.
+              The software side is deliberately small. Each product does one job
+              for people whose working day does not fit a nine-to-five: rotating
+              shifts, spoken routines, browser audio that will not behave. They
+              run on your device wherever they can, because that is both simpler
+              to build and less of your data to be responsible for.
             </p>
             <p class="body">
-              All vector artwork is constructed to Amazon Merch specifications (4500×5400 sRGB transparent master files). The public archive features high-fidelity preview renderings; original vector files remain protected studio IP.
+              Graphics come off the same desk. Every apparel concept is built
+              in-house — domain research, raw sketches, vector geometry, colorway
+              testing, then print preparation. Systems thinking, clear hierarchy
+              and exact line weight carry across both mediums. If a design does
+              not hold up as standalone art from across the room, it does not ship.
+            </p>
+            <p class="body">
+              Vector artwork is constructed to 4500×5400 sRGB transparent master
+              files. The public archive shows high-fidelity previews; the original
+              vector files stay in the studio.
             </p>
           </div>
         </div>
@@ -52,31 +73,34 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
         <h2 class="h-card">Principles</h2>
         <ul class="principles">
           <li>
+            <h3>Your data stays yours</h3>
+            <p>
+              The apps work on device wherever that is possible. Nothing is sold,
+              no advertising trackers ship in any product, and the site itself
+              sets no cookies.
+            </p>
+          </li>
+          <li>
+            <h3>Documented, not just listed</h3>
+            <p>
+              Every published product has a support page that answers real
+              questions and a privacy policy that names what is collected, why,
+              and for how long.
+            </p>
+          </li>
+          <li>
             <h3>Original concepts</h3>
             <p>
-              Every design begins with a BramLabs-created idea rather than stock
+              Every graphic begins with a BramLabs-created idea rather than stock
               artwork, licensed characters or copied branding.
-            </p>
-          </li>
-          <li>
-            <h3>Readable graphics</h3>
-            <p>
-              Every composition must work both as standalone art and as a garment
-              graphic seen at normal viewing distance.
-            </p>
-          </li>
-          <li>
-            <h3>Deliberate construction</h3>
-            <p>
-              Color, line weight, scale and garment placement are considered during
-              the design process — not added after a slogan.
             </p>
           </li>
           <li>
             <h3>Honest credentials</h3>
             <p>
               Software is listed publicly only when a real storefront URL exists.
-              Support pages stay available for products that need them.
+              Support pages stay up for as long as anyone is still running the
+              product.
             </p>
           </li>
         </ul>
@@ -90,7 +114,9 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
           Product support: <a href="mailto:support@bramlabs.co">support@bramlabs.co</a>
         </p>
         <p class="body meta-line">
-          Prefer the <a href="/contact/">contact page</a> for structured messages.
+          Bug reports and feature requests are best sent through the
+          <a href="/feedback/">feedback form</a>, which routes by product.
+          For anything else, use the <a href="/contact/">contact page</a>.
         </p>
       </section>
     </div>

@@ -10,7 +10,9 @@
     "typecheck": "astro check",
     "generate:art": "node scripts/upgrade-assets.mjs",
     "generate:og": "node --experimental-strip-types scripts/generate-og.mjs",
-    "composite:mockups": "node scripts/composite-mockups.mjs"
+    "composite:mockups": "node scripts/composite-mockups.mjs",
+    "verify": "node --experimental-strip-types scripts/verify-build.mjs",
+    "check": "npm run typecheck && npm run build && npm run verify"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^14.1.7",

@@ -1,58 +1,154 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getPublishedSoftware } from "@/data/software";
+
+const products = getPublishedSoftware();
+const effective = "31 August 2026";
 ---
 
 <BaseLayout
-  title="Terms — BramLabs"
-  description="Terms of use for bramlabs.co and related BramLabs materials."
+  title="Terms of Use — BramLabs"
+  description="Terms covering bramlabs.co, the BramLabs software products, and the original artwork published here."
 >
   <section class="section">
-    <div class="wrap prose">
-      <h1 class="h-page">Terms</h1>
-      <p class="meta">Last updated: 1 January 2026</p>
-      <p>
-        By using bramlabs.co you agree to these terms. Portfolio graphics and
-        written content are owned by BramLabs unless otherwise noted. You may not
-        copy, redistribute or resell portfolio artwork without permission.
-      </p>
-      <h2>Software products</h2>
-      <p>
-        Individual apps and extensions may include additional license terms at the
-        point of distribution (for example Chrome Web Store or Amazon Appstore).
-      </p>
-      <h2>Site content</h2>
-      <p>
-        Information on this site is provided for general presentation of BramLabs
-        work. We may update pages without notice.
-      </p>
-      <h2>Contact</h2>
-      <p>
-        <a href="mailto:contact@bramlabs.co">contact@bramlabs.co</a>
-      </p>
+    <div class="wrap">
+      <h1 class="h-page">Terms of Use</h1>
+      <p class="doc-meta effective">Effective {effective}</p>
+
+      <div class="prose">
+        <p class="summary">
+          Plain version: use the site and the products normally and nothing here
+          will trouble you. Do not copy the artwork, do not attack the service,
+          and understand that these are small tools offered as-is.
+        </p>
+
+        <h2>Who these terms are with</h2>
+        <p>
+          These terms are between you and BramLabs, an independent studio run by
+          Bram. By using bramlabs.co or any BramLabs product, you agree to them.
+          If you do not, stop using them.
+        </p>
+
+        <h2>The software products</h2>
+        <p>
+          Products distributed through a store —
+          {
+            products.map((p, i) => (
+              <>
+                {i > 0 && (i === products.length - 1 ? " and " : ", ")}
+                <a href={`/software/${p.slug}/`}>{p.title}</a>
+              </>
+            ))
+          }
+          {" "}— are also subject to the terms of the platform they came from,
+          such as the Chrome Web Store or the Amazon Appstore. Where a platform's
+          terms conflict with these, the platform's terms govern the distribution
+          and these govern everything else.
+        </p>
+        <p>
+          Each product has its own <a href="/privacy/">privacy policy</a>
+          describing what it does with data. Those are part of these terms.
+        </p>
+
+        <h3>Acceptable use</h3>
+        <p>You agree not to:</p>
+        <ul>
+          <li>Reverse engineer, decompile or redistribute a product except where law expressly permits it</li>
+          <li>Use a product to break the law, or to breach the terms of any third-party service it interacts with</li>
+          <li>Attack, overload or probe the service other than under the <a href="/security/">security policy</a></li>
+          <li>Repackage a product and distribute it as your own, or ship it through unofficial mirrors</li>
+        </ul>
+        <p>
+          Some products interact with third-party services that have their own
+          rules. You are responsible for complying with those — using an
+          extension does not transfer that responsibility to BramLabs.
+        </p>
+
+        <h2>Artwork and site content</h2>
+        <p>
+          The apparel graphics, illustrations, written content and design of this
+          site are owned by BramLabs. You may look at them, link to them, and
+          share links. You may not copy, redistribute, resell, or use them in
+          your own products — printed or digital — without written permission.
+        </p>
+        <p>
+          Product names and logos belonging to other companies are the property
+          of those companies. Their appearance here is descriptive and does not
+          imply endorsement or affiliation.
+        </p>
+
+        <h2>Availability and changes</h2>
+        <p>
+          These are small products maintained by one person. Features may change,
+          and a product may be retired. If a product is retired, its support and
+          privacy pages stay up for as long as anyone is plausibly still running
+          it. Pages on this site may be updated without notice.
+        </p>
+
+        <h2>No warranty</h2>
+        <p>
+          The site and the products are provided "as is", without warranty of any
+          kind, express or implied, including fitness for a particular purpose.
+          BramLabs does not warrant that a product will be uninterrupted or
+          error-free.
+        </p>
+        <p>
+          Concretely: do not rely on any of these products as the sole record of
+          something that matters — payroll hours, medication timing, a legal
+          deadline. Keep your own record. Tools help; they are not a system of
+          record.
+        </p>
+
+        <h2>Limitation of liability</h2>
+        <p>
+          To the fullest extent permitted by law, BramLabs is not liable for
+          indirect, incidental or consequential damages arising from use of the
+          site or the products, including lost data, lost profits or missed
+          shifts. Nothing here limits liability that cannot lawfully be limited —
+          including liability for death or personal injury caused by negligence,
+          or for fraud. Some jurisdictions do not allow certain exclusions, so
+          parts of this section may not apply to you.
+        </p>
+
+        <h2>Governing law</h2>
+        <p>
+          These terms are governed by the law of the jurisdiction in which
+          BramLabs operates, without regard to conflict-of-law rules. Nothing in
+          this section removes a consumer protection you have in your own country
+          of residence.
+        </p>
+
+        <h2>Changes to these terms</h2>
+        <p>
+          Material changes update the effective date at the top of this page.
+          Continuing to use the site or the products afterwards means the revised
+          terms apply. The current version took effect on {effective}.
+        </p>
+
+        <h2>Contact</h2>
+        <p>
+          Questions about these terms:
+          <a href="mailto:contact@bramlabs.co">contact@bramlabs.co</a>
+          <br />
+          Product problems: the <a href="/feedback/">feedback form</a> or
+          <a href="mailto:support@bramlabs.co">support@bramlabs.co</a>
+        </p>
+      </div>
     </div>
   </section>
 </BaseLayout>
 
-<style>
-  .prose {
-    max-width: 40rem;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    color: var(--muted);
-    line-height: 1.7;
+<style lang="scss">
+  .effective {
+    margin-top: 0.5rem;
+    margin-bottom: var(--s-5);
   }
-  .prose h1,
-  .prose h2 {
+
+  .summary {
+    font-size: 1.05rem;
     color: var(--ink);
-  }
-  .prose h2 {
-    font-size: 1.2rem;
-    font-weight: 500;
-    margin-top: 0.75rem;
-  }
-  .prose a {
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    border-left: 3px solid var(--ink);
+    padding-left: var(--s-3);
+    line-height: 1.6;
   }
 </style>

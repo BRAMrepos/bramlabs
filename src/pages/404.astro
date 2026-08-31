@@ -2,15 +2,24 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 ---
 
-<BaseLayout title="Not found — BramLabs" description="Page not found." noindex>
+<BaseLayout
+  title="Page not found — BramLabs"
+  description="That page does not exist on bramlabs.co. Links to the software products, the apparel collection, and support are below."
+  noindex
+>
   <section class="section">
     <div class="wrap center">
       <p class="meta">404</p>
       <h1 class="h-page">Page not found</h1>
-      <p class="lede">The page may have moved. Try the collection or studio.</p>
+      <p class="lede">
+        This page has moved or never existed. If you followed a link from an app
+        store listing, the product pages below have the support and privacy
+        documents you are looking for.
+      </p>
       <div class="actions">
-        <a href="/" class="btn -primary">Home</a>
-        <a href="/collection/" class="btn -ghost">Collection</a>
+        <a href="/software/" class="btn -primary">Software</a>
+        <a href="/collection/" class="btn -ghost">Apparel</a>
+        <a href="/feedback/" class="btn -ghost">Report a broken link</a>
       </div>
     </div>
   </section>

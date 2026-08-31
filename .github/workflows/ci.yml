@@ -1,0 +1,39 @@
+name: CI
+
+# Cloudflare Pages deploys from main on push. This runs the same checks first
+# so a broken build is caught on GitHub rather than discovered in the Pages
+# dashboard after it is already live.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      # Guards the failure modes this site has actually had: a published
+      # product missing its privacy or support page, a legacy store URL that
+      # stopped resolving, a broken og:image, a dead internal link.
+      - name: Verify build output
+        run: npm run verify

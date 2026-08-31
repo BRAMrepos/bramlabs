@@ -486,6 +486,21 @@ ol {
   }
 }
 
+/* Underlined link for use inside a .lede or body paragraph, where the
+   surrounding text is not wrapped in .prose. */
+.inline-link {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--line);
+  transition: text-decoration-color var(--t) var(--ease);
+
+  &:hover {
+    text-decoration-color: var(--ink);
+  }
+}
+
 /* Document metadata line: effective dates, versions, breadcrumbs. */
 .doc-meta {
   font-family: var(--font-mono);
