@@ -11,6 +11,14 @@ if (!post) return Astro.redirect("/journal/");
 
 const related = journalPosts.filter((p) => p.slug !== post.slug).slice(0, 2);
 
+/**
+ * post.image is a vector used as the in-page visual, which is fine on the
+ * page but unusable as og:image — most crawlers reject SVG. Map it to the
+ * matching generated 1200x630 card, falling back to the site card.
+ */
+const artMatch = post.image.match(/\/designs\/(.+)-art\.svg$/);
+const ogImage = artMatch ? `/og/design-${artMatch[1]}.png` : "/og/home.png";
+
 const articleLd = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -18,14 +26,14 @@ const articleLd = {
   description: post.excerpt,
   datePublished: post.date,
   author: { "@type": "Person", name: post.byline },
-  image: new URL(post.image, Astro.site).href,
+  image: new URL(ogImage, Astro.site).href,
 };
 ---
 
 <BaseLayout
   title={`${post.title} — BramLabs Journal`}
   description={post.excerpt}
-  image={post.image}
+  image={ogImage}
   type="article"
   jsonLd={articleLd}
 >

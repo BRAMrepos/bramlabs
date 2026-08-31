@@ -1,10 +1,12 @@
 ---
+// Software leads: BramLabs is a software studio that also designs apparel.
+// "Process" was dropped from the top nav — it is part of the apparel story
+// and is reachable from /collection/ and the homepage apparel section.
 const links = [
-  { href: "/collection/", label: "Collection" },
-  { href: "/process/",    label: "Process"    },
-  { href: "/studio/",     label: "Studio"     },
-  { href: "/journal/",   label: "Journal"    },
-  { href: "/about/",      label: "About"      },
+  { href: "/software/",   label: "Software" },
+  { href: "/collection/", label: "Apparel"  },
+  { href: "/journal/",    label: "Journal"  },
+  { href: "/about/",      label: "About"    },
 ];
 const path = Astro.url.pathname;
 ---
@@ -27,7 +29,9 @@ const path = Astro.url.pathname;
                   {
                     active:
                       l.href === "/collection/"
-                        ? path === "/collection/" || path.startsWith("/designs/")
+                        ? path === "/collection/" ||
+                          path.startsWith("/designs/") ||
+                          path.startsWith("/process/")
                         : path.startsWith(l.href.replace(/\/$/, "")),
                   },
                 ]}

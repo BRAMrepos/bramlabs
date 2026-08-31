@@ -2,168 +2,182 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import DesignCard from "@/components/DesignCard.astro";
 import { getFeaturedDesigns, getAllDesigns } from "@/data/designs";
-import { software } from "@/data/software";
+import { getPublishedSoftware } from "@/data/software";
+import { getLatestPosts } from "@/data/journal";
 
-const featured = getFeaturedDesigns();
-const all = getAllDesigns();
-const hero = featured[0] ?? all[0];
-const processDesign = all.find((d) => d.processStages?.length) ?? hero;
-
-// Explicit 4 software items in exact user-requested order
-const targetSoftwareSlugs = ["shiftledger", "clearcue", "workflowai", "sonicshield"];
-const published = targetSoftwareSlugs
-  .map((slug) => software.find((s) => s.slug === slug))
-  .filter((s): s is NonNullable<typeof s> => s !== undefined);
-
-const processStages = (processDesign.processStages ?? []).slice(0, 4);
+// Driven from data, not a hardcoded slug list — a published product can no
+// longer go missing from the homepage the way StoryPeek did.
+const products = getPublishedSoftware();
+const featuredDesigns = getFeaturedDesigns().slice(0, 3);
+const allDesigns = getAllDesigns();
+const posts = getLatestPosts(3);
 ---
 
 <BaseLayout
-  title="BramLabs — Original Apparel Graphics"
-  description="Original apparel graphics by BramLabs: technical illustration, developer culture, shift work, focus and modern professional themes. Design portfolio — not a storefront."
-  image="/mockups/rotation-dial-tee.jpg"
+  title="BramLabs — Independent Software Studio"
+  description="BramLabs builds small, focused software: shift and routine apps for Android, browser utilities for Chrome, and web tools. Plus original apparel graphics from the same desk."
 >
   <!-- 1. HERO ──────────────────────────────────────────── -->
   <section class="hero section">
-    <div class="wrap hero-grid">
+    <div class="wrap">
       <div class="hero-copy">
-        <p class="eyebrow">Original Apparel Graphics</p>
-        <h1 class="h-hero">Graphics built for the people who keep systems running.</h1>
+        <p class="eyebrow">Independent software studio</p>
+        <h1 class="h-hero">Small software for people who work in systems.</h1>
         <p class="lede">
-          Technical illustration and restrained typography for shift workers,
-          developers and focused minds — designed in-house, from concept to print master.
+          Shift tracking, spoken routines, browser tools that stay out of the way.
+          {products.length} products, each one built and maintained by one person —
+          with a real support page and a real privacy policy behind every listing.
         </p>
         <div class="hero-actions">
-          <a href="/collection/" class="btn -primary">Explore Collection</a>
-          <a href="/process/" class="btn -ghost">See Process</a>
+          <a href="/software/" class="btn -primary">Browse the software</a>
+          <a href="/about/" class="btn -ghost">About the studio</a>
         </div>
-        <p class="hero-note meta">
-          {all.length} original designs · portfolio, not a storefront
-        </p>
-      </div>
-
-      <div class="hero-visual">
-        <figure class="hero-garment">
-          <picture>
-            <source srcset={hero.images.primaryMockup.replace(/\.jpg$/, ".webp")} type="image/webp" />
-            <img
-              src={hero.images.primaryMockup}
-              alt={`${hero.shirtColor === "navy" ? "Navy blue" : "Black"} heavyweight T-shirt featuring the ${hero.title} graphic`}
-              width="800"
-              height="1000"
-              loading="eager"
-              fetchpriority="high"
-            />
-          </picture>
-        </figure>
       </div>
     </div>
   </section>
 
-  <!-- 2. FEATURED COLLECTION ───────────────────────────── -->
-  <section class="section" id="collection">
+  <!-- 2. PRODUCTS ─────────────────────────────────────── -->
+  <section class="section products" id="products" aria-labelledby="products-heading">
     <div class="wrap">
       <div class="section-head">
-        <p class="eyebrow">First Collection</p>
-        <h2 class="h-section">Featured Apparel Graphics</h2>
+        <p class="eyebrow">Products</p>
+        <h2 class="h-section" id="products-heading">Everything currently shipping</h2>
+      </div>
+
+      <ul class="product-grid">
+        {
+          products.map((p) => (
+            <li>
+              <a href={`/software/${p.slug}/`} class="product-card">
+                {p.icon ? (
+                  <img src={p.icon} alt="" width="52" height="52" class="p-icon" loading="lazy" />
+                ) : (
+                  <div class="p-icon p-icon-fallback" aria-hidden="true">
+                    <span>{p.title.slice(0, 2).toUpperCase()}</span>
+                  </div>
+                )}
+                <div class="p-body">
+                  <div class="p-head">
+                    <h3 class="p-title">{p.title}</h3>
+                    <span class="p-platform">{p.platform}</span>
+                  </div>
+                  <p class="p-tagline">{p.tagline}</p>
+                  <p class="p-desc">{p.description}</p>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="section-cta">
+        <a href="/software/" class="btn -ghost">All {products.length} products, with support and privacy →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. HOW THE STUDIO WORKS ─────────────────────────── -->
+  <section class="section principles" aria-labelledby="principles-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">How it works</p>
+        <h2 class="h-section" id="principles-heading">One person, and no dark patterns.</h2>
+      </div>
+
+      <ul class="principle-grid">
+        <li>
+          <h3>On-device by default</h3>
+          <p>
+            The mobile and browser products do their work locally. No account to
+            create, and nothing uploaded to a server that does not need to be.
+          </p>
+        </li>
+        <li>
+          <h3>Every product documented</h3>
+          <p>
+            Each one has a support page that answers real questions and a privacy
+            policy that says what is collected, why, and for how long.
+          </p>
+        </li>
+        <li>
+          <h3>Bugs reach a human</h3>
+          <p>
+            Feedback goes to one inbox, read by the person who wrote the code.
+            There is no ticket queue and no support bot.
+          </p>
+        </li>
+        <li>
+          <h3>Nothing is sold on</h3>
+          <p>
+            No advertising trackers, no data brokers, no mailing list you did not
+            ask for. The site itself sets no cookies.
+          </p>
+        </li>
+      </ul>
+
+      <div class="section-cta">
+        <a href="/feedback/" class="btn -ghost">Report a bug or request a feature →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. APPAREL ──────────────────────────────────────── -->
+  <section class="section apparel" id="apparel" aria-labelledby="apparel-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <p class="eyebrow">Also from the studio</p>
+        <h2 class="h-section" id="apparel-heading">Original apparel graphics</h2>
         <p class="lede">
-          Highlights from twelve original pieces — technical illustration, visual systems, and typographic humor built for dark fabric.
+          The same systems thinking, applied to fabric. {allDesigns.length} original
+          vector pieces for shift workers, developers and focused minds — each with
+          its construction trail documented from sketch to print master.
         </p>
       </div>
 
       <div class="design-grid">
-        {featured.map((d) => <DesignCard design={d} />)}
+        {featuredDesigns.map((d) => <DesignCard design={d} />)}
       </div>
 
-      <div class="section-cta">
-        <a href="/collection/" class="btn -ghost">View All {all.length} Collection Pieces →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3. PROCESS ──────────────────────────────────────── -->
-  <section class="section process-teaser">
-    <div class="wrap">
-      <div class="section-head">
-        <p class="eyebrow">Construction Trail</p>
-        <h2 class="h-section">How a Design is Built: {processDesign.title}</h2>
-        <p class="lede">
-          Every piece moves through 4 distinct evolutionary stages — from rough concept sketch to vector master and chest-scale garment application.
-        </p>
-      </div>
-
-      <ol class="process-stages">
-        {
-          processStages.map((s, i) => (
-            <li>
-              <span class="meta accent">0{i + 1}</span>
-              <h3>{s.label}</h3>
-              <p>{s.body}</p>
-              {s.image && (
-                <div class="stage-img-wrap">
-                  <img
-                    src={s.image}
-                    alt={`${processDesign.title}: ${s.label}`}
-                    loading="lazy"
-                    width="640"
-                    height="640"
-                  />
-                </div>
-              )}
-            </li>
-          ))
-        }
-      </ol>
-
-      <a href="/process/" class="btn -ghost">Explore Full Process &amp; Rejected Directions →</a>
-    </div>
-  </section>
-
-  <!-- 4. ORIGINALITY & CRAFT STANDARDS ───────────────── -->
-  <section class="section standards">
-    <div class="wrap">
-      <div class="standards-header">
-        <p class="eyebrow">Studio Craft &amp; Standards</p>
-        <h2 class="h-section">Original work. Print-ready masters.</h2>
-        <p class="lede">
-          This site is a design portfolio — not an online storefront. Production files stay separate from web previews to guarantee technical authenticity and marketplace readiness.
-        </p>
-      </div>
-
-      <div class="standards-grid">
-        <div class="standard-card">
-          <span class="card-num">01</span>
-          <h3 class="card-title">In-House Concepts</h3>
-          <p class="card-desc">100% vector illustration crafted from scratch. Zero stock clipart, licensed characters, or third-party brand marks.</p>
-        </div>
-
-        <div class="standard-card">
-          <span class="card-num">02</span>
-          <h3 class="card-title">Construction Trail</h3>
-          <p class="card-desc">Documented evolution showing sketches, geometric grids, and rejected directions on every process page.</p>
-        </div>
-
-        <div class="standard-card">
-          <span class="card-num">03</span>
-          <h3 class="card-title">Print-Ready Masters</h3>
-          <p class="card-desc">High-resolution vector assets and 4500×5400 px sRGB transparent PNG print masters maintained offline at 300 DPI.</p>
-        </div>
-
-        <div class="standard-card">
-          <span class="card-num">04</span>
-          <h3 class="card-title">Policy &amp; IP Review</h3>
-          <p class="card-desc">Each graphic is screened against USPTO trademark databases and content policies prior to publication.</p>
-        </div>
-      </div>
-
-      <div class="standards-actions">
-        <a href="/collection/" class="btn -primary">Explore Collection</a>
-        <a href="/about/" class="btn -ghost">About BramLabs</a>
+      <div class="apparel-actions">
+        <a href="/collection/" class="btn -ghost">View all {allDesigns.length} pieces →</a>
+        <a href="/process/" class="btn -link">See the process →</a>
       </div>
     </div>
   </section>
 
-  <!-- 5. DESIGNER ──────────────────────────────────────── -->
+  <!-- 5. JOURNAL ──────────────────────────────────────── -->
+  {
+    posts.length > 0 && (
+      <section class="section journal" aria-labelledby="journal-heading">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Journal</p>
+            <h2 class="h-section" id="journal-heading">Notes from the desk</h2>
+          </div>
+
+          <ul class="post-list">
+            {posts.map((post) => (
+              <li>
+                <a href={`/journal/${post.slug}/`} class="post">
+                  <time class="post-date meta" datetime={post.date}>
+                    {post.dateLabel}
+                  </time>
+                  <h3 class="post-title">{post.title}</h3>
+                  <p class="post-excerpt">{post.excerpt}</p>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div class="section-cta">
+            <a href="/journal/" class="btn -ghost">Read the journal →</a>
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <!-- 6. WHO ──────────────────────────────────────────── -->
   <section class="section designer" id="designer">
     <div class="wrap designer-grid">
       <div class="designer-visual">
@@ -172,7 +186,7 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
             <source srcset="/studio/workspace.webp" type="image/webp" />
             <img
               src="/studio/workspace.jpg"
-              alt="BramLabs studio workspace with technical graphic artwork, drafting tools, and fabric swatches"
+              alt="The BramLabs desk: technical vector artwork, drafting tools and fabric swatches"
               width="800"
               height="1000"
               loading="lazy"
@@ -182,95 +196,51 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
       </div>
 
       <div>
-        <p class="eyebrow">Designer &amp; Founder</p>
-        <h2 class="h-section">Designed by Bram</h2>
+        <p class="eyebrow">Who builds this</p>
+        <h2 class="h-section">Designed and built by Bram</h2>
         <p class="body">
-          I founded BramLabs to put original vector craft on apparel. Every piece
-          starts as a researched concept — drawn and constructed in-house with
-          strict geometric systems and technical typography.
+          I write the software, design the graphics, answer the support mail and
+          keep the policies current. Everything published here comes off one desk.
         </p>
         <p class="body second">
-          No stock art. No generic brand logos. Graphics that hold up as
-          standalone compositions before they ever touch fabric.
+          The software and the apparel work share the same habits — clear
+          hierarchy, exact line weight, and no decoration that is not carrying
+          information.
         </p>
-        <a href="/about/" class="btn -link">About BramLabs →</a>
+        <div class="designer-actions">
+          <a href="/about/" class="btn -ghost">About BramLabs</a>
+          <a href="/contact/" class="btn -link">Get in touch →</a>
+        </div>
       </div>
     </div>
   </section>
-
-  <!-- 6. SOFTWARE CREDENTIALS STRIP ────────────────────── -->
-  {
-    published.length > 0 && (
-      <section class="section soft-strip" aria-labelledby="soft-strip-heading">
-        <div class="wrap soft-inner">
-          <div class="soft-head">
-            <div>
-              <p class="eyebrow">Studio Credentials</p>
-              <h2 class="h-section" id="soft-strip-heading">Also Ships Software</h2>
-            </div>
-            <a href="/studio/" class="btn -ghost">All Studio Credentials →</a>
-          </div>
-
-          <div class="soft-grid">
-            {published.map((p) => (
-              <a
-                href={p.externalUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                class="soft-card"
-              >
-                <div class="soft-icon">
-                  {p.icon ? (
-                    <img src={p.icon} alt="" width="44" height="44" />
-                  ) : (
-                    <span class="icon-fallback">{p.title.slice(0, 2).toUpperCase()}</span>
-                  )}
-                </div>
-                <div class="soft-info">
-                  <div class="soft-title-row">
-                    <h3 class="soft-title">{p.title}</h3>
-                    <span class="soft-platform">{p.platform}</span>
-                  </div>
-                  <p class="soft-desc">{p.description}</p>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-    )
-  }
 </BaseLayout>
 
 <style lang="scss">
+  /* ── hero ─────────────────────────────────────────── */
   .hero {
-    padding-top: clamp(2rem, 5vw, 3.5rem);
-    padding-bottom: clamp(3rem, 7vw, 5rem);
-  }
-
-  .hero-grid {
-    display: grid;
-    gap: var(--s-6);
-    align-items: center;
-
-    @media (width >= 768px) {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--s-7);
-    }
+    padding-top: clamp(3rem, 8vw, 6rem);
+    padding-bottom: clamp(2rem, 5vw, 3.5rem);
   }
 
   .hero-copy {
     display: flex;
     flex-direction: column;
     gap: var(--s-3);
+    max-width: 46rem;
   }
 
   .h-hero {
-    font-family: var(--font-heading);
-    font-size: clamp(2.25rem, 4.5vw, 3.25rem);
-    line-height: 1.12;
+    font-family: var(--font-heading, var(--font-display));
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.05;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+  }
+
+  .lede {
+    max-width: 40rem;
   }
 
   .hero-actions {
@@ -281,39 +251,7 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
     margin-top: var(--s-2);
   }
 
-  .hero-note {
-    margin-top: var(--s-1);
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--muted);
-  }
-
-  .hero-visual {
-    display: flex;
-    justify-content: center;
-  }
-
-  .hero-garment {
-    width: 100%;
-    max-width: 520px;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    background: var(--canvas);
-    border: 1px solid var(--line);
-    box-shadow: var(--shadow-card);
-
-    picture, img {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    img {
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-    }
-  }
-
+  /* ── shared section furniture ─────────────────────── */
   .section-head {
     display: flex;
     flex-direction: column;
@@ -322,32 +260,136 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
     max-width: 44rem;
   }
 
-  .design-grid {
+  .section-cta {
+    margin-top: var(--s-5);
+  }
+
+  /* ── products ─────────────────────────────────────── */
+  .products {
+    padding-top: clamp(2rem, 4vw, 3rem);
+  }
+
+  .product-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: grid;
-    gap: var(--s-6) var(--s-5);
+    gap: var(--s-3);
     grid-template-columns: 1fr;
 
     @media (width >= 640px) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (width >= 1024px) {
+    @media (width >= 1080px) {
       grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  .section-cta {
-    margin-top: var(--s-6);
+  .product-card {
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--s-3);
+    padding: var(--s-4);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm, var(--shadow-soft));
+    transition:
+      transform var(--t) var(--ease),
+      box-shadow var(--t) var(--ease),
+      border-color var(--t) var(--ease);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lift);
+      border-color: color-mix(in oklab, var(--ink) 25%, var(--line));
+
+      .p-title {
+        color: var(--accent, var(--ink));
+      }
+    }
   }
 
-  .process-teaser {
+  .p-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
     background: var(--canvas);
+    object-fit: cover;
+    flex-shrink: 0;
   }
 
-  .process-stages {
+  .p-icon-fallback {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+
+  .p-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .p-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .p-title {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    transition: color var(--t) var(--ease);
+  }
+
+  .p-platform {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--muted);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .p-tagline {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .p-desc {
+    margin-top: 0.4rem;
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* ── principles ───────────────────────────────────── */
+  .principles {
+    background: var(--canvas);
+    border-block: 1px solid var(--line);
+  }
+
+  .principle-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
     display: grid;
     gap: var(--s-4);
-    margin-bottom: var(--s-5);
     grid-template-columns: 1fr;
 
     @media (width >= 640px) {
@@ -364,111 +406,113 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
       gap: 0.4rem;
       border-top: 2px solid var(--line);
       padding-top: var(--s-3);
-    }
+      transition: border-color var(--t) var(--ease);
 
-    .accent {
-      color: var(--cyan);
-      font-family: var(--font-mono);
-      font-weight: 700;
-      font-size: 0.8rem;
+      &:hover {
+        border-color: var(--ink);
+      }
     }
 
     h3 {
       font-family: var(--font-display);
       font-size: 1.05rem;
       font-weight: 600;
+      color: var(--ink);
     }
 
     p {
       font-size: 0.875rem;
       color: var(--muted);
-      line-height: 1.5;
-      flex: 1;
-    }
-
-    .stage-img-wrap {
-      margin-top: 0.75rem;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: #09090b;
-      overflow: hidden;
-
-      img {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1;
-        object-fit: contain;
-        padding: 0.5rem;
-        display: block;
-      }
+      line-height: 1.6;
     }
   }
 
-  /* Improved Standards Section Layout */
-  .standards {
-    padding-block: clamp(3.5rem, 8vw, 5.5rem);
-  }
-
-  .standards-header {
-    margin-bottom: var(--s-6);
-    max-width: 44rem;
-  }
-
-  .standards-grid {
+  /* ── apparel ──────────────────────────────────────── */
+  .design-grid {
     display: grid;
-    gap: 1.5rem;
+    gap: var(--s-6) var(--s-5);
     grid-template-columns: 1fr;
-    margin-bottom: var(--s-6);
 
     @media (width >= 640px) {
       grid-template-columns: repeat(2, 1fr);
     }
 
     @media (width >= 1024px) {
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  .standard-card {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    padding-top: 1.25rem;
-    border-top: 2px solid var(--line);
-    transition: border-color 250ms var(--ease);
-
-    &:hover {
-      border-color: var(--ink);
-    }
-
-    .card-num {
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--cyan);
-    }
-
-    .card-title {
-      font-family: var(--font-display);
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--ink);
-    }
-
-    .card-desc {
-      font-size: 0.875rem;
-      color: var(--muted);
-      line-height: 1.55;
-    }
-  }
-
-  .standards-actions {
+  .apparel-actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 0.75rem;
+    margin-top: var(--s-6);
   }
 
+  /* ── journal ──────────────────────────────────────── */
+  .journal {
+    background: var(--canvas);
+    border-block: 1px solid var(--line);
+  }
+
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: var(--s-4);
+    grid-template-columns: 1fr;
+
+    @media (width >= 760px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .post {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    height: 100%;
+    border-top: 2px solid var(--line);
+    padding-top: var(--s-3);
+    transition: border-color var(--t) var(--ease);
+
+    &:hover {
+      border-color: var(--ink);
+
+      .post-title {
+        color: var(--accent, var(--ink));
+      }
+    }
+  }
+
+  .post-date {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--muted);
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ink);
+    transition: color var(--t) var(--ease);
+  }
+
+  .post-excerpt {
+    font-size: 0.875rem;
+    color: var(--muted);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* ── designer ─────────────────────────────────────── */
   .designer-grid {
     display: grid;
     gap: var(--s-6);
@@ -498,125 +542,14 @@ const processStages = (processDesign.processStages ?? []).slice(0, 4);
 
   .second {
     margin-top: var(--s-3);
-    margin-bottom: var(--s-4);
     color: var(--muted);
   }
 
-  .soft-strip {
-    padding-block: clamp(3rem, 6vw, 4.5rem);
-    border-top: 1px solid var(--line);
-    background: var(--canvas);
-  }
-
-  .soft-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 1.75rem;
-  }
-
-  .soft-head {
+  .designer-actions {
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end;
-    justify-content: space-between;
-    gap: 1rem;
-  }
-
-  .soft-grid {
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: 1fr;
-
-    @media (width >= 640px) {
-      grid-template-columns: repeat(2, 1fr);
-    }
-
-    @media (width >= 1024px) {
-      grid-template-columns: repeat(4, 1fr);
-    }
-  }
-
-  .soft-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.85rem;
-    padding: 1rem 1.15rem;
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-sm);
-    transition: transform var(--t) var(--ease), box-shadow var(--t) var(--ease), border-color var(--t) var(--ease);
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lift);
-      border-color: color-mix(in oklab, var(--ink) 25%, var(--line));
-
-      .soft-title {
-        color: var(--accent);
-      }
-    }
-  }
-
-  .soft-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: 10px;
-    overflow: hidden;
-    flex-shrink: 0;
-    display: flex;
     align-items: center;
-    justify-content: center;
-    background: var(--canvas);
-    border: 1px solid var(--line);
-
-    img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .soft-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    flex: 1;
-    min-width: 0;
-  }
-
-  .soft-title-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  .soft-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--ink);
-    transition: color 200ms var(--ease);
-  }
-
-  .soft-platform {
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    color: var(--muted);
-    background: var(--canvas);
-    padding: 0.15rem 0.4rem;
-    border-radius: 4px;
-    border: 1px solid var(--line);
-    white-space: nowrap;
-  }
-
-  .soft-desc {
-    font-size: 0.825rem;
-    color: var(--muted);
-    line-height: 1.45;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
+    gap: 0.75rem;
+    margin-top: var(--s-4);
   }
 </style>

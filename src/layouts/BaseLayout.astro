@@ -11,16 +11,26 @@ import "@/styles/global.scss";
 interface Props {
   title?: string;
   description?: string;
+  /** Social card. Should be a 1200x630 PNG — crawlers reject SVG. */
   image?: string;
+  /**
+   * Real pixel dimensions of `image`. Defaults to the 1200x630 card size.
+   * Pass the true values when using a non-card image, otherwise crawlers get
+   * dimensions that do not match the file and lay the preview out wrongly.
+   */
+  imageWidth?: number;
+  imageHeight?: number;
   type?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const {
-  title = "BramLabs — Original Apparel Graphics",
-  description = "Original apparel graphics by BramLabs: technical illustration for shift work, developer culture, focus and modern professional themes. Design portfolio prepared for marketplace review.",
-  image = "/mockups/rotation-dial-tee.jpg",
+  title = "BramLabs — Independent Software Studio",
+  description = "BramLabs builds small, focused software: shift and routine apps for Android, browser utilities for Chrome, and web tools — plus original apparel graphics from the same desk.",
+  image = "/og/home.png",
+  imageWidth = 1200,
+  imageHeight = 630,
   type = "website",
   noindex = false,
   jsonLd,
@@ -33,9 +43,18 @@ const orgLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "BramLabs",
+  description:
+    "Independent studio publishing small software products and original apparel graphics.",
   url: "https://bramlabs.co",
   email: "contact@bramlabs.co",
+  logo: "https://bramlabs.co/icons/icon-512.png",
   founder: { "@type": "Person", name: "Bram" },
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer support",
+    email: "support@bramlabs.co",
+    url: "https://bramlabs.co/feedback/",
+  },
 };
 
 const siteLd = {
@@ -62,7 +81,7 @@ const extra = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/icons/icon-180.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <!-- theme-color matches --paper (#f3efe6), the actual page background -->
+    <!-- theme-color matches --paper and site.webmanifest; keep all three in sync -->
     <meta name="theme-color" content="#f3efe6" />
     <meta name="msapplication-TileColor" content="#f3efe6" />
     <meta property="og:type" content={type} />
@@ -71,8 +90,9 @@ const extra = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image:width" content={String(imageWidth)} />
+    <meta property="og:image:height" content={String(imageHeight)} />
+    <meta property="og:image:alt" content={title} />
     <meta name="author" content="BramLabs" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />

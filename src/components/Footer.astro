@@ -1,15 +1,21 @@
 ---
-const primary = [
-  { href: "/collection/", label: "Collection" },
+import { getPublishedSoftware } from "@/data/software";
+
+const products = getPublishedSoftware();
+
+const studio = [
+  { href: "/software/",   label: "Software"   },
+  { href: "/collection/", label: "Apparel"    },
   { href: "/process/",    label: "Process"    },
-  { href: "/studio/",     label: "Studio"     },
+  { href: "/journal/",    label: "Journal"    },
   { href: "/about/",      label: "About"      },
 ];
-const secondary = [
-  { href: "/journal/", label: "Journal" },
-  { href: "/contact/", label: "Contact" },
-  { href: "/privacy/", label: "Privacy" },
-  { href: "/terms/",   label: "Terms"   },
+const help = [
+  { href: "/feedback/", label: "Send feedback" },
+  { href: "/contact/",  label: "Contact"       },
+  { href: "/security/", label: "Security"      },
+  { href: "/privacy/",  label: "Privacy"       },
+  { href: "/terms/",    label: "Terms"         },
 ];
 ---
 
@@ -22,22 +28,36 @@ const secondary = [
           <span>BramLabs</span>
         </a>
         <p class="brand-desc">
-          Original apparel graphics by Bram — technical illustration for shift
-          work, developer culture, focus and modern professional themes.
+          Independent software studio run by Bram — small tools for shift work,
+          routine and focus, plus original apparel graphics from the same desk.
         </p>
-        <p class="brand-by">Designed by Bram · Portfolio, not a storefront</p>
+        <p class="brand-by">Built and maintained by one person</p>
       </div>
       <nav aria-label="Footer">
-        <ul>
-          {primary.map((l) => (
-            <li><a href={l.href}>{l.label}</a></li>
-          ))}
-        </ul>
-        <ul>
-          {secondary.map((l) => (
-            <li><a href={l.href}>{l.label}</a></li>
-          ))}
-        </ul>
+        <div class="col">
+          <h2 class="col-head">Products</h2>
+          <ul>
+            {products.map((p) => (
+              <li><a href={`/software/${p.slug}/`}>{p.title}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div class="col">
+          <h2 class="col-head">Studio</h2>
+          <ul>
+            {studio.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
+          </ul>
+        </div>
+        <div class="col">
+          <h2 class="col-head">Help</h2>
+          <ul>
+            {help.map((l) => (
+              <li><a href={l.href}>{l.label}</a></li>
+            ))}
+          </ul>
+        </div>
       </nav>
     </div>
     <div class="footer-bottom">
@@ -58,8 +78,9 @@ const secondary = [
     display: grid;
     gap: var(--s-6);
 
-    @media (width >= 800px) {
-      grid-template-columns: 1.35fr 1fr;
+    @media (width >= 900px) {
+      grid-template-columns: 1.1fr 1.4fr;
+      gap: var(--s-7);
     }
   }
 
@@ -94,8 +115,26 @@ const secondary = [
 
   nav {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--s-4);
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-5) var(--s-4);
+
+    @media (width >= 560px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .col ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .col-head {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink);
+    margin-bottom: 0.4rem;
   }
 
   nav a {
