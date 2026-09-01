@@ -44,3 +44,9 @@
 /.well-known/security.txt
   Content-Type: text/plain; charset=utf-8
   Cache-Control: public, max-age=86400
+
+# Ad-network crawlers fetch this as plain text (IAB app-ads.txt). Short cache
+# so a publisher-ID correction propagates quickly rather than sitting stale.
+/app-ads.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600

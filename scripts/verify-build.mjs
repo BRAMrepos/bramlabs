@@ -141,6 +141,50 @@ async function main() {
       fail(`${toUrl(file)}: missing or too-short meta description`);
   }
 
+  // ── 6. app-ads.txt ───────────────────────────────────────────────
+  // A malformed or missing app-ads.txt fails silently: nothing breaks, ad
+  // buyers just decline to bid on unverifiable inventory. Check it here so
+  // the failure is loud at build time instead of invisible in revenue.
+  const adsPath = join(DIST, "app-ads.txt");
+  if (!existsSync(adsPath)) {
+    fail("app-ads.txt is missing from the site root");
+  } else {
+    const lines = (await readFile(adsPath, "utf8"))
+      .split(/\r?\n/)
+      .map((l) => l.replace(/#.*$/, "").trim())
+      .filter(Boolean);
+
+    if (lines.length === 0) {
+      fail("app-ads.txt has no records");
+    }
+    for (const line of lines) {
+      // exchange domain, publisher id, DIRECT|RESELLER [, certification id]
+      const fields = line.split(",").map((f) => f.trim());
+      if (fields.length < 3 || fields.length > 4) {
+        fail(`app-ads.txt: expected 3 or 4 comma-separated fields, got ${fields.length} in "${line}"`);
+        continue;
+      }
+      const [domain, publisherId, relationship, certId] = fields;
+      if (!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(domain)) {
+        fail(`app-ads.txt: "${domain}" is not a valid exchange domain`);
+      }
+      if (!publisherId) {
+        fail(`app-ads.txt: empty publisher id in "${line}"`);
+      }
+      if (!["DIRECT", "RESELLER"].includes(relationship.toUpperCase())) {
+        fail(`app-ads.txt: relationship must be DIRECT or RESELLER, got "${relationship}"`);
+      }
+      if (certId !== undefined && !/^[a-f0-9]{16}$/i.test(certId)) {
+        fail(`app-ads.txt: certification authority id "${certId}" should be 16 hex characters`);
+      }
+    }
+    // A redirect on this path stops the crawler cold.
+    if (redirects.has("/app-ads.txt") || splats.some((s) => "/app-ads.txt".startsWith(s))) {
+      fail("app-ads.txt is shadowed by a redirect rule — crawlers must get a 200");
+    }
+    notes.push(`app-ads.txt served at the root with ${lines.length} valid record(s)`);
+  }
+
   // ── report ───────────────────────────────────────────────────────
   if (problems.length > 0) {
     console.error(`\nBuild verification FAILED — ${problems.length} problem(s):\n`);
