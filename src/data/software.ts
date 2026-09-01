@@ -271,7 +271,7 @@ export const software: SoftwareProduct[] = [
         {
           heading: "1. Verantwortlicher",
           paragraphs: [
-            "Bram Labs\nBerlin\nDeutschland\nE-Mail: contact@bramlabs.co",
+            "Bramlabs\nBraim\nBerlin N21\n14050\nE-Mail: contact@bramlabs.co",
             "Ein Datenschutzbeauftragter ist nicht bestellt; die gesetzlichen Voraussetzungen dafür liegen nicht vor.",
           ],
         },
