@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ProductNav from "@/components/ProductNav.astro";
+import RichText from "@/components/RichText.astro";
 import { getDocumentedSoftware, type SoftwareProduct } from "@/data/software";
 import { strings } from "@/data/i18n";
 
@@ -45,9 +46,13 @@ const effective = new Date(privacy.effectiveDate).toLocaleDateString(
         {privacyDocument ? privacyDocument.title : `${product.title} Privacy Policy`}
       </h1>
       <p class="doc-meta effective">
-        {privacyDocument
-          ? privacyDocument.standfirst
-          : `${t.effective} ${effective}`}
+        {
+          privacyDocument ? (
+            <RichText text={privacyDocument.standfirst} />
+          ) : (
+            `${t.effective} ${effective}`
+          )
+        }
       </p>
 
       <ProductNav
@@ -64,30 +69,65 @@ const effective = new Date(privacy.effectiveDate).toLocaleDateString(
       {
         privacyDocument ? (
           <div class="prose">
-            <p class="summary">{privacyDocument.summary}</p>
+            <aside class="summary-box">
+              {privacyDocument.summaryLabel && (
+                <p class="summary-label">{privacyDocument.summaryLabel}</p>
+              )}
+              <p><RichText text={privacyDocument.summary} /></p>
+            </aside>
+
             {privacyDocument.sections.map((sec) => (
               <>
-                {sec.heading && <h2>{sec.heading}</h2>}
+                {sec.heading &&
+                  (sec.level === 3 ? (
+                    <h3>{sec.heading}</h3>
+                  ) : (
+                    <h2>{sec.heading}</h2>
+                  ))}
+
                 {sec.paragraphs?.map((para) => (
-                  <p class="keep-breaks">{para}</p>
+                  <p class="keep-breaks"><RichText text={para} /></p>
                 ))}
+
                 {sec.bullets && (
                   <ul>
                     {sec.bullets.map((b) => (
                       <li>
                         {b.strong ? (
                           <>
-                            <strong>{b.strong}</strong> — {b.text}
+                            <strong>{b.strong}</strong> — <RichText text={b.text} />
                           </>
                         ) : (
-                          b.text
+                          <RichText text={b.text} />
                         )}
                       </li>
                     ))}
                   </ul>
                 )}
+
+                {sec.table && (
+                  <div class="table-scroll">
+                    <table class="data-table legal-table">
+                      <thead>
+                        <tr>
+                          <th scope="col">{sec.table.columns[0]}</th>
+                          <th scope="col">{sec.table.columns[1]}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {sec.table.rows.map((row) => (
+                          <tr>
+                            <th scope="row"><RichText text={row.key} /></th>
+                            <td><RichText text={row.value} /></td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+
                 {sec.trailingParagraphs?.map((para) => (
-                  <p class="keep-breaks">{para}</p>
+                  <p class="keep-breaks"><RichText text={para} /></p>
                 ))}
               </>
             ))}
@@ -286,5 +326,112 @@ const effective = new Date(privacy.effectiveDate).toLocaleDateString(
     border-left: 3px solid var(--ink);
     padding-left: var(--s-3);
     line-height: 1.6;
+  }
+
+  /* Authored documents open with a boxed summary rather than a rule: it is
+     the one paragraph most readers will actually read. */
+  .summary-box {
+    background: var(--canvas);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--ink);
+    border-radius: var(--radius);
+    padding: var(--s-3) var(--s-4);
+
+    p:not(.summary-label) {
+      color: var(--ink);
+      line-height: 1.65;
+      margin: 0;
+    }
+  }
+
+  .summary-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 0.5rem;
+  }
+
+  /* Two-column key/value tables. Wide enough to read side by side on a
+     laptop; stacked on a phone, because side-scrolling a legal table hides
+     the "why" column — which is the half that actually matters. */
+  .legal-table {
+    min-width: 34rem;
+
+    th[scope="row"] {
+      white-space: normal;
+      width: 38%;
+      font-weight: 500;
+    }
+
+    code {
+      font-size: 0.82em;
+      overflow-wrap: anywhere;
+    }
+  }
+
+  @media (width < 40rem) {
+    /* The wrapper must stop being a scroll container, or the stacked table
+       still reports an overflow and keeps its scrollbar. */
+    .table-scroll:has(.legal-table) {
+      overflow-x: visible;
+      border: 0;
+      background: none;
+      border-radius: 0;
+    }
+
+    .legal-table {
+      min-width: 0;
+      display: block;
+
+      thead {
+        /* Column headings are redundant once each row is a labelled block,
+           but keep them for screen readers. */
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
+
+      tbody,
+      tr,
+      th,
+      td {
+        display: block;
+        width: auto;
+      }
+
+      tr {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: var(--surface);
+        padding: 0.85rem 1rem;
+
+        + tr {
+          margin-top: 0.6rem;
+        }
+      }
+
+      th[scope="row"] {
+        width: auto;
+        padding: 0 0 0.4rem;
+        border-bottom: 1px solid var(--line);
+        margin-bottom: 0.5rem;
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      td {
+        padding: 0;
+        color: var(--muted);
+        line-height: 1.6;
+        /* The card edge is the boundary now; the cell rule from .data-table
+           would draw a second line under every value. */
+        border-bottom: 0;
+      }
+    }
   }
 </style>

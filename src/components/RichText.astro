@@ -1,0 +1,83 @@
+---
+/**
+ * Renders a small inline markup subset used by authored legal documents.
+ *
+ * Legal text needs emphasis, permission identifiers and citations inline, but
+ * the source lives in a .ts data file. Rather than storing raw HTML (which
+ * would mean trusting a string with set:html) this parses a fixed grammar and
+ * emits real elements:
+ *
+ *   **bold**            → <strong>
+ *   *italic*            → <em>
+ *   `code`              → <code>
+ *   [label](url)        → <a>, external links get target/rel
+ *
+ * Anything unmatched is emitted as plain text, so a stray asterisk in German
+ * legal prose renders as an asterisk rather than swallowing the rest of the
+ * paragraph.
+ */
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+
+type Token =
+  | { kind: "text"; value: string }
+  | { kind: "strong"; value: string }
+  | { kind: "em"; value: string }
+  | { kind: "code"; value: string }
+  | { kind: "link"; value: string; href: string };
+
+// Order matters: ** must be tried before *, or bold parses as two italics.
+const PATTERN =
+  /\*\*(.+?)\*\*|`(.+?)`|\[(.+?)\]\((https?:\/\/[^\s)]+)\)|\*(.+?)\*/gs;
+
+function tokenize(input: string): Token[] {
+  const tokens: Token[] = [];
+  let lastIndex = 0;
+
+  for (const match of input.matchAll(PATTERN)) {
+    const at = match.index ?? 0;
+    if (at > lastIndex) {
+      tokens.push({ kind: "text", value: input.slice(lastIndex, at) });
+    }
+
+    const [, bold, code, linkLabel, linkHref, italic] = match;
+    if (bold !== undefined) {
+      tokens.push({ kind: "strong", value: bold });
+    } else if (code !== undefined) {
+      tokens.push({ kind: "code", value: code });
+    } else if (linkLabel !== undefined && linkHref !== undefined) {
+      tokens.push({ kind: "link", value: linkLabel, href: linkHref });
+    } else if (italic !== undefined) {
+      tokens.push({ kind: "em", value: italic });
+    }
+
+    lastIndex = at + match[0].length;
+  }
+
+  if (lastIndex < input.length) {
+    tokens.push({ kind: "text", value: input.slice(lastIndex) });
+  }
+  return tokens;
+}
+
+const tokens = tokenize(text);
+---
+
+{
+  tokens.map((token) => {
+    if (token.kind === "strong") return <strong>{token.value}</strong>;
+    if (token.kind === "em") return <em>{token.value}</em>;
+    if (token.kind === "code") return <code>{token.value}</code>;
+    if (token.kind === "link") {
+      return (
+        <a href={token.href} target="_blank" rel="noopener noreferrer">
+          {token.value}
+        </a>
+      );
+    }
+    return <Fragment set:text={token.value} />;
+  })
+}

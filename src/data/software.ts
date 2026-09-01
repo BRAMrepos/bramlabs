@@ -71,21 +71,42 @@ export type Locale = "en" | "de";
  * verbatim here and rendered through the site's own chrome, so the wording is
  * never paraphrased by a template.
  */
+/**
+ * A two-column table inside a legal document — "which data / what for",
+ * "permission / why". Two columns is deliberate: anything wider stops being
+ * readable on a phone, which is where most of these are read.
+ */
+export type LegalTable = {
+  columns: [string, string];
+  rows: { key: string; value: string }[];
+};
+
+/**
+ * All free-text fields below accept a small inline markup subset, rendered by
+ * RichText.astro: `**bold**`, `*italic*`, `` `code` `` and `[label](url)`.
+ */
 export type LegalSection = {
-  heading: string;
-  /** Paragraphs, rendered in order. */
+  /** Omit for a continuation block that carries no heading of its own. */
+  heading?: string;
+  /** Heading level. Defaults to 2; use 3 for a subsection. */
+  level?: 2 | 3;
+  /** Paragraphs, rendered in order, before any list or table. */
   paragraphs?: string[];
   /** Bullet list. `strong` is bolded and followed by an en dash. */
   bullets?: { strong?: string; text: string }[];
-  /** Paragraphs rendered after the bullet list. */
+  /** Two-column table, rendered after the bullets. */
+  table?: LegalTable;
+  /** Paragraphs rendered after the list and table. */
   trailingParagraphs?: string[];
 };
 
 export type LegalDocument = {
   title: string;
-  /** Line under the title, e.g. "Android-App ... Stand: 31. August 2026". */
+  /** Line under the title, e.g. "Android-App ... Stand: 1. September 2026". */
   standfirst: string;
-  /** Lead paragraph, styled as the document summary. */
+  /** Optional heading for the summary callout, e.g. "Das Wichtigste vorab". */
+  summaryLabel?: string;
+  /** Lead paragraph, styled as the document summary callout. */
   summary: string;
   sections: LegalSection[];
 };
@@ -114,6 +135,14 @@ export type SoftwareProduct = {
   platform: string;
   /** Where the product runs, in the user's words. */
   availability: string;
+  /**
+   * What it costs and how it is funded, in the user's words. Shown in the
+   * spec list — an ad-funded app should say so before install, not in
+   * section 3 of the privacy policy.
+   */
+  pricing?: string;
+  /** Store/bundle identifier, shown as mono metadata. */
+  packageId?: string;
   status:
     | "published"
     | "submitted"
@@ -178,13 +207,15 @@ export const software: SoftwareProduct[] = [
   {
     slug: "arbeitszeit",
     title: "Arbeitszeit",
-    tagline: "Arbeitszeiterfassung für Deutschland",
+    tagline: "Stundenzettel & Zuschläge",
     description:
-      "Arbeitszeiten, Pausen und Zuschläge erfassen — vollständig offline auf dem Gerät.",
+      "Schichten, Zuschläge und Stundenzettel erfassen — gerechnet und gespeichert auf dem Gerät.",
     longDescription:
-      "Arbeitszeit erfasst Arbeitszeiten, Pausen, Urlaub und Krankheit und rechnet Zuschläge und Stunden gegen deinen Vertrag. Die App besitzt keine Internet-Berechtigung: alles bleibt auf deinem Gerät.",
+      "Arbeitszeit erfasst Schichten, Pausen und Abwesenheiten, rechnet Zuschläge nach § 3b EStG gegen deinen Vertrag und erzeugt daraus einen Stundenzettel. Zeiten und Löhne bleiben auf dem Gerät: es gibt kein Konto und keinen Server, auf den sie übertragen werden.",
     platform: "Android",
     availability: "Android, auf Deutsch",
+    pricing: "Kostenlos, werbefinanziert",
+    packageId: "co.bramlabs.arbeitszeit",
     status: "submitted",
     locale: "de",
     icon: "/studio/arbeitszeit-mark.svg",
@@ -192,107 +223,214 @@ export const software: SoftwareProduct[] = [
     legacyPaths: ["/apps/arbeitszeit/privacy/", "/apps/arbeitszeit/support/"],
     features: [
       {
-        title: "Zeiten und Pausen",
-        body: "Arbeitszeiten, Pausen und Abwesenheiten wie Urlaub und Krankheit an einer Stelle.",
+        title: "Schichten und Pausen",
+        body: "Datum, Beginn, Ende, Pausen, Arbeitsort und Notizen — mit Rundungsregel und Gleitzeitsaldo.",
       },
       {
-        title: "Vertrag und Zuschläge",
-        body: "Wochenstunden, Arbeitstage, Zuschlagssätze und Stundenlohn hinterlegen und gegen die Lohnabrechnung abgleichen.",
+        title: "Zuschläge nach § 3b EStG",
+        body: "Nacht-, Sonn- und Feiertagszuschläge gegen Stundenlohn und Vertrag gerechnet, Feiertage je Bundesland.",
       },
       {
-        title: "Ohne Internet",
-        body: "Die App hat keine Internet-Berechtigung und kann technisch keine Daten übertragen.",
+        title: "Abwesenheiten",
+        body: "Urlaub, Krankheit, Feiertag und Freizeitausgleich laufen in dieselbe Jahresübersicht.",
+      },
+      {
+        title: "Stundenzettel und Export",
+        body: "CSV, ICS und PDF beziehungsweise Druck — lokal erzeugt, Ziel wählst du im System-Dialog.",
+      },
+      {
+        title: "Schichtwecker",
+        body: "Erinnerungen, die einen Geräteneustart überstehen. Die Berechtigung wird erst beim Einschalten abgefragt.",
+      },
+      {
+        title: "App-Sperre",
+        body: "Optional per Fingerabdruck oder Gerätesperre. Die Prüfung bleibt beim System, die App sieht keine biometrischen Daten.",
       },
     ],
     privacy: {
       summary:
-        "Die App besitzt keine Internet-Berechtigung. Alle Einträge bleiben im app-privaten Speicher deines Geräts.",
-      collectsPersonalData: false,
+        "Zeiten, Löhne und Stundenzettel bleiben auf dem Gerät — kein Konto, kein Server. Internet nutzt die App nur für Werbung, und erst nachdem du im Einwilligungsdialog entschieden hast.",
+      // Google processes advertising data once consent is given, so this is
+      // true from the user's perspective even though BramLabs receives only
+      // aggregate billing figures.
+      collectsPersonalData: true,
       practices: [],
       processors: [],
-      effectiveDate: "2026-08-31",
+      effectiveDate: "2026-09-01",
       verified: true,
     },
     // Authored, not generated: this is the wording filed with the store.
     privacyDocument: {
       title: "Datenschutzerklärung",
-      standfirst: "Android-App \u201eArbeitszeit\u201c \u00b7 Stand: 31. August 2026",
+      standfirst:
+        "Für die Android-App **Arbeitszeit – Stundenzettel & Zuschläge** (`co.bramlabs.arbeitszeit`). Stand: 1. September 2026",
+      summaryLabel: "Das Wichtigste vorab",
       summary:
-        "Diese App verarbeitet keine personenbezogenen Daten auf unseren Systemen. Sie besitzt keine Berechtigung für den Internetzugriff und ist technisch nicht in der Lage, Daten zu übertragen. Alles, was du einträgst, bleibt auf deinem Gerät.",
+        "Deine Arbeitszeiten, Zuschläge, Löhne und der Stundenzettel werden ausschließlich auf deinem Gerät gespeichert und berechnet. Es gibt kein Nutzerkonto, keine Anmeldung und keinen Server, auf den diese Daten übertragen werden. Die einzige Internetverbindung, die die App aufbaut, dient der Auslieferung von Werbung – und auch die erst, nachdem du im Einwilligungsdialog entschieden hast.",
       sections: [
         {
           heading: "1. Verantwortlicher",
           paragraphs: [
-            "Bramlabs\nBraim\nBerlin N21\n14050\nE-Mail: contact@bramlabs.co",
+            "Bram Labs\nBerlin\nDeutschland\nE-Mail: contact@bramlabs.co",
+            "Ein Datenschutzbeauftragter ist nicht bestellt; die gesetzlichen Voraussetzungen dafür liegen nicht vor.",
           ],
         },
         {
-          heading: "2. Welche Daten verarbeitet werden",
-          paragraphs: ["Ausschließlich die Angaben, die du selbst in der App erfasst:"],
+          heading: "2. Daten, die du in der App erfasst",
+          paragraphs: ["Die App verarbeitet die Angaben, die du selbst einträgst:"],
           bullets: [
-            { text: "Arbeitszeiten, Pausen und Abwesenheiten (Urlaub, Krankheit)" },
+            { text: "Schichten: Datum, Beginn, Ende, Pausen, Arbeitsort, Notizen" },
+            { text: "Abwesenheiten: Urlaub, Krankheit, Feiertag, Freizeitausgleich" },
             {
-              text: "Vertragsdaten wie Wochenstunden, Arbeitstage, Zuschlagssätze und Stundenlohn",
+              text: "Vertragsdaten: Wochenstunden, Stundenlohn, Zuschlagssätze, Bundesland, Rundungsregel, Gleitzeit-Startsaldo",
             },
             {
-              text: "Angaben für den Stundenzettel: Name, Personalnummer, Abteilung, Arbeitgeber",
-            },
-            { text: "Beträge, die du zum Abgleich von deiner Lohnabrechnung abtippst" },
-          ],
-          trailingParagraphs: [
-            "Die App erhebt keine Geräte-, Standort- oder Nutzungsdaten. Sie enthält keine Analyse-, Tracking- oder Werbebausteine und keine Absturzberichterstattung an Dritte.",
-          ],
-        },
-        {
-          heading: "3. Wo die Daten gespeichert werden",
-          paragraphs: [
-            "Ausschließlich in einem app-privaten Bereich deines Gerätes, auf den andere Apps keinen Zugriff haben. Die automatische Google-Sicherung (allowBackup) ist abgeschaltet, deine Zeiten werden also nicht in eine Cloud gespiegelt. Es gibt keine Server und keine Konten.",
-            "Sicherungen erstellst du selbst über \u201eDaten exportieren\u201c. Wohin diese Datei geht, entscheidest ausschließlich du; ab dem Verlassen der App liegt sie in deiner Verantwortung.",
-          ],
-        },
-        {
-          heading: "4. Berechtigungen",
-          bullets: [
-            {
-              strong: "Benachrichtigungen",
-              text: "damit der Schichtwecker melden kann. Wird erst angefragt, wenn du ihn einschaltest.",
-            },
-            {
-              strong: "Start nach Neustart",
-              text: "Wecker überstehen einen Geräteneustart nicht von selbst; die App setzt sie danach neu.",
-            },
-            {
-              strong: "Fingerabdruck / Gerätesperre",
-              text: "ausschließlich zum Entsperren der App. Die Prüfung übernimmt Android; die App erhält nur die Antwort \u201eja\u201c oder \u201enein\u201c und niemals biometrische Daten.",
+              text: "Optional für den Stundenzettel: Name, Personalnummer, Abteilung, Arbeitgeber",
             },
           ],
           trailingParagraphs: [
-            "Eine Berechtigung für den Internetzugriff besitzt die App nicht.",
+            "**Speicherort:** ausschließlich im app-privaten Speicherbereich deines Geräts (eine JSON-Datei im internen Speicher). Andere Apps können nicht darauf zugreifen. Eine Übertragung an uns oder an Dritte findet nicht statt. Auch die automatische Android-Sicherung (Backup in die Google-Cloud) ist für diese App **abgeschaltet** – Arbeitszeitaufzeichnungen können im Streitfall Beweismittel sein und gehören deshalb nicht ungefragt in eine fremde Sicherung.",
+            "**Löschung:** Du löschst alle Daten, indem du in den Einstellungen \u201eAlle Daten löschen\u201c wählst oder die App deinstallierst. Ein Widerruf uns gegenüber ist nicht nötig, weil wir diese Daten nie erhalten.",
+            "**Export:** CSV-, ICS- und PDF-/Druck-Exporte werden lokal erzeugt. Wohin du sie anschließend gibst – Dateiablage, E-Mail, Drucker – entscheidest du im System-Dialog. Ab diesem Moment gilt die Datenschutzerklärung der von dir gewählten App bzw. des Dienstes.",
           ],
         },
         {
-          heading: "5. Weitergabe an Dritte",
+          heading: "3. Werbung (Google AdMob) und deine Einwilligung",
           paragraphs: [
-            "Es findet keine Weitergabe statt. Es gibt keine Auftragsverarbeiter, keine Dienste Dritter und keine Datenübermittlung in Drittländer.",
+            "Die App ist kostenlos und wird über Werbung finanziert. Dafür setzen wir **Google AdMob** ein, einen Dienst von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.",
+            "Beim ersten Start zeigt dir die App einen **Einwilligungsdialog** (Google User Messaging Platform, UMP), der dem Transparency & Consent Framework des IAB Europe folgt. Erst wenn du dort entschieden hast, wird das Werbe-SDK überhaupt gestartet. Vorher baut die App keine Verbindung zu Google auf.",
+          ],
+          bullets: [
+            {
+              strong: "Stimmst du zu",
+              text: "kann dir Google personalisierte Werbung ausspielen. Rechtsgrundlage: deine Einwilligung nach Art. 6 Abs. 1 lit. a DSGVO bzw. § 25 Abs. 1 TDDDG.",
+            },
+            {
+              strong: "Lehnst du ab",
+              text: "bleibt die App vollständig nutzbar. Du siehst dann nicht personalisierte bzw. eingeschränkte Werbung, die ohne Profilbildung auskommt.",
+            },
+          ],
+          trailingParagraphs: [
+            "**Widerruf:** Deine Auswahl kannst du jederzeit ändern – in der App unter *Mehr → Über → Werbe-Einwilligung ändern*. Der Widerruf wirkt für die Zukunft.",
           ],
         },
         {
-          heading: "6. Rechtsgrundlage und Speicherdauer",
+          heading: "Welche Daten Google dabei verarbeitet",
+          level: 3,
+          table: {
+            columns: ["Datum", "Zweck"],
+            rows: [
+              {
+                key: "Werbe-ID (Advertising ID)",
+                value:
+                  "Zuordnung der Auslieferung; von dir in den Android-Einstellungen zurücksetzbar oder löschbar",
+              },
+              {
+                key: "IP-Adresse",
+                value: "Verbindungsaufbau, grobe Region, Betrugsvermeidung",
+              },
+              {
+                key: "Geräte- und Systemangaben",
+                value:
+                  "Gerätetyp, Betriebssystemversion, Spracheinstellung, Bildschirmformat – damit die Anzeige technisch passt",
+              },
+              {
+                key: "Interaktion mit der Anzeige",
+                value: "Einblendung, Klick, Abrechnung, Messung von Werbebetrug",
+              },
+              {
+                key: "Einwilligungsstatus",
+                value:
+                  "Speicherung deiner Auswahl auf dem Gerät, damit du sie nicht bei jedem Start erneut treffen musst",
+              },
+            ],
+          },
+          trailingParagraphs: [
+            "Wir selbst erhalten von Google nur aggregierte Abrechnungszahlen (Einblendungen, Klicks, Erlöse). Ein Rückschluss auf einzelne Personen ist uns damit nicht möglich.",
+            "**Wichtig:** Die von dir erfassten Arbeitszeiten, Löhne, Zuschläge und persönlichen Angaben werden *nicht* an Google übermittelt und fließen nicht in die Auswahl der Werbung ein. Das Werbe-SDK hat keinen Zugriff auf die Datei, in der die App deine Schichten speichert.",
+            "**Drittlandübermittlung:** Google kann Daten in den USA verarbeiten. Grundlage sind die Standardvertragsklauseln der EU-Kommission sowie die Zertifizierung von Google LLC unter dem EU-US Data Privacy Framework.",
+            "Weitere Informationen: [Datenschutzerklärung von Google](https://policies.google.com/privacy) · [Wie Google Daten in AdMob verwendet](https://support.google.com/admob/answer/6128543) · [Google-Werbeeinstellungen](https://adssettings.google.com)",
+          ],
+        },
+        {
+          heading: "4. Keine Analyse, kein Tracking durch uns",
           paragraphs: [
-            "Da keine Daten an uns übermittelt werden, findet durch uns keine Verarbeitung im Sinne der DSGVO statt. Die auf deinem Gerät gespeicherten Angaben bleiben dort, bis du sie über \u201eAlle Daten löschen\u201c entfernst oder die App deinstallierst.",
+            "Die App enthält **keine** Analyse-, Statistik- oder Absturzberichts-Dienste. Wir erfahren nicht, ob, wann oder wie du die App benutzt. Stürzt die App ab, wird der Fehlerbericht nur lokal angezeigt; ob du ihn uns per E-Mail schickst, entscheidest du.",
+          ],
+        },
+        {
+          heading: "5. Berechtigungen und wofür sie gebraucht werden",
+          table: {
+            columns: ["Berechtigung", "Zweck"],
+            rows: [
+              {
+                key: "`INTERNET`, `ACCESS_NETWORK_STATE`",
+                value: "Ausschließlich das Laden der Werbung und des Einwilligungsdialogs",
+              },
+              {
+                key: "`com.google.android.gms.permission.AD_ID`",
+                value: "Zugriff auf die Werbe-ID für die Auslieferung der Anzeigen",
+              },
+              {
+                key: "`ACCESS_ADSERVICES_AD_ID`, `ACCESS_ADSERVICES_TOPICS`, `ACCESS_ADSERVICES_ATTRIBUTION`",
+                value:
+                  "Bestandteil der Android Privacy Sandbox. Sie werden vom Werbe-SDK mitgebracht und nur wirksam, wenn du der Werbung zugestimmt hast. Zweck ist die Auslieferung und Abrechnung der Anzeigen; auf App-Daten haben sie keinen Zugriff.",
+              },
+              {
+                key: "`WAKE_LOCK`, `FOREGROUND_SERVICE`",
+                value:
+                  "Vom Werbe-SDK mitgebracht, damit Abrechnungssignale auch dann noch übertragen werden, wenn die Verbindung im Moment der Einblendung abgerissen war. Für die Arbeitszeitdaten spielt das keine Rolle.",
+              },
+              {
+                key: "`POST_NOTIFICATIONS`",
+                value:
+                  "Nur wenn du den Schichtwecker oder Erinnerungen einschaltest. Wird erst in diesem Moment abgefragt, nicht beim ersten Start.",
+              },
+              {
+                key: "`RECEIVE_BOOT_COMPLETED`",
+                value: "Damit gestellte Wecker einen Neustart des Geräts überstehen",
+              },
+              {
+                key: "`USE_BIOMETRIC`",
+                value:
+                  "Nur wenn du die App-Sperre aktivierst. Fingerabdruck und Gesichtsdaten bleiben im Sicherheitsbereich des Systems; die App sieht sie nie, sondern erhält vom System nur \u201eentsperrt\u201c oder \u201enicht entsperrt\u201c.",
+              },
+            ],
+          },
+          trailingParagraphs: [
+            "Standortzugriff, Kontakte, Kamera, Mikrofon, Telefonstatus oder Zugriff auf deine Mediendateien fordert die App **nicht** an.",
+          ],
+        },
+        {
+          heading: "6. Speicherdauer",
+          paragraphs: [
+            "Deine Einträge bleiben so lange auf dem Gerät, bis du sie löschst oder die App deinstallierst – wir setzen keine Frist, weil steuer- und arbeitsrechtlich relevante Aufzeichnungen dir gehören, nicht uns. Der Einwilligungsstatus für Werbung wird lokal gespeichert und nach der von Google vorgesehenen Frist erneut abgefragt.",
           ],
         },
         {
           heading: "7. Deine Rechte",
           paragraphs: [
-            "Dir stehen die Rechte aus Art. 15 bis 21 DSGVO zu. Da uns keine Daten vorliegen, gibt es bei uns nichts, worüber wir Auskunft erteilen oder was wir berichtigen oder löschen könnten. Auskunft verschaffst du dir jederzeit selbst über die Export-Funktion, Löschung über \u201eAlle Daten löschen\u201c oder das Deinstallieren der App.",
-            "Unabhängig davon steht dir ein Beschwerderecht bei einer Datenschutz-Aufsichtsbehörde zu.",
+            "Dir stehen nach der DSGVO die Rechte auf Auskunft (Art. 15), Berichtigung (Art. 16), Löschung (Art. 17), Einschränkung (Art. 18), Datenübertragbarkeit (Art. 20) und Widerspruch (Art. 21) zu, außerdem das Recht, eine erteilte Einwilligung jederzeit zu widerrufen (Art. 7 Abs. 3).",
+            "Da wir deine Arbeitszeitdaten weder erheben noch speichern, können wir zu ihnen keine Auskunft erteilen und sie nicht löschen – du hast sie vollständig selbst in der Hand, in der App und über die Export-Funktion. Für die Daten, die im Rahmen der Werbeauslieferung bei Google anfallen, richtest du deine Anfrage bitte direkt an Google.",
+            "Du hast außerdem das Recht auf Beschwerde bei einer Datenschutz-Aufsichtsbehörde, etwa der für unseren Sitz zuständigen Landesbeauftragten für Datenschutz.",
           ],
         },
         {
-          heading: "8. Änderungen",
+          heading: "8. Kinder",
           paragraphs: [
-            "Ändert sich der Funktionsumfang der App in einer Weise, die eine Datenverarbeitung auslöst, wird diese Erklärung vorher angepasst und das Datum oben aktualisiert.",
+            "Die App richtet sich an Erwerbstätige und nicht an Kinder unter 13 Jahren. Im Einwilligungsdialog ist sie entsprechend nicht als kindgerichtet gekennzeichnet.",
+          ],
+        },
+        {
+          heading: "9. Änderungen dieser Erklärung",
+          paragraphs: [
+            "Ändert sich der Funktionsumfang der App, passen wir diese Erklärung an. Maßgeblich ist die jeweils unter dieser Adresse veröffentlichte Fassung; das Datum oben zeigt den Stand.",
+          ],
+        },
+        {
+          heading: "10. Rechtlicher Hinweis zu den Berechnungen",
+          paragraphs: [
+            "Die App bildet Regelungen des Arbeitszeitgesetzes und die steuerfreien Zuschläge nach § 3b EStG ab. Sie liefert eine sorgfältige Rechenhilfe, aber keine Rechts- oder Steuerberatung; verbindlich sind dein Arbeitsvertrag, der geltende Tarifvertrag und die Abrechnung deines Arbeitgebers.",
           ],
         },
       ],
@@ -300,23 +438,31 @@ export const software: SoftwareProduct[] = [
     faq: [
       {
         q: "Wo werden meine Zeiten gespeichert?",
-        a: "Ausschließlich in einem app-privaten Bereich deines Geräts. Die App hat keine Internet-Berechtigung und kann Daten technisch nicht übertragen. Es gibt keine Server und keine Konten.",
+        a: "Ausschließlich im app-privaten Speicher deines Geräts, in einer JSON-Datei im internen Speicher. Andere Apps kommen nicht daran, und es gibt weder Konto noch Server. Auch die automatische Android-Sicherung in die Google-Cloud ist für diese App abgeschaltet.",
       },
       {
-        q: "Werden meine Daten in der Google-Cloud gesichert?",
-        a: "Nein. Die automatische Google-Sicherung (allowBackup) ist abgeschaltet. Sicherungen erstellst du selbst über \u201eDaten exportieren\u201c.",
+        q: "Die App zeigt Werbung — bekommt Google meine Arbeitszeiten?",
+        a: "Nein. Das Werbe-SDK hat keinen Zugriff auf die Datei, in der die App deine Schichten speichert. An Google gehen nur die für die Anzeigenauslieferung nötigen Daten wie Werbe-ID, IP-Adresse und Geräteangaben. Deine Zeiten, Löhne und Zuschläge fließen nicht in die Auswahl der Werbung ein.",
+      },
+      {
+        q: "Wie ändere ich meine Werbe-Einwilligung?",
+        a: "In der App unter „Mehr → Über → Werbe-Einwilligung ändern“. Der Widerruf wirkt für die Zukunft. Lehnst du ab, bleibt die App vollständig nutzbar und zeigt nicht personalisierte Werbung.",
       },
       {
         q: "Was passiert bei einem Gerätewechsel?",
-        a: "Exportiere deine Daten vor dem Wechsel über \u201eDaten exportieren\u201c und importiere die Datei auf dem neuen Gerät. Ohne Export gehen die Einträge beim Deinstallieren verloren.",
+        a: "Exportiere deine Daten vor dem Wechsel über die Export-Funktion (CSV, ICS oder PDF) und übertrage die Datei auf das neue Gerät. Weil nichts in eine Cloud gesichert wird, gehen die Einträge beim Deinstallieren sonst verloren.",
       },
       {
         q: "Warum meldet sich der Schichtwecker nicht?",
-        a: "Der Wecker braucht die Benachrichtigungs-Berechtigung. Prüfe außerdem, ob die Akku-Optimierung für die App eingeschränkt ist — viele Hersteller unterdrücken sonst geplante Alarme.",
+        a: "Der Wecker braucht die Benachrichtigungs-Berechtigung, die erst beim Einschalten abgefragt wird. Prüfe außerdem, ob die Akku-Optimierung für die App eingeschränkt ist — viele Hersteller unterdrücken sonst geplante Alarme.",
+      },
+      {
+        q: "Sind die berechneten Zuschläge rechtlich verbindlich?",
+        a: "Nein. Die App bildet das Arbeitszeitgesetz und die steuerfreien Zuschläge nach § 3b EStG ab und ist als sorgfältige Rechenhilfe gedacht, aber sie ersetzt keine Rechts- oder Steuerberatung. Verbindlich sind dein Arbeitsvertrag, der geltende Tarifvertrag und die Abrechnung deines Arbeitgebers.",
       },
       {
         q: "Wie lösche ich alle Daten?",
-        a: "Über \u201eAlle Daten löschen\u201c in der App oder durch Deinstallieren. Bei uns liegt nichts, was gelöscht werden müsste.",
+        a: "Über „Alle Daten löschen“ in den Einstellungen oder durch Deinstallieren der App. Ein Widerruf uns gegenüber ist nicht nötig, weil wir diese Daten nie erhalten.",
       },
     ],
   },

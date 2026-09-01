@@ -77,6 +77,22 @@ const appLd = {
                 <dt>{t.runsOnLabel}</dt>
                 <dd>{product.availability}</dd>
               </div>
+              {
+                product.pricing && (
+                  <div>
+                    <dt>{t.pricingLabel}</dt>
+                    <dd>{product.pricing}</dd>
+                  </div>
+                )
+              }
+              {
+                product.packageId && (
+                  <div>
+                    <dt>{t.packageLabel}</dt>
+                    <dd class="mono-id">{product.packageId}</dd>
+                  </div>
+                )
+              }
             </dl>
 
             {!live && <p class="review-note">{t.notYetListed}</p>}
@@ -227,6 +243,12 @@ const appLd = {
     border-left: 3px solid var(--orange);
     border-radius: var(--radius);
     max-width: 40rem;
+  }
+
+  .mono-id {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    overflow-wrap: anywhere;
   }
 
   .hero-actions {

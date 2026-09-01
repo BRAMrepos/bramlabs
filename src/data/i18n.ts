@@ -21,6 +21,8 @@ export type ProductStrings = {
   effective: string;
   platformLabel: string;
   runsOnLabel: string;
+  pricingLabel: string;
+  packageLabel: string;
   statusInReview: string;
   getIt: string;
   whatItDoes: string;
@@ -62,6 +64,8 @@ const en: ProductStrings = {
   effective: "Effective",
   platformLabel: "Platform",
   runsOnLabel: "Runs on",
+  pricingLabel: "Price",
+  packageLabel: "Package",
   statusInReview: "In store review",
   getIt: "Get",
   whatItDoes: "What it does",
@@ -116,6 +120,8 @@ const de: ProductStrings = {
   effective: "Stand",
   platformLabel: "Plattform",
   runsOnLabel: "Läuft auf",
+  pricingLabel: "Preis",
+  packageLabel: "Paket",
   statusInReview: "In Prüfung",
   getIt: "Laden:",
   whatItDoes: "Was die App macht",
