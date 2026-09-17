@@ -249,24 +249,24 @@ export const software: SoftwareProduct[] = [
     ],
     privacy: {
       summary:
-        "Zeiten, Löhne und Stundenzettel bleiben auf dem Gerät — kein Konto, kein Server. Internet nutzt die App nur für Werbung, und erst nachdem du im Einwilligungsdialog entschieden hast.",
+        "Zeiten, Löhne und Stundenzettel bleiben auf dem Gerät — kein Konto, kein Server. Internet nutzt die App nur für den Einwilligungsdialog und, erst nach deiner Entscheidung dort, für Werbung.",
       // Google processes advertising data once consent is given, so this is
       // true from the user's perspective even though BramLabs receives only
       // aggregate billing figures.
       collectsPersonalData: true,
       practices: [],
       processors: [],
-      effectiveDate: "2026-09-01",
+      effectiveDate: "2026-09-17",
       verified: true,
     },
     // Authored, not generated: this is the wording filed with the store.
     privacyDocument: {
       title: "Datenschutzerklärung",
       standfirst:
-        "Für die Android-App **Arbeitszeit – Stundenzettel & Zuschläge** (`co.bramlabs.arbeitszeit`). Stand: 1. September 2026",
+        "Für die Android-App **Arbeitszeit – Stundenzettel & Zuschläge** (`co.bramlabs.arbeitszeit`). Stand: 17. September 2026",
       summaryLabel: "Das Wichtigste vorab",
       summary:
-        "Deine Arbeitszeiten, Zuschläge, Löhne und der Stundenzettel werden ausschließlich auf deinem Gerät gespeichert und berechnet. Es gibt kein Nutzerkonto, keine Anmeldung und keinen Server, auf den diese Daten übertragen werden. Die einzige Internetverbindung, die die App aufbaut, dient der Auslieferung von Werbung – und auch die erst, nachdem du im Einwilligungsdialog entschieden hast.",
+        "Deine Arbeitszeiten, Zuschläge, Löhne und der Stundenzettel werden ausschließlich auf deinem Gerät gespeichert und berechnet. Es gibt kein Nutzerkonto, keine Anmeldung und keinen Server, auf den diese Daten übertragen werden. Ins Internet geht die App nur für zwei Dinge: um den Einwilligungsdialog von Google zu laden und – erst nachdem du dort entschieden hast – um Werbung auszuliefern.",
       sections: [
         {
           heading: "1. Verantwortlicher",
@@ -298,7 +298,7 @@ export const software: SoftwareProduct[] = [
           heading: "3. Werbung (Google AdMob) und deine Einwilligung",
           paragraphs: [
             "Die App ist kostenlos und wird über Werbung finanziert. Dafür setzen wir **Google AdMob** ein, einen Dienst von Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland.",
-            "Beim ersten Start zeigt dir die App einen **Einwilligungsdialog** (Google User Messaging Platform, UMP), der dem Transparency & Consent Framework des IAB Europe folgt. Erst wenn du dort entschieden hast, wird das Werbe-SDK überhaupt gestartet. Vorher baut die App keine Verbindung zu Google auf.",
+            "Beim ersten Start zeigt dir die App einen **Einwilligungsdialog** (Google User Messaging Platform, UMP), der dem Transparency & Consent Framework des IAB Europe folgt. Erst wenn du dort entschieden hast, wird das Werbe-SDK gestartet und Werbung angefragt. Vorher verbindet sich die App mit Google ausschließlich, um diesen Einwilligungsdialog zu laden.",
           ],
           bullets: [
             {
@@ -391,9 +391,9 @@ export const software: SoftwareProduct[] = [
                 value: "Damit gestellte Wecker einen Neustart des Geräts überstehen",
               },
               {
-                key: "`USE_BIOMETRIC`",
+                key: "`USE_BIOMETRIC`, `USE_FINGERPRINT`",
                 value:
-                  "Nur wenn du die App-Sperre aktivierst. Fingerabdruck und Gesichtsdaten bleiben im Sicherheitsbereich des Systems; die App sieht sie nie, sondern erhält vom System nur \u201eentsperrt\u201c oder \u201enicht entsperrt\u201c.",
+                  "Nur wenn du die App-Sperre aktivierst. `USE_FINGERPRINT` ist die ältere Bezeichnung derselben Berechtigung für Android 9 und früher. Fingerabdruck und Gesichtsdaten bleiben im Sicherheitsbereich des Systems; die App sieht sie nie, sondern erhält vom System nur \u201eentsperrt\u201c oder \u201enicht entsperrt\u201c.",
               },
             ],
           },
